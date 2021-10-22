@@ -1,0 +1,41 @@
+{% load render_bundle from webpack_loader %}
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="{% static 'favicon.ico' %}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Plateforme de médiation pour l'accessibilité numérique."
+    />
+    <meta name="author" content="Koena" />
+    <link rel="apple-touch-icon" href="{% static 'logo192.png' %}" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="{% static 'manifest.json' %}" />
+
+    <script>
+      window.SERVER_DATA = {
+        initialLanguage: "{{ language }}",
+      };
+    </script>
+    {% render_bundle 'vendors' 'css' 'KOENACONNECT' %}
+    {% render_bundle 'main' 'css' 'KOENACONNECT' %}
+    {% render_bundle 'runtime-main' 'css' 'KOENACONNECT' %}
+
+    <title>Koena Connect</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root" class="body"></div>
+
+    {% render_bundle 'vendors' 'js' 'KOENACONNECT' %}
+    {% render_bundle 'main' 'js' 'KOENACONNECT' %}
+    {% render_bundle 'runtime-main' 'js' 'KOENACONNECT' %}
+  </body>
+</html>

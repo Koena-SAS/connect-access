@@ -1,0 +1,22 @@
+.admin-breadcrumbs {
+  margin-top: 3rem;
+
+  &__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    &.vertical {
+      flex-direction: column;
+    }
+  }
+  &__item {
+    margin-right: 0.1rem;
+    display: flex;
+    align-items: center;
+  }
+  &__icon {
+    margin-top: -3px;
+  }
+}

@@ -1,0 +1,75 @@
+.form {
+  .MuiFormControl-root {
+    .MuiInputLabel-root {
+      font-family: Luciole, sans-serif;
+      color: rgba(0, 0, 0, 0.9);
+      font-size: $label-size;
+      transform: none;
+      padding: 0.5rem 1rem 0.5rem 0;
+      line-height: 1.2;
+      position: static;
+      white-space: unset;
+    }
+    .MuiOutlinedInput-notchedOutline {
+      border-color: rgba(0, 0, 0, 0.4);
+      legend {
+        display: none;
+      }
+    }
+    .Mui-focused .MuiOutlinedInput-notchedOutline {
+      border-color: var(--border-color);
+    }
+    .MuiInputBase-input {
+      font-family: Luciole, sans-serif;
+      font-size: $input-size;
+    }
+    .MuiInputBase-input:not(.MuiInputBase-inputMultiline) {
+      padding: 0.55rem 1rem 0.85rem 1rem;
+    }
+    .Mui-error {
+      font-family: Luciole, sans-serif;
+      color: #ee0701;
+      &::after {
+        border-bottom-color: #ee0701;
+      }
+    }
+    .MuiFormHelperText-root.Mui-error {
+      font-size: 0.85rem;
+      margin: 0.2rem 0 0.2rem 0;
+    }
+    &.input-top-margin {
+      margin-top: 0.7rem;
+    }
+    .MuiInput-underline::after {
+      border-bottom: 2px solid var(--border-color);
+    }
+  }
+
+  input {
+    font-family: Luciole, sans-serif;
+  }
+
+  .input-top-margin {
+    margin-top: 0.7rem;
+  }
+
+  &__error-text {
+    color: #ee0701;
+    margin: 40px 0 0 0px;
+  }
+
+  &__errors-list {
+    padding-left: 12px;
+    margin: 0 0 5px 0;
+  }
+
+  &__helper-text {
+    font-family: Luciole, sans-serif;
+    color: rgba(0, 0, 0, 0.65);
+    margin: 3px 0 0 0;
+    font-size: 0.85rem;
+    text-align: left;
+    line-height: 1.55;
+    letter-spacing: 0.03333em;
+  }
+}

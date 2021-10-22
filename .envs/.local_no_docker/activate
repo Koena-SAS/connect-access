@@ -1,0 +1,27 @@
+# General
+# ------------------------------------------------------------------------------
+export USE_DOCKER=no
+export DOCKER_BUILDKIT=1
+export COMPOSE_DOCKER_CLI_BUILD=1
+
+# PostgreSQL
+# ------------------------------------------------------------------------------
+export POSTGRES_HOST=127.0.0.1
+export POSTGRES_PORT=5432
+export POSTGRES_DB=connect_access
+export POSTGRES_DB_END_TO_END=connect_access_end_to_end
+export POSTGRES_USER=debug
+export POSTGRES_PASSWORD=debug
+export DATABASE_URL=postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:$POSTGRES_PORT/$POSTGRES_DB
+
+# Redis
+# ------------------------------------------------------------------------------
+export REDIS_URL=redis://redis:6379/0
+
+# Celery
+# ------------------------------------------------------------------------------
+export CELERY_BROKER_URL=redis://localhost:6379/0
+
+# Mediation requests
+# ------------------------------------------------------------------------------
+export MEDIATION_REQUEST_EMAIL=test@test.test

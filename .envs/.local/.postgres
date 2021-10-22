@@ -1,0 +1,8 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=connect_access
+POSTGRES_DB_END_TO_END=connect_access_end_to_end
+POSTGRES_USER=debug
+POSTGRES_PASSWORD=debug

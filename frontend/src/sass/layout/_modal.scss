@@ -1,0 +1,16 @@
+.MuiTabs-root {
+  .MuiButtonBase-root {
+    padding: 20px 12px;
+    color: rgba(0, 0, 0, 0.8);
+    background-color: #f3f3f3;
+
+    &.Mui-selected {
+      color: var(--secondary-text-color);
+      background-color: var(--button-background-color);
+    }
+  }
+
+  .MuiTabs-indicator {
+    background-color: #d14905;
+  }
+}

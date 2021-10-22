@@ -1,0 +1,14 @@
+.recap-section {
+  &__button.MuiButton-root {
+    align-self: start;
+    min-width: 22rem;
+    align-self: center;
+    padding: 3px 22px;
+    @media (max-width: 750px) {
+      min-width: 19rem;
+    }
+    @media (max-width: 550px) {
+      min-width: auto;
+    }
+  }
+}

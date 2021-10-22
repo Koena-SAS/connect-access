@@ -1,0 +1,1307 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2020-12-16 15:26+0100\n"
+"Mime-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: fr\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/mediationForm/fields/AssitiveTechnologyFields.js:83
+msgid "<0>Adapted navigation dispositive</0>"
+msgstr "<0>Dispositif de navigation adaptée (boule de commande, clavier adapté, licorne, navigation par les yeux…)</0>"
+
+#: src/mediationForm/fields/NavigationContextFields.js:231
+msgid "<0>Android</0>"
+msgstr "<0>Android</0>"
+
+#: src/mediationForm/fields/AssitiveTechnologyFields.js:59
+msgid "<0>Braille display</0>"
+msgstr "<0>Plage braille</0>"
+
+#: src/admin/requestDetail/TraceReportForm.js:273
+msgid "<0>Call</0>"
+msgstr "<0>Appel</0>"
+
+#: src/mediationForm/fields/NavigationContextFields.js:20
+msgid "<0>Chrome</0>"
+msgstr "<0>Chrome</0>"
+
+#: src/admin/Menu.js:90
+msgid "<0>Close sidebar</0>"
+msgstr "<0>Cacher le menu</0>"
+
+#: src/admin/FilterMediationRequests.js:88
+msgid "<0>Closed</0>"
+msgstr "<0>Fermé</0>"
+
+#: src/admin/requestDetail/TraceReportForm.js:152
+msgid "<0>Complainant</0>"
+msgstr "<0>Demandeur</0>"
+
+#: src/mediationForm/fields/AssitiveTechnologyFields.js:70
+msgid "<0>DYS Disorder software</0>"
+msgstr "<0>Logiciel pour troubles DYS</0>"
+
+#: src/customerLayout/Footer.js:27
+#: src/mediationRequests/MediationRequestsDetail.js:81
+#: src/mediationRequests/MediationRequestsDetail.js:390
+msgid "<0>E-mail:</0>"
+msgstr "<0>E-mail</0> :"
+
+#: src/forms/fields/EmailField.js:24
+#: src/mediationForm/fields/AboutOrganizationFields.js:16
+msgid "<0>E-mail</0>"
+msgstr "Courriel <0>(e-mail)</0>"
+
+#: src/mediationForm/fields/AssitiveTechnologyFields.js:78
+msgid "<0>Exclusive keyboard navigation</0>"
+msgstr "<0>Navigation clavier exclusive</0>"
+
+#: src/admin/requestDetail/TraceReportForm.js:161
+msgid "<0>External organization</0>"
+msgstr "<0>Organisation externe</0>"
+
+#: src/mediationForm/fields/NavigationContextFields.js:15
+msgid "<0>Firefox</0>"
+msgstr "<0>Firefox</0>"
+
+#: src/admin/FilterMediationRequests.js:61
+msgid "<0>Incomplete</0>"
+msgstr "<0>Incomplet</0>"
+
+#: src/mediationForm/fields/NavigationContextFields.js:25
+msgid "<0>Internet Explorer</0>"
+msgstr "<0>Internet Explorer</0>"
+
+#: src/mediationForm/fields/AssitiveTechnologyFields.js:51
+msgid "<0>Keyboard</0>"
+msgstr "<0>Clavier</0>"
+
+#: src/admin/requestDetail/TraceReportForm.js:279
+msgid "<0>Letter</0>"
+msgstr "<0>Lettre</0>"
+
+#: src/admin/FilterMediationRequests.js:85
+msgid "<0>Mediating</0>"
+msgstr "<0>En cours de médiation</0>"
+
+#: src/admin/FilterMediationRequests.js:91
+msgid "<0>Mediation failed</0>"
+msgstr "<0>La médiation a échoué</0>"
+
+#: src/admin/requestDetail/TraceReportForm.js:155
+msgid "<0>Mediator</0>"
+msgstr "<0>Médiateurice</0>"
+
+#: src/mediationForm/fields/NavigationContextFields.js:30
+msgid "<0>Microsoft Edge</0>"
+msgstr "<0>Microsoft Edge</0>"
+
+#: src/admin/requestDetail/TraceReportForm.js:158
+msgid "<0>Organization (partner)</0>"
+msgstr "<0>Organisation partenaire</0>"
+
+#: src/admin/FilterMediationRequests.js:108
+#: src/admin/requestDetail/TraceReportForm.js:164
+#: src/admin/requestDetail/TraceReportForm.js:282
+#: src/mediationForm/fields/AssitiveTechnologyFields.js:88
+#: src/mediationForm/fields/NavigationContextFields.js:237
+msgid "<0>Other</0>"
+msgstr "<0>Autre</0>"
+
+#: src/admin/FilterMediationRequests.js:69
+msgid "<0>Request filed</0>"
+msgstr "<0>Demande déposée</0>"
+
+#: src/mediationForm/fields/AssitiveTechnologyFields.js:54
+msgid "<0>Screen reader with vocal synthesis</0>"
+msgstr "<0>Lecteur d'écran avec synthèse vocale</0>"
+
+#: src/mediationForm/fields/AssitiveTechnologyFields.js:75
+msgid "<0>Virtual keyboard</0>"
+msgstr "<0>Clavier virtuel</0>"
+
+#: src/mediationForm/fields/AssitiveTechnologyFields.js:65
+msgid "<0>Vocal command software</0>"
+msgstr "<0>Logiciel de commande vocale</0>"
+
+#: src/admin/FilterMediationRequests.js:72
+msgid "<0>Waiting for administrative validation</0>"
+msgstr "<0>En attente de validation administrative</0>"
+
+#: src/admin/FilterMediationRequests.js:77
+msgid "<0>Waiting for contact</0>"
+msgstr "<0>En attente de réponse de l'organisation</0>"
+
+#: src/admin/FilterMediationRequests.js:64
+msgid "<0>Waiting for mediator validation</0>"
+msgstr "<0>En attente de validation par le médiateur</0>"
+
+#: src/admin/FilterMediationRequests.js:80
+msgid "<0>Waiting for second contact</0>"
+msgstr "<0>En attente de réponse après relance</0>"
+
+#: src/mediationForm/fields/NavigationContextFields.js:234
+msgid "<0>Windows phone</0>"
+msgstr "<0>Windows phone</0>"
+
+#: src/mediationForm/fields/AssitiveTechnologyFields.js:62
+msgid "<0>Zoom software</0>"
+msgstr "<0>Logiciel d'agrandissement</0>"
+
+#: src/mediationForm/fields/NavigationContextFields.js:228
+msgid "<0>iOS</0>"
+msgstr "<0>iOS</0>"
+
+#: src/customerLayout/Footer.js:36
+msgid "About"
+msgstr "À propos"
+
+#: src/mediationForm/fields/AboutIssueFields.js:16
+msgid "About the issue"
+msgstr "Informations sur le problème rencontré"
+
+#: src/mediationForm/fields/AboutOrganizationFields.js:34
+msgid "About the organization"
+msgstr "Informations sur l'organisation"
+
+#: src/mediationForm/fields/OrganizationAnswerFields.js:14
+msgid "About the organization's answer"
+msgstr "Informations sur la réponse de l'organisation"
+
+#: src/mediationForm/fields/NavigationContextFields.js:179
+msgid "About the platform"
+msgstr "Informations sur la plateforme utilisée"
+
+#: src/customerLayout/Footer.js:45
+msgid "About us"
+msgstr "À propos de nous"
+
+#: src/mediationForm/FormNavigation.js:40
+#: src/mediationForm/FormNavigation.js:43
+#: src/mediationRequests/MediationRequestsDetail.js:59
+msgid "About you"
+msgstr "À propos de vous"
+
+#: src/constants/choicesMap.js:40
+#: src/mediationForm/fields/AboutIssueFields.js:76
+msgid "Access possible by bypass but difficult"
+msgstr "Accès possible par des contournements, mais difficile"
+
+#: src/admin/requestDetail/TraceReports.js:90
+msgid "Actions"
+msgstr "Actions"
+
+#: src/constants/choicesMap.js:11
+msgid "Adapted navigation dispositive"
+msgstr "Dispositif de navigation adaptée (boule de commande, clavier adapté, licorne, navigation par les yeux…)"
+
+#: src/admin/requestDetail/TraceReportForm.js:182
+msgid "Add a new trace report"
+msgstr "Ajouter un novueau rapport de suivi"
+
+#: src/admin/requestDetail/TraceReportForm.js:193
+#: src/admin/requestDetail/TraceReports.js:206
+msgid "Add a trace report"
+msgstr "Ajouter un rapport de suivi"
+
+#: src/admin/requestDetail/TraceReportForm.js:384
+msgid "Add the report"
+msgstr "Ajouter le rapport"
+
+#: src/customerLayout/Header.js:118
+msgid "Admin"
+msgstr "Admin"
+
+#: src/admin/QuickAccess.js:11
+msgid "Admin content"
+msgstr "Contenu de l'interface d'administration"
+
+#: src/admin/FilterMediationRequests.js:60
+#: src/admin/FilterMediationRequests.js:107
+msgid "All"
+msgstr "Toutes"
+
+#: src/admin/AllRequests.js:54
+#: src/admin/AllRequests.js:57
+#: src/admin/Menu.js:143
+#: src/admin/requestDetail/History.js:13
+#: src/admin/requestDetail/RequestDetail.js:17
+#: src/admin/requestDetail/TraceReports.js:65
+#: src/users/mediations/UserMediations.js:16
+msgid "All requests"
+msgstr "Toutes les demandes"
+
+#: src/users/identification/IdentificationLayout.js:124
+msgid "An error occured, please try again."
+msgstr "Une erreur s'est produite, veuillez réessayer."
+
+#: src/users/identification/Login.js:58
+msgid "An unexpected error occurred."
+msgstr "Il y a eu une erreur inattendue."
+
+#: src/constants/choicesMap.js:33
+msgid "Android"
+msgstr "Android"
+
+#: src/mediationForm/fields/FurtherInfoFields.js:21
+msgid "Anything else about your problem?"
+msgstr "Autre chose concernant votre problème ?"
+
+#: src/admin/FilterMediationRequests.js:102
+msgid "Application:"
+msgstr "Application :"
+
+#: src/mediationForm/fields/AssitiveTechnologyFields.js:33
+#: src/mediationForm/fields/AssitiveTechnologyFields.js:40
+msgid "Assistive technologies used"
+msgstr "Technologies d'assistance utilisées"
+
+#: src/mediationRequests/MediationRequestsDetail.js:101
+msgid "Assistive technologies used:"
+msgstr "Technologies d'assistance utilisées :"
+
+#: src/mediationForm/fields/AssitiveTechnologyFields.js:111
+msgid "Assistive technology name(s)"
+msgstr "Nom de la ou des technologies d'assistance utilisées"
+
+#: src/mediationRequests/MediationRequestsDetail.js:134
+msgid "Assistive technology name(s):"
+msgstr "Nom de la ou des technologies d'assistance utilisées :"
+
+#: src/mediationForm/fields/AssitiveTechnologyFields.js:122
+msgid "Assistive technology version(s)"
+msgstr "Version de la ou des technologies d'assistance utilisées"
+
+#: src/mediationRequests/MediationRequestsDetail.js:142
+msgid "Assistive technology version(s):"
+msgstr "Version de la ou des technologies d'assistance utilisées :"
+
+#: src/users/identification/Signup.js:142
+#: src/users/password/PasswordResetConfirm.js:99
+msgid "At least 8 characters, not fully numeric, and must not be a too common word"
+msgstr "Au moins 8 caractères, pas entièrement numérique, et ne doit pas être un mot trop courant"
+
+#: src/admin/requestDetail/TraceReportForm.js:357
+#: src/admin/requestDetail/TraceReports.js:89
+msgid "Attached file"
+msgstr "Fichier joint"
+
+#: src/mediationRequests/MediationRequestsDetail.js:354
+msgid "Attached file:"
+msgstr "Fichier joint :"
+
+#: src/constants/choicesMap.js:6
+msgid "Braille display"
+msgstr "Plage braille"
+
+#: src/constants/choicesMap.js:62
+msgid "Call"
+msgstr "Appel"
+
+#: src/admin/requestDetail/TraceReportForm.js:391
+#: src/users/identification/Login.js:120
+#: src/users/identification/Signup.js:171
+#: src/users/password/PasswordResetRequest.js:73
+msgid "Cancel"
+msgstr "Annuler"
+
+#: src/users/password/PasswordResetConfirm.js:124
+msgid "Change your password"
+msgstr "Changer votre mot de passe"
+
+#: src/users/password/PasswordResetConfirm.js:69
+msgid "Choose a new password"
+msgstr "Choisir un nouveau mot de passe"
+
+#: src/constants/choicesMap.js:24
+msgid "Chrome"
+msgstr "Chrome"
+
+#: src/forms/Snackbar.js:31
+msgid "Close message"
+msgstr "Fermer le message"
+
+#: src/admin/Menu.js:66
+#: src/customerLayout/Header.js:80
+msgid "Close the menu"
+msgstr "Fermer le menu"
+
+#: src/constants/choicesMap.js:57
+msgid "Closed"
+msgstr "Clôturée"
+
+#: src/admin/requestDetail/TraceReportForm.js:348
+#: src/admin/requestDetail/TraceReports.js:88
+msgid "Comment"
+msgstr "Commentaire"
+
+#: src/constants/choicesMap.js:69
+msgid "Complainant"
+msgstr "Demandeur"
+
+#: src/mediationForm/FormNavigation.js:131
+msgid "Completed"
+msgstr "Complété"
+
+#: src/users/identification/Signup.js:155
+#: src/users/password/PasswordResetConfirm.js:113
+msgid "Confirm password"
+msgstr "Confirmer le mot de passe"
+
+#: src/forms/ConfirmationDialog.js:43
+msgid "Confirmation"
+msgstr "Confirmation"
+
+#: src/mediationForm/fields/AboutOrganizationFields.js:115
+msgid "Contact"
+msgstr "Contact"
+
+#: src/admin/requestDetail/TraceReports.js:85
+msgid "Contact Type"
+msgstr "Type de contact"
+
+#: src/admin/requestDetail/TraceReportForm.js:220
+msgid "Contact date"
+msgstr "Date du contact"
+
+#: src/admin/requestDetail/TraceReportForm.js:269
+msgid "Contact type"
+msgstr "Type de contact"
+
+#: src/customerLayout/Footer.js:19
+msgid "Contact us"
+msgstr "Nous contacter"
+
+#: src/mediationRequests/MediationRequestsDetail.js:410
+msgid "Contact:"
+msgstr "Contact :"
+
+#: src/QuickLinks.js:29
+msgid "Content"
+msgstr "Contenu"
+
+#: src/admin/Menu.js:157
+msgid "Custom menu management"
+msgstr "Gestion du menu personnalisé"
+
+#: src/constants/choicesMap.js:9
+msgid "DYS Disorder software"
+msgstr "Logiciel pour troubles DYS"
+
+#: src/admin/Menu.js:124
+#: src/admin/QuickAccess.js:14
+msgid "Dashboard"
+msgstr "Tableau de bord"
+
+#: src/admin/requestDetail/TraceReports.js:84
+#: src/mediationRequests/MediationRequestsList.js:19
+msgid "Date"
+msgstr "Date"
+
+#: src/mediationForm/fields/AboutIssueFields.js:49
+msgid "Describe every step you did in order to access the wanted content or features"
+msgstr "Décrivez les actions que vous avez faites pour accéder au contenu ou aux fonctionnalités désirées"
+
+#: src/mediationRequests/MediationRequestsDetail.js:169
+msgid "Describe every step you did in order to access the wanted content or features:"
+msgstr "Décrivez les actions que vous avez faites pour accéder au contenu ou aux fonctionnalités désirées :"
+
+#: src/admin/requestDetail/History.js:14
+#: src/admin/requestDetail/RequestDetail.js:18
+#: src/admin/requestDetail/TraceReports.js:66
+#: src/mediationRequests/MediationRequestsList.js:24
+#: src/mediationRequests/MediationRequestsList.js:54
+msgid "Details"
+msgstr "Détails"
+
+#: src/mediationForm/fields/NavigationContextFields.js:50
+#: src/mediationRequests/MediationRequestsDetail.js:208
+msgid "Did the problem occur while using a web browser?"
+msgstr "Votre problème est-il survenu en vous connectant via un navigateur web ?"
+
+#: src/mediationForm/fields/OrganizationAnswerFields.js:59
+#: src/mediationRequests/MediationRequestsDetail.js:322
+msgid "Did they reply?"
+msgstr "Avez-vous eu la réponse de l'organisation ?"
+
+#: src/mediationForm/fields/OrganizationAnswerFields.js:25
+#: src/mediationRequests/MediationRequestsDetail.js:305
+msgid "Did you already tell the organization in charge about the problem?"
+msgstr "Avez-vous déjà essayé de remonter le problème à l'organisation concernée ?"
+
+#: src/mediationForm/fields/FurtherInfoFields.js:29
+msgid "Do not hesitate to upload any file that may be useful to better understand your problem"
+msgstr "N'hésitez pas à joindre tout élément pouvant être utile pour mieux comprendre votre problème"
+
+#: src/admin/requestDetail/TraceReports.js:224
+msgid "Do you really want to delete the trace report?"
+msgstr "Voulez-vous vraiment supprimer ce rapport de suivi ?"
+
+#: src/constants/choicesMap.js:28
+msgid "Don't Know"
+msgstr "Ne sais pas"
+
+#: src/mediationForm/fields/NavigationContextFields.js:156
+msgid "Don't know"
+msgstr "Ne sais pas"
+
+#: src/admin/requestDetail/TraceReports.js:163
+msgid "Download the file"
+msgstr "Télécharger le fichier"
+
+#: src/constants/choicesMap.js:63
+msgid "E-mail"
+msgstr "Courriel"
+
+#: src/admin/requestDetail/TraceReports.js:188
+msgid "Edit"
+msgstr "Modifier"
+
+#: src/admin/requestDetail/TraceReportForm.js:181
+msgid "Edit a new trace report"
+msgstr "Modifier le nouveau rapport de suivi"
+
+#: src/admin/requestDetail/TraceReportForm.js:191
+msgid "Edit a trace report"
+msgstr "Modifier un rapport de suivi"
+
+#: src/admin/requestDetail/TraceReportForm.js:382
+msgid "Edit the report"
+msgstr "Modifier le rapport"
+
+#: src/admin/requestDetail/TraceReportForm.js:258
+msgid "Example of correct format: 09/01/2021 06:52 PM"
+msgstr "Exemple de format correct : 25/09/2021 15:52"
+
+#: src/forms/fields/EmailField.js:62
+#: src/mediationForm/fields/AboutOrganizationFields.js:80
+msgid "Example of correct format: name@domain.com"
+msgstr "Exemple de format correct : nom@domaine.fr"
+
+#: src/constants/choicesMap.js:12
+msgid "Exclusive keyboard navigation"
+msgstr "Navigation clavier exclusive"
+
+#: src/constants/choicesMap.js:72
+msgid "External organization"
+msgstr "Organisation externe"
+
+#: src/admin/FilterMediationRequests.js:46
+msgid "Filter by:"
+msgstr "Filtrer par :"
+
+#: src/constants/choicesMap.js:23
+msgid "Firefox"
+msgstr "Firefox"
+
+#: src/forms/fields/FirstNameField.js:37
+msgid "First name / username"
+msgstr "Prénom / pseudo"
+
+#: src/mediationRequests/MediationRequestsDetail.js:65
+msgid "First name / username:"
+msgstr "Prénom / pseudo :"
+
+#: src/QuickLinks.js:35
+msgid "Footer"
+msgstr "Pied de page"
+
+#: src/admin/Menu.js:156
+msgid "Form management"
+msgstr "Gestion du formulaire"
+
+#: src/mediationForm/fields/FurtherInfoFields.js:12
+msgid "Further information"
+msgstr "Informations complémentaires"
+
+#: src/mediationRequests/MediationRequestsDetail.js:346
+msgid "Further information:"
+msgstr "Informations complémentaires :"
+
+#: src/admin/Menu.js:150
+msgid "General Settings"
+msgstr "Paramètres généraux"
+
+#: src/customerLayout/Footer.js:74
+msgid "Help"
+msgstr "Aide"
+
+#: src/admin/requestDetail/History.js:15
+msgid "History"
+msgstr "Historique"
+
+#: src/users/identification/IdentificationLayout.js:64
+msgid "Identification - Login"
+msgstr "Identification - Connexion"
+
+#: src/users/identification/IdentificationLayout.js:72
+msgid "Identification - Reset your password"
+msgstr "Identification - Réinitialiser votre mot de passe"
+
+#: src/users/identification/IdentificationLayout.js:67
+msgid "Identification - Signup"
+msgstr "Identification - Inscription"
+
+#: src/mediationRequests/MediationRequestsList.js:23
+msgid "Identifier"
+msgstr "Identifiant"
+
+#: src/users/identification/IdentificationLayout.js:118
+msgid "If an account exists with this e-mail, you will receive a password reset link soon."
+msgstr "Si un compte existe avec ce courriel, vous recevrez un lien de réinitialisation de mot de passe bientôt."
+
+#: src/mediationForm/fields/AssitiveTechnologyFields.js:24
+msgid ""
+"If you don't use any assistance technology, you can ignore the\n"
+"following questions and go to next step. However, if you use\n"
+"technologies to compensate for your disability in numeric\n"
+"usage, any details would help us to process your demand."
+msgstr "Si vous n'avez pas besoin de technologies d'assistance, vous pouvez ignorer les questions suivantes et passer à la suite. En revanche, si vous utilisez des technologies pour compenser votre handicap dans l'utilisation du numérique, toute précision sera utile pour vous aider."
+
+#: src/constants/choicesMap.js:39
+#: src/mediationForm/fields/AboutIssueFields.js:68
+msgid "Impossible access"
+msgstr "Accès impossible"
+
+#: src/constants/choicesMap.js:50
+msgid "Incomplete"
+msgstr "Incomplet"
+
+#: src/mediationForm/fields/AssitiveTechnologyFields.js:16
+msgid "Information about assistive technology used"
+msgstr "Informations sur la technologie d’assistance utilisée"
+
+#: src/constants/choicesMap.js:25
+msgid "Internet Explorer"
+msgstr "Internet Explorer"
+
+#: src/mediationForm/fields/AboutIssueFields.js:101
+#: src/mediationRequests/MediationRequestsDetail.js:198
+msgid "Is your problem urgent?"
+msgstr "Votre problème est-il urgent ?"
+
+#: src/constants/choicesMap.js:4
+msgid "Keyboard"
+msgstr "Clavier"
+
+#: src/admin/Main.js:22
+msgid "Koena Connect - All mediation requests"
+msgstr "Koena Connect - Toutes les demandes de médiation"
+
+#: src/customerLayout/Main.js:82
+msgid "Koena Connect - Confirm password reset"
+msgstr "Koena Connect - Confirmer la réinitialisation du mot de passe"
+
+#: src/admin/requestDetail/RequestDetailContainer.js:22
+msgid "Koena Connect - Detail of the mediation request"
+msgstr "Koena Connect - Détail de la demande de médiation"
+
+#: src/users/identification/Identification.js:18
+msgid "Koena Connect - Login"
+msgstr "Koena Connect - Connexion"
+
+#: src/customerLayout/Main.js:92
+msgid "Koena Connect - My account"
+msgstr "Koena Connect - Mon compte"
+
+#: src/customerLayout/Main.js:102
+msgid "Koena Connect - My mediation request detail"
+msgstr "Koena Connect - Détails de ma demande de médiation"
+
+#: src/customerLayout/Main.js:97
+msgid "Koena Connect - My mediation requests"
+msgstr "Koena Connect - Mes demandes de médiation"
+
+#: src/admin/Main.js:17
+msgid "Koena Connect - Quick access"
+msgstr "Koena Connect - Accès rapide"
+
+#: src/users/identification/IdentificationLayout.js:100
+msgid "Koena Connect - Reset your password"
+msgstr "Koena Connect - Réinitialiser votre mot de passe"
+
+#: src/users/identification/Identification.js:26
+msgid "Koena Connect - Signup"
+msgstr "Koena Connect - Inscription"
+
+#: src/mediationForm/FormContainer.js:157
+msgid "Koena Connect - Submit a mediation request: summary"
+msgstr "Koena Connect - Déposer une demande de médiation : récapitulatif"
+
+#: src/mediationForm/FormContainer.js:143
+msgid "Koena Connect - Submit a mediation request: the organization"
+msgstr "Koena Connect - Déposer une demande de médiation : l'organisation"
+
+#: src/mediationForm/FormContainer.js:115
+msgid "Koena Connect - Submit a mediation request: your details"
+msgstr "Koena Connect - Déposer une demande de médiation : à propos de vous"
+
+#: src/mediationForm/FormContainer.js:129
+msgid "Koena Connect - Submit a mediation request: your problem"
+msgstr "Koena Connect - Déposer une demande de médiation : votre problème"
+
+#: src/admin/requestDetail/RequestDetailContainer.js:28
+msgid "Koena Connect - Trace reports of the mediation request"
+msgstr "Koena Connect - Rapports de suivi de la demande de médiation"
+
+#: src/admin/Menu.js:116
+#: src/customerLayout/Header.js:69
+msgid "Koena Connect homepage"
+msgstr "Koena Connect page d'accueil"
+
+#: src/forms/fields/LastNameField.js:35
+msgid "Last name"
+msgstr "Nom"
+
+#: src/mediationRequests/MediationRequestsDetail.js:73
+msgid "Last name:"
+msgstr "Nom :"
+
+#: src/customerLayout/Footer.js:54
+msgid "Legal information"
+msgstr "Mentions légales"
+
+#: src/constants/choicesMap.js:64
+msgid "Letter"
+msgstr "Lettre"
+
+#: src/users/identification/Identification.js:19
+#: src/users/identification/Login.js:117
+msgid "Log in"
+msgstr "Se connecter"
+
+#: src/users/identification/Identification.js:35
+msgid "Log in or sign up"
+msgstr "Se connecter ou s'inscrire"
+
+#: src/customerLayout/Header.js:106
+msgid "Login"
+msgstr "Connexion"
+
+#: src/users/identification/LogoutButton.js:63
+msgid "Logout"
+msgstr "Déconnexion"
+
+#: src/mediationForm/fields/AboutOrganizationFields.js:52
+msgid "Mailing address"
+msgstr "Adresse postale"
+
+#: src/mediationRequests/MediationRequestsDetail.js:382
+msgid "Mailing adress:"
+msgstr "Adresse postale :"
+
+#: src/constants/choicesMap.js:56
+msgid "Mediating"
+msgstr "En cours de médiation"
+
+#: src/admin/AllRequests.js:57
+#: src/admin/Menu.js:137
+#: src/admin/requestDetail/History.js:12
+#: src/admin/requestDetail/RequestDetail.js:16
+#: src/admin/requestDetail/TraceReports.js:64
+msgid "Mediation"
+msgstr "Médiation"
+
+#: src/constants/choicesMap.js:58
+msgid "Mediation failed"
+msgstr "Echec de la médiation"
+
+#: src/users/mediations/UserMediation.js:25
+msgid "Mediation request details:"
+msgstr "Détails de ma demande de médiation :"
+
+#: src/constants/choicesMap.js:70
+msgid "Mediator"
+msgstr "Médiateurice"
+
+#: src/QuickLinks.js:23
+msgid "Menu"
+msgstr "Menu"
+
+#: src/constants/choicesMap.js:26
+msgid "Microsoft Edge"
+msgstr "Microsoft Edge"
+
+#: src/constants/choicesMap.js:18
+#: src/mediationForm/fields/AboutIssueFields.js:115
+msgid "Moderately, I can wait, but not too long"
+msgstr "Moyennement, je peux attendre, mais pas trop longtemps"
+
+#: src/mediationForm/Recap.js:199
+msgid "Modify organization data"
+msgstr "Modifier les informations de l'organisation"
+
+#: src/mediationForm/Recap.js:179
+msgid "Modify your data"
+msgstr "Modifier vos informations"
+
+#: src/mediationForm/Recap.js:189
+msgid "Modify your problem description"
+msgstr "Modifier la description de votre problème"
+
+#: src/customerLayout/Header.js:141
+#: src/users/account/Account.js:13
+msgid "My account"
+msgstr "Mon compte"
+
+#: src/mediationForm/fields/PersonalInformationFields.js:23
+msgid "My personal information"
+msgstr "Mes informations personnelles"
+
+#: src/customerLayout/Header.js:131
+msgid "My requests"
+msgstr "Mes demandes"
+
+#: src/mediationForm/fields/AboutOrganizationFields.js:44
+msgid "Name of the organization"
+msgstr "Nom de l'organisation"
+
+#: src/mediationRequests/MediationRequestsDetail.js:374
+msgid "Name of the organization:"
+msgstr "Nom de l'organisation :"
+
+#: src/mediationForm/fields/NavigationContextFields.js:39
+msgid "Navigation context"
+msgstr "Contexte de navigation"
+
+#: src/constants/choicesMap.js:46
+#: src/forms/ConfirmationDialog.js:64
+#: src/mediationForm/fields/NavigationContextFields.js:64
+#: src/mediationForm/fields/NavigationContextFields.js:204
+#: src/mediationForm/fields/OrganizationAnswerFields.js:41
+#: src/mediationForm/fields/OrganizationAnswerFields.js:73
+msgid "No"
+msgstr "Non"
+
+#: src/mediationForm/OrganizationInfo.js:87
+msgid "No field is required. If you have information about the owner of the digital service, you can indicate it, or go to the next step if not."
+msgstr "Aucun champ n'est obligatoire. Si vous avez des informations concernant le propriétaire du service numérique, vous pouvez les indiquer, ou passer à l'étape suivante dans le cas contraire."
+
+#: src/admin/requestDetail/TraceReportForm.js:151
+#: src/admin/requestDetail/TraceReportForm.js:272
+#: src/mediationForm/fields/AboutIssueFields.js:92
+#: src/mediationForm/fields/AboutIssueFields.js:129
+#: src/mediationForm/fields/AssitiveTechnologyFields.js:50
+#: src/mediationForm/fields/NavigationContextFields.js:71
+#: src/mediationForm/fields/NavigationContextFields.js:163
+#: src/mediationForm/fields/NavigationContextFields.js:211
+#: src/mediationForm/fields/NavigationContextFields.js:227
+#: src/mediationForm/fields/OrganizationAnswerFields.js:48
+#: src/mediationForm/fields/OrganizationAnswerFields.js:80
+msgid "Not specified"
+msgstr "Non renseigné"
+
+#: src/constants/choicesMap.js:19
+#: src/mediationForm/fields/AboutIssueFields.js:122
+msgid "Not urgent at all, but would like a solution as soon as possible"
+msgstr "Pas urgent du tout, mais j'aimerais une solution dès que possible"
+
+#: src/mediationForm/ProblemDescription.js:139
+msgid "Only the 1st field \"What was the issue?\" is required."
+msgstr "Seul le 1er champ \"Quel a été le problème rencontré ?\" est obligatoire."
+
+#: src/mediationForm/UserInfo.js:92
+msgid "Only the fields \"First name / username\" and \"Email\" are required."
+msgstr "Seuls les champs \"Prénom / pseudo\" et \"Courriel (e-mail)\" sont obligatoires."
+
+#: src/admin/Menu.js:98
+msgid "Open sidebar"
+msgstr "Montrer le menu"
+
+#: src/admin/Menu.js:66
+#: src/customerLayout/Header.js:80
+msgid "Open the menu"
+msgstr "Ouvrir le menu"
+
+#: src/admin/Menu.js:165
+msgid "Organazations list"
+msgstr "Liste des organisations"
+
+#: src/mediationRequests/MediationRequestsList.js:20
+msgid "Organization"
+msgstr "Organisation"
+
+#: src/constants/choicesMap.js:71
+msgid "Organization (partner)"
+msgstr "Organisation partenaire"
+
+#: src/constants/choicesMap.js:13
+#: src/constants/choicesMap.js:27
+#: src/constants/choicesMap.js:35
+#: src/constants/choicesMap.js:65
+#: src/constants/choicesMap.js:73
+#: src/mediationForm/fields/NavigationContextFields.js:149
+msgid "Other"
+msgstr "Autre"
+
+#: src/users/identification/Login.js:106
+#: src/users/identification/Signup.js:126
+#: src/users/password/PasswordResetConfirm.js:82
+msgid "Password"
+msgstr "Mot de passe"
+
+#: src/users/identification/Signup.js:152
+#: src/users/password/PasswordResetConfirm.js:110
+msgid "Password confirmation is required"
+msgstr "La confirmation du mot de passe est obligatoire"
+
+#: src/users/identification/Login.js:130
+msgid "Password forgotten?"
+msgstr "Mot de passe oublié ?"
+
+#: src/users/identification/Signup.js:88
+#: src/users/password/PasswordResetConfirm.js:33
+msgid "Passwords do not match."
+msgstr "Les mots de passe ne correspondent pas"
+
+#: src/admin/requestDetail/PersonalInformationFields.js:18
+#: src/users/account/UserDetails.js:91
+msgid "Personal information"
+msgstr "Informations personnelles"
+
+#: src/forms/fields/PhoneField.js:41
+#: src/mediationForm/fields/AboutOrganizationFields.js:90
+msgid "Phone number"
+msgstr "Téléphone"
+
+#: src/customerLayout/Footer.js:23
+#: src/mediationRequests/MediationRequestsDetail.js:91
+#: src/mediationRequests/MediationRequestsDetail.js:402
+msgid "Phone number:"
+msgstr "Téléphone :"
+
+#: src/customerLayout/Footer.js:63
+msgid "Privacy"
+msgstr "Vie privée"
+
+#: src/admin/Menu.js:161
+msgid "Pro Offer"
+msgstr "Offre pro"
+
+#: src/mediationRequests/MediationRequestsList.js:21
+msgid "Problem Description"
+msgstr "Description du problème"
+
+#: src/customerLayout/Footer.js:84
+msgid "Project funded as part of the Innov'Up experimentation"
+msgstr "Projet financé dans le cadre du dispositif Innov'Up expérimentation"
+
+#: src/admin/Menu.js:130
+#: src/admin/QuickAccess.js:14
+msgid "Quick Access"
+msgstr "Accès rapide"
+
+#: src/constants/choicesMap.js:41
+#: src/mediationForm/fields/AboutIssueFields.js:84
+msgid "Random access, sometimes it works and sometimes it does not"
+msgstr "Accès aléatoire : parfois ça fonctionne, parfois non"
+
+#: src/admin/requestDetail/TraceReports.js:87
+msgid "Recipient"
+msgstr "Destinataire"
+
+#: src/admin/requestDetail/TraceReportForm.js:336
+msgid "Recipient name(s)"
+msgstr "Nom du destinataire"
+
+#: src/admin/requestDetail/TraceReportForm.js:324
+msgid "Recipient type"
+msgstr "Type de destinataire"
+
+#: src/admin/requestDetail/TraceReports.js:180
+msgid "Remove"
+msgstr "Supprimer"
+
+#: src/admin/requestDetail/TraceReportForm.js:375
+msgid "Remove the attached file"
+msgstr "Supprimer le fichier joint"
+
+#: src/users/password/PasswordResetRequest.js:51
+msgid "Request a password reset"
+msgstr "Réinitialiser votre mot de passe"
+
+#: src/admin/requestDetail/RequestDetail.js:50
+msgid "Request detail"
+msgstr "Détail de la demande"
+
+#: src/admin/requestDetail/History.js:23
+msgid "Request detail: History"
+msgstr "Détail de la demande : Historique"
+
+#: src/admin/requestDetail/TraceReports.js:199
+msgid "Request detail: Trace reports"
+msgstr "Détail de la demande : Rapports de suivi"
+
+#: src/admin/requestDetail/RequestDetailContainer.js:23
+msgid "Request details"
+msgstr "Détails de la demande"
+
+#: src/constants/choicesMap.js:52
+msgid "Request filed"
+msgstr "Demande déposée"
+
+#: src/admin/Menu.js:146
+msgid "Requests management"
+msgstr "Gestion des demandes"
+
+#: src/mediationForm/Recap.js:256
+msgid "Reset all entered data"
+msgstr "Supprimer toutes les données saisies"
+
+#: src/users/password/PasswordResetRequest.js:67
+msgid "Reset password"
+msgstr "Réinitialiser"
+
+#: src/constants/choicesMap.js:5
+msgid "Screen reader with vocal synthesis"
+msgstr "Lecteur d'écran avec synthèse vocale"
+
+#: src/admin/requestDetail/TraceReports.js:86
+msgid "Sender"
+msgstr "Émetteur"
+
+#: src/admin/requestDetail/TraceReportForm.js:308
+msgid "Sender name(s)"
+msgstr "Nom de l'émetteur"
+
+#: src/admin/requestDetail/TraceReportForm.js:296
+msgid "Sender type"
+msgstr "Type d'émetteur"
+
+#: src/users/identification/Signup.js:168
+msgid "Sign up"
+msgstr "S'enregistrer"
+
+#: src/users/identification/Identification.js:27
+msgid "Signup"
+msgstr "Inscription"
+
+#: src/customerLayout/Footer.js:77
+msgid "Sitemap"
+msgstr "Plan du site"
+
+#: src/admin/Menu.js:133
+msgid "Statistics"
+msgstr "Statistiques"
+
+#: src/mediationRequests/MediationRequestsList.js:22
+msgid "Status"
+msgstr "Statut"
+
+#: src/admin/FilterMediationRequests.js:55
+msgid "Status:"
+msgstr "Statut :"
+
+#: src/mediationForm/ProblemDescription.js:162
+#: src/mediationForm/UserInfo.js:83
+msgid "Step 1: About yourself"
+msgstr "Étape 1 : A propos de vous"
+
+#: src/mediationForm/OrganizationInfo.js:101
+#: src/mediationForm/ProblemDescription.js:134
+#: src/mediationForm/Recap.js:244
+#: src/mediationForm/UserInfo.js:106
+msgid "Step 2: Your problem"
+msgstr "Étape 2 : Votre problème"
+
+#: src/mediationForm/ProblemDescription.js:171
+#: src/mediationForm/Recap.js:223
+msgid "Step 3: Summary"
+msgstr "Étape 3 : Récapitulatif"
+
+#: src/mediationForm/OrganizationInfo.js:82
+#: src/mediationForm/ProblemDescription.js:173
+#: src/mediationForm/Recap.js:246
+msgid "Step 3: The organization"
+msgstr "Étape 3 : L'organisation"
+
+#: src/mediationForm/OrganizationInfo.js:109
+#: src/mediationForm/Recap.js:225
+msgid "Step 4: Summary"
+msgstr "Étape 4 : Récapitulatif"
+
+#: src/mediationForm/FormContainer.js:91
+msgid "Submit a mediation request"
+msgstr "Déposer une demande de médiation"
+
+#: src/mediationForm/Recap.js:265
+msgid "Submit my mediation request"
+msgstr "Valider ma demande de médiation"
+
+#: src/mediationForm/FormNavigation.js:40
+#: src/mediationForm/FormNavigation.js:46
+msgid "Summary"
+msgstr "Récapitulatif"
+
+#: src/mediationForm/fields/NavigationContextFields.js:83
+msgid "The URL format is invalid"
+msgstr "Le format de l'URL est incorrect"
+
+#: src/mediationForm/fields/NavigationContextFields.js:100
+msgid "The URL must be a valid http address, with at least domain.extension"
+msgstr "L'URL doit être une adresse http valide, avec au moins la forme domaine.extension"
+
+#: src/admin/requestDetail/TraceReportForm.js:140
+msgid "The contact date must be formated following the pattern mm/dd/yyyy hh:mm (a|p)m"
+msgstr "La date de contact doit être dans un format respectant jj/mm/aaaa hh:mm"
+
+#: src/mediationForm/fields/AboutOrganizationFields.js:23
+msgid "The e-mail format is invalid"
+msgstr "Le format du courriel est incorrect"
+
+#: src/forms/fields/EmailField.js:35
+msgid "The e-mail is required"
+msgstr "Le courriel est obligatoire"
+
+#: src/forms/fields/EmailField.js:38
+msgid "The e-mail must be formated like this: name@domain.extension"
+msgstr "Le courriel doit être de la forme nom@domaine.extension"
+
+#: src/forms/fields/FirstNameField.js:29
+msgid "The first name / username is required"
+msgstr "Le prénom / pseudo est obligatoire"
+
+#: src/forms/fields/LastNameField.js:28
+msgid "The last name is required"
+msgstr "Le nom de famille est obligatoire."
+
+#: src/mediationForm/FormNavigation.js:45
+#: src/mediationRequests/MediationRequestsDetail.js:368
+msgid "The organization"
+msgstr "L'organisation"
+
+#: src/users/identification/Login.js:105
+#: src/users/identification/Signup.js:125
+#: src/users/password/PasswordResetConfirm.js:81
+msgid "The password is required"
+msgstr "Le mot de passe est obligatoire"
+
+#: src/forms/fields/PhoneField.js:33
+#: src/mediationForm/fields/AboutOrganizationFields.js:29
+msgid "The phone number format is invalid"
+msgstr "Le format du numéro de téléphone est incorrect"
+
+#: src/forms/fields/PhoneField.js:30
+msgid "The phone number is required"
+msgstr "Le numéro de téléphone est obligatoire"
+
+#: src/forms/fields/PhoneField.js:59
+#: src/mediationForm/fields/AboutOrganizationFields.js:106
+msgid "The phone number must be 9 to 15 digits long and can be preceded by the + sign"
+msgstr "Le numéro de téléphone doit comporter 9 à 15 chiffres et peut être précédé du signe +"
+
+#: src/admin/requestDetail/TraceReports.js:25
+msgid "The report creation was not successful. Please retry later."
+msgstr "La création du rapport a échoué. Veuillez réessayer plus tard."
+
+#: src/admin/requestDetail/TraceReports.js:27
+msgid "The report deletion was not successful. Please retry later."
+msgstr "La suppression du rapport a échoué. Veuillez réessayer plus tard."
+
+#: src/admin/requestDetail/TraceReports.js:26
+msgid "The report update was not successful. Please retry later."
+msgstr "La modification du rapport a échoué. Veuillez réessayer plus tard."
+
+#: src/users/identification/Login.js:48
+msgid "There was a problem, please reload the page."
+msgstr "Il y a eu un problème, veuillez recharger la page."
+
+#: src/mediationForm/FormContainer.js:101
+msgid "There was a technical error and the submission failed, please try again later"
+msgstr "Il y a eu une erreur technique et la validation a échoué, veuillez réessayer ultérieurement"
+
+#: src/users/account/UserDetails.js:94
+msgid "This information is used to identify you, you can modify it at any time."
+msgstr "Ces informations sont utilisées pour vous identifier, vous pouvez les modifier à tout moment."
+
+#: src/mediationForm/fields/AssitiveTechnologyFields.js:98
+msgid "To select several technologies, first hold down Ctrl key (or Cmd under macOS), then use the mouse click, or on the keyboard the directional arrows to move and Space to select them."
+msgstr "Pour sélectionner plusieurs technologies, maintenez d'abord la touche Ctrl (ou Cmd sous macOS), puis utilisez le clic de la souris, ou au clavier les flèches de direction pour vous déplacer et Espace pour les sélectionner."
+
+#: src/admin/requestDetail/RequestDetailContainer.js:29
+#: src/admin/requestDetail/TraceReports.js:67
+#: src/admin/requestDetail/TraceReports.js:217
+msgid "Trace reports"
+msgstr "Rapports de suivi"
+
+#: src/admin/Menu.js:155
+msgid "User management"
+msgstr "Gestion des utilisateurs"
+
+#: src/customerLayout/Footer.js:70
+msgid "Utilization"
+msgstr "Utilisation"
+
+#: src/users/account/UserDetails.js:159
+msgid "Validate your new personal information"
+msgstr "Valider vos nouvelles informations personnelles"
+
+#: src/admin/requestDetail/RequestDetailContainer.js:42
+msgid "Views for a particular mediation request"
+msgstr "Visualisations liées à une demande de médiation particulière"
+
+#: src/constants/choicesMap.js:10
+msgid "Virtual keyboard"
+msgstr "Clavier virtuel"
+
+#: src/constants/choicesMap.js:8
+msgid "Vocal command software"
+msgstr "Logiciel de commande vocale"
+
+#: src/constants/choicesMap.js:53
+msgid "Waiting for administrative validation"
+msgstr "En attente de validation administrative"
+
+#: src/constants/choicesMap.js:54
+msgid "Waiting for contact"
+msgstr "En attente de réponse de l'organisation"
+
+#: src/constants/choicesMap.js:51
+msgid "Waiting for mediator validation"
+msgstr "En attente de validation par le médiateur"
+
+#: src/constants/choicesMap.js:55
+msgid "Waiting for second contact"
+msgstr "En attente de réponse après relance"
+
+#: src/mediationForm/fields/NavigationContextFields.js:190
+#: src/mediationRequests/MediationRequestsDetail.js:253
+msgid "Was it a mobile app?"
+msgstr "S'agissait-il d'une application mobile ?"
+
+#: src/users/account/UserDetails.js:152
+msgid "We could'nt update your personal information. Please retry later."
+msgstr "Nous n'avons pas pu mettre à jour vos informations personnelles. Veuillez réessayer plus tard."
+
+#: src/customerLayout/Main.js:114
+msgid "We were unable to change your password, please try again later."
+msgstr "Nous n'avons pas pu changer votre mot de passe, veuillez réessayer plus tard."
+
+#: src/users/identification/Login.js:62
+#: src/users/identification/Signup.js:60
+msgid "We were unable to log you in, please try again later."
+msgstr "Nous n'avons pas pu vous connecter, veuillez réessayer plus tard."
+
+#: src/users/identification/Signup.js:76
+msgid "We were unable to sign you up, please try again later."
+msgstr "Nous n'avons pas pu vous inscrire, veuillez réessayer plus tard."
+
+#: src/mediationForm/fields/NavigationContextFields.js:86
+msgid "What is the URL address where you have encountered the problem?"
+msgstr "Quelle est l'adresse URL où vous avez rencontré le problème ?"
+
+#: src/mediationRequests/MediationRequestsDetail.js:220
+msgid "What is the url address where you have encountered the problem?"
+msgstr "Quelle est l'adresse URL où vous avez rencontré le problème ?"
+
+#: src/mediationForm/fields/NavigationContextFields.js:224
+#: src/mediationRequests/MediationRequestsDetail.js:265
+msgid "What kind of app was it?"
+msgstr "Quel type d'application était-ce ?"
+
+#: src/mediationForm/fields/AboutIssueFields.js:28
+#: src/mediationRequests/MediationRequestsDetail.js:161
+msgid "What was the issue?"
+msgstr "Quel a été le problème rencontré ?"
+
+#: src/mediationForm/fields/AboutIssueFields.js:61
+#: src/mediationRequests/MediationRequestsDetail.js:180
+msgid "What was the level of inaccessibility encountered?"
+msgstr "Quel a été le niveau d'inaccessibilité rencontré ?"
+
+#: src/mediationForm/fields/NavigationContextFields.js:246
+#: src/mediationRequests/MediationRequestsDetail.js:281
+msgid "What was the name of the app?"
+msgstr "Quel était le nom de l'application ?"
+
+#: src/mediationForm/fields/OrganizationAnswerFields.js:88
+#: src/mediationRequests/MediationRequestsDetail.js:335
+msgid "What was their reply?"
+msgstr "Quelle est la réponse qui vous a été faite ?"
+
+#: src/mediationForm/fields/NavigationContextFields.js:256
+#: src/mediationRequests/MediationRequestsDetail.js:292
+msgid "Which software, connected object or other did you use?"
+msgstr "Quel logiciel, objet connecté ou autre avez-vous utilisé ?"
+
+#: src/mediationForm/fields/NavigationContextFields.js:114
+#: src/mediationRequests/MediationRequestsDetail.js:231
+msgid "Which web browser did you use?"
+msgstr "Quel navigateur avez-vous utilisé ?"
+
+#: src/mediationForm/fields/NavigationContextFields.js:170
+#: src/mediationRequests/MediationRequestsDetail.js:241
+msgid "Which web browser version did you use?"
+msgstr "Quelle version du navigateur avez-vous utilisée ?"
+
+#: src/constants/choicesMap.js:34
+msgid "Windows phone"
+msgstr "Windows phone"
+
+#: src/constants/choicesMap.js:45
+#: src/forms/ConfirmationDialog.js:57
+#: src/mediationForm/fields/NavigationContextFields.js:57
+#: src/mediationForm/fields/NavigationContextFields.js:197
+#: src/mediationForm/fields/OrganizationAnswerFields.js:34
+#: src/mediationForm/fields/OrganizationAnswerFields.js:66
+msgid "Yes"
+msgstr "Oui"
+
+#: src/constants/choicesMap.js:17
+#: src/mediationForm/fields/AboutIssueFields.js:108
+msgid "Yes, very urgent: need a quick answer"
+msgstr "Oui, très urgent : besoin d'une réponse rapidement"
+
+#: src/mediationForm/fields/AboutIssueFields.js:26
+msgid "You have to describe your problem"
+msgstr "La description du problème est obligatoire"
+
+#: src/mediationForm/FormContainer.js:95
+msgid "Your mediation request has been successfully sent !"
+msgstr "Votre demande de médiation a bien été envoyée !"
+
+#: src/mediationRequests/MediationRequestsList.js:65
+msgid "Your mediation requests' list sorted by date"
+msgstr "Vos demandes de médiation triées par date"
+
+#: src/customerLayout/Main.js:108
+msgid "Your password has been successfully changed."
+msgstr "Votre mot de passe a été changé avec succès."
+
+#: src/users/account/UserDetails.js:146
+msgid "Your personal information was successfully updated."
+msgstr "Vos informations personnelles ont été mises à jour avec succès."
+
+#: src/mediationForm/FormNavigation.js:40
+#: src/mediationForm/FormNavigation.js:44
+#: src/mediationRequests/MediationRequestsDetail.js:155
+msgid "Your problem"
+msgstr "Votre Problème"
+
+#: src/constants/choicesMap.js:7
+msgid "Zoom software"
+msgstr "Logiciel d'agrandissement"
+
+#: src/customerLayout/Footer.js:59
+msgid "https://koena.net/en/koenas-privacy/"
+msgstr "https://koena.net/vie-privee/"
+
+#: src/customerLayout/Footer.js:50
+msgid "https://koena.net/en/legal-information-and-credits/"
+msgstr "https://koena.net/mentions-legales/"
+
+#: src/constants/choicesMap.js:32
+msgid "iOS"
+msgstr "iOS"
+
+#: src/admin/requestDetail/TraceReportForm.js:276
+msgid "optionsEmail"
+msgstr "<0>Courriel</0>"

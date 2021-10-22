@@ -1,0 +1,52 @@
+.about-issue {
+  &__step-description.MuiFormControl-root {
+    margin-top: 1rem;
+    margin-bottom: 0.8rem;
+  }
+  &__inaccessibility-level {
+    @media (max-width: 500px) {
+      margin: 0.8rem 0;
+    }
+  }
+}
+
+.further-information {
+  &__attached-file {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0;
+  }
+  &__attached-file-input {
+    font-size: $input-size;
+    margin-top: 1rem;
+    width: 100%;
+  }
+}
+
+.navigation-context {
+  .navigation-context__browser-label.label {
+    margin-top: 2rem;
+  }
+}
+
+.about-issue,
+.navigation-context,
+.about-platform,
+.about-answer,
+.further-information {
+  .MuiInputLabel-root {
+    margin-top: 1rem;
+  }
+  .label {
+    font-size: $label-size;
+    margin-bottom: 0.5rem;
+    margin-top: 1.5rem;
+  }
+}
+
+.about-issue,
+.navigation-context,
+.about-platform,
+.about-answer {
+  margin-bottom: 2rem;
+}

@@ -1,0 +1,63 @@
+stages:
+  - lint_and_unit_test
+  - end_to_end
+
+variables:
+  POSTGRES_USER: "koenaconnect"
+  POSTGRES_PASSWORD: ""
+  POSTGRES_DB: "test_koenaconnect"
+  POSTGRES_HOST_AUTH_METHOD: trust
+  CELERY_BROKER_URL: "redis://redis:6379/0"
+
+.base-docker:
+  services:
+    - docker:dind
+  variables:
+    # When using dind, it's wise to use the overlayfs driver for
+    # improved performance:
+    DOCKER_DRIVER: overlay2
+    DOCKER_BUILDKIT: 1
+    COMPOSE_DOCKER_CLI_BUILD: 1
+  image: python:3.8
+  image: docker/compose:latest
+  before_script:
+    # Debug information:
+    - docker info && docker-compose --version
+
+lint_and_unit_test:
+  stage: lint_and_unit_test
+  needs: []
+  extends: .base-docker
+  script:
+    - docker-compose -f local.yml build --build-arg BUILDKIT_INLINE_CACHE=1
+    - docker-compose -f local.yml run --rm -w /app/frontend django yarn install
+    # Ensure celerybeat does not crash due to non-existent tables
+    - docker-compose -f local.yml run --rm django python backend/manage.py migrate
+    - docker-compose -f local.yml up -d
+
+    # lint
+    - docker-compose -f local.yml run django flake8 backend --config=backend/setup.cfg --max-complexity=10
+    - docker-compose -f local.yml run -w /app/backend django mypy koenaconnect config --config=setup.cfg
+    - docker-compose -f local.yml run -w /app/frontend django yarn lint
+    - docker-compose -f local.yml run -w /app/frontend django yarn type-check
+
+    # unit tests
+    - docker-compose -f local.yml run django pytest backend/koenaconnect
+    - docker-compose -f local.yml run -w /app/frontend django yarn test --watchAll=false --ci
+
+end_to_end:
+  stage: end_to_end
+  needs: [lint_and_unit_test]
+  extends: .base-docker
+  script:
+    - docker-compose -f local.yml build --build-arg BUILDKIT_INLINE_CACHE=1
+    - docker-compose -f local.yml run --rm -w /app/frontend django yarn install
+    # Ensure celerybeat does not crash due to non-existent tables
+    - docker-compose -f local.yml run --rm django python backend/manage.py migrate
+    - docker-compose -f local.yml up -d
+    - docker-compose -f local.yml run -e CI=1 -e REACT_APP_CI=1 -w /app/frontend django yarn e2e
+  artifacts:
+    paths:
+      - frontend/end_to_end/output/
+    when: on_failure
+  when: manual

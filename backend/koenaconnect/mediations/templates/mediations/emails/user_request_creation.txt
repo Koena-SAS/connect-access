@@ -1,0 +1,6 @@
+{% load i18n %}
+{% blocktranslate %}Your mediation request with the identifier {{ id }} has been taken into account.{% endblocktranslate %}
+
+{% translate "You will soon be contacted by one of our mediators." %}
+
+{% translate "The Koena Connect team" %}

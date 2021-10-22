@@ -1,0 +1,131 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative; /* for the absolute positionning of the logo */
+  background-color: var(--header-color);
+  color: var(--secondary-text-color);
+
+  &::before {
+    content: "";
+    width: 100%;
+    height: 1px;
+    position: absolute;
+    background-color: var(--secondary-text-color);
+    opacity: 0.25;
+    top: 0;
+    left: 0;
+  }
+
+  .MuiButton-root.button {
+    padding: 5px 16px;
+  }
+
+  &__list {
+    margin: 0;
+    padding-left: 0;
+    min-height: 64px;
+    display: flex;
+    align-items: center;
+    padding-right: 1rem;
+  }
+
+  &__logo-container {
+    flex: 1;
+  }
+
+  &__nav-buttons {
+    display: flex;
+
+    @media (max-width: 750px) {
+      /* burger menu */
+      position: fixed;
+      top: 0;
+      right: 0;
+      flex-direction: column;
+      height: 100vh;
+      width: 20rem;
+      background-color: var(--header-color);
+      z-index: 10;
+      padding: 5.55rem 0rem 3rem 0rem;
+      transition: all ease 0.3s;
+      &.menu-opened {
+        visibility: visible;
+        opacity: 1;
+        transform: translateX(0px);
+      }
+      &.menu-closed {
+        visibility: hidden;
+        opacity: 0;
+        transform: translateX(100%);
+      }
+    }
+    @media (max-width: 450px) {
+      /* burger menu */
+      width: 100vw;
+    }
+  }
+
+  &__nav-button {
+    @media (max-width: 750px) {
+      border-bottom: 1px solid transparent;
+      &:last-child {
+        border-top: 1px solid transparent;
+      }
+      .MuiButton-root {
+        &.button {
+          width: 100%;
+          border-radius: unset;
+          margin: 0;
+          height: 4rem;
+          font-size: 1.1rem;
+          &.MuiButton-outlined {
+            border: unset;
+          }
+          &::before,
+          &::after {
+            border-radius: unset;
+          }
+          &::before {
+            border: unset;
+            border-top: 1px solid var(--secondary-text-color);
+            border-bottom: 1px solid var(--secondary-text-color);
+            left: 0;
+          }
+        }
+      }
+    }
+  }
+
+  &__menu-icon {
+    background: none;
+    border: unset;
+    color: var(--secondary-text-color);
+    display: none;
+    cursor: pointer;
+    position: absolute;
+    z-index: 11;
+    top: 0.75rem;
+    right: 1rem;
+    &.menu-opened {
+      position: fixed;
+      top: 2.3rem;
+      right: 1rem;
+    }
+    @media (max-width: 750px) {
+      display: block;
+    }
+  }
+
+  &__logo-link {
+    position: absolute;
+    top: 0;
+
+    &:focus {
+      box-shadow: none;
+      .header__logo {
+        filter: drop-shadow(0 0 5px #80c0fd) drop-shadow(0 0 5px #80c0fd);
+      }
+    }
+  }
+}

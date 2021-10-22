@@ -1,0 +1,48 @@
+.admin-personal-info {
+  display: grid;
+  grid-template:
+    "firstName lastName" auto
+    "email phone" auto /
+    1fr 1fr;
+  justify-content: center;
+  @media (max-width: 1100px) {
+    grid-template:
+      "firstName" auto
+      "lastName" auto
+      "email" auto
+      "phone" auto /
+      1fr;
+  }
+  > div {
+    padding: 0 6% 0 6%;
+    @media (max-width: 750px) {
+      padding: 0 5% 0 5%;
+    }
+  }
+  &__firstName {
+    grid-area: firstName;
+    @media (max-width: 750px) {
+      margin-top: 3rem;
+    }
+  }
+  &__lastName {
+    grid-area: lastName;
+    @media (max-width: 1100px) {
+      margin-top: 1.9rem;
+    }
+  }
+  &__email {
+    grid-area: email;
+    margin-top: 2.1rem;
+    @media (max-width: 1100px) {
+      margin-top: 1.9rem;
+    }
+  }
+  &__phone {
+    grid-area: phone;
+    margin-top: 2.1rem;
+    @media (max-width: 1100px) {
+      margin-top: 1.7rem;
+    }
+  }
+}

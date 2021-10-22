@@ -1,0 +1,51 @@
+.done-button.button {
+  @include submit-button-colors;
+}
+
+.cancel-button.button {
+  @include back-button-colors;
+}
+
+.delete-button.button.MuiButton-root {
+  color: var(--clear-button-background);
+
+  &::before {
+    border: 2px solid var(--clear-button-background);
+    opacity: 0.15;
+  }
+
+  &:hover,
+  &:visited,
+  &:focus {
+    background-color: transparent;
+    &::before {
+      border: 2px solid var(--clear-button-background-hover);
+      opacity: 0.4;
+    }
+    &::after {
+      background-color: rgba(255, 255, 255, 0.5);
+    }
+  }
+}
+
+.edit-button.button.MuiButton-root {
+  color: var(--submit-button-background);
+
+  &::before {
+    border: 2px solid var(--submit-button-background);
+    opacity: 0.2;
+  }
+
+  &:hover,
+  &:visited,
+  &:focus {
+    background-color: transparent;
+    &::before {
+      border: 2px solid var(--submit-button-background-hover);
+      opacity: 0.5;
+    }
+    &::after {
+      background-color: rgba(255, 255, 255, 0.5);
+    }
+  }
+}

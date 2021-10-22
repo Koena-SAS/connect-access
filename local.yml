@@ -1,0 +1,71 @@
+version: "3.8"
+
+volumes:
+  local_postgres_data: {}
+  local_postgres_data_backups: {}
+
+services:
+  django: &django
+    build:
+      context: .
+      cache_from:
+        - connect_access_django:dev
+      dockerfile: ./compose/local/django/Dockerfile
+    image: connect_access_django:dev
+    container_name: django
+    depends_on:
+      - postgres
+    volumes:
+      - .:/app:z
+    env_file:
+      - ./.envs/.local/.django
+      - ./.envs/.local/.postgres
+    ports:
+      - "8000:8000"
+      - "3000:3000"
+    command: /start
+
+  postgres:
+    build:
+      context: .
+      dockerfile: ./compose/production/postgres/Dockerfile
+    image: connect_access_postgres:production
+    container_name: postgres
+    volumes:
+      - local_postgres_data:/var/lib/postgresql/data:Z
+      - local_postgres_data_backups:/backups:z
+      - ./compose/production/postgres/init-scripts:/docker-entrypoint-initdb.d
+    env_file:
+      - ./.envs/.local/.postgres
+
+  redis:
+    image: redis:5.0
+    container_name: redis
+
+  celeryworker:
+    <<: *django
+    image: connect_access_celeryworker:dev
+    container_name: celeryworker
+    depends_on:
+      - redis
+      - postgres
+    ports: []
+    command: /start-celeryworker
+
+  celerybeat:
+    <<: *django
+    image: connect_access_celerybeat:dev
+    container_name: celerybeat
+    depends_on:
+      - redis
+      - postgres
+    ports: []
+    command: /start-celerybeat
+
+  flower:
+    <<: *django
+    image: connect_access_flower:dev
+    container_name: flower
+    ports:
+      - "5555:5555"
+    command: /start-flower

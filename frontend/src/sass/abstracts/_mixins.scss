@@ -1,0 +1,39 @@
+@mixin sr-only {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+@mixin submit-button-colors {
+  color: var(--submit-button-color);
+  background-color: var(--submit-button-background);
+  &:hover,
+  &:visited,
+  &:focus {
+    background-color: var(--submit-button-background-hover);
+  }
+}
+
+@mixin back-button-colors {
+  color: var(--back-button-color);
+  background-color: var(--back-button-background);
+  &:hover,
+  &:visited,
+  &:focus {
+    background-color: var(--back-button-background-hover);
+  }
+}
+
+@mixin clear-button-colors {
+  color: var(--clear-button-color);
+  background-color: var(--clear-button-background);
+  &:hover,
+  &:visited,
+  &:focus {
+    background-color: var(--clear-button-background-hover);
+  }
+}

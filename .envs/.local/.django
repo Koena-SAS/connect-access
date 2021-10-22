@@ -1,0 +1,21 @@
+# General
+# ------------------------------------------------------------------------------
+USE_DOCKER=yes
+DOCKER_BUILDKIT=1
+COMPOSE_DOCKER_CLI_BUILD=1
+IPYTHONDIR=/app/.ipython
+
+# Redis
+# ------------------------------------------------------------------------------
+REDIS_URL=redis://redis:6379/0
+
+# Celery
+# ------------------------------------------------------------------------------
+
+# Flower
+CELERY_FLOWER_USER=oeIeHTSgqgEWBZSLrHaaFWwpNtRvCfiF
+CELERY_FLOWER_PASSWORD=gFVA0gEGMAVMJygKTt74UuZqP2O5QXJDJLPuB6YGh45GHKNSeGOdHcmoPb7Mfztc
+
+# Mediation requests
+# ------------------------------------------------------------------------------
+MEDIATION_REQUEST_EMAIL=test@test.test

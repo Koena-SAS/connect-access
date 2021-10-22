@@ -1,0 +1,35 @@
+.quick-links {
+  background-color: var(--header-color);
+  color: var(--secondary-text-color);
+  min-height: 25px;
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding-left: 8px;
+  }
+
+  li {
+    list-style: none;
+  }
+
+  a,
+  button {
+    transition: color 180ms ease, background-color 180ms ease;
+    padding: 1px 8px 0 8px;
+    background: inherit;
+    color: var(--secondary-text-color);
+    text-decoration: none;
+    border: none;
+    line-height: 25px;
+    display: block;
+    font-size: 0.95rem;
+
+    &:hover,
+    &:focus {
+      background-color: var(--secondary-text-color);
+      color: var(--button-background-color);
+    }
+  }
+}

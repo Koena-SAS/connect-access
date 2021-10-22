@@ -1,0 +1,78 @@
+version: "3.8"
+
+volumes:
+  production_postgres_data: {}
+  production_postgres_data_backups: {}
+  production_traefik: {}
+  production_django_media: {}
+
+services:
+  django: &django
+    build:
+      context: .
+      dockerfile: ./compose/production/django/Dockerfile
+    image: connect_access_django:production
+    volumes:
+      - production_django_media:/app/backend/koenaconnect/media
+    depends_on:
+      - postgres
+      - redis
+    env_file:
+      - ./.envs/.production/.django
+      - ./.envs/.production/.postgres
+    command: /start
+
+  postgres:
+    build:
+      context: .
+      dockerfile: ./compose/production/postgres/Dockerfile
+    image: connect_access_postgres:production
+    volumes:
+      - production_postgres_data:/var/lib/postgresql/data:Z
+      - production_postgres_data_backups:/backups:z
+      - ./compose/production/postgres/init-scripts:/docker-entrypoint-initdb.d
+    env_file:
+      - ./.envs/.production/.postgres
+
+  traefik:
+    build:
+      context: .
+      dockerfile: ./compose/production/traefik/Dockerfile
+    image: connect_access_traefik:production
+    depends_on:
+      - django
+    labels:
+      - "traefik.enable=true"
+    volumes:
+      - production_traefik:/etc/traefik/acme
+    ports:
+      - "0.0.0.0:${APPLICATION_PORT}:80"
+      - "0.0.0.0:${FLOWER_PORT}:5555"
+
+  redis:
+    image: redis:5.0
+
+  celeryworker:
+    <<: *django
+    image: connect_access_celeryworker:production
+    command: /start-celeryworker
+
+  celerybeat:
+    <<: *django
+    image: connect_access_celerybeat:production
+    command: /start-celerybeat
+
+  flower:
+    <<: *django
+    image: connect_access_flower:production
+    command: /start-flower
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./compose/production/nginx/Dockerfile
+    image: connect_access_nginx:production
+    depends_on:
+      - django
+    volumes:
+      - production_django_media:/usr/share/nginx/media:ro

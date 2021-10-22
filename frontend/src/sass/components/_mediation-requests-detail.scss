@@ -1,0 +1,52 @@
+.mediation-request-detail {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 0;
+  &__title {
+    margin: 0;
+    font-size: 1.2rem;
+    position: relative;
+    align-self: start;
+    &::before {
+      content: "";
+      position: absolute;
+      background-color: var(--border-color);
+      width: calc(100% + 2.5rem);
+      height: 0.15rem;
+      top: 2rem;
+      left: 0rem;
+    }
+  }
+  &__list {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    grid-column-gap: 3rem;
+    list-style-type: none;
+    margin: 2rem 0;
+    padding: 0;
+    @media (max-width: 750px) {
+      grid-template-rows: auto;
+      grid-auto-flow: row;
+    }
+    div[role="listitem"] {
+      margin: 0.6rem 0;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  &__items-container {
+    padding-right: 3rem;
+    @media (max-width: 750px) {
+      padding-right: 0;
+    }
+  }
+  &__answer {
+    color: #0e838a;
+  }
+  &__question {
+    margin-top: 1.2rem;
+    font-size: 1.1rem;
+  }
+}

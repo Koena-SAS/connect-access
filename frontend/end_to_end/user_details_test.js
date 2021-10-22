@@ -1,0 +1,33 @@
+Feature("Mediation request");
+
+Before(({ I }) => {
+  I.preparePage();
+  I.have("user", { first_name: "John", email: "user.details@koena.net" });
+});
+
+Scenario(`Log in and see personal information.`, ({ I }) => {
+  I.login("user.details@koena.net", "strongestpasswordever");
+  I.click("My account");
+  I.click("My account");
+  I.click("My account");
+  I.see("Personal information");
+  I.seeInField("First name", "John");
+  I.checkA11y();
+  I.click("Logout");
+}).retry(1);
+
+Scenario(`Change personal information.`, ({ I }) => {
+  I.login("user.details@koena.net", "strongestpasswordever");
+  I.click("My account");
+  I.click("My account");
+  I.click("My account");
+  I.seeInField("First name", "John");
+  I.fillField("First name", "Chang");
+  I.click("Validate your new personal information");
+  I.seeInField("First name", "Chang");
+  I.checkA11y();
+  I.click("Close message");
+  I.refreshPage();
+  I.seeInField("First name", "Chang");
+  I.click("Logout");
+}).retry(1);

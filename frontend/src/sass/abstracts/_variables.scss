@@ -1,0 +1,25 @@
+:root {
+  /* Theme colors personalized from the database */
+  --secondary-text-color: #ffffff;
+  --button-background-color: #3d7a2e;
+  --button-hover-color: #2e5c23;
+  --outlined-button-hover-color: #cd440a;
+  --border-color: #3e8526;
+  --step-color: #3d7a2e;
+  --header-color: #1e3610;
+  --footer-color: #17380b;
+
+  /* button colors */
+  --submit-button-color: white;
+  --submit-button-background: #3d7827;
+  --submit-button-background-hover: #2e5c23;
+  --clear-button-color: white;
+  --clear-button-background: #d60c05;
+  --clear-button-background-hover: #bb0606;
+  --back-button-color: #444444;
+  --back-button-background: #eeeeee;
+  --back-button-background-hover: #d5d5d5;
+}
+
+$label-size: 1.13rem;
+$input-size: 1.03rem;

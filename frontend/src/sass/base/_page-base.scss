@@ -1,0 +1,40 @@
+.page-base {
+  width: 100%;
+  padding: 0.1rem 7% 4rem 7%;
+  background-color: #f8f8f8;
+  box-sizing: border-box;
+  &__title {
+    font-size: 1.75rem;
+    @media (max-width: 450px) {
+      font-size: 1.6rem;
+    }
+  }
+  &__content {
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+  }
+  @media (max-width: 430px) {
+    padding: 0.1rem 4% 4rem 4%;
+  }
+}
+
+.admin-page-base {
+  width: 100%;
+  min-height: calc(100vh - 25px);
+  padding: 4rem 7% 4rem 7%;
+  background-color: #f8f8f8;
+  box-sizing: border-box;
+  &__title {
+    font-size: 1.75rem;
+    @media (max-width: 450px) {
+      font-size: 1.6rem;
+    }
+  }
+  &__content {
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+  }
+  @media (max-width: 430px) {
+    padding: 4rem 4% 4rem 4%;
+  }
+}

@@ -1,0 +1,12 @@
+.envs/*
+!.envs/.local_no_docker/
+!.envs/.local/
+!.envs/production_template/
+.env
+.env_production
+.env_staging
+.vscode
+.mypy_cache
+__pycache__/
+venv/
+backups/

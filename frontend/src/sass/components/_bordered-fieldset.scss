@@ -1,0 +1,18 @@
+.fieldset-border {
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  margin-top: 0.6rem;
+  padding: 2.3rem 2rem;
+  &__legend {
+    font-weight: bold;
+    font-size: 1.25rem;
+    margin-bottom: 0;
+    margin-top: 1.5rem;
+    &.smallMarginTop {
+      margin-top: 0.5rem;
+    }
+  }
+  &.smallPaddingTop {
+    padding-top: 1rem;
+  }
+}

@@ -1,0 +1,37 @@
+.confirmation-dialog {
+  &__content-container {
+    padding: 1.5rem 1.5rem 1.5rem 1.5rem;
+  }
+  &__title {
+    font-size: 1.7rem;
+    font-weight: normal;
+    text-align: center;
+    margin: 0;
+    padding: 1.3rem 1.2rem 1.2rem 1.2rem;
+    color: var(--secondary-text-color);
+    background-color: var(--button-background-color);
+  }
+  &__question {
+    padding: 2.5rem 1.9rem 0rem 1.9rem;
+    font-size: 1.12rem;
+  }
+  &__buttons {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  &__submit.button {
+    flex: auto;
+    flex-basis: 145px;
+  }
+  &__cancel.button {
+    flex: auto;
+    flex-basis: 145px;
+  }
+
+  @media (max-width: 400px) {
+    &__content-container {
+      padding: 1.5rem 1rem 1.5rem 1rem;
+    }
+  }
+}

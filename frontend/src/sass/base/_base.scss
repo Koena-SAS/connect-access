@@ -1,0 +1,59 @@
+html {
+  font-size: 100%;
+}
+
+body {
+  font-family: Luciole, sans-serif;
+  text-rendering: optimizeLegibility;
+  margin: 0;
+  line-height: 1.4;
+  color: #111;
+}
+
+@font-face {
+  font-family: "Luciole";
+  src: url(../fonts/Luciole-Bold.ttf) format("truetype");
+  font-style: normal;
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Luciole";
+  src: url(../fonts/Luciole-Regular.ttf) format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Luciole";
+  src: url(../fonts/Luciole-Regular-Italic.ttf) format("truetype");
+  font-style: italic;
+  font-weight: normal;
+}
+
+/* We define props on focus. */
+:focus:not(.MuiTab-root):not(.MuiInputBase-input):not(.header__logo-link),
+.MuiButton-contained.Mui-focusVisible:focus {
+  box-shadow: 0 0 6px #80c0fd, 0 0 6px #80c0fd, 0 0 6px #80c0fd;
+  outline-offset: -3px;
+  outline: 2px solid currentColor;
+}
+/* We remove props if there is not :focus-visible.
+This by the way ensures that if the browser supports focus but not
+focus-visible, everything defined at focus will be kept and the following
+elements will not be executed.
+cf. https://www.tpgi.com/focus-visible-and-backwards-compatibility/
+  */
+:focus:not(:focus-visible):not(.MuiTab-root):not(.MuiInputBase-input):not(.header__logo-link),
+.MuiButton-contained.Mui-focusVisible:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.body {
+  height: 100vh;
+}
+
+.sr-only {
+  @include sr-only;
+}

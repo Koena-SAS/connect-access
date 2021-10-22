@@ -1,0 +1,135 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  &__title {
+    @include sr-only;
+  }
+  &__head {
+    text-align: left;
+    background-color: white;
+  }
+  td {
+    padding: 1rem 1.5rem;
+    white-space: pre-wrap;
+  }
+  th {
+    font-size: 1.1rem;
+    padding: 1.5rem 1.5rem;
+    color: #333;
+  }
+  &__data-row {
+    background-color: white;
+    border-top: 1px solid #ebebeb;
+    &:nth-child(odd) {
+      background-color: #f8f8f8;
+    }
+    &:focus,
+    &:hover {
+      background-color: #ebebeb;
+      transition: background-color 0.3s ease;
+      box-shadow: none;
+    }
+  }
+
+  @media (min-width: 1400px) and (max-width: 1600px) {
+    td {
+      padding: 1rem 1rem;
+    }
+    th {
+      padding: 1.5rem 1rem;
+    }
+  }
+
+  @mixin mobile-mode {
+    display: block;
+    tr,
+    td,
+    tbody {
+      display: block;
+    }
+    .table__head {
+      @include sr-only;
+    }
+    tbody {
+      background-color: #f8f8f8;
+    }
+    td {
+      position: relative;
+      padding-left: 14.5rem;
+      background-color: white;
+    }
+    td:nth-child(odd) {
+      background-color: #f8f8f8;
+    }
+    .table__data-row {
+      &:focus,
+      &:hover {
+        box-shadow: none;
+        td {
+          background-color: #ebebeb;
+          transition: background-color 0.3s ease;
+        }
+      }
+    }
+    td:before {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      padding: 1rem 1.5rem;
+      box-sizing: border-box;
+      width: 12.5rem;
+      content: attr(data-label);
+      background-color: var(--header-color);
+      color: var(--secondary-text-color);
+      font-weight: bold;
+      white-space: normal;
+    }
+    tr:not(:last-child) {
+      margin-bottom: 1.5rem;
+    }
+    @media (max-width: 500px) {
+      td {
+        padding-left: 10rem;
+        min-height: 1rem;
+      }
+      td:before {
+        width: 8.5rem;
+        padding: 1rem 1rem;
+      }
+    }
+    @media (max-width: 400px) {
+      td {
+        padding-left: 7.5rem;
+        padding-right: 1rem;
+      }
+      td:before {
+        width: 6.5rem;
+        font-size: 0.8rem;
+        padding: 1rem 0.5rem;
+      }
+    }
+  }
+  &.mobileModeFrom1200 {
+    @media (max-width: 1200px) {
+      @include mobile-mode;
+    }
+  }
+  &.mobileModeFrom1400 {
+    @media (max-width: 1400px) {
+      @include mobile-mode;
+    }
+  }
+  &.mobileModeFrom1600 {
+    @media (max-width: 1600px) {
+      @include mobile-mode;
+    }
+  }
+  &.mobileModeFrom1800 {
+    @media (max-width: 1800px) {
+      @include mobile-mode;
+    }
+  }
+}

@@ -1,0 +1,157 @@
+.personal-info {
+  display: grid;
+  grid-template:
+    ". dude . firstName lastName" auto
+    ". dude . email phone" auto /
+    0.5fr auto 0.25fr 2fr 2fr;
+  justify-content: center;
+  border: none;
+  padding-top: 1.6rem;
+  @media (max-width: 1100px) {
+    grid-template:
+      ". dude . firstName" auto
+      ". dude . lastName" auto
+      ". dude . email" auto
+      ". dude . phone" auto /
+      0.5fr auto 0.25fr 4fr;
+  }
+  @media (max-width: 750px) {
+    grid-template:
+      "dude" auto
+      "firstName" auto
+      "lastName" auto
+      "email" auto
+      "phone" auto /
+      auto;
+  }
+  > div {
+    padding: 0 6% 0 6%;
+    @media (max-width: 750px) {
+      padding: 0 5% 0 5%;
+    }
+  }
+  &__dude {
+    grid-area: dude;
+    justify-self: end;
+    @media (max-width: 1100px) {
+      align-self: center;
+    }
+    @media (max-width: 750px) {
+      justify-self: center;
+    }
+  }
+  &__firstName {
+    grid-area: firstName;
+    @media (max-width: 750px) {
+      margin-top: 3rem;
+    }
+  }
+  &__lastName {
+    grid-area: lastName;
+    @media (max-width: 1100px) {
+      margin-top: 1.9rem;
+    }
+  }
+  &__email {
+    grid-area: email;
+    margin-top: 2.1rem;
+    @media (max-width: 1100px) {
+      margin-top: 1.9rem;
+    }
+  }
+  &__phone {
+    grid-area: phone;
+    margin-top: 2.1rem;
+    @media (max-width: 1100px) {
+      margin-top: 1.7rem;
+    }
+  }
+  &__legend {
+    @include sr-only;
+  }
+}
+
+.assistive-technology {
+  display: grid;
+  grid-template:
+    ". warning warning warning warning ." auto
+    "used used used used used used" auto
+    "name name name version version version" auto /
+    0.3fr 0.7fr 0.5fr 0.5fr 0.7fr 0.3fr;
+  justify-content: center;
+  @media (max-width: 1100px) {
+    grid-template:
+      ". warning ." auto
+      "used used used" auto
+      "name name name" auto
+      "version version version" auto /
+      0.3fr 2.4fr 0.3fr;
+  }
+  @media (max-width: 750px) {
+    grid-template:
+      "warning" auto
+      "used" auto
+      "name" auto
+      "version" auto /
+      1fr;
+  }
+  &__title {
+    margin-top: 4rem;
+  }
+  &__warning {
+    grid-area: warning;
+    margin-bottom: 2.8rem;
+    @media (max-width: 450px) {
+      flex-direction: column;
+      .warning__text {
+        margin-left: 0;
+        margin-top: 1rem;
+      }
+    }
+  }
+  &__technologyUsed {
+    grid-area: used;
+    padding: 0 3% 0 3%;
+    @media (max-width: 1100px) {
+      padding: 0 6% 0 6%;
+    }
+    @media (max-width: 750px) {
+      padding: 0;
+    }
+  }
+  &__technologyUsed-helper {
+    margin: 5px 0 0 0;
+  }
+  &__technologyName {
+    grid-area: name;
+    padding: 0 6% 0 6%;
+    margin-top: 2rem;
+    @media (max-width: 750px) {
+      padding: 0;
+    }
+  }
+  &__technologyVersion {
+    grid-area: version;
+    padding: 0 6% 0 6%;
+    margin-top: 2rem;
+    @media (max-width: 750px) {
+      padding: 0;
+    }
+  }
+}
+
+.dude_svg {
+  width: 171px;
+  height: 200px;
+  &__circle {
+    opacity: 0.28;
+    filter: saturate(1.7);
+    fill: var(--border-color);
+  }
+  &__head {
+    fill: var(--border-color);
+  }
+  &__body {
+    fill: var(--border-color);
+  }
+}

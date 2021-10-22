@@ -1,0 +1,26 @@
+.login {
+  &__buttons {
+    padding-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  &__submit.button,
+  &__cancel.button {
+    flex: auto;
+    flex-basis: 145px;
+  }
+  &__forgotten-password-container {
+    padding: 1rem 0rem 0 0rem;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  &__forgotten-password {
+    text-decoration: none;
+    padding: 0.4rem 0.5rem 0.3rem 0.5rem;
+    color: #dd1d20;
+  }
+  .MuiInputLabel-root {
+    margin-top: 1.1rem;
+  }
+}

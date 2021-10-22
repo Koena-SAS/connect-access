@@ -1,0 +1,17 @@
+.MuiAlert-filledSuccess {
+  &.snackbar-alert {
+    background-color: #3d7a2e;
+  }
+}
+
+.MuiAlert-filledError {
+  &.snackbar-alert {
+    background-color: #ee0701;
+  }
+}
+
+.MuiAlert-filledInfo {
+  &.snackbar-alert {
+    background-color: #1c79cd;
+  }
+}

@@ -1,0 +1,29 @@
+{% load i18n %}
+{% translate "A new mediation request has been submitted." %}
+
+{% translate "Main information:" %}
+{% if mediation_request_id %}- {% blocktranslate with id=mediation_request_id %}Public identifier: {{ id }}{% endblocktranslate %}{% endif %}
+{% if mediation_request.application %}- {% blocktranslate with application=mediation_request.application %}Application: {{ application }}{% endblocktranslate %}{% endif %}
+{% if mediation_request_urgency %}- {% blocktranslate with urgency=mediation_request_urgency|safe %}Urgency: {{ urgency }}{% endblocktranslate %}{% endif %}
+
+{% translate "User's information:" %}
+{% if mediation_request.first_name %}- {% blocktranslate with first_name=mediation_request.first_name last_name=mediation_request.last_name %}Name: {{ first_name }} {{ last_name }}{% endblocktranslate %}{% endif %}
+{% if mediation_request.email %}- {% blocktranslate with email=mediation_request.email %}Email: {{ email }}{% endblocktranslate %}{% endif %}
+{% if mediation_request.phone_number %}- {% blocktranslate with phone_number=mediation_request.phone_number %}Phone number: {{ phone_number }}{% endblocktranslate %}{% endif %}
+
+{% translate "Problem description:" %}
+{% if mediation_request.step_description %}- {% blocktranslate with step_description=mediation_request.step_description %}Step description: {{ step_description }}{% endblocktranslate %}{% endif %}
+{% if mediation_request.issue_description %}- {% blocktranslate with issue_description=mediation_request.issue_description %}Issue description: {{ issue_description }}{% endblocktranslate %}{% endif %}
+{% if mediation_request.organization_name or mediation_request.organization_address or mediation_request.organization_email or mediation_request.organization_phone_number or mediation_request.organization_contact  %}
+
+{% translate "Organization information:" %}
+{% if mediation_request.organization_name %}- {% blocktranslate with organization_name=mediation_request.organization_name %}Name: {{ organization_name }}{% endblocktranslate %}{% endif %}
+{% if mediation_request.organization_address %}- {% blocktranslate with organization_address=mediation_request.organization_address %}Mailing address: {{ organization_address }}{% endblocktranslate %}{% endif %}
+{% if mediation_request.organization_email %}- {% blocktranslate with organization_email=mediation_request.organization_email %}Email address: {{ organization_email }}{% endblocktranslate %}{% endif %}
+{% if mediation_request.organization_phone_number %}- {% blocktranslate with organization_phone_number=mediation_request.organization_phone_number %}Phone number: {{ organization_phone_number }}{% endblocktranslate %}{% endif %}
+{% if mediation_request.organization_contact %}- {% blocktranslate with organization_contact=mediation_request.organization_contact %}Contact: {{ organization_contact }}{% endblocktranslate %}{% endif %}
+{% endif %}
+
+{% translate "For more information please take a look at the mediation request." %}
+
+{% translate "The Koena Connect team" %}
