@@ -1,7 +1,8 @@
-import { act, cleanup, fireEvent } from "@testing-library/react";
+import { act, cleanup, fireEvent, waitFor } from "@testing-library/react";
 import axios from "axios";
 import produce from "immer";
 import { generatePath } from "react-router-dom";
+import { cache } from "swr";
 import { PATHS, PATHS_WITHOUT_PREFIX } from "./constants/paths";
 
 jest.mock("axios");
@@ -347,10 +348,12 @@ export function generatePathsWithoutPrefix() {
 /**
  * Cleanup the rendered components, the mocks, and reset axios mocks.
  */
-export const cleanupData = () => {
-  cleanup();
+export const cleanupData = async () => {
   jest.clearAllMocks();
   resetAxiosMocks();
+  localStorage.clear();
+  await waitFor(() => cache.clear());
+  cleanup();
 };
 
 /**
@@ -364,11 +367,13 @@ export const cleanupData = () => {
  */
 export const runWithAndWithoutOrganizationPrefix = async (
   test: any,
-  cleanupFunction?: any
+  cleanupFunction?: () => void,
+  cleanupAsyncFunction?: () => Promise<void>
 ) => {
   await test(generatePathsWithPrefix(), PATHS);
-  cleanupData();
   if (cleanupFunction) cleanupFunction();
+  if (cleanupAsyncFunction) await cleanupAsyncFunction();
+  await cleanupData();
   await test(generatePathsWithoutPrefix(), PATHS_WITHOUT_PREFIX);
 };
 

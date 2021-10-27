@@ -20,28 +20,36 @@ import { ResetLittleStateMachine, unlockStep } from "./mediationForm/testUtils";
 import {
   axiosGetResponseMe,
   click,
+  generatePathsWithoutPrefix,
+  generatePathsWithPrefix,
   mockedAxios,
   resetAxiosMocks,
-  runWithAndWithoutOrganizationPrefix,
 } from "./testUtils";
 
 initLanguagesForTesting();
 jest.mock("axios");
 
-beforeEach(() => {
-  resetAxiosMocks();
-});
-
-afterEach(async () => {
-  jest.clearAllMocks();
-  localStorage.clear();
-  await waitFor(() => cache.clear());
+const resetStateMachine = () => {
   // this is needed to clean the store in jsdom sessionStorage
   render(
     <StateMachineProvider>
       <ResetLittleStateMachine />
     </StateMachineProvider>
   );
+};
+
+const generatedPathsWithPrefix = generatePathsWithPrefix();
+const generatedPathsWithoutPrefix = generatePathsWithoutPrefix();
+
+beforeEach(async () => {
+  resetAxiosMocks();
+  localStorage.clear();
+  await waitFor(() => cache.clear());
+});
+
+afterEach(() => {
+  jest.clearAllMocks();
+  resetStateMachine();
 });
 
 /**
@@ -130,20 +138,20 @@ function ComponentWrapper({ paths }) {
 }
 
 describe("Admin panel", () => {
-  it(`displays admin layout when connected as admin and on admin
-  page`, async () => {
-    axiosGetResponseMe.data.isStaff = true;
-    let loginDone = false;
-    await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
+  describe(`displays admin layout when connected as admin and on admin
+  page`, () => {
+    async function test(
+      generatedPaths: Record<string, string>,
+      paths: Record<string, string>
+    ): Promise<void> {
+      axiosGetResponseMe.data.isStaff = true;
+
       const history = createMemoryHistory({
         initialEntries: [generatedPaths.ROOT],
       });
       const app = await renderApp(history, generatedPaths, paths);
-      if (!loginDone) {
-        await loginUser(app);
-        loginDone = true;
-      }
-      act(() => {
+      await loginUser(app);
+      await act(async () => {
         history.push(generatedPaths.ADMIN);
       });
       expect(
@@ -153,25 +161,38 @@ describe("Admin panel", () => {
       expect(
         app.queryByRole("button", { name: "Dashboard" })
       ).not.toBeInTheDocument();
+    }
+
+    it(`with organization prefix`, async () => {
+      await test(generatedPathsWithPrefix, PATHS);
+    });
+    it(`without organization prefix`, async () => {
+      await test(generatedPathsWithoutPrefix, PATHS_WITHOUT_PREFIX);
     });
   });
 
-  it(`does not display admin layout when connected as non admin and on admin
-  page`, async () => {
-    let loginDone = false;
-    await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
+  describe(`does not display admin layout when connected as non admin and on admin
+  page`, () => {
+    async function test(
+      generatedPaths: Record<string, string>,
+      paths: Record<string, string>
+    ): Promise<void> {
       const history = createMemoryHistory({
         initialEntries: [generatedPaths.ROOT],
       });
       const app = await renderApp(history, generatedPaths, paths);
-      if (!loginDone) {
-        await loginUser(app);
-        loginDone = true;
-      }
+      await loginUser(app);
       act(() => {
         history.push(generatedPaths.ADMIN);
       });
       expect(app.queryByText("Dashboard")).not.toBeInTheDocument();
+    }
+
+    it(`with organization prefix`, async () => {
+      await test(generatedPathsWithPrefix, PATHS);
+    });
+    it(`without organization prefix`, async () => {
+      await test(generatedPathsWithoutPrefix, PATHS_WITHOUT_PREFIX);
     });
   });
 });
@@ -278,78 +299,100 @@ describe("Login / logout", () => {
   });
 
   describe("Logout", () => {
-    it(`displays login button and no more user details after logout,
-    and redirects to homepage`, async () => {
-      await runWithAndWithoutOrganizationPrefix(
-        async (generatedPaths, paths) => {
-          const userPhoneNumber = /2463259871/;
-          const [app, history] = await checkInfoAndPathsOnLogin(
-            userPhoneNumber,
-            generatedPaths.USER_DETAILS,
-            [/My account/],
-            generatedPaths,
-            paths
-          );
-          await checkInfoAndPathsOnLogout(
-            app,
-            history,
-            userPhoneNumber,
-            generatedPaths.ROOT
-          );
-        }
-      );
+    describe(`displays login button and no more user details after logout,
+    and redirects to homepage`, () => {
+      async function test(
+        generatedPaths: Record<string, string>,
+        paths: Record<string, string>
+      ): Promise<void> {
+        const userPhoneNumber = /2463259871/;
+        const [app, history] = await checkInfoAndPathsOnLogin(
+          userPhoneNumber,
+          generatedPaths.USER_DETAILS,
+          [/My account/],
+          generatedPaths,
+          paths
+        );
+        await checkInfoAndPathsOnLogout(
+          app,
+          history,
+          userPhoneNumber,
+          generatedPaths.ROOT
+        );
+      }
+
+      it(`with organization prefix`, async () => {
+        await test(generatedPathsWithPrefix, PATHS);
+      });
+      it(`without organization prefix`, async () => {
+        await test(generatedPathsWithoutPrefix, PATHS_WITHOUT_PREFIX);
+      });
     });
 
-    it(`displays login button and no more user's mediation requests after logout,
-    and redirects to homepage`, async () => {
-      await runWithAndWithoutOrganizationPrefix(
-        async (generatedPaths, paths) => {
-          const mediationRequestId = /f8842f63/;
-          const [app, history] = await checkInfoAndPathsOnLogin(
-            mediationRequestId,
-            generatedPaths.USER_REQUESTS,
-            [/My requests/],
-            generatedPaths,
-            paths
-          );
-          await checkInfoAndPathsOnLogout(
-            app,
-            history,
-            mediationRequestId,
-            generatedPaths.ROOT
-          );
-        }
-      );
+    describe(`displays login button and no more user's mediation requests after logout,
+    and redirects to homepage`, () => {
+      async function test(
+        generatedPaths: Record<string, string>,
+        paths: Record<string, string>
+      ): Promise<void> {
+        const mediationRequestId = /f8842f63/;
+        const [app, history] = await checkInfoAndPathsOnLogin(
+          mediationRequestId,
+          generatedPaths.USER_REQUESTS,
+          [/My requests/],
+          generatedPaths,
+          paths
+        );
+        await checkInfoAndPathsOnLogout(
+          app,
+          history,
+          mediationRequestId,
+          generatedPaths.ROOT
+        );
+      }
+
+      it(`with organization prefix`, async () => {
+        await test(generatedPathsWithPrefix, PATHS);
+      });
+      it(`without organization prefix`, async () => {
+        await test(generatedPathsWithoutPrefix, PATHS_WITHOUT_PREFIX);
+      });
     });
 
-    it(`displays login button and no more user's mediation request detail after logout,
-    and redirects to homepage`, async () => {
-      await runWithAndWithoutOrganizationPrefix(
-        async (generatedPaths, paths) => {
-          const history = createMemoryHistory({
-            initialEntries: [generatedPaths.ROOT],
-          });
-          const app = await renderApp(history, generatedPaths, paths);
-          await loginUser(app);
-          fireEvent.click(app.getByText(/My requests/));
-          const id = app.getByText(/f8842f63/);
-          const detailsButton = within(id.closest("tr")).getByText("Details");
-          await click(detailsButton);
-          await waitFor(() =>
-            expect(history.location.pathname).toEqual(
-              generatedPaths.USER_REQUEST
-            )
-          );
-          const infoNode = app.getByText(/3\.5\.2/);
-          expect(infoNode).toBeInTheDocument();
-          await checkInfoAndPathsOnLogout(
-            app,
-            history,
-            /3\.5\.2/,
-            generatedPaths.ROOT
-          );
-        }
-      );
+    describe(`displays login button and no more user's mediation request detail after logout,
+    and redirects to homepage`, () => {
+      async function test(
+        generatedPaths: Record<string, string>,
+        paths: Record<string, string>
+      ): Promise<void> {
+        const history = createMemoryHistory({
+          initialEntries: [generatedPaths.ROOT],
+        });
+        const app = await renderApp(history, generatedPaths, paths);
+        await loginUser(app);
+        fireEvent.click(app.getByText(/My requests/));
+        const id = app.getByText(/f8842f63/);
+        const detailsButton = within(id.closest("tr")).getByText("Details");
+        await click(detailsButton);
+        await waitFor(() =>
+          expect(history.location.pathname).toEqual(generatedPaths.USER_REQUEST)
+        );
+        const infoNode = app.getByText(/3\.5\.2/);
+        expect(infoNode).toBeInTheDocument();
+        await checkInfoAndPathsOnLogout(
+          app,
+          history,
+          /3\.5\.2/,
+          generatedPaths.ROOT
+        );
+      }
+
+      it(`with organization prefix`, async () => {
+        await test(generatedPathsWithPrefix, PATHS);
+      });
+      it(`without organization prefix`, async () => {
+        await test(generatedPathsWithoutPrefix, PATHS_WITHOUT_PREFIX);
+      });
     });
 
     async function checkInfoAndPathsOnLogin(

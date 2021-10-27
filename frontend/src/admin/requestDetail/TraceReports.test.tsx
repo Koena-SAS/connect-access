@@ -2,12 +2,12 @@ import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
 import { act, fireEvent, render, waitFor } from "@testing-library/react";
 import { createMemoryHistory } from "history";
-import React from "react";
 import { Route, Router } from "react-router-dom";
 import { cache, SWRConfig } from "swr";
 import { PATHS_WITHOUT_PREFIX } from "../../constants/paths";
 import { initLanguagesForTesting } from "../../i18nTestHelper";
 import {
+  click,
   generatePathsWithoutPrefix,
   mockedAxios,
   resetAxiosMocks,
@@ -18,13 +18,13 @@ import TraceReports from "./TraceReports";
 initLanguagesForTesting();
 jest.mock("axios");
 
-beforeEach(() => {
+beforeEach(async () => {
   resetAxiosMocks();
+  await waitFor(() => cache.clear());
 });
 
-afterEach(async () => {
+afterEach(() => {
   jest.clearAllMocks();
-  await waitFor(() => cache.clear());
 });
 
 const generatedPathsWithoutPrefix = generatePathsWithoutPrefix();
@@ -94,8 +94,8 @@ describe("display", () => {
 
   it(`closes the add report form when clicking on cancel button`, async () => {
     await runBasicTest(async ({ getByText, queryByText }) => {
-      fireEvent.click(getByText("Add a trace report"));
-      fireEvent.click(getByText("Cancel"));
+      await click(getByText("Add a trace report"));
+      await click(getByText("Cancel"));
       await waitFor(() =>
         expect(queryByText("Add the report")).not.toBeInTheDocument()
       );
@@ -103,8 +103,8 @@ describe("display", () => {
   });
   it(`closes the add report form when submitting successfully`, async () => {
     await runBasicTest(async ({ getByText, queryByText }) => {
-      fireEvent.click(getByText("Add a trace report"));
-      fireEvent.click(getByText("Add the report"));
+      await click(getByText("Add a trace report"));
+      await click(getByText("Add the report"));
       await waitFor(() =>
         expect(queryByText("Add the report")).not.toBeInTheDocument()
       );
@@ -113,16 +113,16 @@ describe("display", () => {
 
   it(`closes the edit report form when clicking on cancel button`, async () => {
     const { getAllByText, getByText, queryByText } = await renderTraceReports();
-    fireEvent.click(getAllByText("Edit")[0]);
-    fireEvent.click(getByText("Cancel"));
+    await click(getAllByText("Edit")[0]);
+    await click(getByText("Cancel"));
     await waitFor(() =>
       expect(queryByText("Edit the report")).not.toBeInTheDocument()
     );
   });
   it(`closes the edit report form when submitting successfully`, async () => {
     const { getAllByText, getByText, queryByText } = await renderTraceReports();
-    fireEvent.click(getAllByText("Edit")[0]);
-    fireEvent.click(getByText("Edit the report"));
+    await click(getAllByText("Edit")[0]);
+    await click(getByText("Edit the report"));
     await waitFor(() =>
       expect(queryByText("Edit the report")).not.toBeInTheDocument()
     );
@@ -130,27 +130,27 @@ describe("display", () => {
 
   it(`closes the delete report dialog when clicking on No button`, async () => {
     const { getAllByText, getByText, queryByText } = await renderTraceReports();
-    fireEvent.click(getAllByText("Remove")[0]);
-    fireEvent.click(getByText("No"));
+    await click(getAllByText("Remove")[0]);
+    await click(getByText("No"));
     await waitFor(() => expect(queryByText("Yes")).not.toBeInTheDocument());
   });
   it(`closes the delete report dialog when confirming successfully`, async () => {
     const { getAllByText, getByText, queryByText } = await renderTraceReports();
-    fireEvent.click(getAllByText("Remove")[0]);
-    fireEvent.click(getByText("Yes"));
+    await click(getAllByText("Remove")[0]);
+    await click(getByText("Yes"));
     await waitFor(() => expect(queryByText("Yes")).not.toBeInTheDocument());
   });
 
   it(`displays the attached file removal checkbox only when editing a trace report
   that has an attached file`, async () => {
     const { getAllByText, getByText, queryByText } = await renderTraceReports();
-    fireEvent.click(getAllByText("Edit")[0]);
+    await click(getAllByText("Edit")[0]);
     expect(getByText("Remove the attached file")).toBeInTheDocument();
-    fireEvent.click(getByText("Edit the report"));
+    await click(getByText("Edit the report"));
     await waitFor(() =>
       expect(queryByText("Edit the report")).not.toBeInTheDocument()
     );
-    fireEvent.click(getAllByText("Edit")[1]);
+    await click(getAllByText("Edit")[1]);
     expect(queryByText("Remove the attached file")).not.toBeInTheDocument();
   });
 
@@ -158,7 +158,7 @@ describe("display", () => {
   appropriate`, async () => {
     const { getAllByText, getByLabelText, queryByLabelText } =
       await renderTraceReports();
-    fireEvent.click(getAllByText("Edit")[0]);
+    await click(getAllByText("Edit")[0]);
     fireEvent.change(getByLabelText("Sender type"), {
       target: { value: "COMPLAINANT" },
     });
@@ -173,7 +173,7 @@ describe("display", () => {
   appropriate`, async () => {
     const { getAllByText, getByLabelText, queryByLabelText } =
       await renderTraceReports();
-    fireEvent.click(getAllByText("Edit")[0]);
+    await click(getAllByText("Edit")[0]);
     fireEvent.change(getByLabelText("Recipient type"), {
       target: { value: "COMPLAINANT" },
     });
@@ -195,8 +195,8 @@ describe("Errors from the backend", () => {
   during creation`, async () => {
     mockedAxios.post.mockRejectedValue({ data: "backend error" });
     const { getByText } = await renderTraceReports();
-    fireEvent.click(getByText("Add a trace report"));
-    fireEvent.click(getByText("Add the report"));
+    await click(getByText("Add a trace report"));
+    await click(getByText("Add the report"));
     await waitFor(() =>
       expect(
         getByText(/The report creation was not successful/)
@@ -208,8 +208,8 @@ describe("Errors from the backend", () => {
   during deletion`, async () => {
     mockedAxios.delete.mockRejectedValue({ data: "backend error" });
     const { getByText, getAllByText } = await renderTraceReports();
-    fireEvent.click(getAllByText("Remove")[0]);
-    fireEvent.click(getByText("Yes"));
+    await click(getAllByText("Remove")[0]);
+    await click(getByText("Yes"));
     await waitFor(() =>
       expect(
         getByText(/The report deletion was not successful/)
@@ -221,8 +221,8 @@ describe("Errors from the backend", () => {
   during update`, async () => {
     mockedAxios.patch.mockRejectedValue({ data: "backend error" });
     const { getByText, getAllByText } = await renderTraceReports();
-    fireEvent.click(getAllByText("Edit")[0]);
-    fireEvent.click(getByText("Edit the report"));
+    await click(getAllByText("Edit")[0]);
+    await click(getByText("Edit the report"));
     await waitFor(() =>
       expect(
         getByText(/The report update was not successful/)
@@ -235,7 +235,7 @@ describe("accessibility", () => {
   it(`moves focus to the first focusable element when opening the
   modal`, async () => {
     const { getByText, getByLabelText } = await renderTraceReports();
-    fireEvent.click(getByText("Add a trace report"));
+    await click(getByText("Add a trace report"));
     const dateField = getByLabelText("Contact date");
     await waitFor(() => expect(dateField).toHaveFocus());
   });
