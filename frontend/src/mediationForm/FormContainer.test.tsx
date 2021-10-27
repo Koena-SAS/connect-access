@@ -4,8 +4,9 @@ import { act, render, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createMemoryHistory } from "history";
 import { StateMachineProvider } from "little-state-machine";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Route, Router } from "react-router-dom";
+import { cache, SWRConfig } from "swr";
 import { PATHS, PATHS_WITHOUT_PREFIX } from "../constants/paths";
 import { initLanguagesForTesting } from "../i18nTestHelper";
 import {
@@ -30,6 +31,7 @@ import {
 
 initLanguagesForTesting();
 jest.mock("axios");
+jest.setTimeout(10000);
 
 const generatedPathsWithPrefix = generatePathsWithPrefix();
 const generatedPathsWithoutPrefix = generatePathsWithoutPrefix();
@@ -43,8 +45,16 @@ const resetStateMachine = () => {
   );
 };
 
-beforeEach(() => {
+async function resetBetweenTwoSubTests() {
+  resetStateMachine();
+  const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+  await delay(1);
+}
+
+beforeEach(async () => {
   resetAxiosMocks();
+  localStorage.clear();
+  await waitFor(() => cache.clear());
 });
 
 afterEach(() => {
@@ -54,21 +64,29 @@ afterEach(() => {
 
 describe("Steps routing correct display", () => {
   it("displays only user info step when on / path", async () => {
-    await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
-      await testRoute(generatedPaths.ROOT, 1, generatedPaths, paths);
-    }, resetStateMachine);
+    await runWithAndWithoutOrganizationPrefix(
+      async (generatedPaths, paths) => {
+        await testRoute(generatedPaths.ROOT, 1, generatedPaths, paths);
+      },
+      null,
+      resetBetweenTwoSubTests
+    );
   });
 
   it(`displays only problem description step when on /problem-description
   path`, async () => {
-    await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
-      await testRoute(
-        generatedPaths.PROBLEM_DESCRIPTION,
-        2,
-        generatedPaths,
-        paths
-      );
-    }, resetStateMachine);
+    await runWithAndWithoutOrganizationPrefix(
+      async (generatedPaths, paths) => {
+        await testRoute(
+          generatedPaths.PROBLEM_DESCRIPTION,
+          2,
+          generatedPaths,
+          paths
+        );
+      },
+      null,
+      resetBetweenTwoSubTests
+    );
   });
 
   it(`displays only organization info step when on /organization-info
@@ -142,27 +160,35 @@ describe("Steps routing correct display", () => {
 
 describe("renders correctly document title", () => {
   it(`renders correct title when visiting route /`, async () => {
-    await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
-      await checkRendersCorrectTitle(
-        generatedPaths.ROOT,
-        0,
-        "Koena Connect - Submit a mediation request: your details",
-        generatedPaths,
-        paths
-      );
-    }, resetStateMachine);
+    await runWithAndWithoutOrganizationPrefix(
+      async (generatedPaths, paths) => {
+        await checkRendersCorrectTitle(
+          generatedPaths.ROOT,
+          0,
+          "Koena Connect - Submit a mediation request: your details",
+          generatedPaths,
+          paths
+        );
+      },
+      null,
+      resetBetweenTwoSubTests
+    );
   });
 
   it(`renders correct title when visiting route /problem-description`, async () => {
-    await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
-      await checkRendersCorrectTitle(
-        generatedPaths.PROBLEM_DESCRIPTION,
-        1,
-        "Koena Connect - Submit a mediation request: your problem",
-        generatedPaths,
-        paths
-      );
-    }, resetStateMachine);
+    await runWithAndWithoutOrganizationPrefix(
+      async (generatedPaths, paths) => {
+        await checkRendersCorrectTitle(
+          generatedPaths.PROBLEM_DESCRIPTION,
+          1,
+          "Koena Connect - Submit a mediation request: your problem",
+          generatedPaths,
+          paths
+        );
+      },
+      null,
+      resetBetweenTwoSubTests
+    );
   });
 
   it(`renders correct title when visiting route /organization-info (not available
@@ -177,15 +203,19 @@ describe("renders correctly document title", () => {
   });
 
   it(`renders correct title when visiting route /recap`, async () => {
-    await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
-      await checkRendersCorrectTitle(
-        generatedPaths.RECAP,
-        3,
-        "Koena Connect - Submit a mediation request: summary",
-        generatedPaths,
-        paths
-      );
-    }, resetStateMachine);
+    await runWithAndWithoutOrganizationPrefix(
+      async (generatedPaths, paths) => {
+        await checkRendersCorrectTitle(
+          generatedPaths.RECAP,
+          3,
+          "Koena Connect - Submit a mediation request: summary",
+          generatedPaths,
+          paths
+        );
+      },
+      null,
+      resetBetweenTwoSubTests
+    );
   });
 
   async function checkRendersCorrectTitle(
@@ -265,38 +295,42 @@ describe("Steps routing with tabs", () => {
 
 describe("Initialize unlocked steps and do initial routing if needed", () => {
   it(`keeps unlocked steps unlocked when recreating the component`, async () => {
-    await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
-      const { getByText, getByLabelText, unmount } = renderFormContainer(
-        null,
-        generatedPaths,
-        paths
-      );
-      await unlockStep(getByLabelText, getByText, 1);
-      unmount();
-      const history = createMemoryHistory({
-        initialEntries: [generatedPaths.ROOT],
-      });
-      const { getByText: getByText2 } = renderFormContainer(
-        history,
-        generatedPaths,
-        paths
-      );
-      expect(history.location.pathname).toEqual(generatedPaths.ROOT);
-      await click(getByText2("Summary"));
-      expect(history.location.pathname).toEqual(generatedPaths.ROOT);
-      await click(getByText2("Your problem"));
-      expect(history.location.pathname).toEqual(
-        generatedPaths.PROBLEM_DESCRIPTION
-      );
-      if (paths !== PATHS) {
-        await click(getByText2("The organization"));
+    await runWithAndWithoutOrganizationPrefix(
+      async (generatedPaths, paths) => {
+        const { getByText, getByLabelText, unmount } = renderFormContainer(
+          null,
+          generatedPaths,
+          paths
+        );
+        await unlockStep(getByLabelText, getByText, 1);
+        unmount();
+        const history = createMemoryHistory({
+          initialEntries: [generatedPaths.ROOT],
+        });
+        const { getByText: getByText2 } = renderFormContainer(
+          history,
+          generatedPaths,
+          paths
+        );
+        expect(history.location.pathname).toEqual(generatedPaths.ROOT);
+        await click(getByText2("Summary"));
+        expect(history.location.pathname).toEqual(generatedPaths.ROOT);
+        await click(getByText2("Your problem"));
         expect(history.location.pathname).toEqual(
           generatedPaths.PROBLEM_DESCRIPTION
         );
-      }
-      await click(getByText2("About you"));
-      expect(history.location.pathname).toEqual(generatedPaths.ROOT);
-    }, resetStateMachine);
+        if (paths !== PATHS) {
+          await click(getByText2("The organization"));
+          expect(history.location.pathname).toEqual(
+            generatedPaths.PROBLEM_DESCRIPTION
+          );
+        }
+        await click(getByText2("About you"));
+        expect(history.location.pathname).toEqual(generatedPaths.ROOT);
+      },
+      null,
+      resetBetweenTwoSubTests
+    );
   });
 
   it(`redirects to the neerest unlocked step if rendering a locked one, when
@@ -402,22 +436,26 @@ describe("Saving values with tabs", () => {
 describe("Reset entered values", () => {
   it(`removes possibility to change to next page without entering data again
   when clicking on reset`, async () => {
-    await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
-      const history = createMemoryHistory({
-        initialEntries: [generatedPaths.ROOT],
-      });
-      const { getByText, getByLabelText } = renderFormContainer(
-        history,
-        generatedPaths,
-        paths
-      );
-      await unlockStep(getByLabelText, getByText, 3, paths === PATHS);
-      const resetData = getByText("Reset all entered data");
-      await click(resetData);
-      expect(history.location.pathname).toEqual(generatedPaths.ROOT);
-      await click(getByText("Your problem"));
-      expect(history.location.pathname).toEqual(generatedPaths.ROOT);
-    }, resetStateMachine);
+    await runWithAndWithoutOrganizationPrefix(
+      async (generatedPaths, paths) => {
+        const history = createMemoryHistory({
+          initialEntries: [generatedPaths.ROOT],
+        });
+        const { getByText, getByLabelText } = renderFormContainer(
+          history,
+          generatedPaths,
+          paths
+        );
+        await unlockStep(getByLabelText, getByText, 3, paths === PATHS);
+        const resetData = getByText("Reset all entered data");
+        await click(resetData);
+        expect(history.location.pathname).toEqual(generatedPaths.ROOT);
+        await click(getByText("Your problem"));
+        expect(history.location.pathname).toEqual(generatedPaths.ROOT);
+      },
+      null,
+      resetBetweenTwoSubTests
+    );
   });
 
   it("resets all store values definitely when clicking on reset", async () => {
@@ -489,7 +527,6 @@ describe("A11y of the tabs menu", () => {
     await click(getAllByRole("tab")[3]);
     await click(getByText("Modify organization data"));
     expect(getAllByRole("tab")[2]).toHaveFocus();
-    await click(getAllByRole("tab")[3]);
   });
 });
 
@@ -532,13 +569,15 @@ function renderFormContainer(history?: any, generatedPaths?: any, paths?: any) {
     }
   }
   return render(
-    <I18nProvider i18n={i18n}>
-      <Router history={history}>
-        <Route path={paths.ROOT}>
-          <ComponentWrapper />
-        </Route>
-      </Router>
-    </I18nProvider>
+    <SWRConfig value={{ dedupingInterval: 0 }}>
+      <I18nProvider i18n={i18n}>
+        <Router history={history}>
+          <Route path={paths.ROOT}>
+            <ComponentWrapper />
+          </Route>
+        </Router>
+      </I18nProvider>
+    </SWRConfig>
   );
 }
 

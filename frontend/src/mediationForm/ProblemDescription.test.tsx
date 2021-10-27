@@ -3,8 +3,8 @@ import { I18nProvider } from "@lingui/react";
 import { fireEvent, render, waitFor } from "@testing-library/react";
 import { createMemoryHistory } from "history";
 import { createStore, StateMachineProvider } from "little-state-machine";
-import React from "react";
 import { Route, Router } from "react-router-dom";
+import { cache, SWRConfig } from "swr";
 import { PATHS, PATHS_WITHOUT_PREFIX } from "../constants/paths";
 import { initLanguagesForTesting } from "../i18nTestHelper";
 import {
@@ -27,7 +27,7 @@ jest.mock("axios");
 const generatedPathsWithPrefix = generatePathsWithPrefix();
 const generatedPathsWithoutPrefix = generatePathsWithoutPrefix();
 
-beforeEach(() => {
+beforeEach(async () => {
   createStore({
     problemDescription: {
       urgency: "",
@@ -50,6 +50,8 @@ beforeEach(() => {
     },
   });
   resetAxiosMocks();
+  localStorage.clear();
+  await waitFor(() => cache.clear());
 });
 
 afterEach(() => {
@@ -225,7 +227,7 @@ describe("Route correctly on previous / next step navigation buttons", () => {
       PATHS
     );
     fillStep2MandatoryFields(getByLabelText);
-    const submit = getByText("Step 3: Summary");
+    const submit = await waitFor(() => getByText("Step 3: Summary"));
     await click(submit);
     expect(history.location.pathname).toEqual(generatedPathsWithPrefix.RECAP);
   });
@@ -310,20 +312,22 @@ function renderProblemDescription(
   const completed =
     paths === PATHS ? { 0: true, 1: true } : { 0: true, 1: true, 2: true };
   return render(
-    <I18nProvider i18n={i18n}>
-      <Router history={history}>
-        <Route path={paths.ROOT}>
-          <StateMachineProvider>
-            <ProblemDescription
-              activeStep={1}
-              setStepCompleted={() => null}
-              completed={completed}
-              shouldTriggerFocus={false}
-              setShouldTriggerFocus={() => null}
-            />
-          </StateMachineProvider>
-        </Route>
-      </Router>
-    </I18nProvider>
+    <SWRConfig value={{ dedupingInterval: 0 }}>
+      <I18nProvider i18n={i18n}>
+        <Router history={history}>
+          <Route path={paths.ROOT}>
+            <StateMachineProvider>
+              <ProblemDescription
+                activeStep={1}
+                setStepCompleted={() => null}
+                completed={completed}
+                shouldTriggerFocus={false}
+                setShouldTriggerFocus={() => null}
+              />
+            </StateMachineProvider>
+          </Route>
+        </Router>
+      </I18nProvider>
+    </SWRConfig>
   );
 }

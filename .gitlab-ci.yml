@@ -43,7 +43,7 @@ lint_and_unit_test:
 
     # unit tests
     - docker-compose -f local.yml run django pytest backend/koenaconnect
-    - docker-compose -f local.yml run -w /app/frontend django yarn test --watchAll=false --ci
+    - docker-compose -f local.yml run -w /app/frontend django yarn test --watchAll=false --watch=false --ci
 
 end_to_end:
   stage: end_to_end
