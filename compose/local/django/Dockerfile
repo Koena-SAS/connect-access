@@ -98,4 +98,7 @@ RUN chmod +x /start-flower
 # copy application code to WORKDIR
 COPY . ${APP_HOME}
 
+# this is ok because we are in dev environment
+RUN chmod -R 777 /root
+
 ENTRYPOINT ["/entrypoint"]

@@ -2,14 +2,14 @@ const { setHeadlessWhen } = require("@codeceptjs/configure");
 
 setHeadlessWhen(process.env.CI);
 
-var server = require("./end_to_end/config/end_to_end_server");
+var server = require("./end_to_end_server");
 const backendPath = "../backend";
 const database =
   "postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:$POSTGRES_PORT/$POSTGRES_DB_END_TO_END";
 
 exports.config = {
-  tests: "./end_to_end/*_test.js",
-  output: "./end_to_end/output",
+  tests: "../*_test.js",
+  output: "../output",
   helpers: {
     Playwright: {
       url: "http://localhost:3501",
@@ -17,7 +17,7 @@ exports.config = {
       browser: "chromium",
     },
     AxeHelper: {
-      require: "./end_to_end/helpers/axe_helper.js",
+      require: "../helpers/axe_helper.js",
     },
     ApiDataFactory: {
       endpoint: "http://localhost:3501",
@@ -28,7 +28,7 @@ exports.config = {
       factories: {
         user: {
           uri: "/auth/users/",
-          factory: "./end_to_end/factories/user",
+          factory: "../factories/user",
           delete: () => ({
             method: "delete",
             url: "/users/me/",
@@ -38,13 +38,13 @@ exports.config = {
       },
     },
     DjangoHelper: {
-      require: "./end_to_end/helpers/django_helper.js",
+      require: "../helpers/django_helper.js",
       database: database,
       backendPath: backendPath,
     },
   },
   include: {
-    I: "./end_to_end/config/steps_file.js",
+    I: "./steps_file.js",
   },
   async bootstrap() {
     await server.startBackend(backendPath, database, false);

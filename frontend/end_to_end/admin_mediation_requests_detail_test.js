@@ -42,7 +42,7 @@ Scenario(
     I.click("Add a trace report");
     I.fillField("Sender type", "EXTERNAL_ORGANIZATION");
     I.fillField("Comment", "The organization sent us a response");
-    I.attachFile("Attached file", "end_to_end/test_data/white.jpg");
+    I.attachFile("Attached file", "../test_data/white.jpg");
     I.checkA11y();
     I.click("Add the report");
     I.waitForInvisible(".MuiDialog-root"); // to let the modal disappear
@@ -70,7 +70,7 @@ Scenario(`Edit an existing trace report and see it edited`, ({ I }) => {
   I.fillField("Sender type", "OTHER");
   I.fillField("Sender name", "Paul");
   I.fillField("Comment", "The organization sent us an excellent response!");
-  I.attachFile("Attached file", "end_to_end/test_data/white.jpg");
+  I.attachFile("Attached file", "../test_data/white.jpg");
   I.checkA11y();
   I.click("Edit the report");
   I.waitForInvisible(".MuiDialog-root"); // to let the modal disappear

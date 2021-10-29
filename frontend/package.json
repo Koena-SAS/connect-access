@@ -37,11 +37,11 @@
     "lint": "eslint --max-warnings=0 src",
     "lang:extract": "lingui extract",
     "lang:compile": "lingui compile",
-    "e2e": "npx codeceptjs run --steps --config ./codecept_development.conf.js",
+    "e2e": "npx codeceptjs run --steps --config ./end_to_end/config/codecept_development.conf.js",
     "format": "prettier --write .",
     "format-check": "prettier --check .",
     "type-check": "tsc",
-    "test-all": "yarn lint && yarn format-check && yarn type-check && yarn test",
+    "test-all": "yarn lint && yarn type-check && yarn test",
     "build:svg": "svgr src/images/svg/ -d src/images/buildSvg/",
     "eject": "react-scripts eject"
   },
