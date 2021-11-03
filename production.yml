@@ -13,7 +13,7 @@ services:
       dockerfile: ./compose/production/django/Dockerfile
     image: connect_access_django:production
     volumes:
-      - production_django_media:/app/backend/koenaconnect/media
+      - production_django_media:/app/backend/connect_access/media
     depends_on:
       - postgres
       - redis

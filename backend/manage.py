@@ -24,8 +24,8 @@ if __name__ == "__main__":
         raise
 
     # This allows easy placement of apps within the interior
-    # koenaconnect directory.
+    # connect_access directory.
     current_path = Path(__file__).parent.resolve()
-    sys.path.append(str(current_path / "koenaconnect"))
+    sys.path.append(str(current_path / "connect_access"))
 
     execute_from_command_line(sys.argv)

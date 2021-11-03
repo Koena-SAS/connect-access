@@ -112,7 +112,7 @@ function FormContainer({
           />
           {activeStep === 0 && (
             <Page
-              title={t`Koena Connect - Submit a mediation request: your details`}
+              title={t`Connect Access - Submit a mediation request: your details`}
             >
               <UserInfo
                 activeStep={activeStep}
@@ -126,7 +126,7 @@ function FormContainer({
           )}
           {activeStep === 1 && (
             <Page
-              title={t`Koena Connect - Submit a mediation request: your problem`}
+              title={t`Connect Access - Submit a mediation request: your problem`}
             >
               <ProblemDescription
                 activeStep={activeStep}
@@ -140,7 +140,7 @@ function FormContainer({
           )}
           {Boolean(activeStep === 2 && !organizationApp) && (
             <Page
-              title={t`Koena Connect - Submit a mediation request: the organization`}
+              title={t`Connect Access - Submit a mediation request: the organization`}
             >
               <OrganizationInfo
                 activeStep={activeStep}
@@ -154,7 +154,7 @@ function FormContainer({
           )}
           {activeStep === recapStep && (
             <Page
-              title={t`Koena Connect - Submit a mediation request: summary`}
+              title={t`Connect Access - Submit a mediation request: summary`}
             >
               <Recap
                 activeStep={activeStep}

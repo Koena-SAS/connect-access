@@ -1,9 +1,9 @@
-.. Koena Connect documentation master file, created by
+.. Connect Access documentation master file, created by
    sphinx-quickstart.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Koena Connect's documentation!
+Welcome to Connect Access' documentation!
 ======================================================================
 
 .. toctree::

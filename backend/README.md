@@ -39,7 +39,7 @@ pip install -r requirements/local.txt
 Static check of the code is performed with `mypy`:
 
 ```bash
-mypy koenaconnect config --config=setup.cfg
+mypy connect_access config --config=setup.cfg
 ```
 
 ### Unit tests

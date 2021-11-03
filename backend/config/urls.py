@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.urls import include, path, re_path
 from django.views import defaults as default_views
 
-from koenaconnect.views import IndexView
+from connect_access.views import IndexView
 
 urlpatterns = [
     # Django Admin, use {% url 'admin:index' %}

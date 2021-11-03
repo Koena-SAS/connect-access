@@ -165,7 +165,7 @@ describe("renders correctly document title", () => {
         await checkRendersCorrectTitle(
           generatedPaths.ROOT,
           0,
-          "Koena Connect - Submit a mediation request: your details",
+          "Connect Access - Submit a mediation request: your details",
           generatedPaths,
           paths
         );
@@ -181,7 +181,7 @@ describe("renders correctly document title", () => {
         await checkRendersCorrectTitle(
           generatedPaths.PROBLEM_DESCRIPTION,
           1,
-          "Koena Connect - Submit a mediation request: your problem",
+          "Connect Access - Submit a mediation request: your problem",
           generatedPaths,
           paths
         );
@@ -196,7 +196,7 @@ describe("renders correctly document title", () => {
     await checkRendersCorrectTitle(
       generatedPathsWithoutPrefix.ORGANIZATION_INFO,
       2,
-      "Koena Connect - Submit a mediation request: the organization",
+      "Connect Access - Submit a mediation request: the organization",
       generatedPathsWithoutPrefix,
       PATHS_WITHOUT_PREFIX
     );
@@ -208,7 +208,7 @@ describe("renders correctly document title", () => {
         await checkRendersCorrectTitle(
           generatedPaths.RECAP,
           3,
-          "Koena Connect - Submit a mediation request: summary",
+          "Connect Access - Submit a mediation request: summary",
           generatedPaths,
           paths
         );

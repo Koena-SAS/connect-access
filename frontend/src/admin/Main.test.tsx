@@ -105,7 +105,7 @@ describe("renders correctly document title", () => {
     await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
       await checkRendersCorrectTitle(
         generatedPaths.ADMIN,
-        "Koena Connect - Quick access",
+        "Connect Access - Quick access",
         paths
       );
     });
@@ -114,7 +114,7 @@ describe("renders correctly document title", () => {
     await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
       await checkRendersCorrectTitle(
         generatedPaths.ADMIN_ALL_REQUESTS,
-        "Koena Connect - All mediation requests",
+        "Connect Access - All mediation requests",
         paths
       );
     });
@@ -123,7 +123,7 @@ describe("renders correctly document title", () => {
     await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
       await checkRendersCorrectTitle(
         generatedPaths.ADMIN_REQUEST_DETAIL,
-        "Koena Connect - Detail of the mediation request",
+        "Connect Access - Detail of the mediation request",
         paths
       );
     });
@@ -132,7 +132,7 @@ describe("renders correctly document title", () => {
     await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
       await checkRendersCorrectTitle(
         generatedPaths.ADMIN_TRACE_REPORTS,
-        "Koena Connect - Trace reports of the mediation request",
+        "Connect Access - Trace reports of the mediation request",
         paths
       );
     });

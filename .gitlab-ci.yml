@@ -3,9 +3,9 @@ stages:
   - end_to_end
 
 variables:
-  POSTGRES_USER: "koenaconnect"
+  POSTGRES_USER: "connect_access"
   POSTGRES_PASSWORD: ""
-  POSTGRES_DB: "test_koenaconnect"
+  POSTGRES_DB: "test_connect_access"
   POSTGRES_HOST_AUTH_METHOD: trust
   CELERY_BROKER_URL: "redis://redis:6379/0"
 
@@ -37,12 +37,12 @@ lint_and_unit_test:
 
     # lint
     - docker-compose -f local.yml run django flake8 backend --config=backend/setup.cfg --max-complexity=10
-    - docker-compose -f local.yml run -w /app/backend django mypy koenaconnect config --config=setup.cfg
+    - docker-compose -f local.yml run -w /app/backend django mypy connect_access config --config=setup.cfg
     - docker-compose -f local.yml run -w /app/frontend django yarn lint
     - docker-compose -f local.yml run -w /app/frontend django yarn type-check
 
     # unit tests
-    - docker-compose -f local.yml run django pytest backend/koenaconnect
+    - docker-compose -f local.yml run django pytest backend/connect_access
     - docker-compose -f local.yml run -w /app/frontend django yarn test --watchAll=false --watch=false --ci
 
 end_to_end:

@@ -26,7 +26,7 @@ Scenario(
     I.see("Complainant");
     I.see("Sent an email to the organization to explain the issue");
     I.checkA11y();
-    I.click("Koena Connect");
+    I.click("Connect Access");
     I.click("Logout");
   }
 ).retry(1);
@@ -54,7 +54,7 @@ Scenario(
     I.click("Yes");
     I.waitForInvisible(".MuiDialog-root"); // to let the modal disappear
     I.dontSee("The organization sent us a response");
-    I.click("Koena Connect");
+    I.click("Connect Access");
     I.click("Logout");
   }
 ).retry(1);
@@ -89,6 +89,6 @@ Scenario(`Edit an existing trace report and see it edited`, ({ I }) => {
   I.dontSee("The organization sent us an excellent response!");
   I.see("The organization sent us a response");
   I.dontSee("Download the file");
-  I.click("Koena Connect");
+  I.click("Connect Access");
   I.click("Logout");
 }).retry(1);

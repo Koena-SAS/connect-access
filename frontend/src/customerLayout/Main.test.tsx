@@ -256,7 +256,7 @@ describe("renders correctly document title", () => {
     await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
       await checkRendersCorrectTitle(
         generatedPaths.LOGIN,
-        "Koena Connect - Login",
+        "Connect Access - Login",
         paths
       );
     });
@@ -265,7 +265,7 @@ describe("renders correctly document title", () => {
     await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
       await checkRendersCorrectTitle(
         generatedPaths.REGISTER,
-        "Koena Connect - Signup",
+        "Connect Access - Signup",
         paths
       );
     });
@@ -274,7 +274,7 @@ describe("renders correctly document title", () => {
     await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
       await checkRendersCorrectTitle(
         generatedPaths.RESET_PASSWORD,
-        "Koena Connect - Reset your password",
+        "Connect Access - Reset your password",
         paths
       );
     });
@@ -283,7 +283,7 @@ describe("renders correctly document title", () => {
     await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
       await checkRendersCorrectTitle(
         generatedPaths.RESET_PASSWORD_CONFIRM,
-        "Koena Connect - Confirm password reset",
+        "Connect Access - Confirm password reset",
         paths
       );
     });
@@ -292,7 +292,7 @@ describe("renders correctly document title", () => {
     await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
       await checkRendersCorrectTitle(
         generatedPaths.USER_REQUESTS,
-        "Koena Connect - My mediation requests",
+        "Connect Access - My mediation requests",
         paths
       );
     });
@@ -302,7 +302,7 @@ describe("renders correctly document title", () => {
       mockedAxios.get.mockResolvedValue({ data: userMediationsResponse });
       await checkRendersCorrectTitle(
         generatedPaths.USER_REQUEST,
-        "Koena Connect - My mediation request detail",
+        "Connect Access - My mediation request detail",
         paths
       );
     });

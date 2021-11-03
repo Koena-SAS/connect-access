@@ -66,7 +66,7 @@ function Header({ isLogged, setToken, token }) {
             >
               <img
                 src={logo}
-                alt={t`Koena Connect homepage`}
+                alt={t`Connect Access homepage`}
                 className="header__logo"
               />
             </NavLink>

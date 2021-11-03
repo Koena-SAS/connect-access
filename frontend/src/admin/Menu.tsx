@@ -113,7 +113,7 @@ function Menu() {
               <NavLink exact={true} to={generatePrefixedPath(PATHS.ROOT)}>
                 <img
                   src={openedOrMobileMenu ? logo : logoSmall}
-                  alt={t`Koena Connect homepage`}
+                  alt={t`Connect Access homepage`}
                   className={`admin-navigation__logo ${
                     openedOrMobileMenu ? "" : "small"
                   }`}

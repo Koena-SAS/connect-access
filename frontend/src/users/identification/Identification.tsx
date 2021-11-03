@@ -15,7 +15,7 @@ function Identification({ setToken, onClose, shouldFocus }) {
       element: (
         <Login setToken={setToken} handleCloseIdentification={onClose} />
       ),
-      pageTitle: t`Koena Connect - Login`,
+      pageTitle: t`Connect Access - Login`,
       label: t`Log in`,
       path: PATHS.LOGIN,
     },
@@ -23,7 +23,7 @@ function Identification({ setToken, onClose, shouldFocus }) {
       element: (
         <Signup setToken={setToken} handleCloseIdentification={onClose} />
       ),
-      pageTitle: t`Koena Connect - Signup`,
+      pageTitle: t`Connect Access - Signup`,
       label: t`Signup`,
       path: PATHS.REGISTER,
     },

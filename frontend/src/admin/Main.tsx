@@ -14,12 +14,12 @@ function Main({ token, paths }) {
     <main role="main" id="main" className="admin-layout__main admin-main">
       <Switch>
         <Route path={paths.ADMIN} exact>
-          <Page title={t`Koena Connect - Quick access`}>
+          <Page title={t`Connect Access - Quick access`}>
             <QuickAccess token={token} />
           </Page>
         </Route>
         <Route path={paths.ADMIN_ALL_REQUESTS} exact>
-          <Page title={t`Koena Connect - All mediation requests`}>
+          <Page title={t`Connect Access - All mediation requests`}>
             <AllRequests token={token} />
           </Page>
         </Route>

@@ -32,7 +32,7 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
-    "build": "lingui compile && react-app-rewired build && mv build ../backend/staticfiles/koenaconnect_bundles",
+    "build": "lingui compile && react-app-rewired build && mv build ../backend/staticfiles/connect_access_bundles",
     "test": "react-app-rewired test",
     "lint": "eslint --max-warnings=0 src",
     "lang:extract": "lingui extract",

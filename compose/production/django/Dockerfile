@@ -94,8 +94,8 @@ RUN chown django:django ${APP_HOME}
 
 # make django owner of media directory that will be mounted as volume later
 # to avoid docker mounting it as root on some environments
-RUN mkdir -p ${APP_HOME}/backend/koenaconnect/media
-RUN chown django:django ${APP_HOME}/backend/koenaconnect/media
+RUN mkdir -p ${APP_HOME}/backend/connect_access/media
+RUN chown django:django ${APP_HOME}/backend/connect_access/media
 
 USER django
 

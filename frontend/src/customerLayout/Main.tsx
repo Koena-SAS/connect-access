@@ -74,7 +74,7 @@ function Main({
           />
         </Route>
         <Route path={paths.RESET_PASSWORD_CONFIRM} exact>
-          <Page title={t`Koena Connect - Confirm password reset`}>
+          <Page title={t`Connect Access - Confirm password reset`}>
             {!isLogged && (
               <PasswordResetConfirm
                 displayRequestSuccess={displayRequestSuccess}
@@ -84,17 +84,17 @@ function Main({
           </Page>
         </Route>
         <Route path={paths.USER_DETAILS} exact>
-          <Page title={t`Koena Connect - My account`}>
+          <Page title={t`Connect Access - My account`}>
             {isLogged && <Account token={token} />}
           </Page>
         </Route>
         <Route path={paths.USER_REQUESTS} exact>
-          <Page title={t`Koena Connect - My mediation requests`}>
+          <Page title={t`Connect Access - My mediation requests`}>
             {isLogged && <UserMediations token={token} />}
           </Page>
         </Route>
         <Route path={paths.USER_REQUEST} exact>
-          <Page title={t`Koena Connect - My mediation request detail`}>
+          <Page title={t`Connect Access - My mediation request detail`}>
             {isLogged && <UserMediation token={token} />}
           </Page>
         </Route>

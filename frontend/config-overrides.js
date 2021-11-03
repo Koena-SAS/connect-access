@@ -28,7 +28,7 @@ module.exports = {
       );
       config.entry.push(require.resolve("webpack/hot/dev-server"));
     } else if (env === "production") {
-      config.output.publicPath = "/static/koenaconnect_bundles/";
+      config.output.publicPath = "/static/connect_access_bundles/";
 
       config.plugins.push(
         new BundleTracker({

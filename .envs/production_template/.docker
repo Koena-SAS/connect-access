@@ -1,1 +1,1 @@
-COMPOSE_PROJECT_NAME=koenaconnect_production
+COMPOSE_PROJECT_NAME=connect_access_production

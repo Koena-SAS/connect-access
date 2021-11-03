@@ -24,7 +24,7 @@ django.setup()
 
 # -- Project information -----------------------------------------------------
 
-project = "Koena Connect"
+project = "Connect Access"
 copyright = """2020, Koena"""
 author = "Koena"
 

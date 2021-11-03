@@ -11,7 +11,7 @@
       name="description"
       content="Plateforme de médiation pour l'accessibilité numérique."
     />
-    <meta name="author" content="Koena" />
+    <meta name="author" content="Connect Access" />
     <link rel="apple-touch-icon" href="{% static 'logo192.png' %}" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
@@ -24,18 +24,18 @@
         initialLanguage: "{{ language }}",
       };
     </script>
-    {% render_bundle 'vendors' 'css' 'KOENACONNECT' %}
-    {% render_bundle 'main' 'css' 'KOENACONNECT' %}
-    {% render_bundle 'runtime-main' 'css' 'KOENACONNECT' %}
+    {% render_bundle 'vendors' 'css' 'CONNECT_ACCESS' %}
+    {% render_bundle 'main' 'css' 'CONNECT_ACCESS' %}
+    {% render_bundle 'runtime-main' 'css' 'CONNECT_ACCESS' %}
 
-    <title>Koena Connect</title>
+    <title>Connect Access</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root" class="body"></div>
 
-    {% render_bundle 'vendors' 'js' 'KOENACONNECT' %}
-    {% render_bundle 'main' 'js' 'KOENACONNECT' %}
-    {% render_bundle 'runtime-main' 'js' 'KOENACONNECT' %}
+    {% render_bundle 'vendors' 'js' 'CONNECT_ACCESS' %}
+    {% render_bundle 'main' 'js' 'CONNECT_ACCESS' %}
+    {% render_bundle 'runtime-main' 'js' 'CONNECT_ACCESS' %}
   </body>
 </html>

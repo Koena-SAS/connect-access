@@ -55,7 +55,7 @@ exports.config = {
     await server.stopBackend(false);
   },
   mocha: {},
-  name: "koenaconnect",
+  name: "connect_access",
   plugins: {
     pauseOnFail: {},
     retryFailedStep: {

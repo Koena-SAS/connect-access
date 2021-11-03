@@ -73,7 +73,7 @@ CELERY_TASK_EAGER_PROPAGATES = True
 # ------------------------------------------------------------------------------
 
 WEBPACK_LOADER = {
-    "KOENACONNECT": {
+    "CONNECT_ACCESS": {
         "BUNDLE_DIR_NAME": str(FRONTEND_DIR / "build/"),  # noqa F405
         "STATS_FILE": str(FRONTEND_DIR / "webpack-stats.dev.json"),  # noqa F405
     }

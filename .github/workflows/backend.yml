@@ -25,9 +25,9 @@ jobs:
   test_backend:
     needs: flake8
     env:
-      POSTGRES_USER: "koenaconnect"
+      POSTGRES_USER: "connect"
       POSTGRES_PASSWORD: ""
-      POSTGRES_DB: "test_koenaconnect"
+      POSTGRES_DB: "test_connect_access"
       POSTGRES_HOST_AUTH_METHOD: trust
     runs-on: ubuntu-latest
     steps:
@@ -36,5 +36,5 @@ jobs:
       # Ensure celerybeat does not crash due to non-existent tables
       - run: docker-compose -f local.yml run --rm django python backend/manage.py migrate
       - run: docker-compose -f local.yml up -d
-      - run: docker-compose -f local.yml run -w /app/backend django mypy koenaconnect config --config=setup.cfg
-      - run: docker-compose -f local.yml run django pytest backend/koenaconnect
+      - run: docker-compose -f local.yml run -w /app/backend django mypy connect_access config --config=setup.cfg
+      - run: docker-compose -f local.yml run django pytest backend/connect_access

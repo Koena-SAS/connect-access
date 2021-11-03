@@ -97,7 +97,7 @@ function IdentificationLayout({ setToken, isLogged }) {
           >
             <div className="identification">
               {currentDisplayedBlock === "reset-password" ? (
-                <Page title={t`Koena Connect - Reset your password`}>
+                <Page title={t`Connect Access - Reset your password`}>
                   <PasswordResetRequest
                     onClose={handleClosePassword}
                     displayRequestSuccess={displayRequestSuccess}

@@ -21,7 +21,7 @@ Scenario(
     I.see("Difficulties to connect");
     I.see("I have an empty link and I dont know where it points to");
     I.checkA11y();
-    I.click("Koena Connect");
+    I.click("Connect Access");
     I.click("Logout");
   }
 ).retry(1);

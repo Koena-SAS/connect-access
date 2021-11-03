@@ -5,8 +5,8 @@ import environ
 from django.utils.translation import gettext_lazy as _
 
 ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
-# koenaconnect/
-APPS_DIR = ROOT_DIR / "koenaconnect"
+# connect_access/
+APPS_DIR = ROOT_DIR / "connect_access"
 BACKEND_DIR = ROOT_DIR
 FRONTEND_DIR = BACKEND_DIR.parents[0] / "frontend"
 env = environ.Env()
@@ -81,8 +81,8 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    "koenaconnect.users.apps.UsersConfig",
-    "koenaconnect.mediations.apps.MediationsConfig",
+    "connect_access.users.apps.UsersConfig",
+    "connect_access.mediations.apps.MediationsConfig",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -90,7 +90,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 # MIGRATIONS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#migration-modules
-MIGRATION_MODULES = {"sites": "koenaconnect.contrib.sites.migrations"}
+MIGRATION_MODULES = {"sites": "connect_access.contrib.sites.migrations"}
 
 # AUTHENTICATION
 # ------------------------------------------------------------------------------
@@ -188,7 +188,7 @@ TEMPLATES = [
                 "django.template.context_processors.static",
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
-                "koenaconnect.utils.context_processors.settings_context",
+                "connect_access.utils.context_processors.settings_context",
             ],
         },
     }
@@ -311,13 +311,13 @@ DJOSER = {
     "PASSWORD_RESET_SHOW_EMAIL_NOT_FOUND": False,
     "HIDE_USERS": True,
     "SERIALIZERS": {
-        "user_create_password_retype": "koenaconnect.users.serializers.UserCreatePasswordRetypeSerializer",
+        "user_create_password_retype": "connect_access.users.serializers.UserCreatePasswordRetypeSerializer",
         "user_delete": "djoser.serializers.UserDeleteSerializer",
-        "user": "koenaconnect.users.serializers.UserAuthSerializer",
-        "current_user": "koenaconnect.users.serializers.UserAuthSerializer",
+        "user": "connect_access.users.serializers.UserAuthSerializer",
+        "current_user": "connect_access.users.serializers.UserAuthSerializer",
     },
     "EMAIL": {
-        "password_changed_confirmation": "koenaconnect.users.emails.PasswordChangedConfirmationEmail"
+        "password_changed_confirmation": "connect_access.users.emails.PasswordChangedConfirmationEmail"
     },
 }
 

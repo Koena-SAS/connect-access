@@ -4,8 +4,8 @@ from django.conf import settings
 from django.urls import path
 from rest_framework.routers import DefaultRouter, SimpleRouter
 
-from koenaconnect.mediations.api import MediationRequestViewSet, TraceReportViewSet
-from koenaconnect.users.api import UserViewSet
+from connect_access.mediations.api import MediationRequestViewSet, TraceReportViewSet
+from connect_access.users.api import UserViewSet
 
 router: Union[SimpleRouter, DefaultRouter]
 if settings.DEBUG:

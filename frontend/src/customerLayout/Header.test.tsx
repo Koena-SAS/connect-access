@@ -39,7 +39,7 @@ function renderHeader(isLogged = false) {
 
 it("displays correct nav items when not logged", () => {
   const { getByText, getByAltText, queryByText } = renderHeader(false);
-  const home = getByAltText(/Koena Connect/);
+  const home = getByAltText(/Connect Access/);
   const login = getByText("Login");
   const logout = queryByText("Logout");
   const myRequests = queryByText("My requests");
@@ -53,7 +53,7 @@ it("displays correct nav items when not logged", () => {
 
 it("displays correct nav items when logged", async () => {
   const { getByText, getByAltText, queryByText } = renderHeader(true);
-  const home = getByAltText(/Koena Connect/);
+  const home = getByAltText(/Connect Access/);
   const login = queryByText("Login");
   const logout = getByText("Logout");
   const myRequests = getByText("My requests");
@@ -79,7 +79,7 @@ it("displays correct nav items when logged as staff", async () => {
   });
   const { getByText, getByAltText, queryByText, findByText } =
     renderHeader(true);
-  const home = getByAltText(/Koena Connect/);
+  const home = getByAltText(/Connect Access/);
   const login = queryByText("Login");
   const logout = getByText("Logout");
   const myRequests = getByText("My requests");

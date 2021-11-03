@@ -1,0 +1,30 @@
+{% load static i18n %}<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{% block title %}Connect Access{% endblock title %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Application to help producing Easy to Read accessible content for people with intellectual disabilities.">
+    <meta name="author" content="Connect Access">
+
+    {% block css %}
+
+    {% endblock %}
+
+  </head>
+
+  <body>
+    <main>
+      {% block content %}
+      {% endblock content %}
+    </main>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    {% block javascript %}
+
+    {% endblock javascript %}
+  </body>
+</html>

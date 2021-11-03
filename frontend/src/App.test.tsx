@@ -104,18 +104,18 @@ function ComponentWrapper({ paths }) {
   const initialOrganizationApp = hasOrganizationPrefix
     ? {
         id: 1,
-        name: { en: "Koena Connect", fr: "Koena Connect" },
+        name: { en: "Connect Access", fr: "Connect Access" },
         slug: "koena-connect",
         logo: "/media/app_logo/koena/koena-connect/koena_square.png",
         logo_alternative: {
-          en: "Koena Connect Logo",
-          fr: "Logo de Koena Connect",
+          en: "Connect Access Logo",
+          fr: "Logo de Connect Access",
         },
         description: {
-          en: `<h1>Koena Connect</h1>
-      <p>Koena Connect is a mediation platform</p>`,
-          fr: `<h1>Koena Connect</h1>
-      <p>Koena Connect est une plateforme de médiation</p>`,
+          en: `<h1>Connect Access</h1>
+      <p>Connect Access is a mediation platform</p>`,
+          fr: `<h1>Connect Access</h1>
+      <p>Connect Access est une plateforme de médiation</p>`,
         },
         text_color: "#DDFF3F",
         button_background_color: "#98FFF4",

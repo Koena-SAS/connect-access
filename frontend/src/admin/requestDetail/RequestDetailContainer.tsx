@@ -19,13 +19,13 @@ function RequestDetailContainer({ token }) {
   const tabsInfos = [
     {
       element: <RequestDetail token={token} setBreadcrumbs={setBreadcrumbs} />,
-      pageTitle: t`Koena Connect - Detail of the mediation request`,
+      pageTitle: t`Connect Access - Detail of the mediation request`,
       label: t`Request details`,
       path: PATHS.ADMIN_REQUEST_DETAIL,
     },
     {
       element: <TraceReports token={token} setBreadcrumbs={setBreadcrumbs} />,
-      pageTitle: t`Koena Connect - Trace reports of the mediation request`,
+      pageTitle: t`Connect Access - Trace reports of the mediation request`,
       label: t`Trace reports`,
       path: PATHS.ADMIN_TRACE_REPORTS,
     },
