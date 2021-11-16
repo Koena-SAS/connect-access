@@ -25,3 +25,12 @@ export CELERY_BROKER_URL=redis://localhost:6379/0
 # Mediation requests
 # ------------------------------------------------------------------------------
 export MEDIATION_REQUEST_EMAIL=test@test.test
+
+# Application data
+# ------------------------------------------------------------------------------
+export DATA_PLATFORM_NAME="Connect Access"
+export DATA_PLATFORM_DOMAIN_NAME=example.com
+export DATA_COMPANY_NAME=Company
+export DATA_COMPANY_EMAIL=contact@example.com
+export DATA_ADMIN_NAME="John Doe"
+export DATA_ADMIN_EMAIL=john@example.com

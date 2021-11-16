@@ -1,9 +1,11 @@
 import { t } from "@lingui/macro";
 import Dialog from "@material-ui/core/Dialog";
 import PropTypes from "prop-types";
-import React, { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { PATHS } from "../../constants/paths";
+import { ConfigData } from "../../constants/types";
+import ConfigDataContext from "../../contexts/configData";
 import Snackbar from "../../forms/Snackbar";
 import { useGeneratePrefixedPath } from "../../hooks";
 import Page from "../../Page";
@@ -14,6 +16,7 @@ import Identification from "./Identification";
  * Modal window for login, signup and password reset.
  */
 function IdentificationLayout({ setToken, isLogged }) {
+  const configData = useContext<ConfigData>(ConfigDataContext);
   const history = useHistory();
   const location = useLocation();
   const generatePrefixedPath = useGeneratePrefixedPath();
@@ -97,7 +100,9 @@ function IdentificationLayout({ setToken, isLogged }) {
           >
             <div className="identification">
               {currentDisplayedBlock === "reset-password" ? (
-                <Page title={t`Connect Access - Reset your password`}>
+                <Page
+                  title={t`${configData.platformName} - Reset your password`}
+                >
                   <PasswordResetRequest
                     onClose={handleClosePassword}
                     displayRequestSuccess={displayRequestSuccess}

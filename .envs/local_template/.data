@@ -1,0 +1,6 @@
+DATA_PLATFORM_NAME="Connect Access"
+DATA_PLATFORM_DOMAIN_NAME=example.com
+DATA_COMPANY_NAME=Company
+DATA_COMPANY_EMAIL=contact@example.com
+DATA_ADMIN_NAME="John Doe"
+DATA_ADMIN_EMAIL=john@example.com

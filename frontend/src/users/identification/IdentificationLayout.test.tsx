@@ -2,12 +2,13 @@ import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
 import { render, waitFor } from "@testing-library/react";
 import { createMemoryHistory } from "history";
-import React from "react";
 import { Route, Router } from "react-router-dom";
 import { PATHS_WITHOUT_PREFIX } from "../../constants/paths";
+import ConfigDataContext from "../../contexts/configData";
 import { initLanguagesForTesting } from "../../i18nTestHelper";
 import {
   click,
+  configData,
   mockedAxios,
   resetAxiosMocks,
   runWithAndWithoutOrganizationPrefix,
@@ -421,12 +422,14 @@ function renderIdentificationLayout(history, generatedPaths, paths) {
     }
   }
   return render(
-    <I18nProvider i18n={i18n}>
-      <Router history={history}>
-        <Route path={paths.ROOT}>
-          <IdentificationLayout setToken={() => null} isLogged={false} />
-        </Route>
-      </Router>
-    </I18nProvider>
+    <ConfigDataContext.Provider value={configData}>
+      <I18nProvider i18n={i18n}>
+        <Router history={history}>
+          <Route path={paths.ROOT}>
+            <IdentificationLayout setToken={() => null} isLogged={false} />
+          </Route>
+        </Router>
+      </I18nProvider>
+    </ConfigDataContext.Provider>
   );
 }

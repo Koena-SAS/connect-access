@@ -41,7 +41,7 @@
     "format": "prettier --write .",
     "format-check": "prettier --check .",
     "type-check": "tsc",
-    "test-all": "yarn lint && yarn type-check && yarn test",
+    "test-all": "yarn lint && yarn type-check && yarn test --watchAll=false",
     "build:svg": "svgr src/images/svg/ -d src/images/buildSvg/",
     "eject": "react-scripts eject"
   },

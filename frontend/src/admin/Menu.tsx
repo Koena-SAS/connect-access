@@ -5,9 +5,11 @@ import DomainIcon from "@material-ui/icons/Domain";
 import ForumIcon from "@material-ui/icons/Forum";
 import MenuIcon from "@material-ui/icons/Menu";
 import SettingsIcon from "@material-ui/icons/Settings";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { PATHS } from "../constants/paths";
+import { ConfigData } from "../constants/types";
+import ConfigDataContext from "../contexts/configData";
 import {
   useGeneratePrefixedPath,
   useOuterClick,
@@ -22,6 +24,7 @@ import MenuItem from "./MenuItem";
  * Administration menu.
  */
 function Menu() {
+  const configData = useContext<ConfigData>(ConfigDataContext);
   const generatePrefixedPath = useGeneratePrefixedPath();
   const [shownDesktopMenu, setshownDesktopMenu] = useState(true);
   const [shownMobileMenu, setShownMobileMenu] = useState(false);
@@ -113,7 +116,7 @@ function Menu() {
               <NavLink exact={true} to={generatePrefixedPath(PATHS.ROOT)}>
                 <img
                   src={openedOrMobileMenu ? logo : logoSmall}
-                  alt={t`Connect Access homepage`}
+                  alt={t`${configData.platformName} homepage`}
                   className={`admin-navigation__logo ${
                     openedOrMobileMenu ? "" : "small"
                   }`}

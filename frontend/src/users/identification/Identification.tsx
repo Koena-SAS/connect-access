@@ -1,7 +1,9 @@
 import { t } from "@lingui/macro";
 import PropTypes from "prop-types";
-import React from "react";
+import { useContext } from "react";
 import { PATHS } from "../../constants/paths";
+import { ConfigData } from "../../constants/types";
+import ConfigDataContext from "../../contexts/configData";
 import Tabs from "../../forms/Tabs";
 import Login from "./Login";
 import Signup from "./Signup";
@@ -10,12 +12,13 @@ import Signup from "./Signup";
  * Login and signup forms, controlled by tabs.
  */
 function Identification({ setToken, onClose, shouldFocus }) {
+  const configData = useContext<ConfigData>(ConfigDataContext);
   const tabsInfos = [
     {
       element: (
         <Login setToken={setToken} handleCloseIdentification={onClose} />
       ),
-      pageTitle: t`Connect Access - Login`,
+      pageTitle: t`${configData.platformName} - Login`,
       label: t`Log in`,
       path: PATHS.LOGIN,
     },
@@ -23,7 +26,7 @@ function Identification({ setToken, onClose, shouldFocus }) {
       element: (
         <Signup setToken={setToken} handleCloseIdentification={onClose} />
       ),
-      pageTitle: t`Connect Access - Signup`,
+      pageTitle: t`${configData.platformName} - Signup`,
       label: t`Signup`,
       path: PATHS.REGISTER,
     },

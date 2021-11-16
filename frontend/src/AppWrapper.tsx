@@ -5,6 +5,7 @@ import { useCookies } from "react-cookie";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import App from "./App";
 import { PATHS, PATHS_WITHOUT_PREFIX } from "./constants/paths";
+import ConfigDataContext from "./contexts/configData";
 import { dynamicActivate } from "./i18nHelper";
 
 /**
@@ -40,22 +41,24 @@ const AppWrapper = () => {
     ? PATHS
     : PATHS_WITHOUT_PREFIX;
   return (
-    <I18nProvider i18n={i18n}>
-      <Router>
-        <Route path={Object.values(paths)}>
-          <App
-            siteLanguage={siteLanguage}
-            toggleSiteLanguage={toggleSiteLanguage}
-            activeMediationFormStep={activeMediationFormStep}
-            setActiveMediationFormStep={setActiveMediationFormStep}
-            paths={paths}
-            initialOrganizationApp={
-              window["SERVER_DATA"].initialOrganizationApp
-            }
-          />
-        </Route>
-      </Router>
-    </I18nProvider>
+    <ConfigDataContext.Provider value={window["SERVER_DATA"].configData}>
+      <I18nProvider i18n={i18n}>
+        <Router>
+          <Route path={Object.values(paths)}>
+            <App
+              siteLanguage={siteLanguage}
+              toggleSiteLanguage={toggleSiteLanguage}
+              activeMediationFormStep={activeMediationFormStep}
+              setActiveMediationFormStep={setActiveMediationFormStep}
+              paths={paths}
+              initialOrganizationApp={
+                window["SERVER_DATA"].initialOrganizationApp
+              }
+            />
+          </Route>
+        </Router>
+      </I18nProvider>
+    </ConfigDataContext.Provider>
   );
 };
 

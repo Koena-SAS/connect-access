@@ -2,12 +2,13 @@ import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
 import { act, render, waitFor } from "@testing-library/react";
 import { createMemoryHistory } from "history";
-import React from "react";
 import { Route, Router } from "react-router-dom";
 import { cache, SWRConfig } from "swr";
 import { PATHS_WITHOUT_PREFIX } from "../constants/paths";
+import ConfigDataContext from "../contexts/configData";
 import { initLanguagesForTesting } from "../i18nTestHelper";
 import {
+  configData,
   resetAxiosMocks,
   runWithAndWithoutOrganizationPrefix,
 } from "../testUtils";
@@ -43,15 +44,17 @@ async function renderMain(initialPath, history, generatedPaths, paths) {
   let main;
   function renderMainComponent() {
     return render(
-      <SWRConfig value={{ dedupingInterval: 0 }}>
-        <I18nProvider i18n={i18n}>
-          <Router history={history}>
-            <Route path={paths.ROOT}>
-              <Main token="oizjofjzoijf" paths={paths} />
-            </Route>
-          </Router>
-        </I18nProvider>
-      </SWRConfig>
+      <ConfigDataContext.Provider value={configData}>
+        <SWRConfig value={{ dedupingInterval: 0 }}>
+          <I18nProvider i18n={i18n}>
+            <Router history={history}>
+              <Route path={paths.ROOT}>
+                <Main token="oizjofjzoijf" paths={paths} />
+              </Route>
+            </Router>
+          </I18nProvider>
+        </SWRConfig>
+      </ConfigDataContext.Provider>
     );
   }
   await act(async () => {

@@ -29,6 +29,7 @@ lint_and_unit_test:
   needs: []
   extends: .base-docker
   script:
+    - cp -r .envs/local_template .envs/.local
     - docker-compose -f local.yml build --build-arg BUILDKIT_INLINE_CACHE=1
     - docker-compose -f local.yml run --rm -w /app/frontend django yarn install
     # Ensure celerybeat does not crash due to non-existent tables
@@ -50,6 +51,7 @@ end_to_end:
   needs: [lint_and_unit_test]
   extends: .base-docker
   script:
+    - cp -r .envs/local_template .envs/.local
     - docker-compose -f local.yml build --build-arg BUILDKIT_INLINE_CACHE=1
     - docker-compose -f local.yml run --rm -w /app/frontend django yarn install
     # Ensure celerybeat does not crash due to non-existent tables

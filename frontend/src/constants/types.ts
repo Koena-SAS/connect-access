@@ -41,4 +41,8 @@ type MediationRequest = {
   organizationContact: any;
 };
 
-export type { MediationRequest };
+type ConfigData = {
+  platformName: string;
+};
+
+export type { MediationRequest, ConfigData };

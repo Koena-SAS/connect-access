@@ -1,8 +1,11 @@
 import json
 from uuid import UUID
 
+import environ
 from django.utils.translation import get_language
 from django.views.generic.base import TemplateView
+
+env = environ.Env()
 
 
 class UUIDEncoder(json.JSONEncoder):
@@ -27,9 +30,12 @@ class IndexView(TemplateView):
 
         The values are:
          - language: the language code computed by django.
+         - data: the data defined in environment variables to customize Connect Access.
 
         """
         context = super().get_context_data(**kwargs)
         current_language = get_language()
         context["language"] = current_language
+        context["data"] = {"platformName": env("DATA_PLATFORM_NAME")}
+        context["platform_name"] = env("DATA_PLATFORM_NAME")
         return context

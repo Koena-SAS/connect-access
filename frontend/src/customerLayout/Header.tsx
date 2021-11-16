@@ -2,10 +2,12 @@ import { t, Trans } from "@lingui/macro";
 import CloseIcon from "@material-ui/icons/Close";
 import MenuIcon from "@material-ui/icons/Menu";
 import PropTypes from "prop-types";
-import React, { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
 import { LOGIN_HIDDEN } from "../constants/config";
 import { PATHS } from "../constants/paths";
+import { ConfigData } from "../constants/types";
+import ConfigDataContext from "../contexts/configData";
 import Button from "../forms/buttons/Button";
 import {
   useGeneratePrefixedPath,
@@ -19,6 +21,7 @@ import { LogoutButton } from "../users/identification";
  * Header containing the main navbar.
  */
 function Header({ isLogged, setToken, token }) {
+  const configData = useContext<ConfigData>(ConfigDataContext);
   const location = useLocation();
   const history = useHistory();
   const { userDetails } = useUserDetails(token);
@@ -66,7 +69,7 @@ function Header({ isLogged, setToken, token }) {
             >
               <img
                 src={logo}
-                alt={t`Connect Access homepage`}
+                alt={t`${configData.platformName} homepage`}
                 className="header__logo"
               />
             </NavLink>

@@ -1,7 +1,9 @@
 import { t } from "@lingui/macro";
 import PropTypes from "prop-types";
-import React, { useState } from "react";
+import { useContext, useState } from "react";
 import { Route, Switch } from "react-router-dom";
+import { ConfigData } from "../constants/types";
+import ConfigDataContext from "../contexts/configData";
 import Snackbar from "../forms/Snackbar";
 import { useUserDetails } from "../hooks";
 import { FormContainer } from "../mediationForm";
@@ -26,6 +28,7 @@ function Main({
   paths,
   initialOrganizationApp,
 }) {
+  const configData = useContext<ConfigData>(ConfigDataContext);
   const { userDetails } = useUserDetails(token);
   const [requestSuccessMessageOpen, setRequestSuccessMessageOpen] =
     useState(false);
@@ -74,7 +77,7 @@ function Main({
           />
         </Route>
         <Route path={paths.RESET_PASSWORD_CONFIRM} exact>
-          <Page title={t`Connect Access - Confirm password reset`}>
+          <Page title={t`${configData.platformName} - Confirm password reset`}>
             {!isLogged && (
               <PasswordResetConfirm
                 displayRequestSuccess={displayRequestSuccess}
@@ -84,17 +87,19 @@ function Main({
           </Page>
         </Route>
         <Route path={paths.USER_DETAILS} exact>
-          <Page title={t`Connect Access - My account`}>
+          <Page title={t`${configData.platformName} - My account`}>
             {isLogged && <Account token={token} />}
           </Page>
         </Route>
         <Route path={paths.USER_REQUESTS} exact>
-          <Page title={t`Connect Access - My mediation requests`}>
+          <Page title={t`${configData.platformName} - My mediation requests`}>
             {isLogged && <UserMediations token={token} />}
           </Page>
         </Route>
         <Route path={paths.USER_REQUEST} exact>
-          <Page title={t`Connect Access - My mediation request detail`}>
+          <Page
+            title={t`${configData.platformName} - My mediation request detail`}
+          >
             {isLogged && <UserMediation token={token} />}
           </Page>
         </Route>

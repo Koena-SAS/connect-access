@@ -19,6 +19,7 @@ services:
       - redis
     env_file:
       - ./.envs/.staging/.django
+      - ./.envs/.staging/.data
       - ./.envs/.staging/.postgres
     command: /start
 

@@ -2,9 +2,11 @@ import { t, Trans } from "@lingui/macro";
 import produce from "immer";
 import { createStore, StateMachineProvider } from "little-state-machine";
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { PATHS } from "../constants/paths";
+import { ConfigData } from "../constants/types";
+import ConfigDataContext from "../contexts/configData";
 import Snackbar from "../forms/Snackbar";
 import { useGeneratePrefixedPath, useOrganizationApp } from "../hooks";
 import Page from "../Page";
@@ -27,6 +29,7 @@ function FormContainer({
   token,
   initialOrganizationApp,
 }) {
+  const configData = useContext<ConfigData>(ConfigDataContext);
   const [completed, setCompleted] = useState({});
   const generatePrefixedPath = useGeneratePrefixedPath();
   const { organizationApp } = useOrganizationApp(initialOrganizationApp);
@@ -112,7 +115,7 @@ function FormContainer({
           />
           {activeStep === 0 && (
             <Page
-              title={t`Connect Access - Submit a mediation request: your details`}
+              title={t`${configData.platformName} - Submit a mediation request: your details`}
             >
               <UserInfo
                 activeStep={activeStep}
@@ -126,7 +129,7 @@ function FormContainer({
           )}
           {activeStep === 1 && (
             <Page
-              title={t`Connect Access - Submit a mediation request: your problem`}
+              title={t`${configData.platformName} - Submit a mediation request: your problem`}
             >
               <ProblemDescription
                 activeStep={activeStep}
@@ -140,7 +143,7 @@ function FormContainer({
           )}
           {Boolean(activeStep === 2 && !organizationApp) && (
             <Page
-              title={t`Connect Access - Submit a mediation request: the organization`}
+              title={t`${configData.platformName} - Submit a mediation request: the organization`}
             >
               <OrganizationInfo
                 activeStep={activeStep}
@@ -154,7 +157,7 @@ function FormContainer({
           )}
           {activeStep === recapStep && (
             <Page
-              title={t`Connect Access - Submit a mediation request: summary`}
+              title={t`${configData.platformName} - Submit a mediation request: summary`}
             >
               <Recap
                 activeStep={activeStep}

@@ -11,7 +11,6 @@
       name="description"
       content="Plateforme de médiation pour l'accessibilité numérique."
     />
-    <meta name="author" content="Connect Access" />
     <link rel="apple-touch-icon" href="{% static 'logo192.png' %}" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
@@ -22,13 +21,14 @@
     <script>
       window.SERVER_DATA = {
         initialLanguage: "{{ language }}",
+        configData: {{ data|safe }},
       };
     </script>
     {% render_bundle 'vendors' 'css' 'CONNECT_ACCESS' %}
     {% render_bundle 'main' 'css' 'CONNECT_ACCESS' %}
     {% render_bundle 'runtime-main' 'css' 'CONNECT_ACCESS' %}
 
-    <title>Connect Access</title>
+    <title>{{ platform_name }}</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

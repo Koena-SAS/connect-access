@@ -15,6 +15,20 @@ def test_index_has_language_defined_in_context(rf):
     assert context["language"] == "en"
 
 
+@patch("webpack_loader.loader.WebpackLoader.get_bundle")
+def test_index_has_data_information_defined(rf):
+    context = _execute_index_view(rf, reverse("home"))
+    assert "data" in context
+    assert context["data"] == {"platformName": "Connect Access"}
+
+
+@patch("webpack_loader.loader.WebpackLoader.get_bundle")
+def test_index_has_platform_name_defined(rf):
+    context = _execute_index_view(rf, reverse("home"))
+    assert "platform_name" in context
+    assert context["platform_name"] == "Connect Access"
+
+
 def _execute_index_view(rf, path) -> dict:
     request = rf.get(path)
     request.path = path

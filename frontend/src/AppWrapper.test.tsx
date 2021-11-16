@@ -15,7 +15,10 @@ i18n.loadLocaleData({
 });
 
 beforeEach(() => {
-  window["SERVER_DATA"] = { initialLanguage: "en" };
+  window["SERVER_DATA"] = {
+    initialLanguage: "en",
+    configData: { platformName: "Connect Access" },
+  };
 });
 
 function renderAppWrapper() {

@@ -4,6 +4,7 @@ import produce from "immer";
 import { generatePath } from "react-router-dom";
 import { cache } from "swr";
 import { PATHS, PATHS_WITHOUT_PREFIX } from "./constants/paths";
+import { ConfigData } from "./constants/types";
 
 jest.mock("axios");
 export const mockedAxios = axios as jest.Mocked<typeof axios>;
@@ -404,3 +405,7 @@ export async function click(element) {
     fireEvent.click(element);
   });
 }
+
+export const configData: ConfigData = {
+  platformName: "Connect Access",
+} as const;

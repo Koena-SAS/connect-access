@@ -1,11 +1,11 @@
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
 import { fireEvent, render, waitFor } from "@testing-library/react";
-import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { cache, SWRConfig } from "swr";
+import ConfigDataContext from "../contexts/configData";
 import { initLanguagesForTesting } from "../i18nTestHelper";
-import { mockedAxios, resetAxiosMocks } from "../testUtils";
+import { configData, mockedAxios, resetAxiosMocks } from "../testUtils";
 import Header from "./Header";
 
 initLanguagesForTesting();
@@ -23,17 +23,19 @@ afterEach(async () => {
 
 function renderHeader(isLogged = false) {
   return render(
-    <SWRConfig value={{ dedupingInterval: 0 }}>
-      <I18nProvider i18n={i18n}>
-        <Router>
-          <Header
-            isLogged={isLogged}
-            setToken={() => null}
-            token={isLogged ? "blablabla" : null}
-          />
-        </Router>
-      </I18nProvider>
-    </SWRConfig>
+    <ConfigDataContext.Provider value={configData}>
+      <SWRConfig value={{ dedupingInterval: 0 }}>
+        <I18nProvider i18n={i18n}>
+          <Router>
+            <Header
+              isLogged={isLogged}
+              setToken={() => null}
+              token={isLogged ? "blablabla" : null}
+            />
+          </Router>
+        </I18nProvider>
+      </SWRConfig>
+    </ConfigDataContext.Provider>
   );
 }
 

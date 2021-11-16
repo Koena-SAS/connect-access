@@ -33,7 +33,7 @@ msgstr "<0>Appel</0>"
 msgid "<0>Chrome</0>"
 msgstr "<0>Chrome</0>"
 
-#: src/admin/Menu.tsx:90
+#: src/admin/Menu.tsx:93
 msgid "<0>Close sidebar</0>"
 msgstr "<0>Cacher le menu</0>"
 
@@ -216,7 +216,7 @@ msgstr "Ajouter un rapport de suivi"
 msgid "Add the report"
 msgstr "Ajouter le rapport"
 
-#: src/customerLayout/Header.tsx:118
+#: src/customerLayout/Header.tsx:121
 msgid "Admin"
 msgstr "Admin"
 
@@ -231,7 +231,7 @@ msgstr "Toutes"
 
 #: src/admin/AllRequests.tsx:54
 #: src/admin/AllRequests.tsx:57
-#: src/admin/Menu.tsx:143
+#: src/admin/Menu.tsx:146
 #: src/admin/requestDetail/History.tsx:13
 #: src/admin/requestDetail/RequestDetail.tsx:36
 #: src/admin/requestDetail/TraceReports.tsx:65
@@ -239,7 +239,7 @@ msgstr "Toutes"
 msgid "All requests"
 msgstr "Toutes les demandes"
 
-#: src/users/identification/IdentificationLayout.tsx:124
+#: src/users/identification/IdentificationLayout.tsx:129
 msgid "An error occured, please try again."
 msgstr "Une erreur s'est produite, veuillez réessayer."
 
@@ -329,8 +329,8 @@ msgstr "Chrome"
 msgid "Close message"
 msgstr "Fermer le message"
 
-#: src/admin/Menu.tsx:66
-#: src/customerLayout/Header.tsx:80
+#: src/admin/Menu.tsx:69
+#: src/customerLayout/Header.tsx:83
 msgid "Close the menu"
 msgstr "Fermer le menu"
 
@@ -360,71 +360,6 @@ msgstr "Confirmer le mot de passe"
 msgid "Confirmation"
 msgstr "Confirmation"
 
-#: src/admin/Main.tsx:22
-msgid "Connect Access - All mediation requests"
-msgstr "Connect Access - Toutes les demandes de médiation"
-
-#: src/customerLayout/Main.tsx:77
-msgid "Connect Access - Confirm password reset"
-msgstr "Connect Access - Confirmer la réinitialisation du mot de passe"
-
-#: src/admin/requestDetail/RequestDetailContainer.tsx:22
-msgid "Connect Access - Detail of the mediation request"
-msgstr "Connect Access - Détail de la demande de médiation"
-
-#: src/users/identification/Identification.tsx:18
-msgid "Connect Access - Login"
-msgstr "Connect Access - Connexion"
-
-#: src/customerLayout/Main.tsx:87
-msgid "Connect Access - My account"
-msgstr "Connect Access - Mon compte"
-
-#: src/customerLayout/Main.tsx:97
-msgid "Connect Access - My mediation request detail"
-msgstr "Connect Access - Détails de ma demande de médiation"
-
-#: src/customerLayout/Main.tsx:92
-msgid "Connect Access - My mediation requests"
-msgstr "Connect Access - Mes demandes de médiation"
-
-#: src/admin/Main.tsx:17
-msgid "Connect Access - Quick access"
-msgstr "Connect Access - Accès rapide"
-
-#: src/users/identification/IdentificationLayout.tsx:100
-msgid "Connect Access - Reset your password"
-msgstr "Connect Access - Réinitialiser votre mot de passe"
-
-#: src/users/identification/Identification.tsx:26
-msgid "Connect Access - Signup"
-msgstr "Connect Access - Inscription"
-
-#: src/mediationForm/FormContainer.tsx:157
-msgid "Connect Access - Submit a mediation request: summary"
-msgstr "Connect Access - Déposer une demande de médiation : récapitulatif"
-
-#: src/mediationForm/FormContainer.tsx:143
-msgid "Connect Access - Submit a mediation request: the organization"
-msgstr "Connect Access - Déposer une demande de médiation : l'organisation"
-
-#: src/mediationForm/FormContainer.tsx:115
-msgid "Connect Access - Submit a mediation request: your details"
-msgstr "Connect Access - Déposer une demande de médiation : à propos de vous"
-
-#: src/mediationForm/FormContainer.tsx:129
-msgid "Connect Access - Submit a mediation request: your problem"
-msgstr "Connect Access - Déposer une demande de médiation : votre problème"
-
-#: src/admin/requestDetail/RequestDetailContainer.tsx:28
-msgid "Connect Access - Trace reports of the mediation request"
-msgstr "Connect Access - Rapports de suivi de la demande de médiation"
-
-#: src/admin/Menu.tsx:116
-#: src/customerLayout/Header.tsx:69
-msgid "Connect Access homepage"
-msgstr "Connect Access page d'accueil"
-
 #: src/mediationForm/fields/AboutOrganizationFields.tsx:137
 msgid "Contact"
 msgstr "Contact"
@@ -453,7 +388,7 @@ msgstr "Contact :"
 msgid "Content"
 msgstr "Contenu"
 
-#: src/admin/Menu.tsx:157
+#: src/admin/Menu.tsx:160
 msgid "Custom menu management"
 msgstr "Gestion du menu personnalisé"
 
@@ -461,7 +396,7 @@ msgstr "Gestion du menu personnalisé"
 msgid "DYS Disorder software"
 msgstr "Logiciel pour troubles DYS"
 
-#: src/admin/Menu.tsx:124
+#: src/admin/Menu.tsx:127
 #: src/admin/QuickAccess.tsx:14
 msgid "Dashboard"
 msgstr "Tableau de bord"
@@ -579,7 +514,7 @@ msgstr "Prénom / pseudo :"
 msgid "Footer"
 msgstr "Pied de page"
 
-#: src/admin/Menu.tsx:156
+#: src/admin/Menu.tsx:159
 msgid "Form management"
 msgstr "Gestion du formulaire"
 
@@ -591,7 +526,7 @@ msgstr "Informations complémentaires"
 msgid "Further information:"
 msgstr "Informations complémentaires :"
 
-#: src/admin/Menu.tsx:150
+#: src/admin/Menu.tsx:153
 msgid "General Settings"
 msgstr "Paramètres généraux"
 
@@ -603,15 +538,15 @@ msgstr "Aide"
 msgid "History"
 msgstr "Historique"
 
-#: src/users/identification/IdentificationLayout.tsx:64
+#: src/users/identification/IdentificationLayout.tsx:67
 msgid "Identification - Login"
 msgstr "Identification - Connexion"
 
-#: src/users/identification/IdentificationLayout.tsx:72
+#: src/users/identification/IdentificationLayout.tsx:75
 msgid "Identification - Reset your password"
 msgstr "Identification - Réinitialiser votre mot de passe"
 
-#: src/users/identification/IdentificationLayout.tsx:67
+#: src/users/identification/IdentificationLayout.tsx:70
 msgid "Identification - Signup"
 msgstr "Identification - Inscription"
 
@@ -619,7 +554,7 @@ msgstr "Identification - Inscription"
 msgid "Identifier"
 msgstr "Identifiant"
 
-#: src/users/identification/IdentificationLayout.tsx:118
+#: src/users/identification/IdentificationLayout.tsx:123
 msgid "If an account exists with this e-mail, you will receive a password reset link soon."
 msgstr "Si un compte existe avec ce courriel, vous recevrez un lien de réinitialisation de mot de passe bientôt."
 
@@ -673,16 +608,16 @@ msgstr "Mentions légales"
 msgid "Letter"
 msgstr "Lettre"
 
-#: src/users/identification/Identification.tsx:19
+#: src/users/identification/Identification.tsx:22
 #: src/users/identification/Login.tsx:117
 msgid "Log in"
 msgstr "Se connecter"
 
-#: src/users/identification/Identification.tsx:35
+#: src/users/identification/Identification.tsx:38
 msgid "Log in or sign up"
 msgstr "Se connecter ou s'inscrire"
 
-#: src/customerLayout/Header.tsx:106
+#: src/customerLayout/Header.tsx:109
 msgid "Login"
 msgstr "Connexion"
 
@@ -703,7 +638,7 @@ msgid "Mediating"
 msgstr "En cours de médiation"
 
 #: src/admin/AllRequests.tsx:57
-#: src/admin/Menu.tsx:137
+#: src/admin/Menu.tsx:140
 #: src/admin/requestDetail/History.tsx:12
 #: src/admin/requestDetail/RequestDetail.tsx:35
 #: src/admin/requestDetail/TraceReports.tsx:64
@@ -747,7 +682,7 @@ msgstr "Modifier vos informations"
 msgid "Modify your problem description"
 msgstr "Modifier la description de votre problème"
 
-#: src/customerLayout/Header.tsx:141
+#: src/customerLayout/Header.tsx:144
 #: src/users/account/Account.tsx:13
 msgid "My account"
 msgstr "Mon compte"
@@ -756,7 +691,7 @@ msgstr "Mon compte"
 msgid "My personal information"
 msgstr "Mes informations personnelles"
 
-#: src/customerLayout/Header.tsx:131
+#: src/customerLayout/Header.tsx:134
 msgid "My requests"
 msgstr "Mes demandes"
 
@@ -812,16 +747,16 @@ msgstr "Seul le 1er champ \"Quel a été le problème rencontré ?\" est obligat
 msgid "Only the fields \"First name / username\" and \"Email\" are required."
 msgstr "Seuls les champs \"Prénom / pseudo\" et \"Courriel (e-mail)\" sont obligatoires."
 
-#: src/admin/Menu.tsx:98
+#: src/admin/Menu.tsx:101
 msgid "Open sidebar"
 msgstr "Montrer le menu"
 
-#: src/admin/Menu.tsx:66
-#: src/customerLayout/Header.tsx:80
+#: src/admin/Menu.tsx:69
+#: src/customerLayout/Header.tsx:83
 msgid "Open the menu"
 msgstr "Ouvrir le menu"
 
-#: src/admin/Menu.tsx:165
+#: src/admin/Menu.tsx:168
 msgid "Organazations list"
 msgstr "Liste des organisations"
 
@@ -882,7 +817,7 @@ msgstr "Téléphone :"
 msgid "Privacy"
 msgstr "Vie privée"
 
-#: src/admin/Menu.tsx:161
+#: src/admin/Menu.tsx:164
 msgid "Pro Offer"
 msgstr "Offre pro"
 
@@ -894,7 +829,7 @@ msgstr "Description du problème"
 msgid "Project funded as part of the Innov'Up experimentation"
 msgstr "Projet financé dans le cadre du dispositif Innov'Up expérimentation"
 
-#: src/admin/Menu.tsx:130
+#: src/admin/Menu.tsx:133
 #: src/admin/QuickAccess.tsx:14
 msgid "Quick Access"
 msgstr "Accès rapide"
@@ -940,7 +875,7 @@ msgstr "Détail de la demande : Historique"
 msgid "Request detail: Trace reports"
 msgstr "Détail de la demande : Rapports de suivi"
 
-#: src/admin/requestDetail/RequestDetailContainer.tsx:23
+#: src/admin/requestDetail/RequestDetailContainer.tsx:26
 msgid "Request details"
 msgstr "Détails de la demande"
 
@@ -948,7 +883,7 @@ msgstr "Détails de la demande"
 msgid "Request filed"
 msgstr "Demande déposée"
 
-#: src/admin/Menu.tsx:146
+#: src/admin/Menu.tsx:149
 msgid "Requests management"
 msgstr "Gestion des demandes"
 
@@ -980,7 +915,7 @@ msgstr "Type d'émetteur"
 msgid "Sign up"
 msgstr "S'enregistrer"
 
-#: src/users/identification/Identification.tsx:27
+#: src/users/identification/Identification.tsx:30
 msgid "Signup"
 msgstr "Inscription"
 
@@ -988,7 +923,7 @@ msgstr "Inscription"
 msgid "Sitemap"
 msgstr "Plan du site"
 
-#: src/admin/Menu.tsx:133
+#: src/admin/Menu.tsx:136
 msgid "Statistics"
 msgstr "Statistiques"
 
@@ -1028,7 +963,7 @@ msgstr "Étape 3 : L'organisation"
 msgid "Step 4: Summary"
 msgstr "Étape 4 : Récapitulatif"
 
-#: src/mediationForm/FormContainer.tsx:91
+#: src/mediationForm/FormContainer.tsx:94
 msgid "Submit a mediation request"
 msgstr "Déposer une demande de médiation"
 
@@ -1114,7 +1049,7 @@ msgstr "La modification du rapport a échoué. Veuillez réessayer plus tard."
 msgid "There was a problem, please reload the page."
 msgstr "Il y a eu un problème, veuillez recharger la page."
 
-#: src/mediationForm/FormContainer.tsx:101
+#: src/mediationForm/FormContainer.tsx:104
 msgid "There was a technical error and the submission failed, please try again later"
 msgstr "Il y a eu une erreur technique et la validation a échoué, veuillez réessayer ultérieurement"
 
@@ -1126,13 +1061,13 @@ msgstr "Ces informations sont utilisées pour vous identifier, vous pouvez les m
 msgid "To select several technologies, first hold down Ctrl key (or Cmd under macOS), then use the mouse click, or on the keyboard the directional arrows to move and Space to select them."
 msgstr "Pour sélectionner plusieurs technologies, maintenez d'abord la touche Ctrl (ou Cmd sous macOS), puis utilisez le clic de la souris, ou au clavier les flèches de direction pour vous déplacer et Espace pour les sélectionner."
 
-#: src/admin/requestDetail/RequestDetailContainer.tsx:29
+#: src/admin/requestDetail/RequestDetailContainer.tsx:32
 #: src/admin/requestDetail/TraceReports.tsx:67
 #: src/admin/requestDetail/TraceReports.tsx:217
 msgid "Trace reports"
 msgstr "Rapports de suivi"
 
-#: src/admin/Menu.tsx:155
+#: src/admin/Menu.tsx:158
 msgid "User management"
 msgstr "Gestion des utilisateurs"
 
@@ -1144,7 +1079,7 @@ msgstr "Utilisation"
 msgid "Validate your new personal information"
 msgstr "Valider vos nouvelles informations personnelles"
 
-#: src/admin/requestDetail/RequestDetailContainer.tsx:42
+#: src/admin/requestDetail/RequestDetailContainer.tsx:45
 msgid "Views for a particular mediation request"
 msgstr "Visualisations liées à une demande de médiation particulière"
 
@@ -1181,7 +1116,7 @@ msgstr "S'agissait-il d'une application mobile ?"
 msgid "We could'nt update your personal information. Please retry later."
 msgstr "Nous n'avons pas pu mettre à jour vos informations personnelles. Veuillez réessayer plus tard."
 
-#: src/customerLayout/Main.tsx:109
+#: src/customerLayout/Main.tsx:114
 msgid "We were unable to change your password, please try again later."
 msgstr "Nous n'avons pas pu changer votre mot de passe, veuillez réessayer plus tard."
 
@@ -1264,7 +1199,7 @@ msgstr "Oui, très urgent : besoin d'une réponse rapidement"
 msgid "You have to describe your problem"
 msgstr "La description du problème est obligatoire"
 
-#: src/mediationForm/FormContainer.tsx:95
+#: src/mediationForm/FormContainer.tsx:98
 msgid "Your mediation request has been successfully sent !"
 msgstr "Votre demande de médiation a bien été envoyée !"
 
@@ -1272,7 +1207,7 @@ msgstr "Votre demande de médiation a bien été envoyée !"
 msgid "Your mediation requests' list sorted by date"
 msgstr "Vos demandes de médiation triées par date"
 
-#: src/customerLayout/Main.tsx:103
+#: src/customerLayout/Main.tsx:108
 msgid "Your password has been successfully changed."
 msgstr "Votre mot de passe a été changé avec succès."
 
@@ -1305,3 +1240,68 @@ msgstr "iOS"
 #: src/admin/requestDetail/TraceReportForm.tsx:286
 msgid "optionsEmail"
 msgstr "<0>Courriel</0>"
+
+#: src/admin/Main.tsx:26
+msgid "{0} - All mediation requests"
+msgstr "{0} - Toutes les demandes de médiation"
+
+#: src/customerLayout/Main.tsx:80
+msgid "{0} - Confirm password reset"
+msgstr "{0} - Confirmer la réinitialisation du mot de passe"
+
+#: src/admin/requestDetail/RequestDetailContainer.tsx:25
+msgid "{0} - Detail of the mediation request"
+msgstr "{0} - "
+
+#: src/users/identification/Identification.tsx:21
+msgid "{0} - Login"
+msgstr "{0} - Connexion"
+
+#: src/customerLayout/Main.tsx:90
+msgid "{0} - My account"
+msgstr "{0} - Détail de la demande de médiation"
+
+#: src/customerLayout/Main.tsx:101
+msgid "{0} - My mediation request detail"
+msgstr "{0} - "
+
+#: src/customerLayout/Main.tsx:95
+msgid "{0} - My mediation requests"
+msgstr "{0} - Détails de ma demande de médiation"
+
+#: src/admin/Main.tsx:21
+msgid "{0} - Quick access"
+msgstr "{0} - Accès rapide"
+
+#: src/users/identification/IdentificationLayout.tsx:104
+msgid "{0} - Reset your password"
+msgstr "{0} - Réinitialiser votre mot de passe"
+
+#: src/users/identification/Identification.tsx:29
+msgid "{0} - Signup"
+msgstr "{0} - Inscription"
+
+#: src/mediationForm/FormContainer.tsx:160
+msgid "{0} - Submit a mediation request: summary"
+msgstr "{0} - Déposer une demande de médiation : récapitulatif"
+
+#: src/mediationForm/FormContainer.tsx:146
+msgid "{0} - Submit a mediation request: the organization"
+msgstr "{0} - Déposer une demande de médiation : l'organisation"
+
+#: src/mediationForm/FormContainer.tsx:118
+msgid "{0} - Submit a mediation request: your details"
+msgstr "{0} - Déposer une demande de médiation : à propos de vous"
+
+#: src/mediationForm/FormContainer.tsx:132
+msgid "{0} - Submit a mediation request: your problem"
+msgstr "{0} - Déposer une demande de médiation : votre problème"
+
+#: src/admin/requestDetail/RequestDetailContainer.tsx:31
+msgid "{0} - Trace reports of the mediation request"
+msgstr "{0} - Rapports de suivi de la demande de médiation"
+
+#: src/admin/Menu.tsx:119
+#: src/customerLayout/Header.tsx:72
+msgid "{0} homepage"
+msgstr "Page d'accueil de {0}"

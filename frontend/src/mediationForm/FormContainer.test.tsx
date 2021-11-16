@@ -8,9 +8,11 @@ import { useState } from "react";
 import { Route, Router } from "react-router-dom";
 import { cache, SWRConfig } from "swr";
 import { PATHS, PATHS_WITHOUT_PREFIX } from "../constants/paths";
+import ConfigDataContext from "../contexts/configData";
 import { initLanguagesForTesting } from "../i18nTestHelper";
 import {
   click,
+  configData,
   generatePathsWithoutPrefix,
   generatePathsWithPrefix,
   mockedAxios,
@@ -569,15 +571,17 @@ function renderFormContainer(history?: any, generatedPaths?: any, paths?: any) {
     }
   }
   return render(
-    <SWRConfig value={{ dedupingInterval: 0 }}>
-      <I18nProvider i18n={i18n}>
-        <Router history={history}>
-          <Route path={paths.ROOT}>
-            <ComponentWrapper />
-          </Route>
-        </Router>
-      </I18nProvider>
-    </SWRConfig>
+    <ConfigDataContext.Provider value={configData}>
+      <SWRConfig value={{ dedupingInterval: 0 }}>
+        <I18nProvider i18n={i18n}>
+          <Router history={history}>
+            <Route path={paths.ROOT}>
+              <ComponentWrapper />
+            </Route>
+          </Router>
+        </I18nProvider>
+      </SWRConfig>
+    </ConfigDataContext.Provider>
   );
 }
 

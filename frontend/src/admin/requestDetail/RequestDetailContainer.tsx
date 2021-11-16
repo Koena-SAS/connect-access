@@ -1,7 +1,9 @@
 import { t } from "@lingui/macro";
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { PATHS } from "../../constants/paths";
+import { ConfigData } from "../../constants/types";
+import ConfigDataContext from "../../contexts/configData";
 import Tabs from "../../forms/Tabs";
 import { useAdminTraceReports, useWindowDimensions } from "../../hooks";
 import Breadcrumbs from "../Breadcrumbs";
@@ -12,6 +14,7 @@ import TraceReports from "./TraceReports";
  * Contains access to mediation request detail, action history and trace reports.
  */
 function RequestDetailContainer({ token }) {
+  const configData = useContext<ConfigData>(ConfigDataContext);
   useAdminTraceReports(token);
   const [breadcrumbs, setBreadcrumbs] = useState([]);
   const { width: windowWidth } = useWindowDimensions();
@@ -19,13 +22,13 @@ function RequestDetailContainer({ token }) {
   const tabsInfos = [
     {
       element: <RequestDetail token={token} setBreadcrumbs={setBreadcrumbs} />,
-      pageTitle: t`Connect Access - Detail of the mediation request`,
+      pageTitle: t`${configData.platformName} - Detail of the mediation request`,
       label: t`Request details`,
       path: PATHS.ADMIN_REQUEST_DETAIL,
     },
     {
       element: <TraceReports token={token} setBreadcrumbs={setBreadcrumbs} />,
-      pageTitle: t`Connect Access - Trace reports of the mediation request`,
+      pageTitle: t`${configData.platformName} - Trace reports of the mediation request`,
       label: t`Trace reports`,
       path: PATHS.ADMIN_TRACE_REPORTS,
     },

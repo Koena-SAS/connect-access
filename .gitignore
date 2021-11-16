@@ -1,6 +1,5 @@
 .envs/*
-!.envs/.local_no_docker/
-!.envs/.local/
+!.envs/local_template/
 !.envs/production_template/
 .env
 .env_production
