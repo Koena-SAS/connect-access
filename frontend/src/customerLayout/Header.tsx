@@ -14,7 +14,7 @@ import {
   useOuterClick,
   useUserDetails,
 } from "../hooks";
-import logo from "../images/logo_plein.png";
+import logoBackground from "../images/logo_background.png";
 import { LogoutButton } from "../users/identification";
 
 /**
@@ -68,7 +68,12 @@ function Header({ isLogged, setToken, token }) {
               className="header__logo-link"
             >
               <img
-                src={logo}
+                src={logoBackground}
+                alt=""
+                className="header__logo-background"
+              />
+              <img
+                src={require(`../images/${configData.logoFilename}`).default}
                 alt={t`${configData.platformName} homepage`}
                 className="header__logo"
               />

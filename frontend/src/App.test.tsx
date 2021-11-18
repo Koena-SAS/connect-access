@@ -15,11 +15,13 @@ import { Route, Router } from "react-router-dom";
 import { cache, SWRConfig } from "swr";
 import App from "./App";
 import { PATHS, PATHS_WITHOUT_PREFIX } from "./constants/paths";
+import ConfigDataContext from "./contexts/configData";
 import { initLanguagesForTesting } from "./i18nTestHelper";
 import { ResetLittleStateMachine, unlockStep } from "./mediationForm/testUtils";
 import {
   axiosGetResponseMe,
   click,
+  configData,
   generatePathsWithoutPrefix,
   generatePathsWithPrefix,
   mockedAxios,
@@ -73,15 +75,17 @@ async function renderApp(history?: any, generatedPaths?: any, paths?: any) {
   let main;
   await act(async () => {
     main = render(
-      <SWRConfig value={{ dedupingInterval: 0 }}>
-        <I18nProvider i18n={i18n}>
-          <Router history={history}>
-            <Route path={paths.ROOT}>
-              <ComponentWrapper paths={paths} />
-            </Route>
-          </Router>
-        </I18nProvider>
-      </SWRConfig>
+      <ConfigDataContext.Provider value={configData}>
+        <SWRConfig value={{ dedupingInterval: 0 }}>
+          <I18nProvider i18n={i18n}>
+            <Router history={history}>
+              <Route path={paths.ROOT}>
+                <ComponentWrapper paths={paths} />
+              </Route>
+            </Router>
+          </I18nProvider>
+        </SWRConfig>
+      </ConfigDataContext.Provider>
     );
   });
   await waitFor(() => {

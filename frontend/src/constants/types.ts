@@ -43,6 +43,8 @@ type MediationRequest = {
 
 type ConfigData = {
   platformName: string;
+  logoFilename: string;
+  logoFilenameSmall: string;
 };
 
 export type { MediationRequest, ConfigData };

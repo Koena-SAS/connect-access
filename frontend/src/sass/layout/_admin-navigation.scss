@@ -43,12 +43,18 @@
     margin: 1.5rem 0 1.8rem 0;
     padding: 0;
   }
-  &__logo {
+  &__logo-background {
+    position: absolute;
     padding: 1rem 3rem 1.5rem 3rem;
-    &.small {
-      height: 3rem;
-      padding: 1rem 1rem 1.5rem 1rem;
-    }
+  }
+  &__logo {
+    position: relative;
+    z-index: 1;
+    padding: 1rem 3rem 1.5rem 3rem;
+  }
+  &__logo-small {
+    height: 3rem;
+    padding: 1rem 1rem 1.5rem 1rem;
   }
   &__toggle-button {
     background: white;

@@ -408,4 +408,6 @@ export async function click(element) {
 
 export const configData: ConfigData = {
   platformName: "Connect Access",
+  logoFilename: "logo.png",
+  logoFilenameSmall: "logo_small.png",
 } as const;

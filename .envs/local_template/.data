@@ -4,3 +4,5 @@ DATA_COMPANY_NAME=Company
 DATA_COMPANY_EMAIL=contact@example.com
 DATA_ADMIN_NAME="John Doe"
 DATA_ADMIN_EMAIL=john@example.com
+DATA_LOGO_FILENAME=logo.png
+DATA_LOGO_FILENAME_SMALL=logo_small.png

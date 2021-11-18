@@ -34,3 +34,5 @@ export DATA_COMPANY_NAME=Company
 export DATA_COMPANY_EMAIL=contact@example.com
 export DATA_ADMIN_NAME="John Doe"
 export DATA_ADMIN_EMAIL=john@example.com
+export DATA_LOGO_FILENAME=logo.png
+export DATA_LOGO_FILENAME_SMALL=logo_small.png

@@ -19,7 +19,11 @@ def test_index_has_language_defined_in_context(rf):
 def test_index_has_data_information_defined(rf):
     context = _execute_index_view(rf, reverse("home"))
     assert "data" in context
-    assert context["data"] == {"platformName": "Connect Access"}
+    assert context["data"] == {
+        "platformName": "Connect Access",
+        "logoFilename": "logo_custom.png",
+        "logoFilenameSmall": "logo_custom_small.png",
+    }
 
 
 @patch("webpack_loader.loader.WebpackLoader.get_bundle")

@@ -16,8 +16,7 @@ import {
   useWindowDimensions,
 } from "../hooks";
 import { ArrowLeft, ArrowRight } from "../images/buildSvg";
-import logo from "../images/logo_plein.png";
-import logoSmall from "../images/logo_small.png";
+import logoBackground from "../images/logo_background.png";
 import MenuItem from "./MenuItem";
 
 /**
@@ -114,13 +113,31 @@ function Menu() {
           <ul className="admin-navigation__list">
             <li className="admin-navigation__home admin-navigation__item">
               <NavLink exact={true} to={generatePrefixedPath(PATHS.ROOT)}>
-                <img
-                  src={openedOrMobileMenu ? logo : logoSmall}
-                  alt={t`${configData.platformName} homepage`}
-                  className={`admin-navigation__logo ${
-                    openedOrMobileMenu ? "" : "small"
-                  }`}
-                />
+                {openedOrMobileMenu ? (
+                  <>
+                    <img
+                      src={logoBackground}
+                      alt=""
+                      className="admin-navigation__logo-background"
+                    />
+                    <img
+                      src={
+                        require(`../images/${configData.logoFilename}`).default
+                      }
+                      alt={t`${configData.platformName} homepage`}
+                      className="admin-navigation__logo"
+                    />
+                  </>
+                ) : (
+                  <img
+                    src={
+                      require(`../images/${configData.logoFilenameSmall}`)
+                        .default
+                    }
+                    alt={t`${configData.platformName} homepage`}
+                    className="admin-navigation__logo-small"
+                  />
+                )}
               </NavLink>
             </li>
             <MenuItem

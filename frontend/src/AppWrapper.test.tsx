@@ -5,6 +5,7 @@ import { fr } from "make-plural/plurals";
 import AppWrapper from "./AppWrapper";
 import { initLanguagesForTesting } from "./i18nTestHelper";
 import { messages as frMessages } from "./locales/fr/messages";
+import { configData } from "./testUtils";
 
 initLanguagesForTesting();
 i18n.load({
@@ -17,7 +18,7 @@ i18n.loadLocaleData({
 beforeEach(() => {
   window["SERVER_DATA"] = {
     initialLanguage: "en",
-    configData: { platformName: "Connect Access" },
+    configData: configData,
   };
 });
 

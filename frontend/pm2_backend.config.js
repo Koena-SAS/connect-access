@@ -13,6 +13,8 @@ module.exports = {
         DATA_COMPANY_EMAIL: "mediation@example.com",
         DATA_ADMIN_NAME: "Roman",
         DATA_ADMIN_EMAIL: "roman@example.com",
+        DATA_LOGO_FILENAME: "logo.png",
+        DATA_LOGO_FILENAME_SMALL: "logo_small.png",
       },
       exec_mode: "fork",
       instances: "1",

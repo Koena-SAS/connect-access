@@ -29,3 +29,7 @@ webpack-stats.prod.json
 
 # translation
 /src/locales/*/messages.js
+
+# custom data
+src/images/logo_custom.png
+src/images/logo_custom_small.png

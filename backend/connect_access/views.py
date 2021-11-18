@@ -36,6 +36,10 @@ class IndexView(TemplateView):
         context = super().get_context_data(**kwargs)
         current_language = get_language()
         context["language"] = current_language
-        context["data"] = {"platformName": env("DATA_PLATFORM_NAME")}
+        context["data"] = {
+            "platformName": env("DATA_PLATFORM_NAME"),
+            "logoFilename": env("DATA_LOGO_FILENAME"),
+            "logoFilenameSmall": env("DATA_LOGO_FILENAME_SMALL"),
+        }
         context["platform_name"] = env("DATA_PLATFORM_NAME")
         return context

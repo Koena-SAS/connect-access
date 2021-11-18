@@ -123,9 +123,14 @@
 
     &:focus {
       box-shadow: none;
-      .header__logo {
+      .header__logo-background {
         filter: drop-shadow(0 0 5px #80c0fd) drop-shadow(0 0 5px #80c0fd);
       }
     }
+  }
+
+  &__logo {
+    position: absolute;
+    left: 0;
   }
 }
