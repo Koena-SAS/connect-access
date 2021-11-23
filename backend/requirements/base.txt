@@ -27,3 +27,4 @@ django-colorfield==0.4.1  # https://github.com/fabiocaccamo/django-colorfield
 django-translated-fields==0.11.1  # https://github.com/matthiask/django-translated-fields
 django-sass-processor==1.0.1  # https://github.com/jrief/django-sass-processor
 django-compressor==2.4.1  # https://github.com/django-compressor/django-compressor
+django-solo==1.2.0  # https://github.com/lazybird/django-solo

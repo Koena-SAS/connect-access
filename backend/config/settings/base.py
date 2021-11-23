@@ -78,11 +78,13 @@ THIRD_PARTY_APPS = [
     "djoser",
     "colorfield",
     "sass_processor",
+    "solo.apps.SoloAppConfig",
 ]
 
 LOCAL_APPS = [
     "connect_access.users.apps.UsersConfig",
     "connect_access.mediations.apps.MediationsConfig",
+    "connect_access.configuration.apps.ConfigurationConfig",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-03 18:53+0100\n"
+"POT-Creation-Date: 2021-11-23 10:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,9 +26,64 @@ msgstr "Français"
 msgid "English"
 msgstr "Anglais"
 
+#: connect_access/configuration/admin.py:16
+#: connect_access/configuration/admin.py:36
 #: connect_access/mediations/admin.py:27
 msgid "Main information"
 msgstr "Informations principales"
+
+#: connect_access/configuration/models.py:12
+#: connect_access/mediations/models.py:35 connect_access/users/models.py:33
+msgid "Phone number must have 9 to 15 digits, and can be preceded by + sign."
+msgstr ""
+"Le numéro de téléphone doit comporter 9 à 15 chiffres et peut être précédé "
+"du signe +."
+
+#: connect_access/configuration/models.py:17
+msgid "URL must be valid, eg. http://domain.extension"
+msgstr "L'URL doit être valide, par exemple http://domain.extension"
+
+#: connect_access/configuration/models.py:29
+#: connect_access/configuration/models.py:30
+msgid "Company information"
+msgstr "Informations l'entreprise"
+
+#: connect_access/configuration/models.py:33
+#: connect_access/mediations/models.py:210 connect_access/users/models.py:27
+msgid "Email address"
+msgstr "Adresse électronique"
+
+#: connect_access/configuration/models.py:37
+#: connect_access/mediations/models.py:212 connect_access/users/models.py:37
+msgid "Phone number"
+msgstr "Numéro de téléphone"
+
+#: connect_access/configuration/models.py:45
+msgid "Website URL"
+msgstr "URL du site web"
+
+#: connect_access/configuration/models.py:79
+#: connect_access/configuration/models.py:80
+msgid "About service information"
+msgstr "Informations à propos du service"
+
+#: connect_access/configuration/models.py:83
+#: connect_access/mediations/models.py:182
+#: connect_access/mediations/models.py:386 connect_access/users/models.py:22
+msgid "Public identifier"
+msgstr "Identifiant public"
+
+#: connect_access/configuration/models.py:89
+msgid "The order in which the link is displayed"
+msgstr "L'ordre dans lequel le lien est affiché"
+
+#: connect_access/configuration/models.py:94
+msgid "The link text"
+msgstr "Le texte du lien"
+
+#: connect_access/configuration/models.py:98
+msgid "The link URL to the page containing the information"
+msgstr "L'URL du lien vers la page contenant l'information"
 
 #: connect_access/mediations/admin.py:39
 msgid "Complainant information"
@@ -60,12 +115,6 @@ msgstr "Une nouvelle demande de médiation a été créée"
 #: connect_access/mediations/api.py:115
 msgid "mediation request created"
 msgstr "demande de médiation créée"
-
-#: connect_access/mediations/models.py:35 connect_access/users/models.py:33
-msgid "Phone number must have 9 to 15 digits, and can be preceded by + sign."
-msgstr ""
-"Le numéro de téléphone doit comporter 9 à 15 chiffres et peut être précédé "
-"du signe +."
 
 #: connect_access/mediations/models.py:40
 msgid "Domain name must be at least in the form domain.extension"
@@ -229,11 +278,6 @@ msgstr "Demande de médiation"
 msgid "Mediation requests"
 msgstr "Demandes de médiation"
 
-#: connect_access/mediations/models.py:182
-#: connect_access/mediations/models.py:386 connect_access/users/models.py:22
-msgid "Public identifier"
-msgstr "Identifiant public"
-
 #: connect_access/mediations/models.py:188
 msgid "Date of the request"
 msgstr "Date de la demande"
@@ -253,14 +297,6 @@ msgstr "Prénom / pseudo"
 #: connect_access/mediations/models.py:208 connect_access/users/models.py:29
 msgid "Last name"
 msgstr "Nom"
-
-#: connect_access/mediations/models.py:210 connect_access/users/models.py:27
-msgid "Email address"
-msgstr "Adresse électronique"
-
-#: connect_access/mediations/models.py:212 connect_access/users/models.py:37
-msgid "Phone number"
-msgstr "Numéro de téléphone"
 
 #: connect_access/mediations/models.py:218
 msgid "Assistive technologies used"
