@@ -17,8 +17,11 @@ class ContactInformationAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
             {
                 "fields": (
                     (*ContactInformation.email.fields,),
+                    (*ContactInformation.email_text.fields,),
                     (*ContactInformation.phone_number.fields,),
+                    (*ContactInformation.phone_number_text.fields,),
                     (*ContactInformation.website.fields,),
+                    (*ContactInformation.website_text.fields,),
                 )
             },
         ),

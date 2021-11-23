@@ -10,6 +10,8 @@ import {
   useAdminTraceReports,
 } from "./swrAdminFetch";
 import {
+  useFooterAboutService,
+  useFooterContactInformation,
   useOrganizationApp,
   useUserDetails,
   useUserMediationRequests,
@@ -36,4 +38,6 @@ export {
   useEditTraceReport,
   useDeleteTraceReport,
   usePrevious,
+  useFooterAboutService,
+  useFooterContactInformation,
 };

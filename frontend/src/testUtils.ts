@@ -158,6 +158,8 @@ export let axiosGetResponseOrganizationApp;
 export let axiosGetResponseTraceReports;
 export let axiosPostResponseTraceReports;
 export let axiosPatchResponseTraceReports;
+export let axiosGetResponseAboutService;
+export let axiosGetResponseContactInformation;
 
 /**
  * Set mocks for axios methods to be as close as possible
@@ -258,6 +260,62 @@ export const resetAxiosMocks = () => {
       attachedFile: "report.png",
     },
   };
+  axiosGetResponseAboutService = {
+    data: [
+      {
+        id: "d71769d6-645a-4319-80c1-6dbcb38831a7",
+        display_order: 1,
+        link_text: {
+          fr: "À propos de nous",
+          en: "About us",
+        },
+        link_url: {
+          fr: "https://koena.net/faq-koena-connect/",
+          en: "https://koena.net/faq-koena-connect/",
+        },
+      },
+      {
+        id: "0327cb51-2f07-4fee-ac27-9415626a5f7f",
+        display_order: 2,
+        link_text: {
+          fr: "Mentions légales",
+          en: "Legal information",
+        },
+        link_url: {
+          fr: "https://koena.net/mentions-legales/",
+          en: "https://koena.net/en/legal-information-and-credits/",
+        },
+      },
+    ],
+  };
+  axiosGetResponseContactInformation = {
+    data: {
+      email: {
+        fr: "mediation@koena.net",
+        en: "mediation@koena.net",
+      },
+      email_text: {
+        fr: "mediation@koena.net",
+        en: "mediation@koena.net",
+      },
+      phone_number: {
+        fr: "+339726321",
+        en: "+339726321",
+      },
+      phone_number_text: {
+        fr: "+33 (0)9 72 63 21",
+        en: "+33 (0)9 72 63 21",
+      },
+      website: {
+        fr: "https://koena.net/",
+        en: "https://koena.net/",
+      },
+      website_text: {
+        fr: "koena.net",
+        en: "koena.net",
+      },
+    },
+  };
   mockedAxios.post.mockImplementation((url) => {
     if (url === "/auth/token/login/") {
       return Promise.resolve(axiosPostResponseLogin);
@@ -290,6 +348,10 @@ export const resetAxiosMocks = () => {
       url.match(/\/api\/organizations\/[^/]*\/applications\/[^/]*\//)
     ) {
       return Promise.resolve(axiosGetResponseOrganizationApp);
+    } else if (url === "/api/configuration/about-service/") {
+      return Promise.resolve(axiosGetResponseAboutService);
+    } else if (url === "/api/configuration/contact-information/") {
+      return Promise.resolve(axiosGetResponseContactInformation);
     } else {
       return Promise.reject(new Error(`The URL '${url}' is not implemented.`));
     }

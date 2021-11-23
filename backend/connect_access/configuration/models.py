@@ -26,11 +26,20 @@ class ContactInformation(SingletonModel):
     """
 
     class Meta:
-        verbose_name = _("Company information")
-        verbose_name_plural = _("Company information")
+        verbose_name = _(
+            "Information about the organization running the mediation service"
+        )
+        verbose_name_plural = _(
+            "Information about the organization running the mediation service"
+        )
 
     email = TranslatedField(
         models.EmailField(verbose_name=_("Email address"), blank=True)
+    )
+    email_text = TranslatedField(
+        models.CharField(
+            verbose_name=_("Email address display text"), max_length=255, blank=True
+        )
     )
     phone_number = TranslatedField(
         models.CharField(
@@ -40,12 +49,22 @@ class ContactInformation(SingletonModel):
             blank=True,
         )
     )
+    phone_number_text = TranslatedField(
+        models.CharField(
+            verbose_name=_("Phone number display text"), max_length=255, blank=True
+        )
+    )
     website = TranslatedField(
         models.CharField(
             verbose_name=_("Website URL"),
             blank=True,
             validators=[url_regex],
             max_length=200,
+        )
+    )
+    website_text = TranslatedField(
+        models.CharField(
+            verbose_name=_("Website display text"), max_length=255, blank=True
         )
     )
 
@@ -76,8 +95,8 @@ class AboutServiceInformation(TimeStampedModel):
     """
 
     class Meta:
-        verbose_name = _("About service information")
-        verbose_name_plural = _("About service information")
+        verbose_name = _("About mediation service information")
+        verbose_name_plural = _("About mediation service information")
 
     uuid = models.UUIDField(
         verbose_name=_("Public identifier"),

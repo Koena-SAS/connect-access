@@ -60,4 +60,39 @@ function useOrganizationApp(initialOrganizationApp?: any) {
   };
 }
 
-export { useUserMediationRequests, useUserDetails, useOrganizationApp };
+/**
+ * Return footer links in the "about" category.
+ *
+ * @returns data and error if any.
+ */
+function useFooterAboutService() {
+  const { data, error } = useSWR("/api/configuration/about-service/", fetcher);
+  return {
+    footerAboutService: keysToCamel(data),
+    footerAboutServiceError: error,
+  };
+}
+
+/**
+ * Return footer contact information.
+ *
+ * @returns data and error if any.
+ */
+function useFooterContactInformation() {
+  const { data, error } = useSWR(
+    "/api/configuration/contact-information/",
+    fetcher
+  );
+  return {
+    footerContactInformation: keysToCamel(data),
+    footerContactInformationError: error,
+  };
+}
+
+export {
+  useUserMediationRequests,
+  useUserDetails,
+  useOrganizationApp,
+  useFooterAboutService,
+  useFooterContactInformation,
+};

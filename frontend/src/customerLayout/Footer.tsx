@@ -1,5 +1,6 @@
-import { t, Trans } from "@lingui/macro";
-import React from "react";
+import { Trans } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
+import { useFooterAboutService, useFooterContactInformation } from "../hooks";
 import LogoBPI from "../images/buildSvg/LogoBpiFrance";
 import LogoIDF from "../images/buildSvg/LogoRegionIleDeFrance";
 
@@ -7,6 +8,9 @@ import LogoIDF from "../images/buildSvg/LogoRegionIleDeFrance";
  * Footer content with different pages.
  */
 function Footer() {
+  const { footerAboutService } = useFooterAboutService();
+  const { footerContactInformation } = useFooterContactInformation();
+  const { i18n } = useLingui();
   return (
     <footer
       role="contentinfo"
@@ -19,16 +23,51 @@ function Footer() {
             <Trans>Contact us</Trans>
           </h1>
           <ul className="footer__list">
-            <li>
-              <Trans>Phone number:</Trans>{" "}
-              <a href="tel:+33972632128">+33 (0)9 72 63 21 28</a>
-            </li>
-            <li>
-              <Trans>
-                <span lang="en">E-mail:</span>
-              </Trans>{" "}
-              <a href="mailto:mediation@koena.net">mediation@koena.net</a>
-            </li>
+            {footerContactInformation &&
+              "phoneNumber" in footerContactInformation && (
+                <li>
+                  <Trans>Phone number:</Trans>{" "}
+                  <a
+                    href={`tel:${
+                      footerContactInformation.phoneNumber[i18n.locale]
+                    }`}
+                  >
+                    {footerContactInformation.phoneNumberText
+                      ? footerContactInformation.phoneNumberText[i18n.locale]
+                      : footerContactInformation.phoneNumber[i18n.locale]}
+                  </a>
+                </li>
+              )}
+            {footerContactInformation && "email" in footerContactInformation && (
+              <li>
+                <Trans>
+                  <span lang="en">E-mail:</span>
+                </Trans>{" "}
+                <a
+                  href={`mailto:${footerContactInformation.email[i18n.locale]}`}
+                >
+                  {footerContactInformation.emailText
+                    ? footerContactInformation.emailText[i18n.locale]
+                    : footerContactInformation.email[i18n.locale]}
+                </a>
+              </li>
+            )}
+            {footerContactInformation && "website" in footerContactInformation && (
+              <li>
+                <Trans>
+                  <span lang="en">Website:</span>
+                </Trans>{" "}
+                <a
+                  href={`mailto:${
+                    footerContactInformation.website[i18n.locale]
+                  }`}
+                >
+                  {footerContactInformation.websiteText
+                    ? footerContactInformation.websiteText[i18n.locale]
+                    : footerContactInformation.website[i18n.locale]}
+                </a>
+              </li>
+            )}
           </ul>
         </div>
         <div className="footer__link-column">
@@ -36,33 +75,20 @@ function Footer() {
             <Trans>About</Trans>
           </h1>
           <ul className="footer__list">
-            <li>
-              <a
-                href="https://koena.net/faq-koena-connect/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Trans>About us</Trans>
-              </a>
-            </li>
-            <li>
-              <a
-                href={t`https://koena.net/en/legal-information-and-credits/`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Trans>Legal information</Trans>
-              </a>
-            </li>
-            <li>
-              <a
-                href={t`https://koena.net/en/koenas-privacy/`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Trans>Privacy</Trans>
-              </a>
-            </li>
+            {footerAboutService &&
+              footerAboutService.map(function displayListItem(element) {
+                return (
+                  <li key={element.id}>
+                    <a
+                      href={element.linkUrl[i18n.locale]}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {element.linkText[i18n.locale]}
+                    </a>
+                  </li>
+                );
+              })}
           </ul>
         </div>
         <div className="footer__link-column">

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-23 10:44+0100\n"
+"POT-Creation-Date: 2021-11-23 12:20+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,8 +45,9 @@ msgstr "L'URL doit être valide, par exemple http://domain.extension"
 
 #: connect_access/configuration/models.py:29
 #: connect_access/configuration/models.py:30
-msgid "Company information"
-msgstr "Informations l'entreprise"
+msgid "Information about the organization running the mediation service"
+msgstr ""
+"Informations à propos de l'organisation qui gère le service de médiation"
 
 #: connect_access/configuration/models.py:33
 #: connect_access/mediations/models.py:210 connect_access/users/models.py:27
@@ -64,8 +65,8 @@ msgstr "URL du site web"
 
 #: connect_access/configuration/models.py:79
 #: connect_access/configuration/models.py:80
-msgid "About service information"
-msgstr "Informations à propos du service"
+msgid "About mediation service information"
+msgstr "Informations à propos du service de médiation"
 
 #: connect_access/configuration/models.py:83
 #: connect_access/mediations/models.py:182
