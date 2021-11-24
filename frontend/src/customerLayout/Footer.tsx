@@ -24,7 +24,8 @@ function Footer() {
           </h1>
           <ul className="footer__list">
             {footerContactInformation &&
-              "phoneNumber" in footerContactInformation && (
+              footerContactInformation.phoneNumber &&
+              footerContactInformation.phoneNumber[i18n.locale] && (
                 <li>
                   <Trans>Phone number:</Trans>{" "}
                   <a
@@ -38,36 +39,42 @@ function Footer() {
                   </a>
                 </li>
               )}
-            {footerContactInformation && "email" in footerContactInformation && (
-              <li>
-                <Trans>
-                  <span lang="en">E-mail:</span>
-                </Trans>{" "}
-                <a
-                  href={`mailto:${footerContactInformation.email[i18n.locale]}`}
-                >
-                  {footerContactInformation.emailText
-                    ? footerContactInformation.emailText[i18n.locale]
-                    : footerContactInformation.email[i18n.locale]}
-                </a>
-              </li>
-            )}
-            {footerContactInformation && "website" in footerContactInformation && (
-              <li>
-                <Trans>
-                  <span lang="en">Website:</span>
-                </Trans>{" "}
-                <a
-                  href={`mailto:${
-                    footerContactInformation.website[i18n.locale]
-                  }`}
-                >
-                  {footerContactInformation.websiteText
-                    ? footerContactInformation.websiteText[i18n.locale]
-                    : footerContactInformation.website[i18n.locale]}
-                </a>
-              </li>
-            )}
+            {footerContactInformation &&
+              footerContactInformation.email &&
+              footerContactInformation.email[i18n.locale] && (
+                <li>
+                  <Trans>
+                    <span lang="en">E-mail:</span>
+                  </Trans>{" "}
+                  <a
+                    href={`mailto:${
+                      footerContactInformation.email[i18n.locale]
+                    }`}
+                  >
+                    {footerContactInformation.emailText
+                      ? footerContactInformation.emailText[i18n.locale]
+                      : footerContactInformation.email[i18n.locale]}
+                  </a>
+                </li>
+              )}
+            {footerContactInformation &&
+              footerContactInformation.website &&
+              footerContactInformation.website[i18n.locale] && (
+                <li>
+                  <Trans>
+                    <span lang="en">Website:</span>
+                  </Trans>{" "}
+                  <a
+                    href={`mailto:${
+                      footerContactInformation.website[i18n.locale]
+                    }`}
+                  >
+                    {footerContactInformation.websiteText
+                      ? footerContactInformation.websiteText[i18n.locale]
+                      : footerContactInformation.website[i18n.locale]}
+                  </a>
+                </li>
+              )}
           </ul>
         </div>
         <div className="footer__link-column">
