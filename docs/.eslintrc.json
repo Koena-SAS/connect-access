@@ -1,0 +1,11 @@
+{
+  "extends": ["plugin:jsx-a11y/recommended", "prettier"],
+  "plugins": ["jsx-a11y"],
+  "parserOptions": {
+    "ecmaVersion": 2017
+  },
+
+  "env": {
+    "es6": true
+  }
+}

@@ -1,4 +1,4 @@
-exclude: "backend/docs|backend/venv|frontend/node_modules|backend/migrations|.git|.tox"
+exclude: "backend/docs|backend/venv|frontend/node_modules|backend/migrations|.git|.tox|docs/node_modules|docs/build"
 default_stages: [commit]
 fail_fast: true
 

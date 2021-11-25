@@ -1,0 +1,59 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #915800;
+  --ifm-color-primary-dark: #834f00;
+  --ifm-color-primary-darker: #7b4b00;
+  --ifm-color-primary-darkest: #653e00;
+  --ifm-color-primary-light: #a06100;
+  --ifm-color-primary-lighter: #a76500;
+  --ifm-color-primary-lightest: #bd7200;
+  --ifm-code-font-size: 95%;
+  --ifm-footer-background-color: #514f57;
+  --ifm-footer-link-hover-color: #f3c34c;
+}
+
+html[data-theme="dark"] {
+  --ifm-color-primary: #f4c54c;
+  --ifm-color-primary-dark: #f2bb2e;
+  --ifm-color-primary-darker: #f1b61f;
+  --ifm-color-primary-darkest: #d39c0d;
+  --ifm-color-primary-light: #f6cf6a;
+  --ifm-color-primary-lighter: #f7d479;
+  --ifm-color-primary-lightest: #fae2a6;
+}
+
+.docusaurus-highlight-code-line {
+  background-color: rgba(0, 0, 0, 0.1);
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+}
+
+html[data-theme="dark"] .docusaurus-highlight-code-line {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+*:focus {
+  outline: solid 2px currentColor;
+  outline-offset: 2px;
+}
+
+/* underline links */
+
+.footer__link-item {
+  text-decoration: underline;
+}
+
+main a {
+  text-decoration: underline;
+}
+
+main .table-of-contents a {
+  text-decoration: none;
+}
