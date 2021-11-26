@@ -10,6 +10,16 @@ variables:
   CELERY_BROKER_URL: "redis://redis:6379/0"
 
 .base-docker:
+  only:
+    changes:
+      - .envs/**/*
+      - backend/**/*
+      - compose/**/*
+      - frontend/**/*
+      - .dockerignore
+      - .gitlab-ci.yml
+      - local.yml
+      - merge_production_dotenvs_in_dotenv.py
   services:
     - docker:dind
   variables:
@@ -63,3 +73,19 @@ end_to_end:
       - frontend/end_to_end/output/
     when: on_failure
   when: manual
+
+test_docs:
+  stage: lint_and_unit_test
+  image: node:16.13-bullseye
+  script:
+  - cd docs
+  - yarn install
+  - yarn lint
+  - yarn type-check
+  # check that the documentation has been built and commited to the repo
+  - yarn build --out-dir build2
+  - diff -wbB -I '/assets/js/' build build2
+  only:
+    changes:
+      - docs/**/*
+      - .gitlab-ci.yml
