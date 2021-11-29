@@ -52,13 +52,16 @@ const config = {
             type: "doc",
             docId: "intro",
             position: "left",
-            label: "Tutorial",
+            label: "Documentation",
           },
           { to: "/blog", label: "Blog", position: "left" },
           {
             href: "https://gitlab.com/koena/connect-access",
             label: "Source code",
             position: "right",
+          },
+          {
+            type: "localeDropdown",
           },
         ],
       },
@@ -69,7 +72,7 @@ const config = {
             title: "Docs",
             items: [
               {
-                label: "Tutorial",
+                label: "Documentation",
                 to: "/docs/intro",
               },
             ],
@@ -113,6 +116,10 @@ const config = {
         darkTheme: darkCodeTheme,
       },
     }),
+  i18n: {
+    defaultLocale: "en",
+    locales: ["en", "fr"],
+  },
 };
 
 module.exports = config;
