@@ -36,6 +36,10 @@ We are following the [Conventionnal Commits guidelines](https://www.conventional
 
 The convention is followed on branch `master`, but you may not follow it on your branch until merged, as the commit messages will be squashed in one commit for your whole merge request.
 
+### Architecture
+
+For some insights on the general architecture that is used, and some insights on how to modify specific things, please take a look at the [architecture documentation page](./architecture.md).
+
 ## Code quality
 
 The code has to maintain a good level of quality. It has to remain readable, correctly formatted and tested. The styling has to remain responsive. It should also be accessible as much as possible to include everyone.

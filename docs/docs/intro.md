@@ -4,34 +4,35 @@ sidebar_position: 1
 
 # Intro
 
-Let's discover **Docusaurus in less than 5 minutes**.
+Connect access is a platform that helps managing mediation requests.
 
-In french documentation is said <span lang="fr">documentation</span>.
+Disabled people fill a form with the accessibility problem they have on a specific website, and get contacted by your mediation organism. You can help them with an immediate solution, and if needed contact the organisation responsible for the website to try to find a more sustainable solution of the accessibility problem.
 
-## Getting Started
+You have also the possibility to fill reports for everytime you contact someone in the process.
 
-Get started by **creating a new site**.
+## Getting started quickly
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+You can install quickly the application on your local machine with [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/).
 
-## Generate a new site
+Here are the commands to build and start the app:
 
-Generate a new Docusaurus site using the **classic template**:
-
-```shell
-npm init docusaurus@latest my-website classic
+```bash
+git clone https://gitlab.com/koena/connect-access.git
+cd connect-access
+cp -r .envs/local_template .envs/.local
+docker-compose -f local.yml build
+docker-compose -f local.yml run -w /app/backend django python manage.py migrate
+docker-compose -f local.yml up
 ```
 
-## Start your site
+The application will be available on [localhost:8000](http://localhost:8000).
 
-Run the development server:
+## Deploying the solution to production
 
-```shell
-cd my-website
+To deploy to production please read the [documentation page about deployement](./user-documentation/deployement.md).
 
-npx docusaurus start
-```
+## Contributing as a developer
 
-Your site starts at `http://localhost:3000`.
+This application is open source, under AGPL V3 license.
 
-Open `docs/intro.md` and edit some lines: the site **reloads automatically** and displays your changes.
+To contribute you can start by reading the [contribution guidelines](./developer-documentation/contributing.md), and if you would like to contribute to the code, you will probably need to [install the local environment](./developer-documentation/local-environment.md).

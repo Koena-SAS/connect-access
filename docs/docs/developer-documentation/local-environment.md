@@ -140,7 +140,7 @@ python manage.py runserver
 
 By default, the backend will be available on [localhost:8000](http://localhost:8000) but without the frontend running there will be nothing displayed there as the root path displays what is available on port 3000.
 
-You can however access the other paths served by the backend, especially the browsable API provided by Django Rest Framework on [localhost:8000/api/](http://localhost:8000/api/).
+You can however access the other paths served by the backend, especially the browsable API provided by Django Rest Framework on [localhost:8000/api/](http://localhost:8000/api/), and the Django admin panel to manage database objects on [localhost:8000/api/](http://localhost:8000/admin/).
 
 :::info
 
