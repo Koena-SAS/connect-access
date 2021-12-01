@@ -6,6 +6,7 @@
  */
 import React from "react";
 import clsx from "clsx";
+import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from "./HomepageFeatures.module.css";
 
 type FeatureItem = {
@@ -48,10 +49,11 @@ const FeatureList: FeatureItem[] = [
 ];
 
 function Feature({ title, image, description }: FeatureItem) {
+  const imageUrlWithBase = useBaseUrl(image);
   return (
     <div className={clsx("col col--4")}>
       <div className="text--center">
-        <img className={styles.featureSvg} alt={title} src={image} />
+        <img className={styles.featureSvg} alt={title} src={imageUrlWithBase} />
       </div>
       <div className="text--center padding-horiz--md">
         <h3>{title}</h3>

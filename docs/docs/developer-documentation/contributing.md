@@ -18,7 +18,7 @@ In case of bug report, providing detailed instructions to reproduce can really h
 
 The documentation you are reading is built with [Docusaurus](https://docusaurus.io/) and has its source files in the repository, in the `docs/` folder. The source files can contain markdown code but also JSX code.
 
-Currently the documentation has to be built locally and commited to the repository, so that it can be cloned frome any static server directly without the need to run any code. A CI job will check that the code is correctly linted and type-checked, but also that it has been build and commited.
+The documentation is built and deployed to Gitlab Pages when the branch is merged to master.
 
 ## Code contribution
 

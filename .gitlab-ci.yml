@@ -1,6 +1,7 @@
 stages:
   - lint_and_unit_test
   - end_to_end
+  - deploy
 
 variables:
   POSTGRES_USER: "connect_access"
@@ -74,7 +75,7 @@ end_to_end:
     when: on_failure
   when: manual
 
-test_docs:
+test_pages:
   stage: lint_and_unit_test
   image: node:16.13-bullseye
   script:
@@ -82,10 +83,22 @@ test_docs:
   - yarn install
   - yarn lint
   - yarn type-check
-  # check that the documentation has been built and commited to the repo
-  - yarn build --out-dir build2
-  - diff -wbB -I '/assets/js/' build build2
+  - yarn build
   only:
     changes:
       - docs/**/*
       - .gitlab-ci.yml
+
+pages:
+  stage: deploy
+  image: node:16.13-bullseye
+  script:
+  - cd docs
+  - yarn install
+  - yarn build
+  - mv ./build ../public
+  artifacts:
+    paths:
+    - public
+  only:
+    - master
