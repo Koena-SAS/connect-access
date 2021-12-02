@@ -57,3 +57,27 @@ main a {
 main .table-of-contents a {
   text-decoration: none;
 }
+
+/* Description lists */
+.description-list {
+  margin-top: 2rem;
+  padding-left: 2rem;
+}
+
+.description-list dt {
+  font-weight: bold;
+  margin-top: 1.1rem;
+  list-style-type: disc;
+  display: list-item;
+}
+
+.description-list dd {
+  margin-left: 0;
+  line-height: 1.5;
+  margin-top: 0.1rem;
+}
+
+.large-span {
+  width: 100%;
+  display: inline-block;
+}

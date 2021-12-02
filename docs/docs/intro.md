@@ -29,10 +29,10 @@ The application will be available on [localhost:8000](http://localhost:8000).
 
 ## Deploying the solution to production
 
-To deploy to production please read the [documentation page about deployement](./user-documentation/deployement.md).
+To deploy to production please read the [documentation page about deployement](./user-documentation/deployement.mdx).
 
 ## Contributing as a developer
 
 This application is open source, under AGPL V3 license.
 
-To contribute you can start by reading the [contribution guidelines](./developer-documentation/contributing.md), and if you would like to contribute to the code, you will probably need to [install the local environment](./developer-documentation/local-environment.md).
+To contribute you can start by reading the [contribution guidelines](./developer-documentation/contributing.md), and if you would like to contribute to the code, you will probably need to [install the local environment](./developer-documentation/local-environment.mdx).

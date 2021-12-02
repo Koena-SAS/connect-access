@@ -2,22 +2,30 @@
 sidebar_position: 1
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 # Local environment
 
 ## Requirements
 
 Connect Access can be installed and run locally fully with Docker, or without Docker by installing all the needed interpreters and tools:
 
-For local development using Docker:
+<Tabs>
+  <TabItem value="docker" label="With Docker:" default>
 
 - Docker Engine v20+
 - Docker Compose v1.29+
 
-For local development without docker:
+</TabItem>
+<TabItem value="nodocker" label="Without Docker:">
 
 - Python v3.9+
 - Node.js v16+
 - PostgreSQL v13+
+
+</TabItem>
+</Tabs>
 
 ## Initial steps
 
@@ -216,4 +224,4 @@ docker-compose -f local.yml run -w /app/frontend django yarn lang:compile
 
 ## Run Docker staging/production image locally
 
-Running the staging/production image locally is actually the same as running it on a server as docker abstracts everything that matters. You just need to follow the [deployement instructions](../user-documentation/deployement.md) on your local machine.
+Running the staging/production image locally is actually the same as running it on a server as docker abstracts everything that matters. You just need to follow the [deployement instructions](../user-documentation/deployement.mdx) on your local machine.

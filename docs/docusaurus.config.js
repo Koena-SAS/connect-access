@@ -26,11 +26,6 @@ const config = {
           // Please change this to your repo.
           editUrl: "https://gitlab.com/koena/connect-access/-/edit/master/docs",
         },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          editUrl: "https://gitlab.com/koena/connect-access/-/edit/master/docs",
-        },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },
@@ -54,7 +49,6 @@ const config = {
             position: "left",
             label: "Documentation",
           },
-          { to: "/blog", label: "Blog", position: "left" },
           {
             href: "https://gitlab.com/koena/connect-access",
             label: "Source code",
@@ -82,15 +76,7 @@ const config = {
             items: [
               {
                 label: "Stack Overflow",
-                href: "https://stackoverflow.com/questions/tagged/docusaurus",
-              },
-              {
-                label: "Discord",
-                href: "https://discordapp.com/invite/docusaurus",
-              },
-              {
-                label: "Twitter",
-                href: "https://twitter.com/docusaurus",
+                href: "https://stackoverflow.com/questions/tagged/connect-access",
               },
             ],
           },
@@ -98,12 +84,8 @@ const config = {
             title: "More",
             items: [
               {
-                label: "Blog",
-                to: "/blog",
-              },
-              {
-                label: "GitHub",
-                href: "https://github.com/facebook/docusaurus",
+                label: "Source code on GitLab",
+                href: "https://gitlab.com/koena/connect-access",
               },
             ],
           },

@@ -38,7 +38,7 @@ It uses a PostgreSQL database on all environments, and a RabbitMQ message broker
 
 The interationalization is done through the Django main internationalization mechanism:
 
-```python
+```python {3}
 from django.utils.translation import gettext_lazy as _
 
 _("Content to translate")
@@ -70,7 +70,7 @@ This implies that the styling blocks are independent from the React components. 
 
 The internationalization is done with [LinguiJS](https://lingui.js.org/). Mainly with `Trans` and `t` macros.
 
-```typescript
+```typescript {6,7}
 import { t, Trans } from "@lingui/macro";
 
 function MyComponent(): JSX.Element {

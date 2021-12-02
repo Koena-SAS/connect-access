@@ -1,0 +1,253 @@
+---
+sidebar_position: 1
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+# Deployement
+
+The deployement is done with Docker and Docker Compose that package everything needed in containers.
+
+The following are thus needed on the production server:
+
+- Docker Engine v20+
+- Docker Compose v1.29+
+
+The two Docker Compose files `staging.yml` and `production.yml` with correctly configured environment variables give the possibility to have completely separate Docker containers and volumes, so that a staging and a production environment can be run on the same machine independently.
+
+:::info
+
+The SSL/TLS encryption is not done in one of the Docker layers of this application, so you will have to do it before the traffic hits the Traefik container entry point.
+
+:::
+
+To start the deployement you need to clone the repository on your server:
+
+```bash
+git clone https://gitlab.com/koena/connect-access.git
+```
+
+## Environment variables
+
+Most of the configuration is done through environment variables that are loaded by Docker Compose from files in `.envs/` folder.
+
+### Create the files
+
+First you need to copy `.envs/production_template/` for production and staging environments:
+
+```bash
+cd connect-access
+cp -r .envs/production_template .envs/.production
+cp -r .envs/production_template .envs/.staging
+```
+
+### Fill the values
+
+You have to fill the values for all the 5 configuration files:
+
+<Tabs>
+<TabItem value="data" label="Data" default>
+
+<dl className="description-list">
+  <dt>DATA_PLATFORM_NAME</dt>
+  <dd>
+    The name of the platform that will appear publicly instead of "Connect
+    Access".
+  </dd>
+  <dt>DATA_PLATFORM_DOMAIN_NAME</dt>
+  <dd>The domain name of your website.</dd>
+  <dt><span className="large-span">DATA_COMPANY_NAME, </span><span className="large-span">DATA_COMPANY_EMAIL</span></dt>
+  <dd>Your company name and email address, used when sending emails.</dd>
+  <dt><span className="large-span">DATA_ADMIN_NAME, </span><span className="large-span">DATA_ADMIN_EMAIL</span></dt>
+  <dd>
+    The name and email of the administrator, to send him/her emails when
+    important errors occur.
+  </dd>
+  <dt>DATA_LOGO_FILENAME</dt>
+  <dd>
+
+The name of the main logo in `frontend/src/images/`, with a recommended size of 178 x 80 pixels. If it is your own image, you have to add it there. You can let the default value for this environment variable and add your image in `frontend/src/images/`.
+
+  </dd>
+  <dt>DATA_LOGO_FILENAME_SMALL</dt>
+  <dd>
+
+The name of the small logo in `frontend/src/images/`. This logo is shown in the admin panel when the menu is collapsed, and should be as square.
+
+  </dd>
+</dl>
+
+</TabItem>
+<TabItem value="django" label="Django">
+
+<dl className="description-list">
+  <dt>DJANGO_SETTINGS_MODULE</dt>
+  <dd>
+    The Django settings python file used. You will probably not need to change
+    that.
+  </dd>
+  <dt>DJANGO_SECRET_KEY</dt>
+  <dd>
+
+A secret key that you have to generate for your application. You can take a look at the [Django documentation about this](https://docs.djangoproject.com/en/3.2/ref/settings/#std:setting-SECRET_KEY), and you can find a lot of generators on the web.
+
+  </dd>
+  <dt>DJANGO_ADMIN_URL</dt>
+  <dd>
+
+This is the path of your Django admin panel: `yourdomain.com/[DJANGO_ADMIN_URL]/`. Thanks to this, the django admin panel is more difficult to find by attackers.
+
+  </dd>
+  <dt>DJANGO_ALLOWED_HOSTS</dt>
+  <dd>
+
+You can put here all the hostnames that are allowed to send requests to the Django server, separated by commas. You should mainly put here your domain names. This is useful to avoid Cross Site Scripting and Cross-Site Request Forgery attacks. You can find more information in the [Django Documentation abour ALLOWED_HOSTS](https://docs.djangoproject.com/en/3.2/ref/settings/#allowed-hosts).
+
+  </dd>
+  <dt>DJANGO_SERVER_EMAIL</dt>
+  <dd>The email address that Django will indicate as sender for error messages to admins.</dd>
+  <dt><span className="large-span">DJANGO_EMAIL_HOST, </span><span className="large-span">DJANGO_EMAIL_USE_TLS, </span><span className="large-span">DJANGO_EMAIL_PORT, </span><span className="large-span">DJANGO_EMAIL_HOST_USER, </span><span className="large-span">DJANGO_EMAIL_HOST_PASSWORD, </span></dt>
+  <dd>The email configuration elements you will find from your email service provided.</dd>
+  <dt>WEB_CONCURRENCY</dt>
+  <dd>
+
+The number of Gunicorn processes spawned to handle requests. You can learn more about this feature on the [Gunicorn documentation](https://docs.gunicorn.org/en/stable/settings.html#worker-processes).
+
+</dd>
+  <dt><span className="large-span">SENTRY_DSN, </span><span className="large-span">SENTRY_ENVIRONMENT, </span></dt>
+  <dd>
+
+Connect Access is configured to send error logs to Sentry, which is both an open source monitoring tool you can install, and a company running an instance of that tool. The easiest way is to create an account on [sentry.io](https://sentry.io) and use the free version to see if this is useful for you. `SENTRY_DSN` is a URL provided when you create an account, and `SENTRY_ENVIRONMENT` is for configuration, to make a distinction for production and staging logs for example.
+
+</dd>
+  <dt>REDIS_URL</dt>
+  <dd>In case you would like to use another Redis instance on your server.</dd>
+  <dt><span className="large-span">CELERY_FLOWER_USER, </span><span className="large-span">CELERY_FLOWER_PASSWORD, </span></dt>
+  <dd>A random user and password for the Flower monitoring tool.</dd>
+  <dt>MEDIATION_REQUEST_EMAIL</dt>
+  <dd>The email address to which an email will be sent everytime a mediation request is created.</dd>
+</dl>
+
+</TabItem>
+<TabItem value="docker" label="Docker">
+<dl className="description-list">
+  <dt>COMPOSE_PROJECT_NAME</dt>
+  <dd>This is the project name used by Docker for all containers and volumes, which can have the same names and still be independent thanks to the differing project name. You have to change this everytime you would like to install an independent version of Connect Access: to have a staging and a production instance on the same machine, but also if you run several produciton instances.</dd>
+</dl>
+</TabItem>
+<TabItem value="postgres" label="Postgres">
+<dl className="description-list">
+  <dt><span className="large-span">POSTGRES_HOST, </span><span className="large-span">POSTGRES_PORT, </span><span className="large-span">POSTGRES_DB, </span><span className="large-span">POSTGRES_USER, </span><span className="large-span">POSTGRES_PASSWORD, </span></dt>
+  <dd>These information define the PostgreSQL database information that will be used by the backend.</dd>
+  <dt>POSTGRES_DB_END_TO_END</dt>
+  <dd>This is the database name used by the end to end tests. It is flushed everytime the tests are run. You will probably not need this if you are simply installing a staging / production server.</dd>
+</dl>
+</TabItem>
+<TabItem value="traefik" label="Traefik">
+<dl className="description-list">
+  <dt>APPLICATION_PORT</dt>
+  <dd>The port of the main entry point to the Django application. You will need to redirect the traffic coming to your server there, after handling the SSL/TLS encryption.</dd>
+  <dt>FLOWER_PORT</dt>
+  <dd>The port of the Flower container. You don't need to change it if you don't use the service.</dd>
+</dl>
+</TabItem>
+</Tabs>
+
+### Create merged files
+
+You can pass only one file containing environment variables to set to `docker-compose` so you have to merge these files everytime you change something. This can be done with the following command:
+
+```bash
+python merge_production_dotenvs_in_dotenv.py
+```
+
+This will create the two files `.env_production` and `.env_staging` that are simply the concatenation of the 5 separate fiels you configured.
+
+## Build and deploy the application
+
+Everytime you would like to execute a command, you have to specify the correct `docker-compose` YAML configuration file and the correct environment variables merged file.
+
+<Tabs>
+  <TabItem value="production" label="Production" default>
+
+```bash
+docker-compose -f production.yml --env-file .env_production my_command
+```
+
+</TabItem>
+<TabItem value="staging" label="Staging">
+
+```bash
+docker-compose -f staging.yml --env-file .env_staging my_command
+```
+
+</TabItem>
+</Tabs>
+
+To build and start the application, run the following commands:
+
+<Tabs>
+  <TabItem value="production" label="Production" default>
+
+```bash
+docker-compose -f production.yml --env-file .env_production build
+docker-compose -f production.yml --env-file .env_production run django python backend/manage.py migrate
+docker-compose -f production.yml --env-file .env_production up -d
+```
+
+</TabItem>
+<TabItem value="staging" label="Staging">
+
+```bash
+docker-compose -f staging.yml --env-file .env_staging build
+docker-compose -f staging.yml --env-file .env_staging run django python backend/manage.py migrate
+docker-compose -f staging.yml --env-file .env_staging up -d
+```
+
+</TabItem>
+</Tabs>
+
+The application will start, and listen on the port specified by the `APPLICATION_PORT` environment variable.
+
+The `migrate` command is executed on Django to create initially the database tables.
+
+## Configuration
+
+Once the application is running, you can configure some elements through the Django admin panel that will be available at `yourdomain.com/[DJANGO_ADMIN_URL]/`.
+
+But first you need to create an admin account with the following command (you will need to indicate some basic information like your name, email address and password):
+
+<Tabs>
+  <TabItem value="production" label="Production" default>
+
+```bash
+docker-compose -f production.yml --env-file .env_production run django python backend/manage.py createsuperuser
+```
+
+</TabItem>
+<TabItem value="staging" label="Staging">
+
+```bash
+docker-compose -f staging.yml --env-file .env_staging run django python backend/manage.py createsuperuser
+```
+
+</TabItem>
+</Tabs>
+
+With the created account you can connect to the admin panel and fill some configuration information :
+
+<dl className="description-list">
+  <dt>Information about the organization running the mediation service</dt>
+  <dd>
+    Here you can fill information about your company that will appear on the
+    footer of the Connect Access application, in "Contact us" section.
+  </dd>
+  <dt>About mediation service information</dt>
+  <dd>
+    Here you can add links that will appear in the "About" section of the
+    footer. Each entry is one link.
+  </dd>
+  <dt>Sites</dt>
+  <dd>In this section, add an entry for your domain name.</dd>
+</dl>

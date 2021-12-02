@@ -26,7 +26,7 @@ The documentation is built and deployed to Gitlab Pages when the branch is merge
 
 All the code contributions are made through pull/merge requests, to have discussion and code reviews, but also to let the CI validate that everything works.
 
-As much as possible please consider submitting your ideas and commiting/pushing your work early to get feedback, instead of working very long on something that may not be integrated. With gitlab new branch is created automatically with the merge request.
+As much as possible please consider submitting your ideas and commiting/pushing your work early to get feedback, instead of working very long on something that may not be integrated. With gitlab, a new branch is created automatically with the merge request.
 
 Please try to keep your merge requests small (ideally not more than 1 or 2 days of work). To get your code integrated the tests have to pass, but the feature may not be complete. In that case you can hide the feature with CSS if needed until it is ready to be shown.
 
@@ -44,7 +44,7 @@ For some insights on the general architecture that is used, and some insights on
 
 The code has to maintain a good level of quality. It has to remain readable, correctly formatted and tested. The styling has to remain responsive. It should also be accessible as much as possible to include everyone.
 
-To begin your code contribution, please follow the [instructions for local environment installation](./local-environment.md).
+To begin your code contribution, please follow the [instructions for local environment installation](./local-environment.mdx).
 
 ### Accessibility
 

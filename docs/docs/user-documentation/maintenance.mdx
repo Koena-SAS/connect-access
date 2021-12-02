@@ -1,0 +1,221 @@
+---
+sidebar_position: 1
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+# Maintenance
+
+Once you have a running instance of Connect Access, you will need to do some maintenance.
+
+## Update the application code
+
+Connect Access is an open source software, so it will regularly get updates.
+
+To update your running version, you need to do the following steps:
+
+### Make a backup of your application
+
+#### Backup the database
+
+To make a backup of your database, you need to run the following command:
+
+<Tabs>
+  <TabItem value="production" label="Production" default>
+
+```bash
+docker-compose -f production.yml --env-file .env_production run postgres backup
+```
+
+</TabItem>
+<TabItem value="staging" label="Staging">
+
+```bash
+docker-compose -f staging.yml --env-file .env_staging run postgres backup
+```
+
+</TabItem>
+</Tabs>
+
+These backups are stored in a **Docker volume** separate from the one that has the PostgreSQL database.
+
+#### Remember your current git changeset
+
+You need to remember the current git changeset of your local copy of Connect Access, so that youc an later rollback to it easily. For that you can run the following command and copy the resulting changeset hash:
+
+```bash
+git rev-parse HEAD
+```
+
+Another solution could be to make a copy of your local Connect Access repository, so that you can restore it if something goes wrong:
+
+```bash
+cd ..
+cp -r connect-access connect-access_backup
+cd connect-access
+```
+
+### Pull the changes in your local repository
+
+To pull the changes from the repository, the simplest solution is:
+
+```bash
+git pull origin master
+```
+
+### Apply database migrations
+
+Some changes in Connect Access change the database structure. You need to apply these _migrations_ to apply the changes on your database:
+
+<Tabs>
+  <TabItem value="production" label="Production" default>
+
+```bash
+docker-compose -f production.yml --env-file .env_production run django python backend/manage.py migrate
+```
+
+</TabItem>
+<TabItem value="staging" label="Staging">
+
+```bash
+docker-compose -f staging.yml --env-file .env_staging run django python backend/manage.py migrate
+```
+
+</TabItem>
+</Tabs>
+
+### Rebuild and restart your application
+
+After applying the database migrations, you need to restart the application so that everything works correctly.
+
+```bash
+# for staging
+docker-compose -f staging.yml --env-file .env_staging build
+docker-compose -f staging.yml --env-file .env_staging down
+docker-compose -f staging.yml --env-file .env_staging up -d
+
+# for production
+docker-compose -f production.yml --env-file .env_production build
+docker-compose -f production.yml --env-file .env_production down
+docker-compose -f production.yml --env-file .env_production up -d
+```
+
+## Rollback to the previous version
+
+In case the updates did not work, you can rollback to the previous version.
+
+### Rollback the database
+
+To rollback your database to an existing database backup, you can list the available backups with the following command:
+
+<Tabs>
+  <TabItem value="production" label="Production" default>
+
+```bash
+docker-compose -f production.yml --env-file .env_production run postgres backups
+```
+
+</TabItem>
+<TabItem value="staging" label="Staging">
+
+```bash
+docker-compose -f staging.yml --env-file .env_staging run postgres backups
+```
+
+</TabItem>
+</Tabs>
+
+And then you can rollback to a specific database with the following command:
+
+<Tabs>
+  <TabItem value="production" label="Production" default>
+
+```bash
+docker-compose -f production.yml --env-file .env_production run postgres restore THE_NAME_OF_THE_BACKUP_FILE
+```
+
+</TabItem>
+<TabItem value="staging" label="Staging">
+
+```bash
+docker-compose -f staging.yml --env-file .env_staging run postgres restore THE_NAME_OF_THE_BACKUP_FILE
+```
+
+</TabItem>
+</Tabs>
+
+### Rollback the files
+
+If you copied the changeset hash before your update, you can checkout to that changeset:
+
+```bash
+git checkout YOUR_CHANGESET_HASH
+```
+
+If you copied the repository directory, you can restore the old one:
+
+```bash
+cd ..
+rm -rf connect-access
+mv connect-access_backup connect-access
+cd connect-access
+```
+
+Then you need to rebuild and restart your application:
+
+```bash
+# for staging
+docker-compose -f staging.yml --env-file .env_staging build
+docker-compose -f staging.yml --env-file .env_staging down
+docker-compose -f staging.yml --env-file .env_staging up -d
+
+# for production
+docker-compose -f production.yml --env-file .env_production build
+docker-compose -f production.yml --env-file .env_production down
+docker-compose -f production.yml --env-file .env_production up -d
+```
+
+## Manage database backups
+
+### Copy the backups somewhere else
+
+You can get the database backups from the docker volume, and then copy them somewhere else with the `docker cp` command.
+
+First you need to get the name of the postgres container you are interested in, and then copy its `backups` volume content to your local directory:
+
+```bash
+docker ps
+# find the name of the postgres container
+
+# copy all the database backups to a local directory called backups
+docker cp POSTGRES_CONTAINER_NAME:/backups backups
+# copy a specific backup file to a local directory called backups
+docker cp POSTGRES_CONTAINER_NAME:/backups/backup_2021_04_27T15_22_59.sql.gz backups
+```
+
+### Copy the production database to the staging environment
+
+`docker cp` works also to copy a local backup file to a docker volume through the container that is linked to it. You can thus copy the production database to the staging one:
+
+```bash
+# create a fresh backup of the production database
+docker-compose -f production.yml --env-file .env_production run postgres backup
+# copy it to a local repository called backups
+docker cp PRODUCTION_POSTGRES_CONTAINER_NAME:/backups/backup_XXXX_XX_XXXXX_XX_XX.sql.gz backups
+# copy the production database file to staging backups volume
+docker cp backups/backup_XXXX_XX_XXXXX_XX_XX.sql.gz STAGING_POSTGRES_CONTAINER_NAME:/backups/
+# restore the production database in the staging postgres database
+docker-compose -f staging.yml --env-file .env_staging run --rm postgres restore backup_XXXX_XX_XXXXX_XX_XX.sql.gz
+```
+
+## Backup the user files
+
+The images and other files uploaded by users or admins are stored in a specific Docker volume as well. There is no script yet to manipulate them easily like the `postgres backup` / `postgres restore` for the database, but you can still get them from the docker volume the same way as database backup files:
+
+```bash
+# we copy all the user files to a local folder called media_backups
+docker cp DJANGO_CONTAINER_NAME:/app/backend/connect_access/media media_backups
+# we create an archive from these files, so that we can copy it easily somewhere else for backup
+tar -zcvf backups/media_backups.tar.gz media_backups/
+```
