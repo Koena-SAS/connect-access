@@ -6,7 +6,7 @@ sidebar_position: 1
 
 Connect access is a platform that helps managing mediation requests.
 
-Disabled people fill a form with the accessibility problem they have on a specific website, and get contacted by your mediation organism. You can help them with an immediate solution, and if needed contact the organisation responsible for the website to try to find a more sustainable solution of the accessibility problem.
+Disabled people fill a form with the accessibility problem they have on a specific website, and get contacted by your mediation organization. You can help them with an immediate solution, and if needed contact the organisation responsible for the website to try to find a more sustainable solution of the accessibility problem.
 
 You have also the possibility to fill reports for everytime you contact someone in the process.
 
@@ -24,21 +24,21 @@ cd connect-access
 cp -r .envs/local_template .envs/.local
 # activate local enviromnent variables
 source .envs/.local/local_no_docker_activate
-# build the docker images
+# build the Docker images
 docker-compose -f local.yml build
 # create the database tables
 docker-compose -f local.yml run -w /app/backend django python manage.py migrate
 # install the frontend dependencies
 docker-compose -f local.yml run -w /app/frontend django yarn install
-# run the docker containers
+# run the Docker containers
 docker-compose -f local.yml up
 ```
 
 The application will be available on [localhost:8000](http://localhost:8000).
 
-## Deploying the solution to production
+## Deploying to production
 
-To deploy to production please read the [documentation page about deployement](./user-documentation/deployement.mdx).
+To deploy to production environment please read the [documentation page about deployement](./user-documentation/deployement.mdx).
 
 ## Contributing
 

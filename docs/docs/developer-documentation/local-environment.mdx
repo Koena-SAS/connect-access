@@ -37,9 +37,9 @@ To begin, you have to clone the repository locally:
 git clone https://gitlab.com/koena/connect-access.git
 ```
 
-### Configure the git pre-commit hook
+### Configure the Git pre commit hook
 
-Then you can install the python `pre-commit` package and install the git pre commit hooks, to ensure the code you commit is linted:
+Then you can install the Python `pre-commit` package and install the Git pre commit hooks, to ensure the code you commit is linted:
 
 ```bash
 pip install pre-commit
@@ -57,9 +57,9 @@ For this step you need to have Python on your machine. You may skip this but you
 
 Some of the configuration is done via environment variables, that are actually taken from files in the `.envs` directory.
 
-First you need to copy `.envs/local_template` to `.envs/.local`, and fill the values in each file. Most of the values are pre-filled to help you start quickly, but you may need to modify them. For example the PostgreSQL database name and user is set to `debug`, if you choose something else you will have to change that.
+First you need to copy `.envs/local_template` to `.envs/.local`, and fill or update the values in each file. Most of the values are pre-filled to help you start quickly, but you may need to modify them. For example the PostgreSQL database name and user is set to `debug`, if you want something else you will have to change that.
 
-When using Docker the environment variables will be set directly from the files in `.envs/.local` by docker-compose so you don't need to do anything else.
+When using Docker the environment variables will be set directly from the files in `.envs/.local` by Docker Compose so you don't need to do anything else.
 
 When using your own machine directly, you will have to source your terminal with the appropriate file containing the environment variables:
 
@@ -83,7 +83,7 @@ createdb ${POSTGRES_DB} -U ${POSTGRES_USER} --password ${POSTGRES_PASSWORD}
 createdb ${POSTGRES_DB_END_TO_END} -U ${POSTGRES_USER} --password ${POSTGRES_PASSWORD}
 ```
 
-If the user creation does not work, you can create it with the psql console (don't forget to replace the user name and apssword):
+If the user creation does not work, you can create it with the `psql` console (don't forget to replace `debug` by the the user name and password that you want):
 
 ```bash
 sudo -u postgres psql
@@ -98,7 +98,7 @@ CREATE ROLE debug WITH CREATEDB LOGIN PASSWORD 'debug';
 
 #### Install
 
-First you need to create a virtual environment for the python packages:
+First you need to create a virtual environment for the Python packages:
 
 ```bash
 python3 -m venv venv
@@ -113,7 +113,7 @@ pip install -r backend/requirements/local.txt
 
 :::tip
 
-If the installation of some python packages doesn't work because of compilation errors, on linux you may need to install the following dependencies:
+If the installation of some Python packages doesn't work because of compilation errors, on Ubuntu you may need to install the following apt packages:
 
 ```bash
 sudo apt install python3.9-dev libpq-dev
@@ -148,7 +148,7 @@ python manage.py runserver
 
 By default, the backend will be available on [localhost:8000](http://localhost:8000) but without the frontend running there will be nothing displayed there as the root path displays what is available on port 3000.
 
-You can however access the other paths served by the backend, especially the browsable API provided by Django Rest Framework on [localhost:8000/api/](http://localhost:8000/api/), and the Django admin panel to manage database objects on [localhost:8000/api/](http://localhost:8000/admin/).
+You can however access the other paths served by the backend, especially the browsable API provided by Django REST Framework on [localhost:8000/api/](http://localhost:8000/api/), and the Django admin panel to manage database objects on [localhost:8000/api/](http://localhost:8000/admin/).
 
 :::info
 
@@ -160,7 +160,7 @@ In development mode, there are no real emails sent. Everytime an email has to be
 
 #### Install
 
-You need to have `yarn` installed to run the frontend commands:
+You need to have `yarn` installed to run the frontend commands. If it's not the case, you can install it with:
 
 ```bash
 npm install -g yarn
@@ -193,11 +193,11 @@ By default, the frontend will be available on [localhost:3000](http://localhost:
 
 ## Install and run with Docker
 
-Everything is built and started at once with `docker-compose`, and the local code is mounted to docker, so no need to rebuild at each change.
+Everything is built and started at once with `docker-compose`, and the local code is mounted to Docker, so no need to rebuild at each change.
 
 ### Build and run the development servers
 
-You need to build the docker images first, and then run the containers:
+You need to build the Docker images first, and then run the containers:
 
 ```bash
 docker-compose -f local.yml build
@@ -215,7 +215,7 @@ As with the non-Docker mode, the frontend server is available on [localhost:8000
 
 ### Execute commands on the frontend or the backend
 
-There is no need to run `python manage.py runserver` and `yarn start` as they are already running, but you can execute any other command on the backend or the frontend:
+There is no need to run `python manage.py runserver` and `yarn start` as they are already running, but you can execute any other command on the backend or the frontend, eg.:
 
 ```bash
 docker-compose -f local.yml run -w /app/backend django python manage.py compilemessages

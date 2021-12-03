@@ -2,4 +2,226 @@
 sidebar_position: 1
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 # Environnement local
+
+## Prérequis
+
+Connect Access peut être installé et démarré localement entièrement avec Docker, ou sans Docker en installant tous les interpréteurs et outils requis :
+
+<Tabs>
+  <TabItem value="docker" label="Avec Docker :" default>
+
+- Docker Engine v20+
+- Docker Compose v1.29+
+
+</TabItem>
+<TabItem value="nodocker" label="Sans Docker :">
+
+- Python v3.9+
+- Node.js v16+
+- PostgreSQL v13+
+
+</TabItem>
+</Tabs>
+
+## Étapes initiales
+
+### Obtenir le dépôt
+
+Pour commencer, vous devez cloner le dépôt localement :
+
+```bash
+git clone https://gitlab.com/koena/connect-access.git
+```
+
+### Configurer le hook pré-commit de Git
+
+Ensuite vous pouvez installer le paquet Python `pre-commit` et installer le hook Git pré-commit, pour vous assurer que le code que vous allez commiter a passé les vérifications de lint :
+
+```bash
+pip install pre-commit
+# dans le dossier du projet
+pre-commit install
+```
+
+:::tip
+
+Pour cette étape vous avez besoin d'avoir Python sur votre machine. Vous pourriez sauter cette étape mais vous devriez alors vous assurer que tous les outils de qualité sont appliqués avant de pousser votre code sur la branche distante, ou la CI risque d'échouer.
+
+:::
+
+### Configurer les fichiers de variables d'environnement locales
+
+Une partie de la configuration se fait avec des variables d'environnement qui sont extraites de fichiers dans le répertoire `.envs`.
+
+Vous devez d'abord copier `.envs/local_template` vers `.envs/.local`, et remplir ou mettre à jour les valeurs dans chaque fichier. La plupart des valeurs sont pré-remplies pour vous aider à démarrer rapidement, mais il se peut que vous ayez besoin de les modifier. Par exemple pour le nom de la base de données PostgreSQL l'utilisateur s'appelle `debug`, si vous voulez un autre nom il faut modifier la variable concernée.
+
+Quand vous utilisez Docker, les variables d'environnement sont définies directement depuis les fichiers dans `.envs/.local` par Docker Compose, et donc vous n'avez pas besoin de faire quoique ce soit de plus.
+
+Quand vous utilisez votre machine directement, vous devez sourcer votre terminal avec le fichier qui contient les bonnes variables d'environnement :
+
+```bash
+source .envs/.local/local_no_docker_activate
+```
+
+## Installer et démarrer sans Docker
+
+### Base de données
+
+Vous devez créer une base de données PostgreSQL pour le backend, et une autre qui sera vidée automatiquement à chaque lancement des tests de bout en bout.
+
+Par défaut, si vous ne changez pas les valeurs copiées à partir de `.envs/local_template`, la base de données et le nom d'utilisateur seront `debug`, et la base de données pour les tests de bout en bout s'appellera `connect_access_end_to_end`.
+
+Voici les commandes pour créer un utilisateur et deux bases de données:
+
+```bash
+createuser ${POSTGRES_USER}
+createdb ${POSTGRES_DB} -U ${POSTGRES_USER} --password ${POSTGRES_PASSWORD}
+createdb ${POSTGRES_DB_END_TO_END} -U ${POSTGRES_USER} --password ${POSTGRES_PASSWORD}
+```
+
+Si la création de l'utilisateur ne fonctionne pas, vous pouvez le créer avec la console `psql` (n'oubliez pas de remplacer `debug` par le nom d'utilisateur et le mot de passe que vous voulez) :
+
+```bash
+sudo -u postgres psql
+```
+
+```sql
+CREATE ROLE debug WITH CREATEDB LOGIN PASSWORD 'debug';
+\q
+```
+
+### Backend
+
+#### Installer
+
+Vous devez d'abord créer un environnement virtuel pour les paquets Python :
+
+```bash
+python3 -m venv venv
+```
+
+Ensuite il faut les sourcer, et installer les paquets requis pour le développement local :
+
+```bash
+source venv/bin/activate
+pip install -r backend/requirements/local.txt
+```
+
+:::tip
+
+Si l'installation de certains paquets Python ne fonctionne pas à cause d'erreurs de compilation, sur Ubuntu vous pourriez avoir besoin d'installer les paquets apt suivants :
+
+```bash
+sudo apt install python3.9-dev libpq-dev
+```
+
+:::
+
+#### Appliquer les migrations de base de données
+
+Quand la base de données n'a pas les dernières migrations appliquées, vous devez les appliquer avec la commande suivante :
+
+```bash
+cd backend
+python manage.py migrate
+```
+
+#### Compiler les fichiers de langue
+
+La traduction française doit être compilée avec la commande :
+
+```bash
+python manage.py compilemessages
+```
+
+#### Démarrer le serveur de développement
+
+Pour démarrer le backend en mode dev, utilisez le serveur de développement intégré à Django :
+
+```bash
+python manage.py runserver
+```
+
+Par défaut, le backend sera disponible sur [localhost:8000](http://localhost:8000) mais sans le frontend qui tourne il n'y aura rien d'affiché là-bas, étant donné que le chemin racine affiche ce qui est disponible sur le port 3000.
+
+Vous pouvez cependant accéder à d'autres chemins servis par le backend, notamment l'API naviguable fournie par Django REST Framework sur [localhost:8000/api/](http://localhost:8000/api/), et le panel admin de Django pour gérer les objets de la base de données sur [localhost:8000/api/](http://localhost:8000/admin/).
+
+:::info
+
+En mode développement, il n'y a pas de véritables emails envoyés. À chaque fois qu'un email doit être envoyé vous verrez son contenu apparaître dans la console du serveur de développement de Django.
+
+:::
+
+### Frontend
+
+#### Installer
+
+Vous avez besoin d'avoir `yarn` installé pour utiliser les commandes du frontend. Si ce n'est pas le cas, vous pouvez l'installer de cette manière :
+
+```bash
+npm install -g yarn
+```
+
+Vous pouvez alors installer les dépendances `npm` du frontend :
+
+```bash
+cd frontend
+yarn install
+```
+
+#### Compiler les fichiers de langue
+
+La traduction française doit être compilée avec la commande suivante :
+
+```bash
+yarn lang:compile
+```
+
+#### Démarrer le serveur de développement
+
+Pour démarrer le frontend vous devez lancer le serveur de développement de React :
+
+```bash
+yarn start
+```
+
+Par défaut, le frontend sera disponible sur [localhost:3000](http://localhost:3000) mais vous devez accéder à l'application depuis [localhost:8000](http://localhost:8000) quand à la fois le backend et le frontend sont en fonctionnement, car le frontend est en fait servi à travers une vue particulière de l'app Django.
+
+## Installer et démarrer avec Docker
+
+Tout est construit et démarré ensemble avec `docker-compose`, et le répertoire local contenant le code est monté dans Docker, donc pas besoin de reconstruire les images à chaque changement.
+
+### Construire et démarrer les serveurs de développement
+
+Vous devez construire les images Docker d'abord, et ensuite démarrer les containers :
+
+```bash
+docker-compose -f local.yml build
+docker-compose -f local.yml up
+```
+
+Vous pourriez aussi les lancer en mode démon, auquel cas vous n'aurez pas acces au logs depuis le terminal d'où vous avez lancé la commande, et vous devrez arrêter les containers avec une commande supplémentaire :
+
+```bash
+docker-compose -f local.yml up -d
+docker-compose -f local.yml down
+```
+
+Comme avec le mode non-Docker, le serveur du frontend est disponible sur [localhost:8000](http://localhost:3000), et celui du backend est disponible sur [localhost:8000](http://localhost:8000).
+
+### Exécuter des commandes sur le frontend ou le backend
+
+Il n'y a pas besoin d'exécuter `python manage.py runserver` et `yarn start` étant donné qu'ils sont déjà en train de tourner, mais vous pouvez exécuter toute autre commande sur le backend ou le frontend, par exemple :
+
+```bash
+docker-compose -f local.yml run -w /app/backend django python manage.py compilemessages
+docker-compose -f local.yml run -w /app/frontend django yarn lang:compile
+```
+
+## Démarrer les images de production/pré-production localement
+
+Démarrer les images de production/pré-production localement consiste en fait à refaire les mêmes étapes que pour les démarrer sur un serveur étant donné que Docker abstrait tout ce qui nous importe. Vous devez juste suivre [les instructions de déploiement](../user-documentation/deployement.mdx) sur votre machine locale.

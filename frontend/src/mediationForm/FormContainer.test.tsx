@@ -33,7 +33,6 @@ import {
 
 initLanguagesForTesting();
 jest.mock("axios");
-jest.setTimeout(10000);
 
 const generatedPathsWithPrefix = generatePathsWithPrefix();
 const generatedPathsWithoutPrefix = generatePathsWithoutPrefix();
