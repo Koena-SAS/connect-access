@@ -2,40 +2,10 @@
 
 The frontend part has been built with [Create React App](https://github.com/facebook/create-react-app).
 
-## Quality checks
+### Local installation
 
-### eslint
+You can learn more about [the frontend installation in the documentation](https://connectaccess.org/docs/developer-documentation/local-environment#frontend).
 
-First install the dependencies:
+## Quality
 
-```bash
-cd frontend
-yarn install
-```
-
-Then run eslint:
-
-```bash
-yarn lint
-```
-
-### prettier
-
-The code uses `prettier` for its javascript code style.
-
-## Tests
-
-To execute the tests, you first need to install the local dependencies:
-
-```bash
-cd frontend
-yarn install
-```
-
-### Unit tests
-
-Unit tests are performed with `jest`:
-
-```bash
-yarn test
-```
+You can learn more about [the frontend code quality in the documentation](https://connectaccess.org/docs/developer-documentation/contributing/#frontend-code-quality).

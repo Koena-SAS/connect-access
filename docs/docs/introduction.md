@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Intro
+# Introduction
 
 Connect access is a platform that helps managing mediation requests.
 
@@ -31,7 +31,7 @@ The application will be available on [localhost:8000](http://localhost:8000).
 
 To deploy to production please read the [documentation page about deployement](./user-documentation/deployement.mdx).
 
-## Contributing as a developer
+## Contributing
 
 This application is open source, under AGPL V3 license.
 

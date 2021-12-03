@@ -2,50 +2,10 @@
 
 The backend part has been built with [cookiecutter-django](https://github.com/pydanny/cookiecutter-django/) template.
 
-## Quality checks
+## Local installation
 
-### flake8
+You can learn more about [the backend installation in the documentation](https://connectaccess.org/docs/developer-documentation/local-environment#backend).
 
-Most of the quality cheks are performed with `flake8` and its plugins:
+## Quality
 
-First install the code quality dependencies:
-
-```bash
-cd backend
-pip install -r requirements/code_quality.txt
-```
-
-Then run flake8:
-
-```bash
-flake8 --config=setup.cfg --max-complexity 10
-```
-
-### black
-
-The code uses also `black` for its python code style.
-
-## Tests
-
-To execute the tests, you first need to install the local dependencies:
-
-```bash
-cd backend
-pip install -r requirements/local.txt
-```
-
-### Static check
-
-Static check of the code is performed with `mypy`:
-
-```bash
-mypy connect_access config --config=setup.cfg
-```
-
-### Unit tests
-
-Unit tests are performed with `pytest`:
-
-```bash
-pytest
-```
+You can learn more about [the backend code quality in the documentation](https://connectaccess.org/docs/developer-documentation/contributing#backend-code-quality).

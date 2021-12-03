@@ -45,17 +45,18 @@ const config = {
         items: [
           {
             type: "doc",
-            docId: "intro",
+            docId: "introduction",
             position: "left",
             label: "Documentation",
+          },
+          {
+            type: "localeDropdown",
+            position: "right",
           },
           {
             href: "https://gitlab.com/koena/connect-access",
             label: "Source code",
             position: "right",
-          },
-          {
-            type: "localeDropdown",
           },
         ],
       },
@@ -67,7 +68,7 @@ const config = {
             items: [
               {
                 label: "Documentation",
-                to: "/docs/intro",
+                to: "/docs/introduction",
               },
             ],
           },

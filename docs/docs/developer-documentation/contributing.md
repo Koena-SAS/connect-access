@@ -12,7 +12,7 @@ If you would like to contribute please be kind and respectful.
 
 Before creating an issue, please search in the [existing issues](https://gitlab.com/koena/connect-access/-/issues) if something similar doesn't already exist.
 
-In case of bug report, providing detailed instructions to reproduce can really help fixing the bug quickly.
+In case of bug report, providing detailed instructions to reproduce can really help fixing the bug quickly. Please use the provided issue templates.
 
 ## Documentation
 
@@ -24,7 +24,7 @@ The documentation is built and deployed to Gitlab Pages when the branch is merge
 
 ### Merge requests and continuous integration
 
-All the code contributions are made through pull/merge requests, to have discussion and code reviews, but also to let the CI validate that everything works.
+All the code contributions are made through pull/merge requests attached to an issue, to have discussion and code reviews, but also to let the CI validate that everything works.
 
 As much as possible please consider submitting your ideas and commiting/pushing your work early to get feedback, instead of working very long on something that may not be integrated. With gitlab, a new branch is created automatically with the merge request.
 
