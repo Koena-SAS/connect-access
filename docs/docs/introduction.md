@@ -17,11 +17,20 @@ You can install quickly the application on your local machine with [Docker](http
 Here are the commands to build and start the app:
 
 ```bash
+# get the repository
 git clone https://gitlab.com/koena/connect-access.git
 cd connect-access
+# create the environment variable files
 cp -r .envs/local_template .envs/.local
+# activate local enviromnent variables
+source .envs/.local/local_no_docker_activate
+# build the docker images
 docker-compose -f local.yml build
+# create the database tables
 docker-compose -f local.yml run -w /app/backend django python manage.py migrate
+# install the frontend dependencies
+docker-compose -f local.yml run -w /app/frontend django yarn install
+# run the docker containers
 docker-compose -f local.yml up
 ```
 

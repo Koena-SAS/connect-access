@@ -1,6 +1,6 @@
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
-import { act, render, waitFor, within } from "@testing-library/react";
+import { render, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createMemoryHistory } from "history";
 import { StateMachineProvider } from "little-state-machine";
@@ -133,7 +133,7 @@ describe("Steps routing correct display", () => {
       stepToDisplay - 1,
       paths === PATHS
     );
-    await act(async () => {
+    await waitFor(() => {
       history.push(path);
     });
     checkStepText(getByRole, queryByRole, /Step 1/, stepToDisplay === 1);

@@ -1,6 +1,6 @@
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
-import { act, fireEvent, render, waitFor } from "@testing-library/react";
+import { fireEvent, render, waitFor } from "@testing-library/react";
 import { createMemoryHistory } from "history";
 import React from "react";
 import { Router } from "react-router-dom";
@@ -42,7 +42,7 @@ async function renderAllRequests(history) {
       </SWRConfig>
     );
   }
-  await act(async () => {
+  await waitFor(() => {
     app = renderAllRequestsComponent();
   });
   return app;

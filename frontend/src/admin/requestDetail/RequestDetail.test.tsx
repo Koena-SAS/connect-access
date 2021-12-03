@@ -1,6 +1,6 @@
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
-import { act, render, waitFor, within } from "@testing-library/react";
+import { render, waitFor, within } from "@testing-library/react";
 import { createMemoryHistory } from "history";
 import { Route, Router } from "react-router-dom";
 import { cache, SWRConfig } from "swr";
@@ -53,7 +53,7 @@ async function renderRequestDetail(
       </SWRConfig>
     );
   }
-  await act(async () => {
+  await waitFor(() => {
     requestDetail = renderTraceReportComponent();
   });
   return requestDetail;

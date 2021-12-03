@@ -1,4 +1,4 @@
-import { act, cleanup, fireEvent, waitFor } from "@testing-library/react";
+import { cleanup, fireEvent, waitFor } from "@testing-library/react";
 import axios from "axios";
 import produce from "immer";
 import { generatePath } from "react-router-dom";
@@ -460,10 +460,10 @@ export function fillField(
 }
 
 /**
- * Clicks on the given element wrapped in an act().
+ * Clicks on the given element wrapped in an waitFor().
  */
 export async function click(element) {
-  await act(async () => {
+  await waitFor(() => {
     fireEvent.click(element);
   });
 }

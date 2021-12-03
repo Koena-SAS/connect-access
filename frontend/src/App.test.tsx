@@ -1,7 +1,6 @@
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
 import {
-  act,
   cleanup,
   fireEvent,
   render,
@@ -73,7 +72,7 @@ async function renderApp(history?: any, generatedPaths?: any, paths?: any) {
     }
   }
   let main;
-  await act(async () => {
+  await waitFor(() => {
     main = render(
       <ConfigDataContext.Provider value={configData}>
         <SWRConfig value={{ dedupingInterval: 0 }}>
@@ -155,7 +154,7 @@ describe("Admin panel", () => {
       });
       const app = await renderApp(history, generatedPaths, paths);
       await loginUser(app);
-      await act(async () => {
+      await waitFor(() => {
         history.push(generatedPaths.ADMIN);
       });
       expect(
@@ -186,7 +185,7 @@ describe("Admin panel", () => {
       });
       const app = await renderApp(history, generatedPaths, paths);
       await loginUser(app);
-      act(() => {
+      await waitFor(() => {
         history.push(generatedPaths.ADMIN);
       });
       expect(app.queryByText("Dashboard")).not.toBeInTheDocument();

@@ -1,12 +1,6 @@
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
-import {
-  act,
-  fireEvent,
-  render,
-  waitFor,
-  within,
-} from "@testing-library/react";
+import { fireEvent, render, waitFor, within } from "@testing-library/react";
 import { createMemoryHistory } from "history";
 import { Route, Router } from "react-router-dom";
 import { cache, SWRConfig } from "swr";
@@ -44,8 +38,7 @@ async function renderMain(
   islogged = false,
   history = null,
   generatedPaths = null,
-  paths = null,
-  doAct = true
+  paths = null
 ) {
   if (!paths) {
     paths = PATHS_WITHOUT_PREFIX;
@@ -83,13 +76,9 @@ async function renderMain(
       </ConfigDataContext.Provider>
     );
   }
-  if (doAct) {
-    await act(async () => {
-      main = renderMainComponent();
-    });
-  } else {
+  await waitFor(() => {
     main = renderMainComponent();
-  }
+  });
   return main;
 }
 
@@ -312,7 +301,7 @@ describe("renders correctly document title", () => {
   });
 
   async function checkRendersCorrectTitle(route, expectedTitle, paths) {
-    renderMain(route, false, null, null, paths, false);
+    await renderMain(route, false, null, null, paths);
     await waitFor(() => expect(document.title).toEqual(expectedTitle));
   }
 });

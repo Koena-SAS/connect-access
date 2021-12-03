@@ -71,9 +71,6 @@ RUN pip install --no-cache-dir --no-index --find-links=/wheels/ /wheels/* \
 	&& rm -rf /wheels/
 
 RUN npm install pm2 yarn -g
-COPY ./frontend/yarn.lock /yarn.lock
-COPY ./frontend/package.json /package.json
-RUN yarn install
 
 COPY ./compose/production/django/entrypoint /entrypoint
 RUN sed -i 's/\r$//g' /entrypoint

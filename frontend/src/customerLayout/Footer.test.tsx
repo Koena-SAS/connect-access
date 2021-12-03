@@ -1,6 +1,6 @@
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
-import { act, render, RenderResult, waitFor } from "@testing-library/react";
+import { render, RenderResult, waitFor } from "@testing-library/react";
 import { cache, SWRConfig } from "swr";
 import { initLanguagesForTesting } from "../i18nTestHelper";
 import { resetAxiosMocks } from "../testUtils";
@@ -21,7 +21,7 @@ afterEach(() => {
 
 async function renderFooter(): Promise<RenderResult> {
   let app: RenderResult;
-  await act(async () => {
+  await waitFor(() => {
     app = render(
       <SWRConfig value={{ dedupingInterval: 0 }}>
         <I18nProvider i18n={i18n}>
