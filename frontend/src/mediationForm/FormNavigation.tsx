@@ -2,15 +2,47 @@ import { t } from "@lingui/macro";
 import Step from "@material-ui/core/Step";
 import StepButton from "@material-ui/core/StepButton";
 import Stepper from "@material-ui/core/Stepper";
-import PropTypes from "prop-types";
-import React, { useEffect, useMemo, useRef } from "react";
-import { withRouter } from "react-router-dom";
+import { useEffect, useMemo, useRef } from "react";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import { PATHS } from "../constants/paths";
 import {
   useGeneratePrefixedPath,
   useOrganizationApp,
   useWindowDimensions,
 } from "../hooks";
+import type { OrganizationApp } from "../types/organizationApp";
+import type { Completed } from "./StepsInitializer";
+
+type FormNavigationProps = RouteComponentProps & {
+  /**
+   * Indicates the figure of the current displayed form step.
+   */
+  activeStep: number;
+  /**
+   * List of the steps that have been completed, to determine
+   * if the user have access to the next step or not.
+   */
+  completed: Completed;
+  /**
+   * Function called when tab changing asked by the user. The
+   * tab changing should not happen if the function doesn't return
+   * a positive value.
+   */
+  onChangeTab: () => Promise<boolean>;
+  /**
+   * Wether the focus should be placed on the active tab at init.
+   */
+  shouldTriggerFocus: boolean;
+  /**
+   * When true the focus will be placed at the active tab on next render,
+   * and the value will be put to false again.
+   */
+  setShouldTriggerFocus: (shouldTriggerFocus: boolean) => void;
+  /**
+   * The organization applicaiton data got from the backend for the first time.
+   */
+  initialOrganizationApp?: OrganizationApp;
+};
 
 /**
  * Mediation form navigation between steps.
@@ -23,7 +55,7 @@ function FormNavigation({
   shouldTriggerFocus,
   setShouldTriggerFocus,
   initialOrganizationApp,
-}) {
+}: FormNavigationProps) {
   const tabs = useRef({});
   const generatePrefixedPath = useGeneratePrefixedPath();
   const { organizationApp } = useOrganizationApp(initialOrganizationApp);
@@ -159,36 +191,5 @@ function FormNavigation({
     </>
   );
 }
-
-FormNavigation.propTypes = {
-  /**
-   * Indicates the figure of the current displayed form step.
-   */
-  activeStep: PropTypes.number.isRequired,
-  /**
-   * List of the steps that have been completed, to determine
-   * if the user have access to the next step or not.
-   */
-  completed: PropTypes.objectOf(PropTypes.bool).isRequired,
-  /**
-   * Function called when tab changing asked by the user. The
-   * tab changing should not happen if the function doesn't return
-   * a positive value.
-   */
-  onChangeTab: PropTypes.func.isRequired,
-  /**
-   * Wether the focus should be placed on the active tab at init.
-   */
-  shouldTriggerFocus: PropTypes.bool.isRequired,
-  /**
-   * When true the focus will be placed at the active tab on next render,
-   * and the value will be put to false again.
-   */
-  setShouldTriggerFocus: PropTypes.func.isRequired,
-  /**
-   * The organization applicaiton data got from the backend for the first time.
-   */
-  initialOrganizationApp: PropTypes.object,
-};
 
 export default withRouter(FormNavigation);

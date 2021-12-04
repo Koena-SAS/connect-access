@@ -1,5 +1,7 @@
 import { useParams } from "react-router-dom";
 import useSWR from "swr";
+import { MediationRequest } from "../types/mediationRequest";
+import { UserDetails } from "../types/userDetails";
 import { keysToCamel } from "../utils";
 import { fetcher } from "./fetcher";
 import useSwrWithStorage from "./useSwrWithStorage";
@@ -7,11 +9,11 @@ import useSwrWithStorage from "./useSwrWithStorage";
 /**
  * Return up to date mediation requests, handling calls to the backend,
  * and storing in local storage for offline use.
- * @param {string} token the authentication token to make the query.
+ * @param token the authentication token to make the query.
  * @returns data and error if any.
  */
-function useUserMediationRequests(token) {
-  const { data, error } = useSwrWithStorage(
+function useUserMediationRequests(token: string) {
+  const { data, error } = useSwrWithStorage<MediationRequest[]>(
     "/api/mediation-requests/user/",
     token,
     true
@@ -25,11 +27,15 @@ function useUserMediationRequests(token) {
 /**
  * Return up to date user details, handling calls to the backend,
  * and storing in local storage for offline use.
- * @param {string} token the authentication token to make the query.
+ * @param token the authentication token to make the query.
  * @returns data and error if any.
  */
-function useUserDetails(token) {
-  const { data, error } = useSwrWithStorage("/auth/users/me/", token, true);
+function useUserDetails(token: string) {
+  const { data, error } = useSwrWithStorage<UserDetails>(
+    "/auth/users/me/",
+    token,
+    true
+  );
   return {
     userDetails: data,
     userDetailsError: error,
@@ -45,7 +51,10 @@ function useUserDetails(token) {
  * @returns data and error if any.
  */
 function useOrganizationApp(initialOrganizationApp?: any) {
-  const { organizationSlug, applicationSlug } = useParams();
+  const { organizationSlug, applicationSlug } = useParams<{
+    organizationSlug: string;
+    applicationSlug: string;
+  }>();
   const { data, error, mutate } = useSWR(
     Boolean(organizationSlug && applicationSlug)
       ? `/api/organizations/${organizationSlug}/applications/${applicationSlug}/`

@@ -440,7 +440,7 @@ function renderFormNavigation(
           <FormNavigation
             activeStep={activeStep}
             completed={completed}
-            onChangeTab={() => true}
+            onChangeTab={async () => true}
             shouldTriggerFocus={false}
             setShouldTriggerFocus={() => null}
           />{" "}

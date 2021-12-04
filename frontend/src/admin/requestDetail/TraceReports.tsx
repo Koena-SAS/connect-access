@@ -1,7 +1,7 @@
 import { t, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { SnackbarCloseReason } from "@material-ui/core/Snackbar";
 import AddIcon from "@material-ui/icons/Add";
-import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { mutate } from "swr";
@@ -13,12 +13,18 @@ import ConfirmationDialog from "../../forms/ConfirmationDialog";
 import Snackbar from "../../forms/Snackbar";
 import Table from "../../forms/Table";
 import { useAdminTraceReports, useDeleteTraceReport } from "../../hooks";
+import type { TraceReport } from "../../types/traceReport";
 import TraceReportForm from "./TraceReportForm";
+
+type TraceReportsProps = {
+  token: string;
+  setBreadcrumbs: (breadcrumbs: JSX.Element[]) => void;
+};
 
 /**
  * List the available trace reports related to a specific mediation request.
  */
-function TraceReports({ token, setBreadcrumbs }) {
+function TraceReports({ token, setBreadcrumbs }: TraceReportsProps) {
   const { i18n } = useLingui();
   const failureMessages = Object.freeze({
     none: "",
@@ -27,8 +33,11 @@ function TraceReports({ token, setBreadcrumbs }) {
     delete: t`The report deletion was not successful. Please retry later.`,
   });
   const [requestFailureMessageType, setRequestFailureMessageType] =
-    useState("none");
-  const handleCloseFailureMessage = (event, reason) => {
+    useState<keyof typeof failureMessages>("none");
+  const handleCloseFailureMessage = (
+    event: React.SyntheticEvent<any, Event>,
+    reason: SnackbarCloseReason
+  ) => {
     if (reason === "clickaway") {
       return;
     }
@@ -44,7 +53,9 @@ function TraceReports({ token, setBreadcrumbs }) {
   function resetConfirmationDialogOptions() {
     setConfirmationDialogOptions({ report: null, open: false });
   }
-  const { requestId: mediationRequestId } = useParams();
+  const { requestId: mediationRequestId } = useParams<{
+    requestId: string;
+  }>();
   const [deleteTraceReport] = useDeleteTraceReport({
     token,
     onSuccess: function handleDeleteSuccess() {
@@ -72,7 +83,7 @@ function TraceReports({ token, setBreadcrumbs }) {
   function handleAddtraceReport() {
     setFormOpen(true);
   }
-  function handleEditTraceReport(report) {
+  function handleEditTraceReport(report: TraceReport) {
     setEditReport(report);
     setFormOpen(true);
   }
@@ -90,7 +101,7 @@ function TraceReports({ token, setBreadcrumbs }) {
     { text: t`Actions` },
   ];
   const traceReportsList = traceReports ? traceReports : [];
-  const rowsInfos = traceReportsList.map((report) => {
+  const rowsInfos = traceReportsList.map((report: TraceReport) => {
     return {
       key: report.id ? report.id : "undefined",
       infos: [
@@ -242,10 +253,5 @@ function TraceReports({ token, setBreadcrumbs }) {
     </div>
   );
 }
-
-TraceReports.propTypes = {
-  token: PropTypes.string.isRequired,
-  setBreadcrumbs: PropTypes.func.isRequired,
-};
 
 export default TraceReports;

@@ -1,9 +1,8 @@
 import { t, Trans } from "@lingui/macro";
 import axios from "axios";
-import PropTypes from "prop-types";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { withRouter } from "react-router-dom";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import { mutate } from "swr";
 import {
   EmailField,
@@ -21,10 +20,18 @@ import {
   setManualError,
 } from "../../utils/formUtils";
 
+type SignupProps = RouteComponentProps & {
+  handleCloseIdentification: () => void;
+  /**
+   * Set login token for user authentication.
+   */
+  setToken: (token: string) => void;
+};
+
 /**
  * Signup form with error handling.
  */
-function Signup({ setToken, handleCloseIdentification }) {
+function Signup({ setToken, handleCloseIdentification }: SignupProps) {
   const { register, handleSubmit, errors, watch, setError } = useForm();
   const [nonFieldErrors, setNonFieldErrors] = useState([]);
 
@@ -49,7 +56,7 @@ function Signup({ setToken, handleCloseIdentification }) {
           .then(({ data: signupData }) => {
             setToken(signupData.auth_token);
             mutate(
-              ["/auth/users/me/", signupData.auth_token, true],
+              ["/auth/users/me/", signupData.auth_token],
               keysToCamel(userData),
               false
             );
@@ -179,13 +186,5 @@ function Signup({ setToken, handleCloseIdentification }) {
     </form>
   );
 }
-
-Signup.propTypes = {
-  handleCloseIdentification: PropTypes.func.isRequired,
-  /**
-   * Set login token for user authentication.
-   */
-  setToken: PropTypes.func.isRequired,
-};
 
 export default withRouter(Signup);

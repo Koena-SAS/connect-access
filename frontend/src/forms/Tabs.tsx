@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { useGeneratePrefixedPath } from "../hooks";
 import Page from "../Page";
+import { isLocationState } from "../types/typeGuards";
 
 type TabsProps = {
   /**
@@ -73,12 +74,12 @@ function Tabs({
 
   const handleChangeTab = (event, newValue) => {
     let stateObject = {};
-    if (location.state && "from" in location.state) {
+    if (location.state && isLocationState(location.state)) {
       stateObject = {
         from: location.state.from,
       };
     }
-    if (newValue === 0) {
+    if (newValue === 0 && isLocationState(location.state)) {
       history.push({
         pathname: generatePrefixedPath(tabsInfos[newValue].path),
         state: {

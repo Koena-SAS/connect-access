@@ -33,7 +33,7 @@ export function useModifyUserDetails({
   displayRequestFailure,
   displayRequestSuccess,
 }) {
-  const key = ["/auth/users/me/", token, true];
+  const key = ["/auth/users/me/", token];
   return useMutation(modifyUserDetails, {
     onMutate({ input }) {
       const oldData = cache.get(key);

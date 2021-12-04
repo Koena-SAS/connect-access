@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import useSWR from "swr";
-import { MediationRequest } from "../constants/types";
+import { MediationRequest } from "../types/mediationRequest";
 import { keysToCamel } from "../utils";
 import { fetcherWithToken } from "./fetcher";
 
@@ -35,7 +35,9 @@ type UseAdminMediationRequestProps = {
 function useAdminMediationRequest(token): UseAdminMediationRequestProps {
   const { mediationRequests, mediationRequestsError, mutateMediationRequests } =
     useAdminMediationRequests(token);
-  const { requestId } = useParams();
+  const { requestId } = useParams<{
+    requestId: string;
+  }>();
   const foundRequest =
     mediationRequests &&
     mediationRequests.filter(function findMediationRequestById(request) {
@@ -56,7 +58,9 @@ function useAdminMediationRequest(token): UseAdminMediationRequestProps {
  * @returns data, function, and error if any.
  */
 function useAdminTraceReports(token) {
-  const { requestId: mediationRequestId } = useParams();
+  const { requestId: mediationRequestId } = useParams<{
+    requestId: string;
+  }>();
   const { data, error } = useSWR(
     token
       ? [`/api/trace-reports/mediation-request/${mediationRequestId}/`, token]

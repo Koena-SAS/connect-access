@@ -1,8 +1,12 @@
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
-import { fireEvent, render, waitFor } from "@testing-library/react";
-import { createMemoryHistory } from "history";
-import React from "react";
+import {
+  fireEvent,
+  render,
+  RenderResult,
+  waitFor,
+} from "@testing-library/react";
+import { createMemoryHistory, History } from "history";
 import { Router } from "react-router-dom";
 import { cache, SWRConfig } from "swr";
 import { initLanguagesForTesting } from "../i18nTestHelper";
@@ -11,12 +15,13 @@ import {
   mockedAxios,
   resetAxiosMocks,
 } from "../testUtils";
+import { MediationRequestRecieved } from "../types/mediationRequest";
 import AllRequests from "./AllRequests";
 
 initLanguagesForTesting();
 jest.mock("axios");
 
-let mediationsResponse;
+let mediationsResponse: MediationRequestRecieved[];
 
 beforeEach(() => {
   mediationsResponse = mediationRequestsResponse.slice();
@@ -29,7 +34,7 @@ afterEach(async () => {
   await waitFor(() => cache.clear());
 });
 
-async function renderAllRequests(history) {
+async function renderAllRequests(history: History): Promise<RenderResult> {
   let app;
   async function renderAllRequestsComponent() {
     return render(

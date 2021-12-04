@@ -8,6 +8,7 @@ import {
   AboutIssueFields,
   AssitiveTechnologyFields,
 } from "../../mediationForm/fields";
+import { MediationRequest } from "../../types/mediationRequest";
 import PersonalInformationFields from "./PersonalInformationFields";
 
 type FormInputs = {
@@ -24,11 +25,16 @@ type FormInputs = {
   inaccessibilityLevel: string;
 };
 
+type RequestDetailProps = {
+  token: string;
+  setBreadcrumbs: (breadcrumbs: JSX.Element[]) => void;
+};
+
 /**
  * List the details of a specific mediation request, and gives the
  * possibility to update them.
  */
-function RequestDetail({ token, setBreadcrumbs }) {
+function RequestDetail({ token, setBreadcrumbs }: RequestDetailProps) {
   useEffect(
     function initBreadcrumbs() {
       setBreadcrumbs([
@@ -52,7 +58,8 @@ function RequestDetail({ token, setBreadcrumbs }) {
     function setInitialDefaultValues() {
       if (!previousMediationRequest && mediationRequest) {
         for (const key of Object.keys(mediationRequest)) {
-          if (key !== "id") setValue(key, mediationRequest[key]);
+          if (key !== "id")
+            setValue(key, mediationRequest[key as keyof MediationRequest]);
         }
       }
     },

@@ -4,12 +4,13 @@ import produce from "immer";
 import { generatePath } from "react-router-dom";
 import { cache } from "swr";
 import { PATHS, PATHS_WITHOUT_PREFIX } from "./constants/paths";
-import { ConfigData } from "./constants/types";
+import { MediationRequestRecieved } from "./types/mediationRequest";
+import { ConfigData } from "./types/types";
 
 jest.mock("axios");
 export const mockedAxios = axios as jest.Mocked<typeof axios>;
 
-export const mediationRequestsResponse = [
+export const mediationRequestsResponse: MediationRequestRecieved[] = [
   {
     id: "4ae77193-1b66-4182-82af-bc9ce432b0e0",
     creation_date: "2021-02-03",

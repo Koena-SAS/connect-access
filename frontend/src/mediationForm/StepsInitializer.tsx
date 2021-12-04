@@ -1,12 +1,32 @@
+import { History } from "history";
 import { useStateMachine } from "little-state-machine";
-import PropTypes from "prop-types";
 import { useEffect } from "react";
-import { withRouter } from "react-router-dom";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import { PATHS } from "../constants/paths";
 import { useGeneratePrefixedPath, useOrganizationApp } from "../hooks";
+import type { OrganizationApp } from "../types/organizationApp";
 import { organizationInfoStepComplete } from "./OrganizationInfo";
 import { problemDescriptionStepComplete } from "./ProblemDescription";
 import { userInfoStepComplete } from "./UserInfo";
+
+type Completed = Record<0 | 1 | 2 | 3, boolean> | {};
+
+type StepsInitializerProps = RouteComponentProps & {
+  /**
+   * List of the steps that have been completed, to determine
+   * if the user have access to the next step or not.
+   */
+  completed: Completed;
+  /**
+   * Change the list of the unlocked steps.
+   */
+  setCompleted: (completed: Completed) => void;
+  /**
+   * The organization applicaiton data got from the backend for the first time.
+   */
+  initialOrganizationApp?: OrganizationApp;
+  history: History;
+};
 
 /**
  * Initialize completed steps and routes away from unothorized step
@@ -17,7 +37,7 @@ function StepsInitializer({
   setCompleted,
   history,
   initialOrganizationApp,
-}) {
+}: StepsInitializerProps) {
   const { state } = useStateMachine();
   const generatePrefixedPath = useGeneratePrefixedPath();
   const { organizationApp } = useOrganizationApp(initialOrganizationApp);
@@ -69,7 +89,10 @@ function StepsInitializer({
     redirectInitiallyIfNeeded();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  function redirectToNeerestStep(askedStep, initialCompleted) {
+  function redirectToNeerestStep(
+    askedStep: number,
+    initialCompleted: Completed
+  ) {
     for (let i = askedStep - 1; i >= 0; i--) {
       if (i === 0 || initialCompleted[i - 1]) {
         history.push(stepToUrl[i]);
@@ -80,20 +103,5 @@ function StepsInitializer({
   return null;
 }
 
-StepsInitializer.propTypes = {
-  /**
-   * List of the steps that have been completed, to determine
-   * if the user have access to the next step or not.
-   */
-  completed: PropTypes.objectOf(PropTypes.bool).isRequired,
-  /**
-   * Change the list of the unlocked steps.
-   */
-  setCompleted: PropTypes.func.isRequired,
-  /**
-   * The organization applicaiton data got from the backend for the first time.
-   */
-  initialOrganizationApp: PropTypes.object,
-};
-
 export default withRouter(StepsInitializer);
+export type { Completed };

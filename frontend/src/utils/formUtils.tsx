@@ -1,9 +1,14 @@
+import { ErrorOption } from "react-hook-form";
+
 /**
  * Formats one or several error message(s).
- * @param {String or array of String} errorsToFormat the error messages
- * @param {Boolean} muiError if the error will be given to a MUI component
+ * @param errorsToFormat the error messages
+ * @param muiError if the error will be given to a MUI component
  */
-export function formatErrors(errorsToFormat, muiError) {
+export function formatErrors(
+  errorsToFormat: string | string[],
+  muiError: boolean
+) {
   if (!Array.isArray(errorsToFormat)) {
     errorsToFormat = [errorsToFormat];
   }
@@ -31,9 +36,9 @@ export function formatErrors(errorsToFormat, muiError) {
 
 /**
  * Returns the correct wrapping element for an error message
- * @param {String or array of String} errorsToWrap
+ * @param errorsToWrap
  */
-export function chooseErrorWrappingElement(errorsToWrap) {
+export function chooseErrorWrappingElement(errorsToWrap?: { message: any }) {
   if (
     errorsToWrap &&
     Array.isArray(errorsToWrap.message) &&
@@ -47,15 +52,19 @@ export function chooseErrorWrappingElement(errorsToWrap) {
 
 /**
  * Sets manual errors on react hook form
- * @param { String or array of String } errorsToSet the error message(s)
- * @param { String } fieldName the field in error
+ * @param errorToSet the error message(s)
+ * @param fieldName the field in error
  * @param { Function } setError the react hook form setError function
  */
-export function setManualError(errorsToSet, fieldName, setError) {
-  if (errorsToSet) {
+export function setManualError(
+  errorToSet: string,
+  fieldName: string,
+  setError: (name: string, error: ErrorOption) => void
+) {
+  if (errorToSet) {
     setError(fieldName, {
       type: "manual",
-      message: errorsToSet,
+      message: errorToSet,
     });
   }
 }

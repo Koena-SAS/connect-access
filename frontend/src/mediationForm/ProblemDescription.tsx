@@ -2,14 +2,14 @@ import { t, Trans } from "@lingui/macro";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import { useStateMachine } from "little-state-machine";
-import PropTypes from "prop-types";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { withRouter } from "react-router-dom";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import { PATHS } from "../constants/paths";
 import Button from "../forms/buttons/Button";
 import Information from "../forms/Information";
 import { useGeneratePrefixedPath, useOrganizationApp } from "../hooks";
+import type { OrganizationApp } from "../types/organizationApp";
 import {
   AboutIssueFields,
   FurtherInfoFields,
@@ -17,7 +17,38 @@ import {
   OrganizationAnswerFields,
 } from "./fields";
 import FormNavigation from "./FormNavigation";
+import type { Completed } from "./StepsInitializer";
 import { updateProblemDescription } from "./updateAction";
+
+type ProblemDescriptionProps = RouteComponentProps & {
+  /**
+   * Indicates the figure of the current displayed form step.
+   */
+  activeStep: number;
+  /**
+   * List of the steps that have been completed, to determine
+   * if the user have access to the next step or not.
+   */
+  completed: Completed;
+  /**
+   * Function called when tab changing asked by the user and required
+   * fields correctly filled. The call will unlock the next step.
+   */
+  setStepCompleted: () => void;
+  /**
+   * Wether the focus should be placed on the active tab at init.
+   */
+  shouldTriggerFocus: boolean;
+  /**
+   * When true the focus will be placed at the active tab on next render,
+   * and the value will be put to false again.
+   */
+  setShouldTriggerFocus: (shouldTriggerFocus: boolean) => void;
+  /**
+   * The organization applicaiton data got from the backend for the first time.
+   */
+  initialOrganizationApp?: OrganizationApp;
+};
 
 /**
  * Second step of the main mediation form, to get information on the problem.
@@ -30,7 +61,7 @@ function ProblemDescription({
   shouldTriggerFocus,
   setShouldTriggerFocus,
   initialOrganizationApp,
-}) {
+}: ProblemDescriptionProps) {
   const [shouldFocusOnFirstErrorField, setShouldFocusOnFirstErrorField] =
     useState(false);
   const { state, actions } = useStateMachine({ updateProblemDescription });
@@ -193,36 +224,6 @@ function ProblemDescription({
     </>
   );
 }
-
-ProblemDescription.propTypes = {
-  /**
-   * Indicates the figure of the current displayed form step.
-   */
-  activeStep: PropTypes.number.isRequired,
-  /**
-   * List of the steps that have been completed, to determine
-   * if the user have access to the next step or not.
-   */
-  completed: PropTypes.objectOf(PropTypes.bool).isRequired,
-  /**
-   * Function called when tab changing asked by the user and required
-   * fields correctly filled. The call will unlock the next step.
-   */
-  setStepCompleted: PropTypes.func.isRequired,
-  /**
-   * Wether the focus should be placed on the active tab at init.
-   */
-  shouldTriggerFocus: PropTypes.bool.isRequired,
-  /**
-   * When true the focus will be placed at the active tab on next render,
-   * and the value will be put to false again.
-   */
-  setShouldTriggerFocus: PropTypes.func.isRequired,
-  /**
-   * The organization applicaiton data got from the backend for the first time.
-   */
-  initialOrganizationApp: PropTypes.object,
-};
 
 /**
  * Tells if the problem description step is complete or not.

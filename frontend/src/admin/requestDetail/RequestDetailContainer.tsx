@@ -2,10 +2,10 @@ import { t } from "@lingui/macro";
 import PropTypes from "prop-types";
 import { useContext, useState } from "react";
 import { PATHS } from "../../constants/paths";
-import { ConfigData } from "../../constants/types";
 import ConfigDataContext from "../../contexts/configData";
 import Tabs from "../../forms/Tabs";
 import { useAdminTraceReports, useWindowDimensions } from "../../hooks";
+import { ConfigData } from "../../types/types";
 import Breadcrumbs from "../Breadcrumbs";
 import RequestDetail from "./RequestDetail";
 import TraceReports from "./TraceReports";
@@ -13,7 +13,7 @@ import TraceReports from "./TraceReports";
 /**
  * Contains access to mediation request detail, action history and trace reports.
  */
-function RequestDetailContainer({ token }) {
+function RequestDetailContainer({ token }: { token: string }) {
   const configData = useContext<ConfigData>(ConfigDataContext);
   useAdminTraceReports(token);
   const [breadcrumbs, setBreadcrumbs] = useState([]);

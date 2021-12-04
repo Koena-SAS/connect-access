@@ -6,7 +6,6 @@ import { useContext, useEffect, useState } from "react";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
 import { LOGIN_HIDDEN } from "../constants/config";
 import { PATHS } from "../constants/paths";
-import { ConfigData } from "../constants/types";
 import ConfigDataContext from "../contexts/configData";
 import Button from "../forms/buttons/Button";
 import {
@@ -15,6 +14,7 @@ import {
   useUserDetails,
 } from "../hooks";
 import logoBackground from "../images/logo_background.png";
+import { ConfigData } from "../types/types";
 import { LogoutButton } from "../users/identification";
 
 /**

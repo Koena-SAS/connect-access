@@ -24,7 +24,7 @@ function PasswordResetConfirm({
 }) {
   const { register, handleSubmit, errors, watch, setError } = useForm();
   const history = useHistory();
-  const { uid, token } = useParams();
+  const { uid, token } = useParams<{ uid: string; token: string }>();
   const generatePrefixedPath = useGeneratePrefixedPath();
   const validatePasswords = () => {
     if (watch("password1") === watch("password2")) {

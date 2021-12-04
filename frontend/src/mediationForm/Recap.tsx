@@ -4,17 +4,65 @@ import ClearIcon from "@material-ui/icons/Clear";
 import DoneIcon from "@material-ui/icons/Done";
 import axios from "axios";
 import { useStateMachine } from "little-state-machine";
-import PropTypes from "prop-types";
-import React, { useEffect, useState } from "react";
-import { withRouter } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import { mutate } from "swr";
 import { PATHS } from "../constants/paths";
 import Button from "../forms/buttons/Button";
 import { useGeneratePrefixedPath, useOrganizationApp } from "../hooks";
 import MediationRequestsDetail from "../mediationRequests/MediationRequestsDetail";
+import type { OrganizationApp } from "../types/organizationApp";
 import FormNavigation from "./FormNavigation";
+import type { Completed } from "./StepsInitializer";
 import { resetState } from "./updateAction";
 import { formStateToMediationRequests } from "./utils";
+
+type RecapProps = RouteComponentProps & {
+  /**
+   * Indicates the figure of the current displayed form step.
+   */
+  activeStep: number;
+  /**
+   * List of the steps that have been completed, to determine
+   * if the user have access to the next step or not.
+   */
+  completed: Completed;
+  /**
+   * Resets completed steps list.
+   */
+  resetCompleted: () => void;
+  /**
+   * Wether the focus should be placed on the active tab at init.
+   */
+  shouldTriggerFocus: boolean;
+  /**
+   * When true the focus will be placed at the active tab on next render,
+   * and the value will be put to false again.
+   */
+  setShouldTriggerFocus: (shouldTriggerFocus: boolean) => void;
+  /**
+   * The id of the currently logged user.
+   */
+  userId?: string;
+  /**
+   * Trigger success notification when the mediation request has been
+   * successfully submitted.
+   */
+  displayRequestSuccessMessage: () => void;
+  /**
+   * Trigger error notification when the mediation request has resulted
+   * in an error.
+   */
+  displayRequestFailureMessage: () => void;
+  /**
+   * The authentication token.
+   */
+  token?: string;
+  /**
+   * The organization applicaiton data got from the backend for the first time.
+   */
+  initialOrganizationApp?: OrganizationApp;
+};
 
 /**
  * 4th step of the main mediation form, to summerize everything before submit.
@@ -31,7 +79,7 @@ function Recap({
   displayRequestFailureMessage,
   token,
   initialOrganizationApp,
-}) {
+}: RecapProps) {
   const { state, actions } = useStateMachine({ resetState });
   const generatePrefixedPath = useGeneratePrefixedPath();
   const { organizationApp } = useOrganizationApp(initialOrganizationApp);
@@ -161,7 +209,7 @@ function Recap({
       })
       .then(() => {
         displayRequestSuccessMessage();
-        mutate(["/api/mediation-requests/user/", token, true]);
+        mutate(["/api/mediation-requests/user/", token]);
         handleClickReset();
       })
       .catch(() => {
@@ -206,7 +254,7 @@ function Recap({
       <FormNavigation
         activeStep={activeStep}
         completed={completed}
-        onChangeTab={() => true}
+        onChangeTab={async (): Promise<boolean> => true}
         shouldTriggerFocus={shouldTriggerFocus}
         setShouldTriggerFocus={setShouldTriggerFocus}
         initialOrganizationApp={initialOrganizationApp}
@@ -270,52 +318,5 @@ function Recap({
     </>
   );
 }
-
-Recap.propTypes = {
-  /**
-   * Indicates the figure of the current displayed form step.
-   */
-  activeStep: PropTypes.number.isRequired,
-  /**
-   * List of the steps that have been completed, to determine
-   * if the user have access to the next step or not.
-   */
-  completed: PropTypes.objectOf(PropTypes.bool).isRequired,
-  /**
-   * Resets completed steps list.
-   */
-  resetCompleted: PropTypes.func.isRequired,
-  /**
-   * Wether the focus should be placed on the active tab at init.
-   */
-  shouldTriggerFocus: PropTypes.bool.isRequired,
-  /**
-   * When true the focus will be placed at the active tab on next render,
-   * and the value will be put to false again.
-   */
-  setShouldTriggerFocus: PropTypes.func.isRequired,
-  /**
-   * The id of the currently logged user.
-   */
-  userId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  /**
-   * Trigger success notification when the mediation request has been
-   * successfully submitted.
-   */
-  displayRequestSuccessMessage: PropTypes.func.isRequired,
-  /**
-   * Trigger error notification when the mediation request has resulted
-   * in an error.
-   */
-  displayRequestFailureMessage: PropTypes.func.isRequired,
-  /**
-   * The authentication token.
-   */
-  token: PropTypes.string,
-  /**
-   * The organization applicaiton data got from the backend for the first time.
-   */
-  initialOrganizationApp: PropTypes.object,
-};
 
 export default withRouter(Recap);

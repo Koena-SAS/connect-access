@@ -1,6 +1,6 @@
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
-import { render, waitFor, within } from "@testing-library/react";
+import { render, RenderResult, waitFor, within } from "@testing-library/react";
 import { createMemoryHistory } from "history";
 import { Route, Router } from "react-router-dom";
 import { cache, SWRConfig } from "swr";
@@ -27,7 +27,7 @@ async function renderRequestDetail(
   history?: any,
   generatedPaths?: any,
   paths?: any
-) {
+): Promise<RenderResult> {
   if (!paths) {
     paths = PATHS_WITHOUT_PREFIX;
   }
@@ -39,7 +39,7 @@ async function renderRequestDetail(
       initialEntries: [generatedPaths.ADMIN_REQUEST_DETAIL],
     });
   }
-  let requestDetail;
+  let requestDetail: RenderResult;
   function renderTraceReportComponent() {
     return render(
       <SWRConfig value={{ dedupingInterval: 0 }}>

@@ -1,5 +1,5 @@
 import React from "react";
-import type { ConfigData } from "../constants/types";
+import type { ConfigData } from "../types/types";
 
 /**
  * Configuration data set with DATA_* environment variables.

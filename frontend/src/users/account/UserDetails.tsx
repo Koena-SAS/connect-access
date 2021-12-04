@@ -1,7 +1,7 @@
 import { t, Trans } from "@lingui/macro";
 import produce from "immer";
 import PropTypes from "prop-types";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   EmailField,

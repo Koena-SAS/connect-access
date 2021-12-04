@@ -1,9 +1,8 @@
 import { t, Trans } from "@lingui/macro";
 import axios from "axios";
-import PropTypes from "prop-types";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, withRouter } from "react-router-dom";
+import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import { mutate } from "swr";
 import { PATHS } from "../../constants/paths";
 import { EmailField, TextField } from "../../forms";
@@ -12,10 +11,18 @@ import DoneButton from "../../forms/buttons/DoneButton";
 import { useGeneratePrefixedPath } from "../../hooks";
 import { keysToCamel } from "../../utils";
 
+type LoginProps = RouteComponentProps & {
+  handleCloseIdentification: () => void;
+  /**
+   * Set login token for user authentication.
+   */
+  setToken: (token: string) => void;
+};
+
 /**
  * Login form with error handling.
  */
-function Login({ setToken, handleCloseIdentification }) {
+function Login({ setToken, handleCloseIdentification }: LoginProps) {
   const generatePrefixedPath = useGeneratePrefixedPath();
   const { register, handleSubmit, errors } = useForm();
   const [nonFieldErrors, setNonFieldErrors] = useState([]);
@@ -37,7 +44,7 @@ function Login({ setToken, handleCloseIdentification }) {
           })
           .then(({ data: userData }) => {
             mutate(
-              ["/auth/users/me/", signupData.auth_token, true],
+              ["/auth/users/me/", signupData.auth_token],
               keysToCamel(userData),
               false
             );
@@ -133,13 +140,5 @@ function Login({ setToken, handleCloseIdentification }) {
     </form>
   );
 }
-
-Login.propTypes = {
-  handleCloseIdentification: PropTypes.func.isRequired,
-  /**
-   * Set login token for user authentication.
-   */
-  setToken: PropTypes.func.isRequired,
-};
 
 export default withRouter(Login);

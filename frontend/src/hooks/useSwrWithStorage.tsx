@@ -1,8 +1,8 @@
 import axios from "axios";
-import useSWR from "swr";
+import useSWR, { SWRResponse } from "swr";
 import { keysToCamel } from "../utils";
 
-const fetcher = (url, token, isObject) =>
+const fetcher = (url: string, token: string) =>
   axios
     .get(url, {
       headers: {
@@ -12,7 +12,8 @@ const fetcher = (url, token, isObject) =>
     .then((res) => {
       if (res.data) {
         const data = keysToCamel(res.data);
-        const localValue = isObject ? JSON.stringify(data) : data;
+        const localValue =
+          typeof data !== "string" ? JSON.stringify(data) : data;
         localStorage.setItem(url + token, localValue);
         return data;
       } else {
@@ -26,12 +27,16 @@ const fetcher = (url, token, isObject) =>
  * with an additional local storage copy to be able to provide
  * the information while offline.
  *
- * @param {string} key
- * @param {string} token used to authenticate the user
- * @param {boolean} isObject indicates if the value is an object
- * @returns {List} value and setValue to read and manage the state
+ * @param key
+ * @param token used to authenticate the user
+ * @param isObject indicates if the value is an object
+ * @returns value and setValue to read and manage the state
  */
-function useSwrWithLocalStorage(key, token, isObject = false) {
+function useSwrWithLocalStorage<Data = unknown, Error = unknown>(
+  key: string,
+  token: string,
+  isObject: boolean = false
+): SWRResponse<Data, Error> {
   const initValue = () => {
     const localValue = localStorage.getItem(key + token);
     if (localValue) {
@@ -46,7 +51,7 @@ function useSwrWithLocalStorage(key, token, isObject = false) {
         initialData: initialValue,
       }
     : undefined;
-  return useSWR(token ? [key, token, isObject] : null, fetcher, options);
+  return useSWR<Data, Error>(token ? [key, token] : null, fetcher, options);
 }
 
 export default useSwrWithLocalStorage;

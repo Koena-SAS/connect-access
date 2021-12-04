@@ -17,7 +17,10 @@ function CustomerLayout({
   siteLanguage,
   toggleSiteLanguage,
 }) {
-  const { organizationSlug, applicationSlug } = useParams();
+  const { organizationSlug, applicationSlug } = useParams<{
+    organizationSlug: string;
+    applicationSlug: string;
+  }>();
   const { organizationApp } = useOrganizationApp(initialOrganizationApp);
   const organizationInconsistent =
     Boolean(organizationSlug && !organizationApp) ||

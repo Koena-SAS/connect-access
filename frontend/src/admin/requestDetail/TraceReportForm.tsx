@@ -8,7 +8,6 @@ import LocalizationProvider from "@material-ui/lab/LocalizationProvider";
 import enLocale from "date-fns/locale/en-US";
 import frLocale from "date-fns/locale/fr";
 import produce from "immer";
-import PropTypes from "prop-types";
 import { useEffect, useRef } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
@@ -17,6 +16,7 @@ import { TextField } from "../../forms";
 import CancelButton from "../../forms/buttons/CancelButton";
 import DoneButton from "../../forms/buttons/DoneButton";
 import { useAddTraceReport, useEditTraceReport } from "../../hooks";
+import { TraceReport } from "../../types/traceReport";
 
 type FormInput = {
   traceType: string;
@@ -24,8 +24,23 @@ type FormInput = {
   senderName: string;
   recipientType: string;
   recipientName: string;
-  contactDate: Date;
+  contactDate: Date | string;
   comment: string;
+  attachedFile: string;
+  removeAttachedFile: string;
+};
+
+type ActionType = "create" | "edit";
+
+type TraceReportFormProps = {
+  token: string;
+  onClose: () => void;
+  formOpen: boolean;
+  report: TraceReport;
+  /**
+   * In case of failure of the creation or edition in the backend.
+   */
+  triggerFailureMessage: (type: ActionType) => void;
 };
 
 /**
@@ -37,10 +52,12 @@ function TraceReportForm({
   formOpen,
   report,
   triggerFailureMessage,
-}) {
+}: TraceReportFormProps) {
   const { i18n } = useLingui();
-  const { requestId: mediationRequestId } = useParams();
-  function getReportActionOptions(type) {
+  const { requestId: mediationRequestId } = useParams<{
+    requestId: string;
+  }>();
+  function getReportActionOptions(type: ActionType) {
     return {
       token,
       onFailure: function handleFailure() {
@@ -78,9 +95,9 @@ function TraceReportForm({
   });
   const isEditMode = report ? true : false;
 
-  function onSubmit(data) {
+  function onSubmit(data: FormInput) {
     const dataToSend = produce(data, (draft) => {
-      if (draft.contactDate instanceof Date) {
+      if (typeof draft.contactDate !== "string") {
         draft.contactDate = draft.contactDate.toJSON();
       }
     });
@@ -90,7 +107,7 @@ function TraceReportForm({
       doAddTraceReport(dataToSend);
     }
   }
-  function doEditTraceReport(dataToSend) {
+  function doEditTraceReport(dataToSend: FormInput) {
     const editDataToSend = produce(dataToSend, (draft) => {
       if (draft.removeAttachedFile) {
         draft.attachedFile = "";
@@ -103,7 +120,7 @@ function TraceReportForm({
       token,
     });
   }
-  function doAddTraceReport(dataToSend) {
+  function doAddTraceReport(dataToSend: FormInput) {
     addTraceReport({
       traceReport: dataToSend,
       mediationRequestId,
@@ -178,7 +195,7 @@ function TraceReportForm({
   );
   const watchSenderType = watch("senderType");
   const watchRecipientType = watch("recipientType");
-  function contactEntityNeedsName(contactEntityValue) {
+  function contactEntityNeedsName(contactEntityValue: string) {
     return Boolean(contactEntityValue !== "COMPLAINANT") ? true : false;
   }
   return (
@@ -405,18 +422,5 @@ function TraceReportForm({
     </Dialog>
   );
 }
-
-TraceReportForm.propTypes = {
-  token: PropTypes.string.isRequired,
-  onClose: PropTypes.func.isRequired,
-  formOpen: PropTypes.bool.isRequired,
-  /**
-   * In case of failure of the creation or edition in the backend.
-   */
-  triggerFailureMessage: PropTypes.func.isRequired,
-  report: PropTypes.shape({
-    comment: PropTypes.string,
-  }),
-};
 
 export default TraceReportForm;

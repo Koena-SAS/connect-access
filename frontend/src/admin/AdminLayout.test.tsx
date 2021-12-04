@@ -34,7 +34,7 @@ function renderAdminLayout(history?: any, generatedPaths?: any, paths?: any) {
             <AdminLayout
               token="oizjofjzoijf"
               siteLanguage="en"
-              toggleSiteLanguage={() => null}
+              toggleSiteLanguage={(): null => null}
               paths={paths}
             />
           </Route>

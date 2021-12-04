@@ -44,7 +44,7 @@ function LogoutButton({ setToken, token }) {
            because logging out immediately is important
            for the user.*/
       });
-    mutate(["/auth/users/me/", token, true], null, false);
+    mutate(["/auth/users/me/", token], null, false);
     setToken(null);
     const includesMandatoryLogin = PATHS_MANDATORY_LOGIN.includes(
       location.pathname

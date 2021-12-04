@@ -26,6 +26,7 @@ import {
   mockedAxios,
   resetAxiosMocks,
 } from "./testUtils";
+import type { MediationRequestRecieved } from "./types/mediationRequest";
 
 initLanguagesForTesting();
 jest.mock("axios");
@@ -570,20 +571,21 @@ describe("Mediation form", () => {
     await click(homepage);
     await unlockStep(app.getByLabelText, app.getByText, 3);
     const submitButton = app.getByText("Submit my mediation request");
+    const userMediationRequestsData: MediationRequestRecieved[] = [
+      {
+        id: "f8842f63-5073-4956-a7fa-2ec8eb82f37d",
+        creation_date: "2021-02-03",
+        status: "WAITING_MEDIATOR_VALIDATION",
+        first_name: "John",
+        last_name: "Doe",
+        email: "john@doe.com",
+        step_description: "I try to load the page",
+        issue_description: "New mediation request",
+        organization_name: "Koena",
+      },
+    ];
     mockedAxios.get.mockResolvedValue({
-      data: [
-        {
-          id: "f8842f63-5073-4956-a7fa-2ec8eb82f37d",
-          creationDate: "2021-02-03",
-          status: "WAITING_MEDIATOR_VALIDATION",
-          firstName: "John",
-          lastName: "Doe",
-          email: "john@doe.com",
-          stepDescription: "I try to load the page",
-          issueDescription: "New mediation request",
-          organizationName: "Koena",
-        },
-      ],
+      data: userMediationRequestsData,
     });
     await click(submitButton);
     const myRequests = app.getByText("My requests");

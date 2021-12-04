@@ -4,11 +4,12 @@ import PropTypes from "prop-types";
 import { useContext, useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { PATHS } from "../../constants/paths";
-import { ConfigData } from "../../constants/types";
 import ConfigDataContext from "../../contexts/configData";
 import Snackbar from "../../forms/Snackbar";
 import { useGeneratePrefixedPath } from "../../hooks";
 import Page from "../../Page";
+import { isLocationState } from "../../types/typeGuards";
+import { ConfigData } from "../../types/types";
 import PasswordResetRequest from "../password/PasswordResetRequest";
 import Identification from "./Identification";
 
@@ -52,7 +53,7 @@ function IdentificationLayout({ setToken, isLogged }) {
     setRequestFailureMessageOpen(false);
   };
   const handleCloseIdentification = () => {
-    if (location.state && "from" in location.state) {
+    if (location.state && isLocationState(location.state)) {
       history.push(location.state.from);
     } else {
       history.push(generatePrefixedPath(PATHS.ROOT));

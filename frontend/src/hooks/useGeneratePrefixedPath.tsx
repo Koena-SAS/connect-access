@@ -6,7 +6,11 @@ import { generatePath, useParams } from "react-router-dom";
  * @returns function taking the path without params and computing the generated path.
  */
 const useGeneratePrefixedPath = () => {
-  const { organizationSlug, applicationSlug, requestId } = useParams();
+  const { organizationSlug, applicationSlug, requestId } = useParams<{
+    organizationSlug: string;
+    applicationSlug: string;
+    requestId: string;
+  }>();
   const generatePrefixedPath = (path) => {
     return generatePath(path, {
       organizationSlug,

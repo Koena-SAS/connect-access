@@ -1,17 +1,32 @@
 import { t } from "@lingui/macro";
-import PropTypes from "prop-types";
 import { useContext } from "react";
 import { PATHS } from "../../constants/paths";
-import { ConfigData } from "../../constants/types";
 import ConfigDataContext from "../../contexts/configData";
 import Tabs from "../../forms/Tabs";
+import { ConfigData } from "../../types/types";
 import Login from "./Login";
 import Signup from "./Signup";
+
+type IdentificationProps = {
+  /**
+   * Set login token for user authentication.
+   */
+  setToken: (token: string) => void;
+  onClose: () => void;
+  /**
+   * Whether the first tabbable element should get the focus.
+   */
+  shouldFocus: boolean;
+};
 
 /**
  * Login and signup forms, controlled by tabs.
  */
-function Identification({ setToken, onClose, shouldFocus }) {
+function Identification({
+  setToken,
+  onClose,
+  shouldFocus,
+}: IdentificationProps) {
   const configData = useContext<ConfigData>(ConfigDataContext);
   const tabsInfos = [
     {
@@ -44,18 +59,6 @@ function Identification({ setToken, onClose, shouldFocus }) {
 
 Identification.defaultProps = {
   shouldFocus: false,
-};
-
-Identification.propTypes = {
-  /**
-   * Set login token for user authentication.
-   */
-  setToken: PropTypes.func.isRequired,
-  onClose: PropTypes.func.isRequired,
-  /**
-   * Whether the first tabbable element should get the focus.
-   */
-  shouldFocus: PropTypes.bool,
 };
 
 export default Identification;

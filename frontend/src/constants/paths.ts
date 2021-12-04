@@ -1,6 +1,26 @@
 export const APP_PREFIX = "/:organizationSlug?/:applicationSlug?";
 
-export const PATHS_WITHOUT_PREFIX = {
+type PathsKeys =
+  | "ROOT"
+  | "PROBLEM_DESCRIPTION"
+  | "ORGANIZATION_INFO"
+  | "RECAP"
+  | "LOGIN"
+  | "REGISTER"
+  | "RESET_PASSWORD"
+  | "RESET_PASSWORD_CONFIRM"
+  | "USER_DETAILS"
+  | "USER_REQUESTS"
+  | "USER_REQUEST"
+  | "ADMIN"
+  | "ADMIN_ALL_REQUESTS"
+  | "ADMIN_REQUEST_DETAIL"
+  | "ADMIN_TRACE_REPORTS"
+  | "ADMIN_REQUEST_HISTORY";
+
+type Paths = Record<PathsKeys, string>;
+
+export const PATHS_WITHOUT_PREFIX: Paths = {
   ROOT: "/",
   PROBLEM_DESCRIPTION: "/problem-description",
   ORGANIZATION_INFO: "/organization-info",
@@ -19,7 +39,7 @@ export const PATHS_WITHOUT_PREFIX = {
   ADMIN_REQUEST_HISTORY: "/admin/all-requests/:requestId/history",
 };
 
-export const PATHS = {
+export const PATHS: Paths = {
   ROOT: `${APP_PREFIX}${PATHS_WITHOUT_PREFIX.ROOT}`,
   PROBLEM_DESCRIPTION: `${APP_PREFIX}${PATHS_WITHOUT_PREFIX.PROBLEM_DESCRIPTION}`,
   ORGANIZATION_INFO: `${APP_PREFIX}${PATHS_WITHOUT_PREFIX.ORGANIZATION_INFO}`,
@@ -43,3 +63,5 @@ export const PATHS_MANDATORY_LOGIN = [
   PATHS.USER_REQUESTS,
   PATHS.USER_REQUEST,
 ];
+
+export type { Paths };

@@ -1,23 +1,41 @@
 import { t, Trans } from "@lingui/macro";
 import produce from "immer";
 import { createStore, StateMachineProvider } from "little-state-machine";
-import PropTypes from "prop-types";
 import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { PATHS } from "../constants/paths";
-import { ConfigData } from "../constants/types";
 import ConfigDataContext from "../contexts/configData";
 import Snackbar from "../forms/Snackbar";
 import { useGeneratePrefixedPath, useOrganizationApp } from "../hooks";
 import Page from "../Page";
+import type { OrganizationApp } from "../types/organizationApp";
+import { ConfigData } from "../types/types";
 import OrganizationInfo from "./OrganizationInfo";
 import ProblemDescription from "./ProblemDescription";
 import Recap from "./Recap";
+import type { Completed } from "./StepsInitializer";
 import StepsInitializer from "./StepsInitializer";
 import { initialState } from "./updateAction";
 import UserInfo from "./UserInfo";
 
 createStore(initialState);
+
+type FormContainerProps = {
+  activeStep: number;
+  setActiveStep: (step: number) => void;
+  /**
+   * The id of the currently logged user.
+   */
+  userId?: string;
+  /**
+   * The authentication token.
+   */
+  token?: string;
+  /**
+   * The organization applicaiton data got from the backend for the first time.
+   */
+  initialOrganizationApp?: OrganizationApp;
+};
 
 /**
  * Main form to send a mediation request, and displayed on the homepage.
@@ -28,9 +46,9 @@ function FormContainer({
   userId,
   token,
   initialOrganizationApp,
-}) {
+}: FormContainerProps) {
   const configData = useContext<ConfigData>(ConfigDataContext);
-  const [completed, setCompleted] = useState({});
+  const [completed, setCompleted] = useState<Completed>({});
   const generatePrefixedPath = useGeneratePrefixedPath();
   const { organizationApp } = useOrganizationApp(initialOrganizationApp);
   const [shouldTriggerFocus, setShouldTriggerFocus] = useState(false);
@@ -110,7 +128,6 @@ function FormContainer({
           <StepsInitializer
             setCompleted={setCompleted}
             completed={completed}
-            setActiveStep={setActiveStep}
             initialOrganizationApp={initialOrganizationApp}
           />
           {activeStep === 0 && (
@@ -178,22 +195,5 @@ function FormContainer({
     </div>
   );
 }
-
-FormContainer.propTypes = {
-  activeStep: PropTypes.number.isRequired,
-  setActiveStep: PropTypes.func.isRequired,
-  /**
-   * The id of the currently logged user.
-   */
-  userId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  /**
-   * The authentication token.
-   */
-  token: PropTypes.string,
-  /**
-   * The organization applicaiton data got from the backend for the first time.
-   */
-  initialOrganizationApp: PropTypes.object,
-};
 
 export default FormContainer;

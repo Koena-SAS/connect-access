@@ -2,10 +2,14 @@ import { Trans } from "@lingui/macro";
 import PropTypes from "prop-types";
 import { useEffect } from "react";
 
+type HistoryProps = {
+  setBreadcrumbs: (breadcrumbs: JSX.Element[]) => void;
+};
+
 /**
  * List the available trace reports related to a specific mediation request.
  */
-function History({ token, setBreadcrumbs }) {
+function History({ setBreadcrumbs }: HistoryProps) {
   useEffect(
     function initBreadcrumbs() {
       setBreadcrumbs([

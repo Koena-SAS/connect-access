@@ -69,6 +69,7 @@
     "@types/node": "^16.11.9",
     "@types/react": "^17.0.36",
     "@types/react-dom": "^17.0.11",
+    "@types/react-router-dom": "^5.3.2",
     "axe-playwright": "^1.1.8",
     "codeceptjs": "^3.1.2",
     "eslint-config-prettier": "^8.3.0",

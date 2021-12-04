@@ -1,6 +1,6 @@
 import { Trans } from "@lingui/macro";
 import PropTypes from "prop-types";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { useUserMediationRequests } from "../../hooks";
 import { MediationRequestsDetail } from "../../mediationRequests";
@@ -10,7 +10,7 @@ import { MediationRequestsDetail } from "../../mediationRequests";
  */
 function UserMediation({ token }) {
   const { userMediationRequests } = useUserMediationRequests(token);
-  let { requestId } = useParams();
+  let { requestId } = useParams<{ requestId: string }>();
   const mediationRequest = useMemo(
     () =>
       userMediationRequests &&

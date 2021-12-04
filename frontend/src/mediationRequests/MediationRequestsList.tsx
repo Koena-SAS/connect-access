@@ -12,7 +12,8 @@ import Table from "../forms/Table";
  * List mediation requests within a table.
  */
 function MediationRequestsList({ mediationRequests, detailsPath }) {
-  const { organizationSlug, applicationSlug } = useParams();
+  const { organizationSlug, applicationSlug } =
+    useParams<{ organizationSlug: string; applicationSlug: string }>();
   const { i18n } = useLingui();
 
   const headsInfos = [

@@ -48,7 +48,9 @@ async function addTraceReport({ traceReport, mediationRequestId, token }) {
  *   and an object with additional information like errors.
  */
 export function useAddTraceReport({ token, onSuccess, onFailure }) {
-  const { requestId: mediationRequestId } = useParams();
+  const { requestId: mediationRequestId } = useParams<{
+    requestId: string;
+  }>();
   const key = [
     `/api/trace-reports/mediation-request/${mediationRequestId}/`,
     token,
@@ -136,7 +138,9 @@ async function editTraceReport({
  *   and an object with additional information like errors.
  */
 export function useEditTraceReport({ token, onSuccess, onFailure }) {
-  const { requestId: mediationRequestId } = useParams();
+  const { requestId: mediationRequestId } = useParams<{
+    requestId: string;
+  }>();
   const key = [
     `/api/trace-reports/mediation-request/${mediationRequestId}/`,
     token,
@@ -216,7 +220,9 @@ async function deleteTraceReport({ traceReport, token }) {
  *   and an object with additional information like errors.
  */
 export function useDeleteTraceReport({ token, onSuccess, onFailure }) {
-  const { requestId: mediationRequestId } = useParams();
+  const { requestId: mediationRequestId } = useParams<{
+    requestId: string;
+  }>();
   const key = [
     `/api/trace-reports/mediation-request/${mediationRequestId}/`,
     token,

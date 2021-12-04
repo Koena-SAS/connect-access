@@ -1,9 +1,15 @@
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
-import { fireEvent, render, waitFor } from "@testing-library/react";
+import {
+  fireEvent,
+  render,
+  RenderResult,
+  waitFor,
+} from "@testing-library/react";
 import { createMemoryHistory } from "history";
 import { Route, Router } from "react-router-dom";
 import { cache, SWRConfig } from "swr";
+import type { Paths } from "../../constants/paths";
 import { PATHS_WITHOUT_PREFIX } from "../../constants/paths";
 import { initLanguagesForTesting } from "../../i18nTestHelper";
 import {
@@ -33,7 +39,7 @@ async function renderTraceReports(
   history?: any,
   generatedPaths?: any,
   paths?: any
-) {
+): Promise<RenderResult> {
   if (!paths) {
     paths = PATHS_WITHOUT_PREFIX;
   }
@@ -65,14 +71,16 @@ async function renderTraceReports(
   return traceReport;
 }
 
-async function runBasicTest(callback) {
-  await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
-    const history = createMemoryHistory({
-      initialEntries: [generatedPaths.ADMIN_REQUEST_DETAIL],
-    });
-    const app = await renderTraceReports(history, generatedPaths, paths);
-    await callback(app);
-  });
+async function runBasicTest(callback: (app: RenderResult) => Promise<void>) {
+  await runWithAndWithoutOrganizationPrefix(
+    async (generatedPaths: Paths, paths: Paths) => {
+      const history = createMemoryHistory({
+        initialEntries: [generatedPaths.ADMIN_REQUEST_DETAIL],
+      });
+      const app = await renderTraceReports(history, generatedPaths, paths);
+      await callback(app);
+    }
+  );
 }
 
 describe("display", () => {
@@ -83,7 +91,8 @@ describe("display", () => {
       expect(getByText(/Complainant/)).toBeInTheDocument();
       expect(getByText(/Mediator/)).toBeInTheDocument();
       expect(getByText(/John/)).toBeInTheDocument();
-      expect(getAllByRole("link")[0].href).toContain("report.png");
+      const link = getAllByRole("link")[0] as HTMLLinkElement;
+      expect(link.href).toContain("report.png");
       expect(getByText("Call")).toBeInTheDocument();
 
       expect(getByText(/06\/15\/2021/)).toBeInTheDocument();

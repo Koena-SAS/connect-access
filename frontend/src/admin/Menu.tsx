@@ -8,7 +8,6 @@ import SettingsIcon from "@material-ui/icons/Settings";
 import { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { PATHS } from "../constants/paths";
-import { ConfigData } from "../constants/types";
 import ConfigDataContext from "../contexts/configData";
 import {
   useGeneratePrefixedPath,
@@ -17,6 +16,7 @@ import {
 } from "../hooks";
 import { ArrowLeft, ArrowRight } from "../images/buildSvg";
 import logoBackground from "../images/logo_background.png";
+import { ConfigData } from "../types/types";
 import MenuItem from "./MenuItem";
 
 /**

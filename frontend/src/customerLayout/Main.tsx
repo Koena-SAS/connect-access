@@ -2,12 +2,12 @@ import { t } from "@lingui/macro";
 import PropTypes from "prop-types";
 import { useContext, useState } from "react";
 import { Route, Switch } from "react-router-dom";
-import { ConfigData } from "../constants/types";
 import ConfigDataContext from "../contexts/configData";
 import Snackbar from "../forms/Snackbar";
 import { useUserDetails } from "../hooks";
 import { FormContainer } from "../mediationForm";
 import Page from "../Page";
+import { ConfigData } from "../types/types";
 import {
   Account,
   IdentificationLayout,
