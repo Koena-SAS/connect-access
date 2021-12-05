@@ -1,4 +1,5 @@
 import { t, Trans } from "@lingui/macro";
+import type { SnackbarCloseReason } from "@material-ui/core/Snackbar";
 import produce from "immer";
 import { createStore, StateMachineProvider } from "little-state-machine";
 import { useContext, useEffect, useState } from "react";
@@ -8,12 +9,12 @@ import ConfigDataContext from "../contexts/configData";
 import Snackbar from "../forms/Snackbar";
 import { useGeneratePrefixedPath, useOrganizationApp } from "../hooks";
 import Page from "../Page";
-import type { OrganizationApp } from "../types/organizationApp";
+import type { OrganizationAppRecieved } from "../types/organizationApp";
 import { ConfigData } from "../types/types";
 import OrganizationInfo from "./OrganizationInfo";
 import ProblemDescription from "./ProblemDescription";
 import Recap from "./Recap";
-import type { Completed } from "./StepsInitializer";
+import type { Completed, Step } from "./StepsInitializer";
 import StepsInitializer from "./StepsInitializer";
 import { initialState } from "./updateAction";
 import UserInfo from "./UserInfo";
@@ -21,8 +22,8 @@ import UserInfo from "./UserInfo";
 createStore(initialState);
 
 type FormContainerProps = {
-  activeStep: number;
-  setActiveStep: (step: number) => void;
+  activeStep: Step;
+  setActiveStep: (step: Step) => void;
   /**
    * The id of the currently logged user.
    */
@@ -34,7 +35,7 @@ type FormContainerProps = {
   /**
    * The organization applicaiton data got from the backend for the first time.
    */
-  initialOrganizationApp?: OrganizationApp;
+  initialOrganizationApp?: OrganizationAppRecieved;
 };
 
 /**
@@ -75,12 +76,12 @@ function FormContainer({
     }
   }, [location, setActiveStep, generatePrefixedPath, recapStep]);
 
-  const setStepCompleted = (step) => () => {
+  function setStepCompleted(step: Step): void {
     const newCompleted = produce(completed, (draftState) => {
       draftState[step] = true;
     });
     setCompleted(newCompleted);
-  };
+  }
   const resetCompleted = () => {
     setCompleted({});
   };
@@ -91,13 +92,19 @@ function FormContainer({
   const displayRequestFailure = () => {
     setRequestFailureMessageOpen(true);
   };
-  const handleCloseSuccessMessage = (event, reason) => {
+  const handleCloseSuccessMessage = (
+    event: React.SyntheticEvent<any, Event>,
+    reason: SnackbarCloseReason
+  ) => {
     if (reason === "clickaway") {
       return;
     }
     setRequestSuccessMessageOpen(false);
   };
-  const handleCloseFailureMessage = (event, reason) => {
+  const handleCloseFailureMessage = (
+    event: React.SyntheticEvent<any, Event>,
+    reason: SnackbarCloseReason
+  ) => {
     if (reason === "clickaway") {
       return;
     }
@@ -136,7 +143,7 @@ function FormContainer({
             >
               <UserInfo
                 activeStep={activeStep}
-                setStepCompleted={setStepCompleted(0)}
+                setStepCompleted={() => setStepCompleted(0)}
                 completed={completed}
                 shouldTriggerFocus={shouldTriggerFocus}
                 setShouldTriggerFocus={setShouldTriggerFocus}
@@ -150,7 +157,7 @@ function FormContainer({
             >
               <ProblemDescription
                 activeStep={activeStep}
-                setStepCompleted={setStepCompleted(1)}
+                setStepCompleted={() => setStepCompleted(1)}
                 completed={completed}
                 shouldTriggerFocus={shouldTriggerFocus}
                 setShouldTriggerFocus={setShouldTriggerFocus}
@@ -164,7 +171,7 @@ function FormContainer({
             >
               <OrganizationInfo
                 activeStep={activeStep}
-                setStepCompleted={setStepCompleted(2)}
+                setStepCompleted={() => setStepCompleted(2)}
                 completed={completed}
                 shouldTriggerFocus={shouldTriggerFocus}
                 setShouldTriggerFocus={setShouldTriggerFocus}

@@ -11,9 +11,9 @@ import { PATHS } from "../constants/paths";
 import Button from "../forms/buttons/Button";
 import { useGeneratePrefixedPath, useOrganizationApp } from "../hooks";
 import MediationRequestsDetail from "../mediationRequests/MediationRequestsDetail";
-import type { OrganizationApp } from "../types/organizationApp";
+import type { OrganizationAppRecieved } from "../types/organizationApp";
 import FormNavigation from "./FormNavigation";
-import type { Completed } from "./StepsInitializer";
+import type { Completed, Step } from "./StepsInitializer";
 import { resetState } from "./updateAction";
 import { formStateToMediationRequests } from "./utils";
 
@@ -21,7 +21,7 @@ type RecapProps = RouteComponentProps & {
   /**
    * Indicates the figure of the current displayed form step.
    */
-  activeStep: number;
+  activeStep: Step;
   /**
    * List of the steps that have been completed, to determine
    * if the user have access to the next step or not.
@@ -61,7 +61,7 @@ type RecapProps = RouteComponentProps & {
   /**
    * The organization applicaiton data got from the backend for the first time.
    */
-  initialOrganizationApp?: OrganizationApp;
+  initialOrganizationApp?: OrganizationAppRecieved;
 };
 
 /**

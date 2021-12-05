@@ -4,7 +4,7 @@ import Breadcrumbs from "./Breadcrumbs";
 /**
  * Overview of the main admin funcitonnalities.
  */
-function QuickAccess({ token }) {
+function QuickAccess() {
   return (
     <div className="admin-quick-access admin-page-base">
       <h1 className="admin-page-base__title">

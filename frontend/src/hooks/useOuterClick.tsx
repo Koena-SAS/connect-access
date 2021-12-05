@@ -5,13 +5,13 @@ import { useEffect, useRef } from "react";
  * holds a specific ref, retuned by this hook.
  * This hook comes from https://stackoverflow.com/a/54292872/1774332
  *
- * @param {function} callback the function that is called when clicking
+ * @param callback the function that is called when clicking
  *   outside of the element that holds the returned ref.
  * @returns ref to be assigned to the element that does not trigger the
  *   click callback.
  */
-function useOuterClick(callback) {
-  const callbackRef = useRef<(event) => void>(null);
+function useOuterClick(callback: (event: MouseEvent) => void) {
+  const callbackRef = useRef<(event: MouseEvent) => void>(null);
   const innerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -20,16 +20,17 @@ function useOuterClick(callback) {
   useEffect(() => {
     document.addEventListener("click", handleClick);
     return () => document.removeEventListener("click", handleClick);
-    function handleClick(e) {
+    function handleClick(event: MouseEvent): void {
       const innerRefIsVisible =
         innerRef.current &&
         getComputedStyle(innerRef.current).visibility === "visible";
       if (
         innerRefIsVisible &&
         callbackRef.current &&
-        !innerRef.current.contains(e.target)
+        // cast as specified in https://stackoverflow.com/a/43851475/1774332
+        !innerRef.current.contains(event.target as Node)
       )
-        callbackRef.current(e);
+        callbackRef.current(event);
     }
   }, []);
 

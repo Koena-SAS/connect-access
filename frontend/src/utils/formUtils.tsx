@@ -38,7 +38,7 @@ export function formatErrors(
  * Returns the correct wrapping element for an error message
  * @param errorsToWrap
  */
-export function chooseErrorWrappingElement(errorsToWrap?: { message: any }) {
+export function chooseErrorWrappingElement(errorsToWrap?: { message?: any }) {
   if (
     errorsToWrap &&
     Array.isArray(errorsToWrap.message) &&

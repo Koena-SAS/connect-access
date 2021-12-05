@@ -16,7 +16,7 @@ i18n.loadLocaleData({
 });
 
 beforeEach(() => {
-  window["SERVER_DATA"] = {
+  window.SERVER_DATA = {
     initialLanguage: "en",
     configData: configData,
   };

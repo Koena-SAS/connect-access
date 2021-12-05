@@ -7,7 +7,7 @@ import BorderedFieldset from "./BorderedFieldset";
 
 initLanguagesForTesting();
 
-const TestingProvider = ({ children }) => (
+const TestingProvider = ({ children }: { children: React.ReactNode }) => (
   <I18nProvider i18n={i18n}>{children}</I18nProvider>
 );
 

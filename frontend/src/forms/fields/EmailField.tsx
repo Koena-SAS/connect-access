@@ -50,7 +50,7 @@ function EmailField({
       <TextField
         id={`${componentName}-email`}
         name="email"
-        inputRef={(e) => {
+        inputRef={(input: HTMLInputElement) => {
           const rhfRef = register({
             required: required ? t`The e-mail is required` : undefined,
             pattern: {
@@ -58,9 +58,9 @@ function EmailField({
               message: t`The e-mail must be formated like this: name@domain.extension`,
             },
           });
-          rhfRef(e);
+          rhfRef(input);
           if (elementRef) {
-            elementRef.current = e;
+            elementRef.current = input;
           }
         }}
         label={emailLabel}

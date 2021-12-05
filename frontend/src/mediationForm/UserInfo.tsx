@@ -8,17 +8,20 @@ import { PATHS } from "../constants/paths";
 import Button from "../forms/buttons/Button";
 import Information from "../forms/Information";
 import { useGeneratePrefixedPath } from "../hooks";
-import type { OrganizationApp } from "../types/organizationApp";
+import type { OrganizationAppRecieved } from "../types/organizationApp";
 import { AssitiveTechnologyFields, PersonalInformationFields } from "./fields";
 import FormNavigation from "./FormNavigation";
-import type { Completed } from "./StepsInitializer";
+import type { Completed, Step } from "./StepsInitializer";
+import type { UserInfo as UserInfoType } from "./updateAction";
 import { updateUserInfo } from "./updateAction";
+
+type FormInput = UserInfoType;
 
 type UserInfoProps = RouteComponentProps & {
   /**
    * Indicates the figure of the current displayed form step.
    */
-  activeStep: number;
+  activeStep: Step;
   /**
    * List of the steps that have been completed, to determine
    * if the user have access to the next step or not.
@@ -41,7 +44,7 @@ type UserInfoProps = RouteComponentProps & {
   /**
    * The organization applicaiton data got from the backend for the first time.
    */
-  initialOrganizationApp?: OrganizationApp;
+  initialOrganizationApp?: OrganizationAppRecieved;
 };
 
 /**
@@ -60,10 +63,11 @@ function UserInfo({
     useState(false);
   const { state, actions } = useStateMachine({ updateUserInfo });
   const generatePrefixedPath = useGeneratePrefixedPath();
-  const { register, handleSubmit, errors, trigger, getValues } = useForm({
-    defaultValues: state.userInfo,
-  });
-  const onSubmit = (data) => {
+  const { register, handleSubmit, errors, trigger, getValues } =
+    useForm<FormInput>({
+      defaultValues: state.userInfo,
+    });
+  const onSubmit = (data: FormInput) => {
     actions.updateUserInfo(data);
     setStepCompleted();
     history.push(generatePrefixedPath(PATHS.PROBLEM_DESCRIPTION));
@@ -147,7 +151,7 @@ function UserInfo({
  * Tells if the user info step is complete or not.
  * @param {object of String} userInfoState
  */
-export function userInfoStepComplete(userInfoState) {
+export function userInfoStepComplete(userInfoState: UserInfoType) {
   const { firstName, email } = userInfoState;
   if (firstName && email) {
     return true;

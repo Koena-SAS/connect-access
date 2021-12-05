@@ -33,7 +33,7 @@ describe("Errors on mandatory fields", () => {
 describe("Errors on fields' format", () => {
   it("displays an error message when the email address does not meet the regex", async () => {
     const app = renderLogin();
-    fillField(app.getByLabelText, /E-mail/, "bla@");
+    fillField(app, /E-mail/, "bla@");
     const submit = app.getByText("Log in");
     await click(submit);
     const errors = app.getAllByRole("alert");
@@ -73,7 +73,7 @@ describe("Errors from the backend", () => {
 describe("Accessibility", () => {
   it("gives focus to the first error when click on submit", async () => {
     const app = renderLogin();
-    fillField(app.getByLabelText, /E-mail/, "bla@");
+    fillField(app, /E-mail/, "bla@");
     const submit = app.getByText("Log in");
     await click(submit);
     expect(app.getByLabelText(/E-mail/)).toHaveFocus();

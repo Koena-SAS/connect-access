@@ -2,19 +2,20 @@ import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
 import { fireEvent, render, within } from "@testing-library/react";
 import { createMemoryHistory } from "history";
-import React from "react";
 import { Route, Router } from "react-router-dom";
+import type { Paths } from "../constants/paths";
 import { PATHS, PATHS_WITHOUT_PREFIX } from "../constants/paths";
 import { initLanguagesForTesting } from "../i18nTestHelper";
 import {
   mediationRequests as mediationRequestsConst,
   runWithAndWithoutOrganizationPrefix,
 } from "../testUtils";
+import type { MediationRequest } from "../types/mediationRequest";
 import MediationRequestsList from "./MediationRequestsList";
 
 initLanguagesForTesting();
 
-let mediationRequests;
+let mediationRequests: MediationRequest[];
 
 beforeEach(() => {
   mediationRequests = mediationRequestsConst.slice();
@@ -41,21 +42,23 @@ it("displays the list of given mediation requests", async () => {
 
 it(`redirects to the correct path when clicking on a specific
  mediation request`, async () => {
-  await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
-    const history = createMemoryHistory();
-    history.push(generatedPaths.USER_REQUESTS);
-    expect(history.location.pathname).toEqual(generatedPaths.USER_REQUESTS);
-    const { getByText } = renderMediationRequestList(
-      history,
-      generatedPaths,
-      paths
-    );
-    const id = getByText(/f8842f63/);
-    expect(id).toBeInTheDocument();
-    const detailsButton = within(id.closest("tr")).getByText("Details");
-    fireEvent.click(detailsButton);
-    expect(history.location.pathname).toEqual(generatedPaths.USER_REQUEST);
-  });
+  await runWithAndWithoutOrganizationPrefix(
+    async (generatedPaths: Paths, paths: Paths) => {
+      const history = createMemoryHistory();
+      history.push(generatedPaths.USER_REQUESTS);
+      expect(history.location.pathname).toEqual(generatedPaths.USER_REQUESTS);
+      const { getByText } = renderMediationRequestList(
+        history,
+        generatedPaths,
+        paths
+      );
+      const id = getByText(/f8842f63/);
+      expect(id).toBeInTheDocument();
+      const detailsButton = within(id.closest("tr")).getByText("Details");
+      fireEvent.click(detailsButton);
+      expect(history.location.pathname).toEqual(generatedPaths.USER_REQUEST);
+    }
+  );
 });
 
 function renderMediationRequestList(

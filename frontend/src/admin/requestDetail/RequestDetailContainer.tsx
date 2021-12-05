@@ -1,5 +1,4 @@
 import { t } from "@lingui/macro";
-import PropTypes from "prop-types";
 import { useContext, useState } from "react";
 import { PATHS } from "../../constants/paths";
 import ConfigDataContext from "../../contexts/configData";
@@ -49,9 +48,5 @@ function RequestDetailContainer({ token }: { token: string }) {
     </div>
   );
 }
-
-RequestDetailContainer.propTypes = {
-  token: PropTypes.string,
-};
 
 export default RequestDetailContainer;

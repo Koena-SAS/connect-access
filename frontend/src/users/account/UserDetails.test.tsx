@@ -1,6 +1,6 @@
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
-import { render, waitFor } from "@testing-library/react";
+import { render, RenderResult, waitFor } from "@testing-library/react";
 import React from "react";
 import { initLanguagesForTesting } from "../../i18nTestHelper";
 import {
@@ -44,52 +44,52 @@ it("displays the given user details", async () => {
 
 it(`displays a success message when the user details are successfully
 updated`, async () => {
-  const { getByLabelText, getByText } = await renderUserDetails();
-  await fillFields(getByLabelText, getByText);
+  const app = await renderUserDetails();
+  await fillFields(app);
   expect(
-    getByText(/Your personal information was successfully updated/)
+    app.getByText(/Your personal information was successfully updated/)
   ).toBeInTheDocument();
 });
 
 describe("Errors on mandatory fields", () => {
   it("displays an error message when the first name is missing", async () => {
-    const { getByText, getByLabelText } = await renderUserDetails();
-    await fillFields(getByLabelText, getByText, "firstName");
-    const error = getByText(/The first name .* is required/);
+    const app = await renderUserDetails();
+    await fillFields(app, "firstName");
+    const error = app.getByText(/The first name .* is required/);
     expect(error).toBeInTheDocument();
   });
 
   it("displays an error message when the email address is missing", async () => {
-    const { getByText, getByLabelText } = await renderUserDetails();
-    await fillFields(getByLabelText, getByText, "email");
-    const error = getByText(/The e-mail is required/);
+    const app = await renderUserDetails();
+    await fillFields(app, "email");
+    const error = app.getByText(/The e-mail is required/);
     expect(error).toBeInTheDocument();
   });
 });
 
 describe("Errors on bad formatted fields", () => {
   it("displays an error message when the email does not meet the regex", async () => {
-    const { getByText, getByLabelText, getByRole } = await renderUserDetails();
-    fillField(getByLabelText, /Last name/, "KOENA");
-    fillField(getByLabelText, /First name/, "Koena");
-    fillField(getByLabelText, /E-mail/, "bla@");
-    fillField(getByLabelText, /Phone number/, "4365214982");
-    const submit = getByText(/Validate your new personal/);
+    const app = await renderUserDetails();
+    fillField(app, /Last name/, "KOENA");
+    fillField(app, /First name/, "Koena");
+    fillField(app, /E-mail/, "bla@");
+    fillField(app, /Phone number/, "4365214982");
+    const submit = app.getByText(/Validate your new personal/);
     await click(submit);
-    const error = getByRole("alert");
+    const error = app.getByRole("alert");
     expect(error.textContent).toMatch(/The e-mail must be/);
   });
 
   it(`displays an error message when the phone number does not meet the
 regex`, async () => {
-    const { getByText, getByLabelText, getByRole } = await renderUserDetails();
-    fillField(getByLabelText, /Last name/, "KOENA");
-    fillField(getByLabelText, /First name/, "Koena");
-    fillField(getByLabelText, /E-mail/, "bla@bla.fr");
-    fillField(getByLabelText, /Phone number/, "982");
-    const submit = getByText(/Validate your new personal/);
+    const app = await renderUserDetails();
+    fillField(app, /Last name/, "KOENA");
+    fillField(app, /First name/, "Koena");
+    fillField(app, /E-mail/, "bla@bla.fr");
+    fillField(app, /Phone number/, "982");
+    const submit = app.getByText(/Validate your new personal/);
     await click(submit);
-    const error = getByRole("alert");
+    const error = app.getByRole("alert");
     expect(error.textContent).toMatch(/phone number format is/i);
   });
 });
@@ -97,12 +97,12 @@ regex`, async () => {
 describe("Errors from the backend", () => {
   it(`displays an error message when the backend replies without response
 data`, async () => {
-    const { getByText, getByLabelText } = await renderUserDetails();
+    const app = await renderUserDetails();
     mockedAxios.put.mockRejectedValue({
       data: "error",
     });
-    await fillFields(getByLabelText, getByText);
-    const error = getByText(
+    await fillFields(app);
+    const error = app.getByText(
       /We could'nt update your personal information. Please retry later./
     );
     expect(error).toBeInTheDocument();
@@ -110,32 +110,27 @@ data`, async () => {
 
   it(`displays an error message when the backend says the first name field is
 in error`, async () => {
-    const { getByText, getByLabelText } = await renderUserDetails();
-    await checkBackendFieldsErrors("first_name", getByText, getByLabelText);
+    await checkBackendFieldsErrors("first_name", await renderUserDetails());
   });
 
   it(`displays an error message when the backend says the last name field is
 in error`, async () => {
-    const { getByText, getByLabelText } = await renderUserDetails();
-    await checkBackendFieldsErrors("last_name", getByText, getByLabelText);
+    await checkBackendFieldsErrors("last_name", await renderUserDetails());
   });
 
   it(`displays an error message when the backend says the email field is
 in error`, async () => {
-    const { getByText, getByLabelText } = await renderUserDetails();
-    await checkBackendFieldsErrors("email", getByText, getByLabelText);
+    await checkBackendFieldsErrors("email", await renderUserDetails());
   });
 
   it(`displays an error message when the backend says the phone number field is
 in error`, async () => {
-    const { getByText, getByLabelText } = await renderUserDetails();
-    await checkBackendFieldsErrors("phone_number", getByText, getByLabelText);
+    await checkBackendFieldsErrors("phone_number", await renderUserDetails());
   });
 
   async function checkBackendFieldsErrors(
-    fieldName,
-    getByText,
-    getByLabelText
+    fieldName: string,
+    app: RenderResult
   ) {
     mockedAxios.put.mockRejectedValue({
       response: {
@@ -145,10 +140,10 @@ in error`, async () => {
       },
     });
     // we consider here that the given field has wrong format for the backend
-    await fillFields(getByLabelText, getByText);
-    const error1 = getByText(/A first specific error/);
+    await fillFields(app);
+    const error1 = app.getByText(/A first specific error/);
     expect(error1).toBeInTheDocument();
-    const error2 = getByText(/A second error/);
+    const error2 = app.getByText(/A second error/);
     expect(error2).toBeInTheDocument();
     mockedAxios.put.mockRejectedValue({
       response: {
@@ -157,49 +152,38 @@ in error`, async () => {
         },
       },
     });
-    await fillFields(getByLabelText, getByText, 2);
-    const error = getByText(/One specific error/);
+    await fillFields(app, null, 2);
+    const error = app.getByText(/One specific error/);
     expect(error).toBeInTheDocument();
   }
 });
 
 describe("Accessibility", () => {
   it("gives focus to the first error when click on submit", async () => {
-    const { getByText, getByLabelText } = await renderUserDetails();
-    fillField(getByLabelText, /Last name/, "KOENA");
-    fillField(getByLabelText, /First name/, "");
-    fillField(getByLabelText, /E-mail/, "bla@bla.fr");
-    fillField(getByLabelText, /Phone number/, "982");
-    const submit = getByText(/Validate your new personal/);
+    const app = await renderUserDetails();
+    fillField(app, /Last name/, "KOENA");
+    fillField(app, /First name/, "");
+    fillField(app, /E-mail/, "bla@bla.fr");
+    fillField(app, /Phone number/, "982");
+    const submit = app.getByText(/Validate your new personal/);
     await click(submit);
-    expect(getByLabelText(/First name/)).toHaveFocus();
+    expect(app.getByLabelText(/First name/)).toHaveFocus();
   });
 });
 
 async function fillFields(
-  getByLabelText,
-  getByText,
-  missingField = null,
-  postCallNumber = 1
+  app: RenderResult,
+  missingField: string = null,
+  postCallNumber: number = 1
 ) {
   [/Last name/, /First name/, /Phone number/, /E-mail/].forEach((label) =>
-    fillField(getByLabelText, label, "")
+    fillField(app, label, "")
   );
-  fillField(getByLabelText, /Last name/, "KOENA", missingField !== "lastName");
-  fillField(
-    getByLabelText,
-    /First name/,
-    "Koena",
-    missingField !== "firstName"
-  );
-  fillField(getByLabelText, /E-mail/, "bla@bla.fr", missingField !== "email");
-  fillField(
-    getByLabelText,
-    /Phone number/,
-    "4365214982",
-    missingField !== "phoneNumber"
-  );
-  const submit = getByText(/Validate your new personal/);
+  fillField(app, /Last name/, "KOENA", missingField !== "lastName");
+  fillField(app, /First name/, "Koena", missingField !== "firstName");
+  fillField(app, /E-mail/, "bla@bla.fr", missingField !== "email");
+  fillField(app, /Phone number/, "4365214982", missingField !== "phoneNumber");
+  const submit = app.getByText(/Validate your new personal/);
   await click(submit);
   if (!missingField) {
     await waitFor(() =>

@@ -43,7 +43,7 @@ function Menu() {
     }
   });
   useEffect(() => {
-    const handleEscape = (event) => {
+    const handleEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         if (shownMobileMenu) {
           hideMobileMenu();

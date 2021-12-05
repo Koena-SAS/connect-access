@@ -1,7 +1,6 @@
 import { Trans } from "@lingui/macro";
 import axios from "axios";
-import PropTypes from "prop-types";
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { PATHS } from "../../constants/paths";
@@ -10,6 +9,26 @@ import CancelButton from "../../forms/buttons/CancelButton";
 import DoneButton from "../../forms/buttons/DoneButton";
 import { useGeneratePrefixedPath } from "../../hooks";
 
+type FormInput = {
+  email: string;
+};
+
+type PasswordResetRequestProps = {
+  onClose: () => void;
+  /**
+   * Displays a success notification when called.
+   */
+  displayRequestSuccess: () => void;
+  /**
+   * Displays an error message when called.
+   */
+  displayRequestFailure: () => void;
+  /**
+   * Whether the first tabbable element should get the focus.
+   */
+  shouldFocus?: boolean;
+};
+
 /**
  * Display an email field to begin the password reset process.
  */
@@ -17,8 +36,8 @@ function PasswordResetRequest({
   onClose,
   displayRequestSuccess,
   displayRequestFailure,
-  shouldFocus,
-}) {
+  shouldFocus = false,
+}: PasswordResetRequestProps) {
   const history = useHistory();
   const generatePrefixedPath = useGeneratePrefixedPath();
   const firstTabbableElement = useRef<HTMLInputElement>(null);
@@ -27,11 +46,11 @@ function PasswordResetRequest({
       firstTabbableElement.current.focus();
     }
   }, [shouldFocus]);
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors } = useForm<FormInput>();
   const handleCancel = () => {
     onClose();
   };
-  const onSubmit = (data) => {
+  const onSubmit = (data: FormInput) => {
     const dataToSend = {
       email: data.email,
     };
@@ -77,25 +96,5 @@ function PasswordResetRequest({
     </div>
   );
 }
-
-PasswordResetRequest.defaultProps = {
-  shouldFocus: false,
-};
-
-PasswordResetRequest.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  /**
-   * Displays a success notification when called.
-   */
-  displayRequestSuccess: PropTypes.func.isRequired,
-  /**
-   * Displays an error message when called.
-   */
-  displayRequestFailure: PropTypes.func.isRequired,
-  /**
-   * Whether the first tabbable element should get the focus.
-   */
-  shouldFocus: PropTypes.bool,
-};
 
 export default PasswordResetRequest;

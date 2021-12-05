@@ -8,7 +8,7 @@ type ContactEntityType =
 type TraceType = "CALL" | "MAIL" | "LETTER" | "OTHER";
 
 type TraceReport = {
-  id: string;
+  id?: string;
   contactDate: string;
   traceType?: TraceType;
   senderType?: ContactEntityType;
@@ -17,6 +17,36 @@ type TraceReport = {
   recipientName?: string;
   comment?: string;
   attachedFile?: string;
+  removeAttachedFile?: boolean;
 };
 
-export type { TraceReport, ContactEntityType, TraceType };
+type TraceReportRecieved = {
+  id: string;
+  contact_date: string;
+  trace_type?: TraceType;
+  sender_type?: ContactEntityType;
+  sender_name?: string;
+  recipient_type?: ContactEntityType;
+  recipient_name?: string;
+  comment?: string;
+  attached_file?: string;
+};
+
+type TraceReportToSend = {
+  contact_date: string;
+  trace_type?: TraceType;
+  sender_type?: ContactEntityType;
+  sender_name?: string;
+  recipient_type?: ContactEntityType;
+  recipient_name?: string;
+  comment?: string;
+  attached_file?: string;
+};
+
+export type {
+  TraceReport,
+  ContactEntityType,
+  TraceType,
+  TraceReportRecieved,
+  TraceReportToSend,
+};

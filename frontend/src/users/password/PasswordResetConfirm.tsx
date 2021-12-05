@@ -1,6 +1,5 @@
 import { t, Trans } from "@lingui/macro";
 import axios from "axios";
-import PropTypes from "prop-types";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useHistory, useParams } from "react-router-dom";
@@ -14,6 +13,22 @@ import {
   setManualError,
 } from "../../utils/formUtils";
 
+type FormInput = {
+  password1: string;
+  password2: string;
+};
+
+type PasswordResetConfirmProps = {
+  /**
+   * Function called to diplay success message in snackbar.
+   */
+  displayRequestSuccess: () => void;
+  /**
+   * Function called to diplay error message in snackbar.
+   */
+  displayRequestFailure: () => void;
+};
+
 /**
  * Provide a form to update a user's password.
  * This component is only accessible through a link sent by email.
@@ -21,8 +36,9 @@ import {
 function PasswordResetConfirm({
   displayRequestSuccess,
   displayRequestFailure,
-}) {
-  const { register, handleSubmit, errors, watch, setError } = useForm();
+}: PasswordResetConfirmProps) {
+  const { register, handleSubmit, errors, watch, setError } =
+    useForm<FormInput>();
   const history = useHistory();
   const { uid, token } = useParams<{ uid: string; token: string }>();
   const generatePrefixedPath = useGeneratePrefixedPath();
@@ -33,7 +49,7 @@ function PasswordResetConfirm({
       return false;
     }
   };
-  const onSubmit = (data) => {
+  const onSubmit = (data: FormInput) => {
     const dataToSend = {
       uid: uid,
       token: token,
@@ -135,16 +151,5 @@ function PasswordResetConfirm({
     </div>
   );
 }
-
-PasswordResetConfirm.propTypes = {
-  /**
-   * Function called to diplay success message in snackbar.
-   */
-  displayRequestSuccess: PropTypes.func.isRequired,
-  /**
-   * Function called to diplay error message in snackbar.
-   */
-  displayRequestFailure: PropTypes.func.isRequired,
-};
 
 export default PasswordResetConfirm;

@@ -1,14 +1,20 @@
+import type { MediationRequest } from "../types/mediationRequest";
+import type { GlobalState } from "./updateAction";
+
 /**
  * The main mediation form holds its information in a state hendled by
  * little state machine. It is divided into 3 parts.
  * This function merges them into one object, in the format that is used
  * through the whole app for mediation request information.
  *
- * @param {object} formState the divided state
+ * @param formState the divided state
  * @returns the merged mediation request information
  */
-export function formStateToMediationRequests(formState) {
+export function formStateToMediationRequests(
+  formState: GlobalState
+): MediationRequest {
   return {
+    status: "WAITING_MEDIATOR_VALIDATION",
     firstName: formState.userInfo.firstName,
     lastName: formState.userInfo.lastName,
     email: formState.userInfo.email,

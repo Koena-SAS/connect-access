@@ -5,6 +5,7 @@ import { createMemoryHistory } from "history";
 import { createStore, StateMachineProvider } from "little-state-machine";
 import * as reactDeviceDetect from "react-device-detect";
 import { Route, Router } from "react-router-dom";
+import type { Paths } from "../constants/paths";
 import { PATHS, PATHS_WITHOUT_PREFIX } from "../constants/paths";
 import { initLanguagesForTesting } from "../i18nTestHelper";
 import { click, runWithAndWithoutOrganizationPrefix } from "../testUtils";
@@ -24,7 +25,7 @@ beforeEach(() => {
       lastName: "",
       email: "",
       phoneNumber: "",
-      assistiveTechnologyUsed: "",
+      assistiveTechnologyUsed: [],
       technologyName: "",
       technologyVersion: "",
     },
@@ -37,11 +38,11 @@ describe("Errors on mandatory fields", () => {
   missing`, async () => {
     const history = createMemoryHistory();
     const initialLocation = history.location;
-    const { getByText, getByLabelText } = renderUserInfo(history);
-    fillStep1MandatoryFields(getByLabelText, "firstName");
-    const submit = getByText("Step 2: Your problem");
+    const app = renderUserInfo(history);
+    fillStep1MandatoryFields(app, "firstName");
+    const submit = app.getByText("Step 2: Your problem");
     await click(submit);
-    const error = getByText(/The first name .* is required/);
+    const error = app.getByText(/The first name .* is required/);
     expect(error).toBeInTheDocument();
     expect(history.location).toEqual(initialLocation);
   });
@@ -50,11 +51,11 @@ describe("Errors on mandatory fields", () => {
   missing`, async () => {
     const history = createMemoryHistory();
     const initialLocation = history.location;
-    const { getByText, getByLabelText } = renderUserInfo(history);
-    fillStep1MandatoryFields(getByLabelText, "email");
-    const submit = getByText("Step 2: Your problem");
+    const app = renderUserInfo(history);
+    fillStep1MandatoryFields(app, "email");
+    const submit = app.getByText("Step 2: Your problem");
     await click(submit);
-    const error = getByText(/The e-mail is required/);
+    const error = app.getByText(/The e-mail is required/);
     expect(error).toBeInTheDocument();
     expect(history.location).toEqual(initialLocation);
   });
@@ -65,15 +66,15 @@ describe("Errors on bad formatted input", () => {
   bad format`, async () => {
     const history = createMemoryHistory();
     const initialLocation = history.location;
-    const { getByText, getByLabelText } = renderUserInfo(history);
-    fillStep1MandatoryFields(getByLabelText, "email");
-    const inputEmail = getByLabelText(/E-mail/);
+    const app = renderUserInfo(history);
+    fillStep1MandatoryFields(app, "email");
+    const inputEmail = app.getByLabelText(/E-mail/);
     fireEvent.change(inputEmail, {
       target: { value: "bluebill@koena" },
     });
-    const submit = getByText("Step 2: Your problem");
+    const submit = app.getByText("Step 2: Your problem");
     await click(submit);
-    const error = getByText(/The e-mail must be formated like this/);
+    const error = app.getByText(/The e-mail must be formated like this/);
     expect(error).toBeInTheDocument();
     expect(history.location).toEqual(initialLocation);
   });
@@ -82,15 +83,15 @@ describe("Errors on bad formatted input", () => {
   bad format`, async () => {
     const history = createMemoryHistory();
     const initialLocation = history.location;
-    const { getByText, getByLabelText } = renderUserInfo(history);
-    fillStep1MandatoryFields(getByLabelText);
-    const inputPhone = getByLabelText(/Phone number/);
+    const app = renderUserInfo(history);
+    fillStep1MandatoryFields(app);
+    const inputPhone = app.getByLabelText(/Phone number/);
     fireEvent.change(inputPhone, {
       target: { value: "333" },
     });
-    const submit = getByText("Step 2: Your problem");
+    const submit = app.getByText("Step 2: Your problem");
     await click(submit);
-    const error = getByText(/The phone number format/);
+    const error = app.getByText(/The phone number format/);
     expect(error).toBeInTheDocument();
     expect(history.location).toEqual(initialLocation);
   });
@@ -98,27 +99,27 @@ describe("Errors on bad formatted input", () => {
 
 describe("Accessibility", () => {
   it("gives focus to the first error when click on next", async () => {
-    const { getByText, getByLabelText } = renderUserInfo();
-    fillStep1MandatoryFields(getByLabelText, "firstName");
-    const inputPhone = getByLabelText(/Phone number/);
+    const app = renderUserInfo();
+    fillStep1MandatoryFields(app, "firstName");
+    const inputPhone = app.getByLabelText(/Phone number/);
     fireEvent.change(inputPhone, {
       target: { value: "333" },
     });
-    const submit = getByText("Step 2: Your problem");
+    const submit = app.getByText("Step 2: Your problem");
     await click(submit);
-    expect(getByLabelText(/First name/)).toHaveFocus();
+    expect(app.getByLabelText(/First name/)).toHaveFocus();
   });
 
   it("gives focus to the first error when click another tab", async () => {
-    const { getByRole, getByLabelText } = renderUserInfo();
-    fillStep1MandatoryFields(getByLabelText, "email");
-    const inputPhone = getByLabelText(/Phone number/);
+    const app = renderUserInfo();
+    fillStep1MandatoryFields(app, "email");
+    const inputPhone = app.getByLabelText(/Phone number/);
     fireEvent.change(inputPhone, {
       target: { value: "333" },
     });
-    const submit = getByRole("tab", { name: /Your problem/ });
+    const submit = app.getByRole("tab", { name: /Your problem/ });
     await click(submit);
-    expect(getByLabelText(/E-mail/)).toHaveFocus();
+    expect(app.getByLabelText(/E-mail/)).toHaveFocus();
   });
 
   it(`displays a helper text for the assistive technology used field only when on
@@ -137,35 +138,33 @@ describe("Accessibility", () => {
 
 describe("Route correctly on previous / next step navigation buttons", () => {
   it("routes to the correct path when click on next step button", async () => {
-    await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
-      const history = createMemoryHistory({
-        initialEntries: [generatedPaths.ROOT],
-      });
-      const { getByText, getByLabelText } = renderUserInfo(
-        history,
-        generatedPaths,
-        paths
-      );
-      fillStep1MandatoryFields(getByLabelText);
-      const submit = getByText("Step 2: Your problem");
-      await click(submit);
-      expect(history.location.pathname).toEqual(
-        generatedPaths.PROBLEM_DESCRIPTION
-      );
-    });
+    await runWithAndWithoutOrganizationPrefix(
+      async (generatedPaths: Paths, paths: Paths) => {
+        const history = createMemoryHistory({
+          initialEntries: [generatedPaths.ROOT],
+        });
+        const app = renderUserInfo(history, generatedPaths, paths);
+        fillStep1MandatoryFields(app);
+        const submit = app.getByText("Step 2: Your problem");
+        await click(submit);
+        expect(history.location.pathname).toEqual(
+          generatedPaths.PROBLEM_DESCRIPTION
+        );
+      }
+    );
   });
 });
 
 describe("Saves data", () => {
   it(`saves entered data after successful click on next step, and redisplays it
   when the component is recreated`, async () => {
-    const { getByText, getByLabelText, unmount } = renderUserInfo();
-    fillStep1MandatoryFields(getByLabelText);
-    fillStep1NonMandatoryFields(getByLabelText);
-    const next = getByText("Step 2: Your problem");
+    const app = renderUserInfo();
+    fillStep1MandatoryFields(app);
+    fillStep1NonMandatoryFields(app);
+    const next = app.getByText("Step 2: Your problem");
     await click(next);
-    unmount();
-    checkStep1FieldValues(renderUserInfo().getByLabelText);
+    app.unmount();
+    checkStep1FieldValues(renderUserInfo());
   });
 });
 

@@ -1,14 +1,31 @@
 import { Trans } from "@lingui/macro";
 import Dialog from "@material-ui/core/Dialog";
-import PropTypes from "prop-types";
-import { useEffect, useRef } from "react";
+import { ReactNode, useEffect, useRef } from "react";
 import CancelButton from "../forms/buttons/CancelButton";
 import DoneButton from "../forms/buttons/DoneButton";
+
+type ConfirmationDialogProps = {
+  questionText: ReactNode;
+  onClose: (event: {}, reason: "backdropClick" | "escapeKeyDown") => void;
+  /**
+   * Function executed when the user validates the action.
+   */
+  onValidate: () => void;
+  /**
+   * Controls the open / close aspect of the modal.
+   */
+  opened: boolean;
+};
 
 /**
  * Confirmation dialog for actions like deleting something.
  */
-function ConfirmationDialog({ questionText, onClose, onValidate, opened }) {
+function ConfirmationDialog({
+  questionText,
+  onClose,
+  onValidate,
+  opened,
+}: ConfirmationDialogProps) {
   const cancelElement = useRef<HTMLButtonElement>(null);
   useEffect(
     function triggerFocusOnFirstElement() {
@@ -68,18 +85,5 @@ function ConfirmationDialog({ questionText, onClose, onValidate, opened }) {
     </Dialog>
   );
 }
-
-ConfirmationDialog.propTypes = {
-  questionText: PropTypes.node.isRequired,
-  onClose: PropTypes.func.isRequired,
-  /**
-   * Function executed when the user validates the action.
-   */
-  onValidate: PropTypes.func.isRequired,
-  /**
-   * Controls the open / close aspect of the modal.
-   */
-  opened: PropTypes.bool.isRequired,
-};
 
 export default ConfirmationDialog;

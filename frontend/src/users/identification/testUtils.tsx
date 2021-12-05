@@ -1,41 +1,17 @@
+import type { RenderResult } from "@testing-library/react";
 import { waitFor } from "@testing-library/react";
 import { click, fillField, mockedAxios } from "../../testUtils";
 
 export async function fillSignupFields(
-  app,
-  missingField = null,
-  postCallNumber = 2
+  app: RenderResult,
+  missingField: string = null,
+  postCallNumber: number = 2
 ) {
-  fillField(
-    app.getByLabelText,
-    /Last name/,
-    "KOENA",
-    missingField !== "lastName"
-  );
-  fillField(
-    app.getByLabelText,
-    /First name/,
-    "Koena",
-    missingField !== "firstName"
-  );
-  fillField(
-    app.getByLabelText,
-    /E-mail/,
-    "bla@bla.fr",
-    missingField !== "email"
-  );
-  fillField(
-    app.getByLabelText,
-    /Password/,
-    "pass",
-    missingField !== "password1"
-  );
-  fillField(
-    app.getByLabelText,
-    /Confirm password/,
-    "pass",
-    missingField !== "password2"
-  );
+  fillField(app, /Last name/, "KOENA", missingField !== "lastName");
+  fillField(app, /First name/, "Koena", missingField !== "firstName");
+  fillField(app, /E-mail/, "bla@bla.fr", missingField !== "email");
+  fillField(app, /Password/, "pass", missingField !== "password1");
+  fillField(app, /Confirm password/, "pass", missingField !== "password2");
   const submit = app.getByText("Sign up");
   await click(submit);
   if (!missingField) {
@@ -46,22 +22,12 @@ export async function fillSignupFields(
 }
 
 export async function fillLoginFields(
-  app,
-  missingField = null,
-  postCallNumber = 1
+  app: RenderResult,
+  missingField: string = null,
+  postCallNumber: number = 1
 ) {
-  fillField(
-    app.getByLabelText,
-    /E-mail/,
-    "bla@bla.fr",
-    missingField !== "email"
-  );
-  fillField(
-    app.getByLabelText,
-    /Password/,
-    "pass",
-    missingField !== "password"
-  );
+  fillField(app, /E-mail/, "bla@bla.fr", missingField !== "email");
+  fillField(app, /Password/, "pass", missingField !== "password");
   const submit = app.getByTestId("loginSubmit");
   await click(submit);
   if (!missingField) {
@@ -72,9 +38,13 @@ export async function fillLoginFields(
 }
 
 export async function checkBackendFieldsErrors(
-  fieldName,
-  fillFieldsFunction,
-  app
+  fieldName: string,
+  fillFieldsFunction: (
+    app: RenderResult,
+    missingField: string,
+    postCallNumber: number
+  ) => Promise<void>,
+  app: RenderResult
 ) {
   mockedAxios.post.mockRejectedValue({
     response: {

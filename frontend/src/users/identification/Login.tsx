@@ -11,6 +11,11 @@ import DoneButton from "../../forms/buttons/DoneButton";
 import { useGeneratePrefixedPath } from "../../hooks";
 import { keysToCamel } from "../../utils";
 
+type FormInput = {
+  email: string;
+  password: string;
+};
+
 type LoginProps = RouteComponentProps & {
   handleCloseIdentification: () => void;
   /**
@@ -24,10 +29,10 @@ type LoginProps = RouteComponentProps & {
  */
 function Login({ setToken, handleCloseIdentification }: LoginProps) {
   const generatePrefixedPath = useGeneratePrefixedPath();
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors } = useForm<FormInput>();
   const [nonFieldErrors, setNonFieldErrors] = useState([]);
   const [allFieldsInError, setAllFieldsInError] = useState(false);
-  const onSubmit = (data) => {
+  const onSubmit = (data: FormInput) => {
     const dataToSend = {
       email: data.email,
       password: data.password,

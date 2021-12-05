@@ -1,12 +1,10 @@
 import { Trans } from "@lingui/macro";
-import PropTypes from "prop-types";
-import React from "react";
 import UserDetails from "./UserDetails";
 
 /**
  * Display user account related information.
  */
-function Account({ token }) {
+function Account({ token }: { token: string }) {
   return (
     <div className="user-account page-base">
       <h1 className="page-base__title">
@@ -18,9 +16,5 @@ function Account({ token }) {
     </div>
   );
 }
-
-Account.propTypes = {
-  token: PropTypes.string.isRequired,
-};
 
 export default Account;

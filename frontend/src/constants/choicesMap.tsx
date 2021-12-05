@@ -21,13 +21,13 @@ export const assistiveTechnologyMap: Record<AssistiveTechnology, string> = {
   ADAPTED_NAVIGATION_DISPOSITIVE: t`Adapted navigation dispositive`,
   EXCLUSIVE_KEYBOARD_NAVIGATION: t`Exclusive keyboard navigation`,
   OTHER: t`Other`,
-};
+} as const;
 
 export const urgencyLevelMap: Record<Urgency, string> = {
   VERY_URGENT: t`Yes, very urgent: need a quick answer`,
   MODERATELY_URGENT: t`Moderately, I can wait, but not too long`,
   NOT_URGENT: t`Not urgent at all, but would like a solution as soon as possible`,
-};
+} as const;
 
 export const browserMap: Record<Browser, string> = {
   FIREFOX: t`Firefox`,
@@ -36,25 +36,25 @@ export const browserMap: Record<Browser, string> = {
   MICROSOFT_EDGE: t`Microsoft Edge`,
   OTHER: t`Other`,
   DONT_KNOW: t`Don't Know`,
-};
+} as const;
 
 export const mobileAppPlatformMap: Record<MobileAppPlatform, string> = {
   IOS: t`iOS`,
   ANDROID: t`Android`,
   WINDOWS_PHONE: t`Windows phone`,
   OTHER: t`Other`,
-};
+} as const;
 
 export const inaccessibilityLevelMap: Record<InaccessibilityLevel, string> = {
   IMPOSSIBLE_ACCESS: t`Impossible access`,
   ACCESS_DIFFICULT: t`Access possible by bypass but difficult`,
   RANDOM_ACCESS: t`Random access, sometimes it works and sometimes it does not`,
-};
+} as const;
 
 export const booleanMap: Record<YesNo, string> = {
   YES: t`Yes`,
   NO: t`No`,
-};
+} as const;
 
 export const statusMap: Record<Status, string> = {
   PENDING: t`Incomplete`,
@@ -66,14 +66,14 @@ export const statusMap: Record<Status, string> = {
   MEDIATING: t`Mediating`,
   CLOTURED: t`Closed`,
   MEDIATION_FAILED: t`Mediation failed`,
-};
+} as const;
 
 export const traceTypeMap: Record<TraceType, string> = {
   CALL: t`Call`,
   MAIL: t`E-mail`,
   LETTER: t`Letter`,
   OTHER: t`Other`,
-};
+} as const;
 
 export const contactEntityTypeMap: Record<ContactEntityType, string> = {
   COMPLAINANT: t`Complainant`,
@@ -81,4 +81,4 @@ export const contactEntityTypeMap: Record<ContactEntityType, string> = {
   ORGANIZATION: t`Organization (partner)`,
   EXTERNAL_ORGANIZATION: t`External organization`,
   OTHER: t`Other`,
-};
+} as const;

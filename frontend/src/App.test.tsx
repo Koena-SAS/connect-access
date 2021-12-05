@@ -1,5 +1,6 @@
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
+import type { RenderResult } from "@testing-library/react";
 import {
   cleanup,
   fireEvent,
@@ -7,15 +8,17 @@ import {
   waitFor,
   within,
 } from "@testing-library/react";
-import { createMemoryHistory } from "history";
+import { createMemoryHistory, MemoryHistory } from "history";
 import { StateMachineProvider } from "little-state-machine";
 import { useState } from "react";
 import { Route, Router } from "react-router-dom";
 import { cache, SWRConfig } from "swr";
 import App from "./App";
+import type { Paths } from "./constants/paths";
 import { PATHS, PATHS_WITHOUT_PREFIX } from "./constants/paths";
 import ConfigDataContext from "./contexts/configData";
 import { initLanguagesForTesting } from "./i18nTestHelper";
+import type { Step } from "./mediationForm/StepsInitializer";
 import { ResetLittleStateMachine, unlockStep } from "./mediationForm/testUtils";
 import {
   axiosGetResponseMe,
@@ -27,6 +30,7 @@ import {
   resetAxiosMocks,
 } from "./testUtils";
 import type { MediationRequestRecieved } from "./types/mediationRequest";
+import type { Langs } from "./types/types";
 
 initLanguagesForTesting();
 jest.mock("axios");
@@ -59,7 +63,11 @@ afterEach(() => {
  * If the paths parameter has the organization prefix, the organization
  * app prop will be included, otherwise it will be null.
  */
-async function renderApp(history?: any, generatedPaths?: any, paths?: any) {
+async function renderApp(
+  history?: any,
+  generatedPaths?: any,
+  paths?: any
+): Promise<RenderResult> {
   if (!paths) {
     paths = PATHS_WITHOUT_PREFIX;
   }
@@ -72,7 +80,7 @@ async function renderApp(history?: any, generatedPaths?: any, paths?: any) {
       history = createMemoryHistory();
     }
   }
-  let main;
+  let main: RenderResult;
   await waitFor(() => {
     main = render(
       <ConfigDataContext.Provider value={configData}>
@@ -94,9 +102,9 @@ async function renderApp(history?: any, generatedPaths?: any, paths?: any) {
   return main;
 }
 
-function ComponentWrapper({ paths }) {
-  const [activeStep, setActiveStep] = useState(0);
-  const [siteLanguage, setSiteLanguage] = useState("en");
+function ComponentWrapper({ paths }: { paths: Paths }) {
+  const [activeStep, setActiveStep] = useState<Step>(0);
+  const [siteLanguage, setSiteLanguage] = useState<Langs>("en");
   const toggleSiteLanguage = () => {
     if (siteLanguage === "fr") {
       setSiteLanguage("en");
@@ -107,7 +115,7 @@ function ComponentWrapper({ paths }) {
   const hasOrganizationPrefix = paths === PATHS;
   const initialOrganizationApp = hasOrganizationPrefix
     ? {
-        id: 1,
+        id: "1",
         name: { en: "Connect Access", fr: "Connect Access" },
         slug: "koena-connect",
         logo: "/media/app_logo/koena/koena-connect/koena_square.png",
@@ -305,10 +313,7 @@ describe("Login / logout", () => {
   describe("Logout", () => {
     describe(`displays login button and no more user details after logout,
     and redirects to homepage`, () => {
-      async function test(
-        generatedPaths: Record<string, string>,
-        paths: Record<string, string>
-      ): Promise<void> {
+      async function test(generatedPaths: Paths, paths: Paths): Promise<void> {
         const userPhoneNumber = /2463259871/;
         const [app, history] = await checkInfoAndPathsOnLogin(
           userPhoneNumber,
@@ -335,10 +340,7 @@ describe("Login / logout", () => {
 
     describe(`displays login button and no more user's mediation requests after logout,
     and redirects to homepage`, () => {
-      async function test(
-        generatedPaths: Record<string, string>,
-        paths: Record<string, string>
-      ): Promise<void> {
+      async function test(generatedPaths: Paths, paths: Paths): Promise<void> {
         const mediationRequestId = /f8842f63/;
         const [app, history] = await checkInfoAndPathsOnLogin(
           mediationRequestId,
@@ -365,10 +367,7 @@ describe("Login / logout", () => {
 
     describe(`displays login button and no more user's mediation request detail after logout,
     and redirects to homepage`, () => {
-      async function test(
-        generatedPaths: Record<string, string>,
-        paths: Record<string, string>
-      ): Promise<void> {
+      async function test(generatedPaths: Paths, paths: Paths): Promise<void> {
         const history = createMemoryHistory({
           initialEntries: [generatedPaths.ROOT],
         });
@@ -400,12 +399,12 @@ describe("Login / logout", () => {
     });
 
     async function checkInfoAndPathsOnLogin(
-      info,
-      path,
-      elementsToClickOn,
-      generatedPaths,
-      paths
-    ) {
+      info: string | RegExp,
+      path: string,
+      elementsToClickOn: (string | RegExp)[],
+      generatedPaths: Paths,
+      paths: Paths
+    ): Promise<[RenderResult, MemoryHistory]> {
       const history = createMemoryHistory({
         initialEntries: [generatedPaths.ROOT],
       });
@@ -421,7 +420,12 @@ describe("Login / logout", () => {
       return [app, history];
     }
 
-    async function checkInfoAndPathsOnLogout(app, history, info, path) {
+    async function checkInfoAndPathsOnLogout(
+      app: RenderResult,
+      history: MemoryHistory,
+      info: string | RegExp,
+      path: string
+    ) {
       fireEvent.click(app.getByText(/Logout/));
       await waitFor(() => expect(app.getByText(/Login/)).toBeInTheDocument());
       expect(app.queryByText(/Logout/)).not.toBeInTheDocument();
@@ -492,7 +496,7 @@ describe("Login / logout", () => {
   });
 });
 
-async function loginUser(app, getRequestDone = true) {
+async function loginUser(app: RenderResult, getRequestDone = true) {
   fireEvent.click(app.getByText(/Login/));
   const idDialog = app.getByRole("dialog");
   fireEvent.change(within(idDialog).getByLabelText(/E-mail/), {
@@ -536,7 +540,7 @@ describe("Register", () => {
     expect(app.getByText(/Logout/)).toBeInTheDocument();
   });
 
-  async function registerUser(app, postAxiosCalls = 2) {
+  async function registerUser(app: RenderResult, postAxiosCalls = 2) {
     fireEvent.click(app.getByText(/Login/));
     fireEvent.click(app.getByText(/Signup/));
     const idDialog = app.getByRole("dialog");
@@ -569,7 +573,7 @@ describe("Mediation form", () => {
     await loginUser(app);
     const homepage = app.getByAltText(/homepage/);
     await click(homepage);
-    await unlockStep(app.getByLabelText, app.getByText, 3);
+    await unlockStep(app, 3);
     const submitButton = app.getByText("Submit my mediation request");
     const userMediationRequestsData: MediationRequestRecieved[] = [
       {

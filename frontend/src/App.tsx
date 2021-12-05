@@ -1,12 +1,30 @@
-import PropTypes from "prop-types";
 import { Route, Switch } from "react-router-dom";
 import { AdminLayout } from "./admin";
+import type { Paths } from "./constants/paths";
 import CustomerLayout from "./customerLayout/CustomerLayout";
 import {
   useStateWithStorage,
   useUserDetails,
   useUserMediationRequests,
 } from "./hooks";
+import type { Step } from "./mediationForm/StepsInitializer";
+import type { OrganizationAppRecieved } from "./types/organizationApp";
+import type { Langs } from "./types/types";
+
+type AppProps = {
+  siteLanguage: Langs;
+  toggleSiteLanguage: () => void;
+  activeMediationFormStep: Step;
+  setActiveMediationFormStep: (step: Step) => void;
+  /**
+   * The paths to be used in the main element for routes rendering.
+   */
+  paths: Paths;
+  /**
+   * The organization applicaiton data got from the backend for the first time.
+   */
+  initialOrganizationApp?: OrganizationAppRecieved;
+};
 
 /**
  * Main component holding the menu and the router.
@@ -18,7 +36,7 @@ function App({
   setActiveMediationFormStep,
   paths,
   initialOrganizationApp,
-}) {
+}: AppProps) {
   const [token, setToken] = useStateWithStorage("token");
   const isLogged = Boolean(token);
   // the below hooks trigger the loading of data from server
@@ -56,20 +74,5 @@ function App({
     </>
   );
 }
-
-App.propTypes = {
-  siteLanguage: PropTypes.string.isRequired,
-  toggleSiteLanguage: PropTypes.func.isRequired,
-  activeMediationFormStep: PropTypes.number.isRequired,
-  setActiveMediationFormStep: PropTypes.func.isRequired,
-  /**
-   * The paths to be used in the main element for routes rendering.
-   */
-  paths: PropTypes.objectOf(PropTypes.string).isRequired,
-  /**
-   * The organization applicaiton data got from the backend for the first time.
-   */
-  initialOrganizationApp: PropTypes.object,
-};
 
 export default App;

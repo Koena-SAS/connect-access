@@ -1,6 +1,6 @@
 import * as React from "react";
 
-function SvgInformation(props) {
+function SvgInformation(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" {...props}>
       <path d="M256.002 182.774c-12.718 0-21.761 5.37-21.761 13.283V303.73c0 6.782 9.044 13.565 21.761 13.565 12.152 0 22.043-6.783 22.043-13.565V196.057c0-7.913-9.891-13.283-22.043-13.283zM256.002 116.361c-13 0-23.174 9.326-23.174 20.065s10.174 20.348 23.174 20.348c12.718 0 22.892-9.609 22.892-20.348 0-10.738-10.175-20.065-22.892-20.065z" />

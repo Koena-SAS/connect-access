@@ -1,46 +1,66 @@
 import "little-state-machine";
+import type {
+  AssistiveTechnology,
+  Browser,
+  InaccessibilityLevel,
+  MobileAppPlatform,
+  Urgency,
+} from "../types/mediationRequest";
+import { YesNo } from "../types/types";
 
 declare module "little-state-machine" {
   interface GlobalState {
-    userInfo?: {
-      firstName: string;
-      lastName: string;
-      email: string;
-      phoneNumber: string;
-      assistiveTechnologyUsed: string;
-      technologyName: string;
-      technologyVersion: string;
-    };
-    problemDescription?: {
-      urgency: string;
-      stepDescription: string;
-      issueDescription: string;
-      inaccessibilityLevel: string;
-      browserUsed: string;
-      url: string;
-      browser: string;
-      browserVersion: string;
-      mobileAppUsed: string;
-      mobileAppPlatform: string;
-      mobileAppName: string;
-      otherUsedSoftware: string;
-      didTellOrganization: string;
-      didOrganizationReply: string;
-      organizationReply: string;
-      furtherInfo: string;
-      attachedFile: any;
-    };
-    organizationInfo?: {
-      name: string;
-      mailingAddress: string;
-      email: string;
-      phoneNumber: string;
-      contact: string;
-    };
+    userInfo?: UserInfo;
+    problemDescription?: ProblemDescription;
+    organizationInfo?: OrganizationInfo;
   }
 }
 
-function updateUserInfo(state, payload) {
+type GlobalState = {
+  userInfo?: UserInfo;
+  problemDescription?: ProblemDescription;
+  organizationInfo?: OrganizationInfo;
+};
+
+type UserInfo = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  assistiveTechnologyUsed: AssistiveTechnology[] | [];
+  technologyName: string;
+  technologyVersion: string;
+};
+
+type ProblemDescription = {
+  urgency: Urgency | "";
+  stepDescription: string;
+  issueDescription: string;
+  inaccessibilityLevel: InaccessibilityLevel | "";
+  browserUsed: YesNo | "";
+  url: string;
+  browser: Browser | "";
+  browserVersion: string;
+  mobileAppUsed: YesNo | "";
+  mobileAppPlatform: MobileAppPlatform | "";
+  mobileAppName: string;
+  otherUsedSoftware: string;
+  didTellOrganization: YesNo | "";
+  didOrganizationReply: YesNo | "";
+  organizationReply: string;
+  furtherInfo: string;
+  attachedFile: any;
+};
+
+type OrganizationInfo = {
+  name: string;
+  mailingAddress: string;
+  email: string;
+  phoneNumber: string;
+  contact: string;
+};
+
+function updateUserInfo(state: GlobalState, payload: Partial<UserInfo>) {
   return {
     ...state,
     userInfo: {
@@ -50,7 +70,10 @@ function updateUserInfo(state, payload) {
   };
 }
 
-function updateProblemDescription(state, payload) {
+function updateProblemDescription(
+  state: GlobalState,
+  payload: Partial<ProblemDescription>
+) {
   return {
     ...state,
     problemDescription: {
@@ -60,7 +83,10 @@ function updateProblemDescription(state, payload) {
   };
 }
 
-function updateOrganizationInfo(state, payload) {
+function updateOrganizationInfo(
+  state: GlobalState,
+  payload: Partial<OrganizationInfo>
+) {
   return {
     ...state,
     organizationInfo: {
@@ -70,13 +96,13 @@ function updateOrganizationInfo(state, payload) {
   };
 }
 
-const initialState = {
+const initialState: GlobalState = {
   userInfo: {
     firstName: "",
     lastName: "",
     email: "",
     phoneNumber: "",
-    assistiveTechnologyUsed: "",
+    assistiveTechnologyUsed: [],
     technologyName: "",
     technologyVersion: "",
   },
@@ -119,3 +145,4 @@ export {
   initialState,
   resetState,
 };
+export type { GlobalState, UserInfo, ProblemDescription, OrganizationInfo };

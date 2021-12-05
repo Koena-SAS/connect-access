@@ -7,7 +7,7 @@
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
     "@fontsource/roboto": "^4.4.0",
-    "@lingui/react": "^3.9.0",
+    "@lingui/react": "^3.13.0",
     "@material-ui/core": "^5.0.0-alpha.44",
     "@material-ui/icons": "^5.0.0-alpha.44",
     "@material-ui/lab": "^5.0.0-alpha.44",
@@ -19,7 +19,6 @@
     "little-state-machine": "^4.1.0",
     "little-state-machine-devtools": "^2.0.1",
     "node-sass": "^v6.0.1",
-    "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-cookie": "^4.0.3",
     "react-device-detect": "^1.17.0",
@@ -42,7 +41,7 @@
     "format-check": "prettier --check .",
     "type-check": "tsc",
     "test-all": "yarn lint && yarn type-check && yarn test --watchAll=false",
-    "build:svg": "svgr src/images/svg/ -d src/images/buildSvg/",
+    "build:svg": "svgr src/images/svg/ -d src/images/buildSvg/ --typescript",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -63,7 +62,8 @@
   "devDependencies": {
     "@axe-core/react": "^4.2.1",
     "@lingui/cli": "^3.9.0",
-    "@lingui/macro": "^3.9.0",
+    "@lingui/core": "^3.13.0",
+    "@lingui/macro": "^3.13.0",
     "@svgr/cli": "^5.5.0",
     "@types/jest": "^27.0.3",
     "@types/node": "^16.11.9",

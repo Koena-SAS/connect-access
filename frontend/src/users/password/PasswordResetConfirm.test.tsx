@@ -41,13 +41,12 @@ describe("Error handling", () => {
   });
 
   it("displays an error message when the two passwords are not the same", async () => {
-    const { getByText, getByLabelText, getByRole } =
-      renderPasswordResetConfirm();
-    fillField(getByLabelText, /Password/, "pass");
-    fillField(getByLabelText, /Confirm password/, "pass2");
-    const submit = getByText("Change your password");
+    const app = renderPasswordResetConfirm();
+    fillField(app, /Password/, "pass");
+    fillField(app, /Confirm password/, "pass2");
+    const submit = app.getByText("Change your password");
     await click(submit);
-    const error = getByRole("alert");
+    const error = app.getByRole("alert");
     expect(error.textContent).toMatch(/Passwords do not match/);
   });
 

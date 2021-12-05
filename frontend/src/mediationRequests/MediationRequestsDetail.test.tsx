@@ -1,9 +1,10 @@
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
-import { render } from "@testing-library/react";
+import { render, RenderResult } from "@testing-library/react";
+import type { History } from "history";
 import { createMemoryHistory } from "history";
-import React from "react";
 import { Route, Router } from "react-router-dom";
+import type { Paths } from "../constants/paths";
 import { PATHS_WITHOUT_PREFIX } from "../constants/paths";
 import { initLanguagesForTesting } from "../i18nTestHelper";
 import { mediationRequests } from "../testUtils";
@@ -25,11 +26,11 @@ it(`displays h3 titles with titlesHeadingLevel set to 2`, async () => {
 });
 
 function renderMediationRequestDetail(
-  titlesHeadingLevel,
-  history?: any,
-  generatedPaths?: any,
-  paths?: any
-) {
+  titlesHeadingLevel: number,
+  history?: History,
+  generatedPaths?: Paths,
+  paths?: Paths
+): RenderResult {
   if (!paths) {
     paths = PATHS_WITHOUT_PREFIX;
   }

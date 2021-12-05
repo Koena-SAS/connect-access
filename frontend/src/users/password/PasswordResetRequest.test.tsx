@@ -33,12 +33,11 @@ describe("Error handling", () => {
   });
 
   it("displays an error message when the email address does not meet the regex", async () => {
-    const { getByText, getByLabelText, getByRole } =
-      renderPasswordResetRequest();
-    fillField(getByLabelText, /E-mail/, "bla@");
-    const submit = getByText("Reset password");
+    const app = renderPasswordResetRequest();
+    fillField(app, /E-mail/, "bla@");
+    const submit = app.getByText("Reset password");
     await click(submit);
-    const error = getByRole("alert");
+    const error = app.getByRole("alert");
     expect(error.textContent).toMatch(
       /The e-mail must be formated like this: name@domain.extension/
     );

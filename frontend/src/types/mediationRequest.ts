@@ -1,3 +1,9 @@
+import type {
+  ApplicationData,
+  ApplicationDataRecieved,
+} from "./organizationApp";
+import type { YesNo } from "./types";
+
 type Status =
   | "PENDING"
   | "WAITING_MEDIATOR_VALIDATION"
@@ -39,89 +45,75 @@ type AssistiveTechnology =
   | "OTHER";
 
 type MediationRequest = {
-  id: any;
-  creationDate: any;
+  id?: string;
+  creationDate?: string;
   status: Status;
-  applicationData?: {
-    id: any;
-    name: any;
-    organizationName: any;
-    organizationEmail: any;
-    organizationPhoneNumber: any;
-    organizationAddress: any;
-  };
-  firstName: any;
-  lastName?: any;
-  email: any;
-  phoneNumber?: any;
-  assistiveTechnologyUsed?: AssistiveTechnology[];
-  technologyName?: any;
-  technologyVersion?: any;
-  urgency?: Urgency;
-  issueDescription: any;
-  stepDescription?: any;
-  inaccessibilityLevel?: InaccessibilityLevel;
-  browserUsed?: any;
-  url?: any;
+  applicationData?: ApplicationData;
+  firstName: string;
+  lastName?: string;
+  email: string;
+  phoneNumber?: string;
+  assistiveTechnologyUsed?: AssistiveTechnology[] | [];
+  technologyName?: string;
+  technologyVersion?: string;
+  urgency?: Urgency | "";
+  issueDescription: string;
+  stepDescription?: string;
+  inaccessibilityLevel?: InaccessibilityLevel | "";
+  browserUsed?: YesNo | "";
+  url?: string;
   browser?: Browser | "";
-  browserVersion?: any;
-  mobileAppUsed?: any;
-  mobileAppPlatform?: MobileAppPlatform;
-  mobileAppName?: any;
-  otherUsedSoftware?: any;
-  didTellOrganization?: any;
-  didOrganizationReply?: any;
-  organizationReply?: any;
-  furtherInfo?: any;
+  browserVersion?: string;
+  mobileAppUsed?: YesNo | "";
+  mobileAppPlatform?: MobileAppPlatform | "";
+  mobileAppName?: string;
+  otherUsedSoftware?: string;
+  didTellOrganization?: YesNo | "";
+  didOrganizationReply?: YesNo | "";
+  organizationReply?: string;
+  furtherInfo?: string;
   attachedFile?: any;
-  organizationName?: any;
-  organizationAddress?: any;
-  organizationEmail?: any;
-  organizationPhoneNumber?: any;
-  organizationContact?: any;
+  organizationName?: string;
+  organizationAddress?: string;
+  organizationEmail?: string;
+  organizationPhoneNumber?: string;
+  organizationContact?: string;
 };
 
 type MediationRequestRecieved = {
-  id: any;
-  creation_date: any;
+  id?: string;
+  creation_date?: string;
   status: Status;
-  application_data?: {
-    id: any;
-    name: any;
-    organization_name: any;
-    organization_email: any;
-    organization_phone_number: any;
-    organization_address: any;
-  };
-  first_name: any;
-  last_name?: any;
-  email: any;
-  phone_number?: any;
-  assistive_technology_used?: AssistiveTechnology[];
-  technology_name?: any;
-  technology_version?: any;
-  urgency?: Urgency;
-  issue_description: any;
-  step_description?: any;
-  inaccessibility_level?: InaccessibilityLevel;
-  browser_used?: any;
-  url?: any;
+  application_data?: ApplicationDataRecieved;
+  first_name: string;
+  last_name?: string;
+  email: string;
+  phone_number?: string;
+  assistive_technology_used?: AssistiveTechnology[] | [];
+  technology_name?: string;
+  technology_version?: string;
+  urgency?: Urgency | "";
+  issue_description: string;
+  step_description?: string;
+  inaccessibility_level?: InaccessibilityLevel | "";
+  browser_used?: YesNo | "";
+  url?: string;
   browser?: Browser | "";
-  browser_version?: any;
-  mobile_app_used?: any;
+  browser_version?: string;
+  mobile_app_used?: YesNo | "";
   mobile_app_platform?: MobileAppPlatform | "";
-  mobile_app_name?: any;
-  other_used_software?: any;
-  did_tell_organization?: any;
-  did_organization_reply?: any;
-  organization_reply?: any;
-  further_info?: any;
+  mobile_app_name?: string;
+  other_used_software?: string;
+  did_tell_organization?: YesNo | "";
+  did_organization_reply?: YesNo | "";
+  organization_reply?: string;
+  further_info?: string;
   attached_file?: any;
-  organization_name?: any;
-  organization_address?: any;
-  organization_email?: any;
-  organization_phone_number?: any;
-  organization_contact?: any;
+  organization_name?: string;
+  organization_address?: string;
+  organization_email?: string;
+  organization_phone_number?: string;
+  organization_contact?: string;
 };
 
 export type {

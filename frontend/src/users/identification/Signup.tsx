@@ -20,6 +20,15 @@ import {
   setManualError,
 } from "../../utils/formUtils";
 
+type FormInput = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  password1: string;
+  password2: string;
+};
+
 type SignupProps = RouteComponentProps & {
   handleCloseIdentification: () => void;
   /**
@@ -32,10 +41,11 @@ type SignupProps = RouteComponentProps & {
  * Signup form with error handling.
  */
 function Signup({ setToken, handleCloseIdentification }: SignupProps) {
-  const { register, handleSubmit, errors, watch, setError } = useForm();
+  const { register, handleSubmit, errors, watch, setError } =
+    useForm<FormInput>();
   const [nonFieldErrors, setNonFieldErrors] = useState([]);
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: FormInput) => {
     const dataToSend = {
       first_name: data.firstName,
       last_name: data.lastName,

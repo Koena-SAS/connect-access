@@ -16,7 +16,7 @@ type IdentificationProps = {
   /**
    * Whether the first tabbable element should get the focus.
    */
-  shouldFocus: boolean;
+  shouldFocus?: boolean;
 };
 
 /**
@@ -25,7 +25,7 @@ type IdentificationProps = {
 function Identification({
   setToken,
   onClose,
-  shouldFocus,
+  shouldFocus = false,
 }: IdentificationProps) {
   const configData = useContext<ConfigData>(ConfigDataContext);
   const tabsInfos = [
@@ -56,9 +56,5 @@ function Identification({
     </div>
   );
 }
-
-Identification.defaultProps = {
-  shouldFocus: false,
-};
 
 export default Identification;

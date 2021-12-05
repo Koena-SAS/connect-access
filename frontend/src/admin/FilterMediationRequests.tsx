@@ -1,8 +1,17 @@
 import { t, Trans } from "@lingui/macro";
-import PropTypes from "prop-types";
 import { useMemo } from "react";
 import { TextField } from "../forms";
 import { useAdminMediationRequests } from "../hooks";
+import type { ApplicationData } from "../types/organizationApp";
+
+type FilterMediationRequestsProps = {
+  setChosenStatus: (value: string) => void;
+  setChosenApplication: (value: string) => void;
+  /**
+   * The authentication token given when user is logged in.
+   */
+  token: string;
+};
 
 /**
  * Filter all the mediation requests.
@@ -11,7 +20,7 @@ function FilterMediationRequests({
   setChosenStatus,
   setChosenApplication,
   token,
-}) {
+}: FilterMediationRequestsProps) {
   const { mediationRequests } = useAdminMediationRequests(token);
   const applicationNames = useMemo(
     function createApplicationNames() {
@@ -33,10 +42,12 @@ function FilterMediationRequests({
     },
     [mediationRequests]
   );
-  const handleChangeStatus = (event) => {
+  const handleChangeStatus = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChosenStatus(event.target.value);
   };
-  const handleChangeApplication = (event) => {
+  const handleChangeApplication = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setChosenApplication(event.target.value);
   };
 
@@ -122,16 +133,7 @@ function FilterMediationRequests({
   );
 }
 
-FilterMediationRequests.propTypes = {
-  setChosenStatus: PropTypes.func.isRequired,
-  setChosenApplication: PropTypes.func.isRequired,
-  /**
-   * The authentication token given when user is logged in.
-   */
-  token: PropTypes.string.isRequired,
-};
-
-function buildApplicationName(applicationData) {
+function buildApplicationName(applicationData: ApplicationData) {
   return `${applicationData.name} (${applicationData.organizationName})`;
 }
 

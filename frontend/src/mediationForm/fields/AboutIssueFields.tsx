@@ -31,8 +31,8 @@ type AboutIssueFieldsProps = {
 function AboutIssueFields({
   register,
   errors,
-  validateRequired = (errorText) => {
-    return (value) => (value ? true : errorText);
+  validateRequired = (errorText: string) => {
+    return (value: string) => (value ? true : errorText);
   },
   className,
   ...borderFieldsetProps

@@ -1,5 +1,6 @@
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
+import type { RenderResult } from "@testing-library/react";
 import { render, waitFor } from "@testing-library/react";
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -15,7 +16,7 @@ afterEach(() => {
   jest.clearAllMocks();
 });
 
-function renderSignup() {
+function renderSignup(): RenderResult {
   return render(
     <I18nProvider i18n={i18n}>
       <Router>
@@ -60,30 +61,30 @@ describe("Errors on mandatory fields", () => {
 
 describe("Errors on fields' format", () => {
   it("displays an error message when the email does not meet the regex ", async () => {
-    const { getByText, getByLabelText, getByRole } = renderSignup();
-    fillField(getByLabelText, /Last name/, "KOENA");
-    fillField(getByLabelText, /First name/, "Koena");
-    fillField(getByLabelText, /E-mail/, "bla@");
-    fillField(getByLabelText, /Password/, "pass");
-    fillField(getByLabelText, /Confirm password/, "pass");
-    const submit = getByText("Sign up");
+    const app = renderSignup();
+    fillField(app, /Last name/, "KOENA");
+    fillField(app, /First name/, "Koena");
+    fillField(app, /E-mail/, "bla@");
+    fillField(app, /Password/, "pass");
+    fillField(app, /Confirm password/, "pass");
+    const submit = app.getByText("Sign up");
     await click(submit);
-    const error = getByRole("alert");
+    const error = app.getByRole("alert");
     expect(error.textContent).toMatch(
       /The e-mail must be formated like this: name@domain.extension/
     );
   });
 
   it("displays an error message when the two passwords are not the same", async () => {
-    const { getByText, getByLabelText, getByRole } = renderSignup();
-    fillField(getByLabelText, /Last name/, "KOENA");
-    fillField(getByLabelText, /First name/, "Koena");
-    fillField(getByLabelText, /E-mail/, "bla@bla.fr");
-    fillField(getByLabelText, /Password/, "pass");
-    fillField(getByLabelText, /Confirm password/, "pass2");
-    const submit = getByText("Sign up");
+    const app = renderSignup();
+    fillField(app, /Last name/, "KOENA");
+    fillField(app, /First name/, "Koena");
+    fillField(app, /E-mail/, "bla@bla.fr");
+    fillField(app, /Password/, "pass");
+    fillField(app, /Confirm password/, "pass2");
+    const submit = app.getByText("Sign up");
     await click(submit);
-    const error = getByRole("alert");
+    const error = app.getByRole("alert");
     expect(error.textContent).toMatch(/Passwords do not match/);
   });
 });
@@ -143,14 +144,14 @@ describe("Errors from the backend", () => {
 
 describe("Accessibility", () => {
   it("gives focus to the first error when click on submit", async () => {
-    const { getByText, getByLabelText } = renderSignup();
-    fillField(getByLabelText, /Last name/, "KOENA");
-    fillField(getByLabelText, /First name/, "");
-    fillField(getByLabelText, /E-mail/, "bla@");
-    fillField(getByLabelText, /Password/, "pass");
-    fillField(getByLabelText, /Confirm password/, "pass");
-    const submit = getByText("Sign up");
+    const app = renderSignup();
+    fillField(app, /Last name/, "KOENA");
+    fillField(app, /First name/, "");
+    fillField(app, /E-mail/, "bla@");
+    fillField(app, /Password/, "pass");
+    fillField(app, /Confirm password/, "pass");
+    const submit = app.getByText("Sign up");
     await click(submit);
-    expect(getByLabelText(/First name/)).toHaveFocus();
+    expect(app.getByLabelText(/First name/)).toHaveFocus();
   });
 });

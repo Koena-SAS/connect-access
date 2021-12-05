@@ -5,13 +5,14 @@ type BreadcrumbsProps = {
   /**
    * The items given in a hierarchical order.
    */
-  items: any;
+  items: any[];
   /**
    * The number of pixels below which the orientation will be vertical.
    */
   widthToChangeOrientation?: number;
   [props: string]: any;
 };
+
 function Breadcrumbs({
   items,
   widthToChangeOrientation = 300,

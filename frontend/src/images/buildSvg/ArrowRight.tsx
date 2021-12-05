@@ -1,6 +1,6 @@
 import * as React from "react";
 
-function SvgArrowRight(props) {
+function SvgArrowRight(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       height={512}

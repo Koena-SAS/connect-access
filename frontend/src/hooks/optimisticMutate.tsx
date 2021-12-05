@@ -1,21 +1,41 @@
+import type { AxiosResponse } from "axios";
 import axios from "axios";
 import { cache, mutate } from "swr";
 import useMutation from "use-mutation";
+import type { UserDetails, UserDetailsToSend } from "../types/userDetails";
 import { keysToCamel, keysToSnake } from "../utils";
 
-async function modifyUserDetails({ userDetails, token }) {
+type ModifyUserDetailsProps = {
+  userDetails: UserDetails;
+  token: string;
+};
+
+async function modifyUserDetails({
+  userDetails,
+  token,
+}: ModifyUserDetailsProps): Promise<AxiosResponse<UserDetailsToSend>> {
   const dataToSend = keysToSnake(userDetails);
   try {
-    const response = await axios.put("/auth/users/me/", dataToSend, {
-      headers: {
-        Authorization: `token ${token}`,
-      },
-    });
+    const response = await axios.put<UserDetailsToSend>(
+      "/auth/users/me/",
+      dataToSend,
+      {
+        headers: {
+          Authorization: `token ${token}`,
+        },
+      }
+    );
     return response;
   } catch (error) {
     throw error.response ? error.response.data : [];
   }
 }
+
+type UseModifyUserDetailsProps = {
+  token: string;
+  displayRequestFailure: () => void;
+  displayRequestSuccess: () => void;
+};
 
 /**
  * Modify the user detials.
@@ -32,7 +52,7 @@ export function useModifyUserDetails({
   token,
   displayRequestFailure,
   displayRequestSuccess,
-}) {
+}: UseModifyUserDetailsProps) {
   const key = ["/auth/users/me/", token];
   return useMutation(modifyUserDetails, {
     onMutate({ input }) {

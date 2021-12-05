@@ -1,5 +1,4 @@
 import { Trans } from "@lingui/macro";
-import PropTypes from "prop-types";
 import { useEffect } from "react";
 
 type HistoryProps = {
@@ -29,10 +28,5 @@ function History({ setBreadcrumbs }: HistoryProps) {
     </>
   );
 }
-
-History.propTypes = {
-  token: PropTypes.string.isRequired,
-  setBreadcrumbs: PropTypes.func.isRequired,
-};
 
 export default History;

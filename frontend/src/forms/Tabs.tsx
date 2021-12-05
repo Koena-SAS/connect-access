@@ -2,8 +2,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Box from "@material-ui/core/Box";
 import Tab from "@material-ui/core/Tab";
 import MUITabs from "@material-ui/core/Tabs";
-import PropTypes from "prop-types";
-import { useEffect, useRef, useState } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { useGeneratePrefixedPath } from "../hooks";
 import Page from "../Page";
@@ -72,7 +71,10 @@ function Tabs({
     }
   }, [shouldFocus]);
 
-  const handleChangeTab = (event, newValue) => {
+  const handleChangeTab = (
+    event: React.SyntheticEvent<Element, Event>,
+    newValue: number
+  ) => {
     let stateObject = {};
     if (location.state && isLocationState(location.state)) {
       stateObject = {
@@ -94,12 +96,13 @@ function Tabs({
     }
   };
 
-  function a11yProps(index) {
+  function a11yProps(index: number) {
     return {
       id: `full-width-tab-${index}`,
       "aria-controls": `full-width-tabpanel-${index}`,
     };
   }
+
   return (
     <div className={className}>
       <AppBar position="static" color="default">
@@ -135,9 +138,14 @@ function Tabs({
   );
 }
 
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+type TabPanelProps = {
+  children?: ReactNode;
+  index: number;
+  value: number;
+  [other: string]: any;
+};
 
+function TabPanel({ children, value, index, ...other }: TabPanelProps) {
   return (
     <div
       role="tabpanel"
@@ -150,11 +158,5 @@ function TabPanel(props) {
     </div>
   );
 }
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
-};
 
 export default Tabs;

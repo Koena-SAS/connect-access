@@ -6,12 +6,13 @@ import React from "react";
 import { Router } from "react-router-dom";
 import { initLanguagesForTesting } from "../../i18nTestHelper";
 import { mediationRequestsResponse, mockedAxios } from "../../testUtils";
+import type { MediationRequestRecieved } from "../../types/mediationRequest";
 import UserMediations from "./UserMediations";
 
 initLanguagesForTesting();
 jest.mock("axios");
 
-let userMediationsResponse;
+let userMediationsResponse: MediationRequestRecieved[];
 
 beforeEach(() => {
   userMediationsResponse = mediationRequestsResponse.slice();

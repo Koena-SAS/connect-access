@@ -5,13 +5,13 @@ import { generatePath, useParams } from "react-router-dom";
  * prefix parameters in react router.
  * @returns function taking the path without params and computing the generated path.
  */
-const useGeneratePrefixedPath = () => {
+function useGeneratePrefixedPath() {
   const { organizationSlug, applicationSlug, requestId } = useParams<{
     organizationSlug: string;
     applicationSlug: string;
     requestId: string;
   }>();
-  const generatePrefixedPath = (path) => {
+  const generatePrefixedPath = (path: string): string => {
     return generatePath(path, {
       organizationSlug,
       applicationSlug,
@@ -19,6 +19,6 @@ const useGeneratePrefixedPath = () => {
     });
   };
   return generatePrefixedPath;
-};
+}
 
 export default useGeneratePrefixedPath;

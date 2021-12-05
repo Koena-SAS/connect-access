@@ -101,4 +101,8 @@ pages:
     paths:
     - public
   only:
-    - master
+    refs:
+      - master
+    changes:
+      - docs/**/*
+      - .gitlab-ci.yml

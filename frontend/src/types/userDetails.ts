@@ -7,4 +7,21 @@ type UserDetails = {
   isStaff: boolean;
 };
 
-export type { UserDetails };
+type UserDetailsReceived = {
+  id: string;
+  first_name: string;
+  last_name?: string;
+  email: string;
+  phone_number?: string;
+  is_staff: boolean;
+};
+
+type UserDetailsToSend = {
+  id?: string;
+  first_name: string;
+  last_name?: string;
+  email: string;
+  phone_number?: string;
+};
+
+export type { UserDetails, UserDetailsReceived, UserDetailsToSend };

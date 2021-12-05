@@ -46,7 +46,7 @@ function PhoneField({
       <TextField
         id={`${componentName}-phoneNumber`}
         name="phoneNumber"
-        inputRef={(e) => {
+        inputRef={(input: HTMLInputElement) => {
           const rhfRef = register({
             required: required ? t`The phone number is required` : undefined,
             pattern: {
@@ -54,9 +54,9 @@ function PhoneField({
               message: t`The phone number format is invalid`,
             },
           });
-          rhfRef(e);
+          rhfRef(input);
           if (elementRef) {
-            elementRef.current = e;
+            elementRef.current = input;
           }
         }}
         label={t`Phone number`}

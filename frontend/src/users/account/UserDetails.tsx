@@ -1,6 +1,6 @@
 import { t, Trans } from "@lingui/macro";
+import type { SnackbarCloseReason } from "@material-ui/core";
 import produce from "immer";
-import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
@@ -12,12 +12,15 @@ import {
 import Button from "../../forms/buttons/Button";
 import Snackbar from "../../forms/Snackbar";
 import { useModifyUserDetails, useUserDetails } from "../../hooks";
+import type { UserDetails as UserDetailsType } from "../../types/userDetails";
 import { setManualError } from "../../utils/formUtils";
+
+type FormInput = UserDetailsType;
 
 /**
  * Display user details.
  */
-function UserDetails({ token }) {
+function UserDetails({ token }: { token: string }) {
   const [requestSuccessMessageOpen, setRequestSuccessMessageOpen] =
     useState(false);
   const [requestFailureMessageOpen, setRequestFailureMessageOpen] =
@@ -28,13 +31,19 @@ function UserDetails({ token }) {
   const displayRequestFailure = () => {
     setRequestFailureMessageOpen(true);
   };
-  const handleCloseSuccessMessage = (event, reason) => {
+  const handleCloseSuccessMessage = (
+    event: React.SyntheticEvent<any, Event>,
+    reason: SnackbarCloseReason
+  ) => {
     if (reason === "clickaway") {
       return;
     }
     setRequestSuccessMessageOpen(false);
   };
-  const handleCloseFailureMessage = (event, reason) => {
+  const handleCloseFailureMessage = (
+    event: React.SyntheticEvent<any, Event>,
+    reason: SnackbarCloseReason
+  ) => {
     if (reason === "clickaway") {
       return;
     }
@@ -47,7 +56,8 @@ function UserDetails({ token }) {
       displayRequestSuccess,
       displayRequestFailure,
     });
-  const { register, handleSubmit, errors, setValue, setError } = useForm();
+  const { register, handleSubmit, errors, setValue, setError } =
+    useForm<FormInput>();
 
   useEffect(() => {
     if (userDetailsModificationError) {
@@ -78,7 +88,7 @@ function UserDetails({ token }) {
     }
   }, [userDetails, setValue]);
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: FormInput) => {
     const userDetailsToSend = produce(data, (draft) => {
       draft.isStaff = userDetails.isStaff;
     });
@@ -163,9 +173,5 @@ function UserDetails({ token }) {
     </section>
   );
 }
-
-UserDetails.propTypes = {
-  token: PropTypes.string.isRequired,
-};
 
 export default UserDetails;

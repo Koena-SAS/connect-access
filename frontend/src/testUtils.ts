@@ -1,11 +1,20 @@
-import { cleanup, fireEvent, waitFor } from "@testing-library/react";
+import {
+  cleanup,
+  fireEvent,
+  RenderResult,
+  waitFor,
+} from "@testing-library/react";
 import axios from "axios";
 import produce from "immer";
 import { generatePath } from "react-router-dom";
 import { cache } from "swr";
 import { PATHS, PATHS_WITHOUT_PREFIX } from "./constants/paths";
-import { MediationRequestRecieved } from "./types/mediationRequest";
+import type {
+  MediationRequest,
+  MediationRequestRecieved,
+} from "./types/mediationRequest";
 import { ConfigData } from "./types/types";
+import { getEntries } from "./types/utilTypes";
 
 jest.mock("axios");
 export const mockedAxios = axios as jest.Mocked<typeof axios>;
@@ -78,7 +87,7 @@ export const mediationRequestsResponse: MediationRequestRecieved[] = [
   },
 ];
 
-export const mediationRequests = [
+export const mediationRequests: MediationRequest[] = [
   {
     id: "4ae77193-1b66-4182-82af-bc9ce432b0e0",
     creationDate: "2021-02-03",
@@ -146,21 +155,21 @@ export const mediationRequests = [
   },
 ];
 
-export let axiosPostResponseLogin;
-export let axiosPostResponseLogout;
-export let axiosPostResponseRegister;
-export let axiosPostResponseResetPassword;
-export let axiosPostResponseResetPasswordConfirm;
-export let axiosGetResponseMe;
-export let axiosPutResponseMe;
-export let axiosPostResponseMediationRequests;
-export let axiosGetResponseMediationRequests;
-export let axiosGetResponseOrganizationApp;
-export let axiosGetResponseTraceReports;
-export let axiosPostResponseTraceReports;
-export let axiosPatchResponseTraceReports;
-export let axiosGetResponseAboutService;
-export let axiosGetResponseContactInformation;
+export let axiosPostResponseLogin: any;
+export let axiosPostResponseLogout: any;
+export let axiosPostResponseRegister: any;
+export let axiosPostResponseResetPassword: any;
+export let axiosPostResponseResetPasswordConfirm: any;
+export let axiosGetResponseMe: any;
+export let axiosPutResponseMe: any;
+export let axiosPostResponseMediationRequests: any;
+export let axiosGetResponseMediationRequests: any;
+export let axiosGetResponseOrganizationApp: any;
+export let axiosGetResponseTraceReports: any;
+export let axiosPostResponseTraceReports: any;
+export let axiosPatchResponseTraceReports: any;
+export let axiosGetResponseAboutService: any;
+export let axiosGetResponseContactInformation: any;
 
 /**
  * Set mocks for axios methods to be as close as possible
@@ -379,7 +388,7 @@ export const resetAxiosMocks = () => {
  */
 export function generatePathsWithPrefix() {
   return produce(PATHS, (draftState) => {
-    for (const [key, value] of Object.entries(draftState)) {
+    for (const [key, value] of getEntries(draftState)) {
       draftState[key] = generatePath(value, {
         organizationSlug: "koena",
         applicationSlug: "koena-connect",
@@ -397,7 +406,7 @@ export function generatePathsWithPrefix() {
  */
 export function generatePathsWithoutPrefix() {
   return produce(PATHS, (draftState) => {
-    for (const [key, value] of Object.entries(draftState)) {
+    for (const [key, value] of getEntries(draftState)) {
       draftState[key] = generatePath(value, {
         organizationSlug: null,
         applicationSlug: null,
@@ -443,19 +452,19 @@ export const runWithAndWithoutOrganizationPrefix = async (
 
 /**
  * Fill a field conditionally.
- * @param {function} getByLabelText function coming from react testing library.
- * @param {string} fieldLabel the label of the field to fill.
- * @param {string} value the value of the field to fill.
- * @param {boolean} shouldFill if false we don't do anything.
+ * @param app render result coming from react testing library.
+ * @param fieldLabel the label of the field to fill.
+ * @param value the value of the field to fill.
+ * @param shouldFill if false we don't do anything.
  */
 export function fillField(
-  getByLabelText,
-  fieldLabel,
-  value,
-  shouldFill = true
+  app: RenderResult,
+  fieldLabel: string | RegExp,
+  value: string,
+  shouldFill: boolean = true
 ) {
   if (shouldFill) {
-    const field = getByLabelText(fieldLabel);
+    const field = app.getByLabelText(fieldLabel);
     fireEvent.change(field, { target: { value: value } });
   }
 }
@@ -463,7 +472,7 @@ export function fillField(
 /**
  * Clicks on the given element wrapped in an waitFor().
  */
-export async function click(element) {
+export async function click(element: Node) {
   await waitFor(() => {
     fireEvent.click(element);
   });

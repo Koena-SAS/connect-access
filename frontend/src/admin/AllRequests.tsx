@@ -1,5 +1,4 @@
 import { Trans } from "@lingui/macro";
-import PropTypes from "prop-types";
 import { useMemo, useState } from "react";
 import { PATHS } from "../constants/paths";
 import { useAdminMediationRequests } from "../hooks";
@@ -12,7 +11,7 @@ import FilterMediationRequests, {
 /**
  * List all the mediation requests with filtering options.
  */
-function AllRequests({ token }) {
+function AllRequests({ token }: { token: string }) {
   const { mediationRequests } = useAdminMediationRequests(token);
   const [chosenStatus, setChosenStatus] = useState("");
   const [chosenApplication, setChosenApplication] = useState("");
@@ -70,12 +69,5 @@ function AllRequests({ token }) {
     </div>
   );
 }
-
-AllRequests.propTypes = {
-  /**
-   * The authentication token given when user is logged in.
-   */
-  token: PropTypes.string.isRequired,
-};
 
 export default AllRequests;

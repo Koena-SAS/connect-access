@@ -1,9 +1,16 @@
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
-import { fireEvent, render, waitFor, within } from "@testing-library/react";
-import { createMemoryHistory } from "history";
+import {
+  fireEvent,
+  render,
+  RenderResult,
+  waitFor,
+  within,
+} from "@testing-library/react";
+import { createMemoryHistory, History } from "history";
 import { Route, Router } from "react-router-dom";
 import { cache, SWRConfig } from "swr";
+import type { Paths } from "../constants/paths";
 import { PATHS_WITHOUT_PREFIX } from "../constants/paths";
 import ConfigDataContext from "../contexts/configData";
 import { initLanguagesForTesting } from "../i18nTestHelper";
@@ -14,13 +21,14 @@ import {
   resetAxiosMocks,
   runWithAndWithoutOrganizationPrefix,
 } from "../testUtils";
+import type { MediationRequestRecieved } from "../types/mediationRequest";
 import { fillResetPasswordConfirmFields } from "../users/password/testUtils";
 import Main from "./Main";
 
 initLanguagesForTesting();
 jest.mock("axios");
 
-let userMediationsResponse;
+let userMediationsResponse: MediationRequestRecieved[];
 
 beforeEach(async () => {
   userMediationsResponse = mediationRequestsResponse.slice();
@@ -34,12 +42,12 @@ afterEach(() => {
 });
 
 async function renderMain(
-  initialPath = null,
-  islogged = false,
-  history = null,
-  generatedPaths = null,
-  paths = null
-) {
+  initialPath: string = null,
+  islogged: boolean = false,
+  history: History = null,
+  generatedPaths: Paths = null,
+  paths: Paths = null
+): Promise<RenderResult> {
   if (!paths) {
     paths = PATHS_WITHOUT_PREFIX;
   }
@@ -53,7 +61,7 @@ async function renderMain(
     }
   }
   if (initialPath) history.push(initialPath);
-  let main;
+  let main: RenderResult;
   function renderMainComponent() {
     return render(
       <ConfigDataContext.Provider value={configData}>
@@ -82,10 +90,10 @@ async function renderMain(
   return main;
 }
 
-const logged = Object.freeze({
+const logged = {
   YES: "YES",
   NO: "NO",
-});
+} as const;
 
 describe("Routing tests when not logged in", () => {
   it("displays correct item when visiting route / and not logged", async () => {
@@ -143,101 +151,110 @@ describe("Routing tests when logged in", () => {
   });
 });
 
-async function checkOnlyNeededComponentIsRendered(routeName, loggingState) {
-  await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
-    const isLogged = loggingState === logged.YES;
-    const app = await renderMain(
-      generatedPaths[routeName],
-      isLogged,
-      null,
-      generatedPaths,
-      paths
-    );
-    const { queryByTestId, queryByText, getByText, getByTestId } = app;
-    if (routeName === "LOGIN" && !isLogged) {
-      const loginModal = getByTestId("loginSubmit");
-      expect(loginModal).toBeInTheDocument();
-    } else {
-      const loginModal = queryByTestId("loginSubmit");
-      expect(loginModal).not.toBeInTheDocument();
+async function checkOnlyNeededComponentIsRendered(
+  routeName: keyof Paths,
+  loggingState: "YES" | "NO"
+) {
+  await runWithAndWithoutOrganizationPrefix(
+    async (generatedPaths: Paths, paths: Paths) => {
+      const isLogged = loggingState === logged.YES;
+      const app = await renderMain(
+        generatedPaths[routeName],
+        isLogged,
+        null,
+        generatedPaths,
+        paths
+      );
+      const { queryByTestId, queryByText, getByText, getByTestId } = app;
+      if (routeName === "LOGIN" && !isLogged) {
+        const loginModal = getByTestId("loginSubmit");
+        expect(loginModal).toBeInTheDocument();
+      } else {
+        const loginModal = queryByTestId("loginSubmit");
+        expect(loginModal).not.toBeInTheDocument();
+      }
+      if (routeName === "REGISTER" && !isLogged) {
+        const registerModal = getByText("Sign up");
+        expect(registerModal).toBeInTheDocument();
+      } else {
+        const registerModal = queryByText("Sign up");
+        expect(registerModal).not.toBeInTheDocument();
+      }
+      if (routeName === "RESET_PASSWORD" && !isLogged) {
+        const resetButton = getByText("Reset password");
+        expect(resetButton).toBeInTheDocument();
+      } else {
+        const resetButton = queryByText("Reset password");
+        expect(resetButton).not.toBeInTheDocument();
+      }
+      if (routeName === "RESET_PASSWORD_CONFIRM" && !isLogged) {
+        const submitButton = getByText("Change your password");
+        expect(submitButton).toBeInTheDocument();
+      } else {
+        const submitButton = queryByText("Change your password");
+        expect(submitButton).not.toBeInTheDocument();
+      }
+      if (routeName === "USER_REQUESTS" && isLogged) {
+        const userMediations = getByText("All requests");
+        expect(userMediations).toBeInTheDocument();
+      } else {
+        const userMediations = queryByText("All requests");
+        expect(userMediations).not.toBeInTheDocument();
+      }
+      if (routeName === "USER_REQUEST" && isLogged) {
+        const userMediation = getByText(/Mediation request details/);
+        expect(userMediation).toBeInTheDocument();
+      } else {
+        const userMediation = queryByText(/Mediation request details/);
+        expect(userMediation).not.toBeInTheDocument();
+      }
     }
-    if (routeName === "REGISTER" && !isLogged) {
-      const registerModal = getByText("Sign up");
-      expect(registerModal).toBeInTheDocument();
-    } else {
-      const registerModal = queryByText("Sign up");
-      expect(registerModal).not.toBeInTheDocument();
-    }
-    if (routeName === "RESET_PASSWORD" && !isLogged) {
-      const resetButton = getByText("Reset password");
-      expect(resetButton).toBeInTheDocument();
-    } else {
-      const resetButton = queryByText("Reset password");
-      expect(resetButton).not.toBeInTheDocument();
-    }
-    if (routeName === "RESET_PASSWORD_CONFIRM" && !isLogged) {
-      const submitButton = getByText("Change your password");
-      expect(submitButton).toBeInTheDocument();
-    } else {
-      const submitButton = queryByText("Change your password");
-      expect(submitButton).not.toBeInTheDocument();
-    }
-    if (routeName === "USER_REQUESTS" && isLogged) {
-      const userMediations = getByText("All requests");
-      expect(userMediations).toBeInTheDocument();
-    } else {
-      const userMediations = queryByText("All requests");
-      expect(userMediations).not.toBeInTheDocument();
-    }
-    if (routeName === "USER_REQUEST" && isLogged) {
-      const userMediation = getByText(/Mediation request details/);
-      expect(userMediation).toBeInTheDocument();
-    } else {
-      const userMediation = queryByText(/Mediation request details/);
-      expect(userMediation).not.toBeInTheDocument();
-    }
-  });
+  );
 }
 
 describe("Password reset routing", () => {
   it(`redirects to /login after successful password change`, async () => {
-    await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
-      resetAxiosMocks();
-      const history = createMemoryHistory({
-        initialEntries: [generatedPaths.ROOT],
-      });
-      const app = await renderMain(
-        generatedPaths.RESET_PASSWORD_CONFIRM,
-        false,
-        history,
-        generatedPaths,
-        paths
-      );
-      await fillResetPasswordConfirmFields(app);
-      await waitFor(() =>
-        expect(history.location.pathname).toEqual(generatedPaths.LOGIN)
-      );
-    });
+    await runWithAndWithoutOrganizationPrefix(
+      async (generatedPaths: Paths, paths: Paths) => {
+        resetAxiosMocks();
+        const history = createMemoryHistory({
+          initialEntries: [generatedPaths.ROOT],
+        });
+        const app = await renderMain(
+          generatedPaths.RESET_PASSWORD_CONFIRM,
+          false,
+          history,
+          generatedPaths,
+          paths
+        );
+        await fillResetPasswordConfirmFields(app);
+        await waitFor(() =>
+          expect(history.location.pathname).toEqual(generatedPaths.LOGIN)
+        );
+      }
+    );
   });
 });
 
 describe("User mediations", () => {
   it(`displays mediation request item details when clicking on a specific
   mediation request`, async () => {
-    await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
-      mockedAxios.get.mockResolvedValue({ data: userMediationsResponse });
-      const { getByText } = await renderMain(
-        generatedPaths.USER_REQUESTS,
-        true,
-        null,
-        generatedPaths,
-        paths
-      );
-      const id = await waitFor(() => getByText(/f8842f63/));
-      const detailsButton = within(id.closest("tr")).getByText("Details");
-      fireEvent.click(detailsButton);
-      expect(getByText(/Mediation request details/)).toBeInTheDocument();
-    });
+    await runWithAndWithoutOrganizationPrefix(
+      async (generatedPaths: Paths, paths: Paths) => {
+        mockedAxios.get.mockResolvedValue({ data: userMediationsResponse });
+        const { getByText } = await renderMain(
+          generatedPaths.USER_REQUESTS,
+          true,
+          null,
+          generatedPaths,
+          paths
+        );
+        const id = await waitFor(() => getByText(/f8842f63/));
+        const detailsButton = within(id.closest("tr")).getByText("Details");
+        fireEvent.click(detailsButton);
+        expect(getByText(/Mediation request details/)).toBeInTheDocument();
+      }
+    );
   });
 });
 
@@ -245,62 +262,78 @@ describe("renders correctly document title", () => {
   // route / is already tested in FormContainer tests
 
   it(`renders correct title when visiting route /login`, async () => {
-    await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
-      await checkRendersCorrectTitle(
-        generatedPaths.LOGIN,
-        "Connect Access - Login",
-        paths
-      );
-    });
+    await runWithAndWithoutOrganizationPrefix(
+      async (generatedPaths: Paths, paths: Paths) => {
+        await checkRendersCorrectTitle(
+          generatedPaths.LOGIN,
+          "Connect Access - Login",
+          paths
+        );
+      }
+    );
   });
   it(`renders correct title when visiting route /register`, async () => {
-    await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
-      await checkRendersCorrectTitle(
-        generatedPaths.REGISTER,
-        "Connect Access - Signup",
-        paths
-      );
-    });
+    await runWithAndWithoutOrganizationPrefix(
+      async (generatedPaths: Paths, paths: Paths) => {
+        await checkRendersCorrectTitle(
+          generatedPaths.REGISTER,
+          "Connect Access - Signup",
+          paths
+        );
+      }
+    );
   });
   it(`renders correct title when visiting route /reset-password`, async () => {
-    await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
-      await checkRendersCorrectTitle(
-        generatedPaths.RESET_PASSWORD,
-        "Connect Access - Reset your password",
-        paths
-      );
-    });
+    await runWithAndWithoutOrganizationPrefix(
+      async (generatedPaths: Paths, paths: Paths) => {
+        await checkRendersCorrectTitle(
+          generatedPaths.RESET_PASSWORD,
+          "Connect Access - Reset your password",
+          paths
+        );
+      }
+    );
   });
   it(`renders correct title when visiting route /reset-password/confirm/:uid/:token`, async () => {
-    await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
-      await checkRendersCorrectTitle(
-        generatedPaths.RESET_PASSWORD_CONFIRM,
-        "Connect Access - Confirm password reset",
-        paths
-      );
-    });
+    await runWithAndWithoutOrganizationPrefix(
+      async (generatedPaths: Paths, paths: Paths) => {
+        await checkRendersCorrectTitle(
+          generatedPaths.RESET_PASSWORD_CONFIRM,
+          "Connect Access - Confirm password reset",
+          paths
+        );
+      }
+    );
   });
   it(`renders correct title when visiting route /user-requests`, async () => {
-    await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
-      await checkRendersCorrectTitle(
-        generatedPaths.USER_REQUESTS,
-        "Connect Access - My mediation requests",
-        paths
-      );
-    });
+    await runWithAndWithoutOrganizationPrefix(
+      async (generatedPaths: Paths, paths: Paths) => {
+        await checkRendersCorrectTitle(
+          generatedPaths.USER_REQUESTS,
+          "Connect Access - My mediation requests",
+          paths
+        );
+      }
+    );
   });
   it(`renders correct title when visiting route /user-requests/:id`, async () => {
-    await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
-      mockedAxios.get.mockResolvedValue({ data: userMediationsResponse });
-      await checkRendersCorrectTitle(
-        generatedPaths.USER_REQUEST,
-        "Connect Access - My mediation request detail",
-        paths
-      );
-    });
+    await runWithAndWithoutOrganizationPrefix(
+      async (generatedPaths: Paths, paths: Paths) => {
+        mockedAxios.get.mockResolvedValue({ data: userMediationsResponse });
+        await checkRendersCorrectTitle(
+          generatedPaths.USER_REQUEST,
+          "Connect Access - My mediation request detail",
+          paths
+        );
+      }
+    );
   });
 
-  async function checkRendersCorrectTitle(route, expectedTitle, paths) {
+  async function checkRendersCorrectTitle(
+    route: string,
+    expectedTitle: string,
+    paths: Paths
+  ) {
     await renderMain(route, false, null, null, paths);
     await waitFor(() => expect(document.title).toEqual(expectedTitle));
   }
@@ -308,40 +341,44 @@ describe("renders correctly document title", () => {
 
 describe("Notification messages", () => {
   it(`displays a success message when the backend replies with success`, async () => {
-    await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
-      resetAxiosMocks();
-      const app = await renderMain(
-        generatedPaths.RESET_PASSWORD_CONFIRM,
-        false,
-        null,
-        generatedPaths,
-        paths
-      );
-      await fillResetPasswordConfirmFields(app);
-      const successMessage = await waitFor(() =>
-        app.getByText(/Your password has been successfully changed./)
-      );
-      expect(successMessage).toBeInTheDocument();
-    });
+    await runWithAndWithoutOrganizationPrefix(
+      async (generatedPaths: Paths, paths: Paths) => {
+        resetAxiosMocks();
+        const app = await renderMain(
+          generatedPaths.RESET_PASSWORD_CONFIRM,
+          false,
+          null,
+          generatedPaths,
+          paths
+        );
+        await fillResetPasswordConfirmFields(app);
+        const successMessage = await waitFor(() =>
+          app.getByText(/Your password has been successfully changed./)
+        );
+        expect(successMessage).toBeInTheDocument();
+      }
+    );
   });
 
   it(`displays an error message when the backend replies with a non field
   error`, async () => {
-    await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
-      resetAxiosMocks();
-      const app = await renderMain(
-        generatedPaths.RESET_PASSWORD_CONFIRM,
-        false,
-        null,
-        generatedPaths,
-        paths
-      );
-      mockedAxios.post.mockRejectedValue({ data: "backend error" });
-      await fillResetPasswordConfirmFields(app);
-      const error = app.getByText(
-        /We were unable to change your password, please try again later./
-      );
-      expect(error).toBeInTheDocument();
-    });
+    await runWithAndWithoutOrganizationPrefix(
+      async (generatedPaths: Paths, paths: Paths) => {
+        resetAxiosMocks();
+        const app = await renderMain(
+          generatedPaths.RESET_PASSWORD_CONFIRM,
+          false,
+          null,
+          generatedPaths,
+          paths
+        );
+        mockedAxios.post.mockRejectedValue({ data: "backend error" });
+        await fillResetPasswordConfirmFields(app);
+        const error = app.getByText(
+          /We were unable to change your password, please try again later./
+        );
+        expect(error).toBeInTheDocument();
+      }
+    );
   });
 });

@@ -5,6 +5,7 @@ import { createMemoryHistory } from "history";
 import { createStore, StateMachineProvider } from "little-state-machine";
 import { Route, Router } from "react-router-dom";
 import { cache, SWRConfig } from "swr";
+import type { Paths } from "../constants/paths";
 import { PATHS, PATHS_WITHOUT_PREFIX } from "../constants/paths";
 import { initLanguagesForTesting } from "../i18nTestHelper";
 import {
@@ -96,21 +97,21 @@ describe("display fields conditionnally", () => {
   });
 
   async function checkConditionalFields(
-    browserUsed,
-    mobileAppUsed,
-    didTellOrganization,
-    didOrganizationReply
+    browserUsed: boolean,
+    mobileAppUsed: boolean,
+    didTellOrganization: boolean,
+    didOrganizationReply: boolean
   ) {
-    const { getByLabelText } = renderProblemDescription();
+    const app = renderProblemDescription();
     const conditionalFields = {
       browserUsed,
       mobileAppUsed,
       didTellOrganization,
       didOrganizationReply,
     };
-    fillStep2MandatoryFields(getByLabelText);
-    await fillStep2NonMandatoryFields(getByLabelText, conditionalFields);
-    await checkStep2FieldValues(getByLabelText, conditionalFields);
+    fillStep2MandatoryFields(app);
+    await fillStep2NonMandatoryFields(app, conditionalFields);
+    await checkStep2FieldValues(app, conditionalFields);
   }
 
   describe("Conditional on organizaton page or not", () => {
@@ -145,11 +146,11 @@ describe("Errors on mandatory fields", () => {
   missing`, async () => {
     const history = createMemoryHistory();
     const initialLocation = history.location;
-    const { getByText, getByLabelText } = renderProblemDescription(history);
-    fillStep2MandatoryFields(getByLabelText, "issueDescription");
-    const submit = getByText("Step 3: The organization");
+    const app = renderProblemDescription(history);
+    fillStep2MandatoryFields(app, "issueDescription");
+    const submit = app.getByText("Step 3: The organization");
     await click(submit);
-    const error = getByText("You have to describe your problem");
+    const error = app.getByText("You have to describe your problem");
     expect(error).toBeInTheDocument();
     expect(history.location).toEqual(initialLocation);
   });
@@ -160,13 +161,13 @@ describe("Errors on bad formatted input", () => {
   and click on next`, async () => {
     const history = createMemoryHistory();
     const initialLocation = history.location;
-    const { getByText, getByLabelText } = renderProblemDescription(history);
-    fillStep2MandatoryFields(getByLabelText);
-    const inputUrl = getByLabelText(/What is the URL address/);
+    const app = renderProblemDescription(history);
+    fillStep2MandatoryFields(app);
+    const inputUrl = app.getByLabelText(/What is the URL address/);
     fireEvent.change(inputUrl, { target: { value: "htp://domain.extension" } });
-    const submit = getByText("Step 3: The organization");
+    const submit = app.getByText("Step 3: The organization");
     await click(submit);
-    const error = getByText("The URL format is invalid");
+    const error = app.getByText("The URL format is invalid");
     expect(error).toBeInTheDocument();
     expect(history.location).toEqual(initialLocation);
   });
@@ -221,13 +222,13 @@ describe("Route correctly on previous / next step navigation buttons", () => {
     const history = createMemoryHistory({
       initialEntries: [generatedPathsWithPrefix.ROOT],
     });
-    const { getByText, getByLabelText } = renderProblemDescription(
+    const app = renderProblemDescription(
       history,
       generatedPathsWithPrefix,
       PATHS
     );
-    fillStep2MandatoryFields(getByLabelText);
-    const submit = await waitFor(() => getByText("Step 3: Summary"));
+    fillStep2MandatoryFields(app);
+    const submit = await waitFor(() => app.getByText("Step 3: Summary"));
     await click(submit);
     expect(history.location.pathname).toEqual(generatedPathsWithPrefix.RECAP);
   });
@@ -237,13 +238,13 @@ describe("Route correctly on previous / next step navigation buttons", () => {
     const history = createMemoryHistory({
       initialEntries: [generatedPathsWithoutPrefix.ROOT],
     });
-    const { getByText, getByLabelText } = renderProblemDescription(
+    const app = renderProblemDescription(
       history,
       generatedPathsWithoutPrefix,
       PATHS_WITHOUT_PREFIX
     );
-    fillStep2MandatoryFields(getByLabelText);
-    const submit = getByText("Step 3: The organization");
+    fillStep2MandatoryFields(app);
+    const submit = app.getByText("Step 3: The organization");
     await click(submit);
     expect(history.location.pathname).toEqual(
       generatedPathsWithoutPrefix.ORGANIZATION_INFO
@@ -252,43 +253,45 @@ describe("Route correctly on previous / next step navigation buttons", () => {
 
   it(`routes to the correct path when click on previous step button, without willing
   required fields`, async () => {
-    await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
-      const history = createMemoryHistory({
-        initialEntries: [generatedPaths.ROOT],
-      });
-      const { getByText } = renderProblemDescription(
-        history,
-        generatedPaths,
-        paths
-      );
-      const submit = getByText("Step 1: About yourself");
-      await click(submit);
-      expect(history.location.pathname).toEqual(generatedPaths.ROOT);
-    });
+    await runWithAndWithoutOrganizationPrefix(
+      async (generatedPaths: Paths, paths: Paths) => {
+        const history = createMemoryHistory({
+          initialEntries: [generatedPaths.ROOT],
+        });
+        const { getByText } = renderProblemDescription(
+          history,
+          generatedPaths,
+          paths
+        );
+        const submit = getByText("Step 1: About yourself");
+        await click(submit);
+        expect(history.location.pathname).toEqual(generatedPaths.ROOT);
+      }
+    );
   });
 });
 
 describe("Saves data", () => {
   it(`saves entered data after successful click on next step, and redisplays it
   when the component is recreated`, async () => {
-    const { getByText, getByLabelText, unmount } = renderProblemDescription();
-    fillStep2MandatoryFields(getByLabelText);
-    await fillStep2NonMandatoryFields(getByLabelText);
-    const next = getByText("Step 3: The organization");
+    const app = renderProblemDescription();
+    fillStep2MandatoryFields(app);
+    await fillStep2NonMandatoryFields(app);
+    const next = app.getByText("Step 3: The organization");
     await click(next);
-    unmount();
-    await checkStep2FieldValues(renderProblemDescription().getByLabelText);
+    app.unmount();
+    await checkStep2FieldValues(renderProblemDescription());
   });
 
   it(`saves entered data after successful click on previous step, and redisplays it
   when the component is recreated`, async () => {
-    const { getByText, getByLabelText, unmount } = renderProblemDescription();
-    fillStep2MandatoryFields(getByLabelText);
-    await fillStep2NonMandatoryFields(getByLabelText);
-    const previous = getByText("Step 1: About yourself");
+    const app = renderProblemDescription();
+    fillStep2MandatoryFields(app);
+    await fillStep2NonMandatoryFields(app);
+    const previous = app.getByText("Step 1: About yourself");
     await click(previous);
-    unmount();
-    await checkStep2FieldValues(renderProblemDescription().getByLabelText);
+    app.unmount();
+    await checkStep2FieldValues(renderProblemDescription());
   });
 });
 

@@ -1,6 +1,5 @@
 import { Trans } from "@lingui/macro";
 import produce from "immer";
-import PropTypes from "prop-types";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useAdminMediationRequest, usePrevious } from "../../hooks";
@@ -46,7 +45,8 @@ function RequestDetail({ token, setBreadcrumbs }: RequestDetailProps) {
     [setBreadcrumbs]
   );
   const { mediationRequest } = useAdminMediationRequest(token);
-  const previousMediationRequest = usePrevious(mediationRequest);
+  const previousMediationRequest =
+    usePrevious<MediationRequest>(mediationRequest);
   const { register, errors, setValue } = useForm<FormInputs>({
     defaultValues: mediationRequest
       ? produce(mediationRequest, (draft) => {
@@ -95,10 +95,5 @@ function RequestDetail({ token, setBreadcrumbs }: RequestDetailProps) {
     </div>
   );
 }
-
-RequestDetail.propTypes = {
-  token: PropTypes.string.isRequired,
-  setBreadcrumbs: PropTypes.func.isRequired,
-};
 
 export default RequestDetail;

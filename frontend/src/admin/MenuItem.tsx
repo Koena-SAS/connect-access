@@ -1,15 +1,40 @@
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
-import PropTypes from "prop-types";
 import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { PATHS } from "../constants/paths";
 import { useGeneratePrefixedPath, useWindowDimensions } from "../hooks";
 
+type ItemIconProps = {
+  fontSize?: string;
+  className?: string;
+  color?: string;
+};
+
+type MenuItemProps = {
+  itemText: string;
+  ItemIcon: React.FC<ItemIconProps>;
+  id: string;
+  shownDesktopMenu: boolean;
+  /**
+   * Actual menu items.
+   */
+  subItems: {
+    text: string;
+    link: string;
+  }[];
+};
+
 /**
  * Administration menu item.
  */
-function MenuItem({ itemText, ItemIcon, id, subItems, shownDesktopMenu }) {
+function MenuItem({
+  itemText,
+  ItemIcon,
+  id,
+  subItems,
+  shownDesktopMenu,
+}: MenuItemProps) {
   const generatePrefixedPath = useGeneratePrefixedPath();
   const location = useLocation();
   const { width: windowWidth } = useWindowDimensions();
@@ -98,21 +123,5 @@ function MenuItem({ itemText, ItemIcon, id, subItems, shownDesktopMenu }) {
     </>
   );
 }
-
-MenuItem.propTypes = {
-  itemText: PropTypes.string.isRequired,
-  ItemIcon: PropTypes.object.isRequired,
-  id: PropTypes.string.isRequired,
-  shownDesktopMenu: PropTypes.bool.isRequired,
-  /**
-   * Actual menu items.
-   */
-  subItems: PropTypes.arrayOf(
-    PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      link: PropTypes.string.isRequired,
-    })
-  ),
-};
 
 export default MenuItem;

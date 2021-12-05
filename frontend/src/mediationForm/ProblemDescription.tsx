@@ -9,7 +9,7 @@ import { PATHS } from "../constants/paths";
 import Button from "../forms/buttons/Button";
 import Information from "../forms/Information";
 import { useGeneratePrefixedPath, useOrganizationApp } from "../hooks";
-import type { OrganizationApp } from "../types/organizationApp";
+import type { OrganizationAppRecieved } from "../types/organizationApp";
 import {
   AboutIssueFields,
   FurtherInfoFields,
@@ -17,14 +17,17 @@ import {
   OrganizationAnswerFields,
 } from "./fields";
 import FormNavigation from "./FormNavigation";
-import type { Completed } from "./StepsInitializer";
+import type { Completed, Step } from "./StepsInitializer";
+import type { ProblemDescription as ProblemDescriptionType } from "./updateAction";
 import { updateProblemDescription } from "./updateAction";
+
+type FormInput = ProblemDescriptionType;
 
 type ProblemDescriptionProps = RouteComponentProps & {
   /**
    * Indicates the figure of the current displayed form step.
    */
-  activeStep: number;
+  activeStep: Step;
   /**
    * List of the steps that have been completed, to determine
    * if the user have access to the next step or not.
@@ -47,7 +50,7 @@ type ProblemDescriptionProps = RouteComponentProps & {
   /**
    * The organization applicaiton data got from the backend for the first time.
    */
-  initialOrganizationApp?: OrganizationApp;
+  initialOrganizationApp?: OrganizationAppRecieved;
 };
 
 /**
@@ -77,15 +80,15 @@ function ProblemDescription({
     getValues,
     watch,
     formState: { errors },
-  } = useForm({ defaultValues });
+  } = useForm<FormInput>({ defaultValues });
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: FormInput) => {
     actions.updateProblemDescription(data);
   };
 
   let validateRequiredFields = true;
-  const validateRequired = (errorText) => {
-    return (value) => {
+  const validateRequired = (errorText: string) => {
+    return (value: string) => {
       if (!validateRequiredFields || Boolean(value)) {
         return true;
       } else {
@@ -229,7 +232,9 @@ function ProblemDescription({
  * Tells if the problem description step is complete or not.
  * @param {object of String} problemDescriptionState
  */
-export function problemDescriptionStepComplete(problemDescriptionState) {
+export function problemDescriptionStepComplete(
+  problemDescriptionState: ProblemDescriptionType
+) {
   const { issueDescription } = problemDescriptionState;
   if (issueDescription) {
     return true;

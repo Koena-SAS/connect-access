@@ -1,11 +1,14 @@
 import { t } from "@lingui/macro";
 import MuiAlert from "@material-ui/core/Alert";
-import MUISnackbar from "@material-ui/core/Snackbar";
+import MUISnackbar, { SnackbarCloseReason } from "@material-ui/core/Snackbar";
 
 type SnackbarProps = {
   notificationText: string;
   open: boolean;
-  onClose: any;
+  onClose: (
+    event: React.SyntheticEvent<any, Event>,
+    reason: SnackbarCloseReason
+  ) => void;
   closeText?: string;
   severity: "success" | "error" | "info";
 };
@@ -32,7 +35,7 @@ function Snackbar({
       <MuiAlert
         elevation={6}
         variant="filled"
-        onClose={onClose}
+        onClose={(event) => onClose(event, null)}
         severity={severity}
         closeText={closeText}
         role={severity === "error" ? "alert" : "status"}

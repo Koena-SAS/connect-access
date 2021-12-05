@@ -8,17 +8,20 @@ import { PATHS } from "../constants/paths";
 import Button from "../forms/buttons/Button";
 import Information from "../forms/Information";
 import { useGeneratePrefixedPath } from "../hooks";
-import type { OrganizationApp } from "../types/organizationApp";
+import type { OrganizationAppRecieved } from "../types/organizationApp";
 import { AboutOrganizationFields } from "./fields";
 import FormNavigation from "./FormNavigation";
-import type { Completed } from "./StepsInitializer";
+import type { Completed, Step } from "./StepsInitializer";
+import type { OrganizationInfo as OrganizationInfoType } from "./updateAction";
 import { updateOrganizationInfo } from "./updateAction";
+
+type FormInput = OrganizationInfoType;
 
 type OrganizationInfoProps = RouteComponentProps & {
   /**
    * Indicates the figure of the current displayed form step.
    */
-  activeStep: number;
+  activeStep: Step;
   /**
    * List of the steps that have been completed, to determine
    * if the user have access to the next step or not.
@@ -41,7 +44,7 @@ type OrganizationInfoProps = RouteComponentProps & {
   /**
    * The organization applicaiton data got from the backend for the first time.
    */
-  initialOrganizationApp?: OrganizationApp;
+  initialOrganizationApp?: OrganizationAppRecieved;
 };
 
 /**
@@ -58,10 +61,10 @@ function OrganizationInfo({
 }: OrganizationInfoProps) {
   const { state, actions } = useStateMachine({ updateOrganizationInfo });
   const generatePrefixedPath = useGeneratePrefixedPath();
-  const { register, control, errors, trigger, getValues } = useForm({
+  const { register, control, errors, trigger, getValues } = useForm<FormInput>({
     defaultValues: state.organizationInfo,
   });
-  const onSubmit = (data) => {
+  const onSubmit = (data: FormInput) => {
     actions.updateOrganizationInfo(data);
   };
 
@@ -152,7 +155,9 @@ function OrganizationInfo({
  * Tells if the organization info step is complete or not.
  * @param {object of String} organizationInfoState
  */
-export function organizationInfoStepComplete(organizationInfoState) {
+export function organizationInfoStepComplete(
+  organizationInfoState: OrganizationInfoType
+) {
   return true;
 }
 

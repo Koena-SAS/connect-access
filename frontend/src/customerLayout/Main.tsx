@@ -1,12 +1,15 @@
 import { t } from "@lingui/macro";
-import PropTypes from "prop-types";
+import { SnackbarCloseReason } from "@material-ui/core/Snackbar";
 import { useContext, useState } from "react";
 import { Route, Switch } from "react-router-dom";
+import type { Paths } from "../constants/paths";
 import ConfigDataContext from "../contexts/configData";
 import Snackbar from "../forms/Snackbar";
 import { useUserDetails } from "../hooks";
 import { FormContainer } from "../mediationForm";
+import type { Step } from "../mediationForm/StepsInitializer";
 import Page from "../Page";
+import type { OrganizationAppRecieved } from "../types/organizationApp";
 import { ConfigData } from "../types/types";
 import {
   Account,
@@ -15,6 +18,25 @@ import {
   UserMediation,
   UserMediations,
 } from "../users";
+
+type MainProps = {
+  isLogged: boolean;
+  /**
+   * Set login token for user authentication.
+   */
+  setToken: (token: string) => void;
+  /**
+   * The authentication token given when user is logged in.
+   */
+  token?: string;
+  activeMediationFormStep: Step;
+  setActiveMediationFormStep: (activeMediationFormStep: number) => void;
+  paths: Paths;
+  /**
+   * The organization applicaiton data got from the backend for the first time.
+   */
+  initialOrganizationApp?: OrganizationAppRecieved;
+};
 
 /**
  * Main content with different pages.
@@ -27,7 +49,7 @@ function Main({
   setActiveMediationFormStep,
   paths,
   initialOrganizationApp,
-}) {
+}: MainProps) {
   const configData = useContext<ConfigData>(ConfigDataContext);
   const { userDetails } = useUserDetails(token);
   const [requestSuccessMessageOpen, setRequestSuccessMessageOpen] =
@@ -40,13 +62,19 @@ function Main({
   const displayRequestFailure = () => {
     setRequestFailureMessageOpen(true);
   };
-  const ClosePasswordConfirmSuccessMessage = (event, reason) => {
+  const ClosePasswordConfirmSuccessMessage = (
+    event: React.SyntheticEvent<any, Event>,
+    reason: SnackbarCloseReason
+  ) => {
     if (reason === "clickaway") {
       return;
     }
     setRequestSuccessMessageOpen(false);
   };
-  const ClosePasswordFailureMessage = (event, reason) => {
+  const ClosePasswordFailureMessage = (
+    event: React.SyntheticEvent<any, Event>,
+    reason: SnackbarCloseReason
+  ) => {
     if (reason === "clickaway") {
       return;
     }
@@ -119,24 +147,5 @@ function Main({
     </main>
   );
 }
-
-Main.propTypes = {
-  isLogged: PropTypes.bool.isRequired,
-  /**
-   * Set login token for user authentication.
-   */
-  setToken: PropTypes.func.isRequired,
-  /**
-   * The authentication token given when user is logged in.
-   */
-  token: PropTypes.string,
-  activeMediationFormStep: PropTypes.number.isRequired,
-  setActiveMediationFormStep: PropTypes.func.isRequired,
-  paths: PropTypes.objectOf(PropTypes.string),
-  /**
-   * The organization applicaiton data got from the backend for the first time.
-   */
-  initialOrganizationApp: PropTypes.object,
-};
 
 export default Main;

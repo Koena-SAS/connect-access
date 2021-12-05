@@ -1,7 +1,6 @@
 import { t, Trans } from "@lingui/macro";
 import CloseIcon from "@material-ui/icons/Close";
 import MenuIcon from "@material-ui/icons/Menu";
-import PropTypes from "prop-types";
 import { useContext, useEffect, useState } from "react";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
 import { LOGIN_HIDDEN } from "../constants/config";
@@ -17,10 +16,22 @@ import logoBackground from "../images/logo_background.png";
 import { ConfigData } from "../types/types";
 import { LogoutButton } from "../users/identification";
 
+type HeaderProps = {
+  isLogged: boolean;
+  /**
+   * Set login token for user authentication.
+   */
+  setToken: (token: string) => void;
+  /**
+   * The authentication token given when user is logged in.
+   */
+  token?: string;
+};
+
 /**
  * Header containing the main navbar.
  */
-function Header({ isLogged, setToken, token }) {
+function Header({ isLogged, setToken, token }: HeaderProps) {
   const configData = useContext<ConfigData>(ConfigDataContext);
   const location = useLocation();
   const history = useHistory();
@@ -38,14 +49,14 @@ function Header({ isLogged, setToken, token }) {
       hideMenu();
     }
   });
-  const handleLoginClick = (e) => {
+  const handleLoginClick = (event: KeyboardEvent) => {
     history.push({
       pathname: generatePrefixedPath(PATHS.LOGIN),
       state: { from: location.pathname },
     });
   };
   useEffect(() => {
-    const handleEscape = (event) => {
+    const handleEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         if (burgerMenuVisible) {
           hideMenu();
@@ -160,17 +171,5 @@ function Header({ isLogged, setToken, token }) {
     </header>
   );
 }
-
-Header.propTypes = {
-  isLogged: PropTypes.bool.isRequired,
-  /**
-   * Set login token for user authentication.
-   */
-  setToken: PropTypes.func.isRequired,
-  /**
-   * The authentication token given when user is logged in.
-   */
-  token: PropTypes.string,
-};
 
 export default Header;

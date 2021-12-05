@@ -3,8 +3,8 @@ import { I18nProvider } from "@lingui/react";
 import { fireEvent, render, waitFor, within } from "@testing-library/react";
 import { createMemoryHistory } from "history";
 import { createStore, StateMachineProvider } from "little-state-machine";
-import React from "react";
 import { Route, Router } from "react-router-dom";
+import type { Paths } from "../constants/paths";
 import { PATHS, PATHS_WITHOUT_PREFIX } from "../constants/paths";
 import { initLanguagesForTesting } from "../i18nTestHelper";
 import {
@@ -16,11 +16,12 @@ import {
   runWithAndWithoutOrganizationPrefix,
 } from "../testUtils";
 import Recap from "./Recap";
+import type { GlobalState } from "./updateAction";
 
 initLanguagesForTesting();
 jest.mock("axios");
 
-let storeContent;
+let storeContent: GlobalState;
 
 const generatedPathsWithPrefix = generatePathsWithPrefix();
 const generatedPathsWithoutPrefix = generatePathsWithoutPrefix();
@@ -360,30 +361,34 @@ describe("Route correctly", () => {
   });
 
   it(`routes to the correct path when clicking on modify your data button`, async () => {
-    await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
-      const history = createMemoryHistory({
-        initialEntries: [generatedPaths.ROOT],
-      });
-      const { getByText } = renderRecap(history, generatedPaths, paths);
-      const modifyYourData = getByText("Modify your data");
-      fireEvent.click(modifyYourData);
-      expect(history.location.pathname).toEqual(generatedPaths.ROOT);
-    });
+    await runWithAndWithoutOrganizationPrefix(
+      async (generatedPaths: Paths, paths: Paths) => {
+        const history = createMemoryHistory({
+          initialEntries: [generatedPaths.ROOT],
+        });
+        const { getByText } = renderRecap(history, generatedPaths, paths);
+        const modifyYourData = getByText("Modify your data");
+        fireEvent.click(modifyYourData);
+        expect(history.location.pathname).toEqual(generatedPaths.ROOT);
+      }
+    );
   });
 
   it(`routes to the correct path when clicking on modify your problem
   description`, async () => {
-    await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
-      const history = createMemoryHistory({
-        initialEntries: [generatedPaths.ROOT],
-      });
-      const { getByText } = renderRecap(history, generatedPaths, paths);
-      const modifyYourData = getByText("Modify your problem description");
-      fireEvent.click(modifyYourData);
-      expect(history.location.pathname).toEqual(
-        generatedPaths.PROBLEM_DESCRIPTION
-      );
-    });
+    await runWithAndWithoutOrganizationPrefix(
+      async (generatedPaths: Paths, paths: Paths) => {
+        const history = createMemoryHistory({
+          initialEntries: [generatedPaths.ROOT],
+        });
+        const { getByText } = renderRecap(history, generatedPaths, paths);
+        const modifyYourData = getByText("Modify your problem description");
+        fireEvent.click(modifyYourData);
+        expect(history.location.pathname).toEqual(
+          generatedPaths.PROBLEM_DESCRIPTION
+        );
+      }
+    );
   });
 
   it(`routes to the correct path when clicking on modify organization data,
@@ -402,15 +407,17 @@ describe("Route correctly", () => {
   });
 
   it(`routes to the the homepage when clicking on reset`, async () => {
-    await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
-      const history = createMemoryHistory({
-        initialEntries: [generatedPaths.ROOT],
-      });
-      const { getByText } = renderRecap(history, generatedPaths, paths);
-      const resetData = getByText("Reset all entered data");
-      fireEvent.click(resetData);
-      expect(history.location.pathname).toEqual(generatedPaths.ROOT);
-    });
+    await runWithAndWithoutOrganizationPrefix(
+      async (generatedPaths: Paths, paths: Paths) => {
+        const history = createMemoryHistory({
+          initialEntries: [generatedPaths.ROOT],
+        });
+        const { getByText } = renderRecap(history, generatedPaths, paths);
+        const resetData = getByText("Reset all entered data");
+        fireEvent.click(resetData);
+        expect(history.location.pathname).toEqual(generatedPaths.ROOT);
+      }
+    );
   });
 });
 
@@ -424,31 +431,35 @@ describe("Submit data to backend", () => {
   });
 
   it(`redirects the user to the main page in case of success`, async () => {
-    await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
-      const history = createMemoryHistory({
-        initialEntries: [generatedPaths.RECAP],
-      });
-      const { getByText } = renderRecap(history, generatedPaths, paths);
-      expect(history.location.pathname).toEqual(generatedPaths.RECAP);
-      mockedAxios.post.mockResolvedValue({ data: {} });
-      const submitButton = getByText("Submit my mediation request");
-      await click(submitButton);
-      expect(history.location.pathname).toEqual(generatedPaths.ROOT);
-    });
+    await runWithAndWithoutOrganizationPrefix(
+      async (generatedPaths: Paths, paths: Paths) => {
+        const history = createMemoryHistory({
+          initialEntries: [generatedPaths.RECAP],
+        });
+        const { getByText } = renderRecap(history, generatedPaths, paths);
+        expect(history.location.pathname).toEqual(generatedPaths.RECAP);
+        mockedAxios.post.mockResolvedValue({ data: {} });
+        const submitButton = getByText("Submit my mediation request");
+        await click(submitButton);
+        expect(history.location.pathname).toEqual(generatedPaths.ROOT);
+      }
+    );
   });
 
   it(`does not redirect the user in case of failure`, async () => {
-    await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
-      const history = createMemoryHistory({
-        initialEntries: [generatedPaths.RECAP],
-      });
-      const { getByText } = renderRecap(history, generatedPaths, paths);
-      expect(history.location.pathname).toEqual(generatedPaths.RECAP);
-      mockedAxios.post.mockRejectedValue({ data: {} });
-      const submitButton = getByText("Submit my mediation request");
-      await click(submitButton);
-      expect(history.location.pathname).toEqual(generatedPaths.RECAP);
-    });
+    await runWithAndWithoutOrganizationPrefix(
+      async (generatedPaths: Paths, paths: Paths) => {
+        const history = createMemoryHistory({
+          initialEntries: [generatedPaths.RECAP],
+        });
+        const { getByText } = renderRecap(history, generatedPaths, paths);
+        expect(history.location.pathname).toEqual(generatedPaths.RECAP);
+        mockedAxios.post.mockRejectedValue({ data: {} });
+        const submitButton = getByText("Submit my mediation request");
+        await click(submitButton);
+        expect(history.location.pathname).toEqual(generatedPaths.RECAP);
+      }
+    );
   });
 });
 

@@ -1,10 +1,20 @@
 import { Trans } from "@lingui/macro";
-import PropTypes from "prop-types";
+import type { Langs } from "./types/types";
+
+type QuickLinksProps = {
+  siteLanguage: Langs;
+  toggleSiteLanguage: () => void;
+  excludeFooter?: boolean;
+};
 
 /**
  * Small header menu with quick links and toggle language button.
  */
-function QuickLinks({ siteLanguage, toggleSiteLanguage, excludeFooter }) {
+function QuickLinks({
+  siteLanguage,
+  toggleSiteLanguage,
+  excludeFooter = false,
+}: QuickLinksProps) {
   const languageButtonLabel = Boolean(siteLanguage === "fr") ? (
     <span lang="en">English</span>
   ) : (
@@ -40,15 +50,5 @@ function QuickLinks({ siteLanguage, toggleSiteLanguage, excludeFooter }) {
     </div>
   );
 }
-
-QuickLinks.defaultProps = {
-  excludeFooter: false,
-};
-
-QuickLinks.propTypes = {
-  siteLanguage: PropTypes.string.isRequired,
-  toggleSiteLanguage: PropTypes.func.isRequired,
-  excludeFooter: PropTypes.bool,
-};
 
 export default QuickLinks;

@@ -10,14 +10,15 @@ import {
   useOrganizationApp,
   useWindowDimensions,
 } from "../hooks";
-import type { OrganizationApp } from "../types/organizationApp";
-import type { Completed } from "./StepsInitializer";
+import type { OrganizationAppRecieved } from "../types/organizationApp";
+import { PartialRecord } from "../types/utilTypes";
+import type { Completed, Step as StepType } from "./StepsInitializer";
 
 type FormNavigationProps = RouteComponentProps & {
   /**
    * Indicates the figure of the current displayed form step.
    */
-  activeStep: number;
+  activeStep: StepType;
   /**
    * List of the steps that have been completed, to determine
    * if the user have access to the next step or not.
@@ -41,7 +42,7 @@ type FormNavigationProps = RouteComponentProps & {
   /**
    * The organization applicaiton data got from the backend for the first time.
    */
-  initialOrganizationApp?: OrganizationApp;
+  initialOrganizationApp?: OrganizationAppRecieved;
 };
 
 /**
@@ -56,7 +57,7 @@ function FormNavigation({
   setShouldTriggerFocus,
   initialOrganizationApp,
 }: FormNavigationProps) {
-  const tabs = useRef({});
+  const tabs = useRef<PartialRecord<StepType, HTMLElement>>({});
   const generatePrefixedPath = useGeneratePrefixedPath();
   const { organizationApp } = useOrganizationApp(initialOrganizationApp);
   const { width: windowWidth } = useWindowDimensions();
@@ -78,8 +79,13 @@ function FormNavigation({
       t`Summary`,
     ];
   }
-  function tabProps(index, isActiveTab) {
-    const props = {
+  function tabProps(index: StepType, isActiveTab: boolean) {
+    type TabProps = {
+      id: string;
+      role: string;
+      "aria-controls"?: string;
+    };
+    const props: TabProps = {
       id: `mediation-tab-${index}`,
       role: "tab",
     };
@@ -88,8 +94,8 @@ function FormNavigation({
     }
     return props;
   }
-  const handleChangeTab = (newValue) => async () => {
-    if (completed[newValue] || completed[newValue - 1]) {
+  const handleChangeTab = (newValue: StepType) => async () => {
+    if (completed[newValue] || completed[(newValue - 1) as StepType]) {
       const isFormValid = await onChangeTab();
       if (isFormValid) {
         if (newValue === 0) {
@@ -123,31 +129,37 @@ function FormNavigation({
       return 1;
     }
   }, [completed, organizationApp]);
-  const selectNextTab = (index) => {
-    const nextIndex = (index + 1) % (maxCompleted + 1);
-    if (completed[nextIndex] || completed[nextIndex - 1]) {
+  const selectNextTab = (index: StepType) => {
+    const nextIndex = ((index + 1) % (maxCompleted + 1)) as StepType;
+    if (completed[nextIndex] || completed[(nextIndex - 1) as StepType]) {
       tabs.current[nextIndex].focus();
     }
   };
-  const selectPreviousTab = (index) => {
-    const previousIndex = (maxCompleted + index) % (maxCompleted + 1);
-    if (completed[previousIndex] || completed[previousIndex - 1]) {
+  const selectPreviousTab = (index: StepType) => {
+    const previousIndex = ((maxCompleted + index) %
+      (maxCompleted + 1)) as StepType;
+    if (
+      completed[previousIndex] ||
+      completed[(previousIndex - 1) as StepType]
+    ) {
       tabs.current[previousIndex].focus();
     }
   };
-  const handleKeyDown = (index) => async (event) => {
-    if (completed[index] || completed[index - 1]) {
-      const nextArrowKey = isTablistVertical ? "ArrowDown" : "ArrowRight";
-      const previousArrowKey = isTablistVertical ? "ArrowUp" : "ArrowLeft";
-      if (event.key === nextArrowKey) {
-        event.preventDefault();
-        selectNextTab(index);
-      } else if (event.key === previousArrowKey) {
-        event.preventDefault();
-        selectPreviousTab(index);
+  const handleKeyDown =
+    (index: StepType) =>
+    async (event: React.KeyboardEvent<HTMLButtonElement>) => {
+      if (completed[index] || completed[(index - 1) as StepType]) {
+        const nextArrowKey = isTablistVertical ? "ArrowDown" : "ArrowRight";
+        const previousArrowKey = isTablistVertical ? "ArrowUp" : "ArrowLeft";
+        if (event.key === nextArrowKey) {
+          event.preventDefault();
+          selectNextTab(index);
+        } else if (event.key === previousArrowKey) {
+          event.preventDefault();
+          selectPreviousTab(index);
+        }
       }
-    }
-  };
+    };
 
   return (
     <>
@@ -158,8 +170,8 @@ function FormNavigation({
         aria-orientation={isTablistVertical ? "vertical" : "horizontal"}
       >
         <Stepper nonLinear activeStep={activeStep} className="stepper">
-          {stepLabels.map((label, index) => {
-            const disabled = index !== 0 && !completed[index - 1];
+          {stepLabels.map((label: string, index: StepType) => {
+            const disabled = index !== 0 && !completed[(index - 1) as StepType];
             const iconLabel = completed[index] ? t`Completed` : `${index + 1}`;
             const isActiveStep = activeStep === index;
             return (

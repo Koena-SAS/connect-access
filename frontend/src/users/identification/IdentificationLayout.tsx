@@ -1,6 +1,6 @@
 import { t } from "@lingui/macro";
+import type { SnackbarCloseReason } from "@material-ui/core";
 import Dialog from "@material-ui/core/Dialog";
-import PropTypes from "prop-types";
 import { useContext, useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { PATHS } from "../../constants/paths";
@@ -13,10 +13,21 @@ import { ConfigData } from "../../types/types";
 import PasswordResetRequest from "../password/PasswordResetRequest";
 import Identification from "./Identification";
 
+type IdentificationLayoutProps = {
+  isLogged: boolean;
+  /**
+   * Set login token for user authentication.
+   */
+  setToken: (token: string) => void;
+};
+
 /**
  * Modal window for login, signup and password reset.
  */
-function IdentificationLayout({ setToken, isLogged }) {
+function IdentificationLayout({
+  setToken,
+  isLogged,
+}: IdentificationLayoutProps) {
   const configData = useContext<ConfigData>(ConfigDataContext);
   const history = useHistory();
   const location = useLocation();
@@ -40,13 +51,19 @@ function IdentificationLayout({ setToken, isLogged }) {
   const displayRequestFailure = () => {
     setRequestFailureMessageOpen(true);
   };
-  const handleCloseSuccessMessage = (event, reason) => {
+  const handleCloseSuccessMessage = (
+    event: React.SyntheticEvent<any, Event>,
+    reason: SnackbarCloseReason
+  ) => {
     if (reason === "clickaway") {
       return;
     }
     setRequestSuccessMessageOpen(false);
   };
-  const handleCloseFailureMessage = (event, reason) => {
+  const handleCloseFailureMessage = (
+    event: React.SyntheticEvent<any, Event>,
+    reason: SnackbarCloseReason
+  ) => {
     if (reason === "clickaway") {
       return;
     }
@@ -137,13 +154,5 @@ function IdentificationLayout({ setToken, isLogged }) {
     </>
   );
 }
-
-IdentificationLayout.propTypes = {
-  isLogged: PropTypes.bool.isRequired,
-  /**
-   * Set login token for user authentication.
-   */
-  setToken: PropTypes.func.isRequired,
-};
 
 export default IdentificationLayout;

@@ -2,9 +2,10 @@ import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
 import { fireEvent, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import type { History } from "history";
 import { createMemoryHistory } from "history";
-import React from "react";
 import { Route, Router } from "react-router-dom";
+import type { Paths } from "../constants/paths";
 import { PATHS, PATHS_WITHOUT_PREFIX } from "../constants/paths";
 import { initLanguagesForTesting } from "../i18nTestHelper";
 import {
@@ -15,6 +16,7 @@ import {
   runWithAndWithoutOrganizationPrefix,
 } from "../testUtils";
 import FormNavigation from "./FormNavigation";
+import type { Completed, Step } from "./StepsInitializer";
 
 initLanguagesForTesting();
 jest.mock("axios");
@@ -262,7 +264,7 @@ describe("Accessibility", () => {
     it(`changes correctly tabs with arrows when only step 1 and 2 are reachable
   `, async () => {
       await runWithAndWithoutOrganizationPrefix(
-        async (generatedPaths, paths) => {
+        async (generatedPaths: Paths, paths: Paths) => {
           const { getAllByRole } = renderFormNavigation(
             null,
             generatedPaths,
@@ -288,7 +290,7 @@ describe("Accessibility", () => {
 
     it("gives the focus to the currently active element when press tab", async () => {
       await runWithAndWithoutOrganizationPrefix(
-        async (generatedPaths, paths) => {
+        async (generatedPaths: Paths, paths: Paths) => {
           const { getAllByRole } = renderFormNavigation(
             null,
             generatedPaths,
@@ -415,11 +417,11 @@ describe("Accessibility", () => {
 });
 
 function renderFormNavigation(
-  history,
-  generatedPaths,
-  paths,
-  completed = {},
-  activeStep = 0
+  history: History,
+  generatedPaths: Paths,
+  paths: Paths,
+  completed: Completed = {},
+  activeStep: Step = 0
 ) {
   if (!paths) {
     paths = PATHS_WITHOUT_PREFIX;

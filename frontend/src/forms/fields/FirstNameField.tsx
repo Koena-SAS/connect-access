@@ -44,15 +44,15 @@ function FirstNameField({
     <TextField
       id={`${componentName}-firstName`}
       name="firstName"
-      inputRef={(e) => {
+      inputRef={(input: HTMLInputElement) => {
         const rhfRef = register({
           required: required
             ? t`The first name / username is required`
             : undefined,
         });
-        rhfRef(e);
+        rhfRef(input);
         if (elementRef) {
-          elementRef.current = e;
+          elementRef.current = input;
         }
       }}
       label={t`First name / username`}

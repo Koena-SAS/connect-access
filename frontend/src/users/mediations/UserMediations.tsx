@@ -1,14 +1,19 @@
 import { Trans } from "@lingui/macro";
-import PropTypes from "prop-types";
-import React from "react";
 import { PATHS } from "../../constants/paths";
 import { useUserMediationRequests } from "../../hooks";
 import { MediationRequestsList } from "../../mediationRequests";
 
+type UserMediationsProps = {
+  /**
+   * The authentication token given when user is logged in.
+   */
+  token: string;
+};
+
 /**
  * List logged in user's mediation requests.
  */
-function UserMediations({ token }) {
+function UserMediations({ token }: UserMediationsProps) {
   const { userMediationRequests } = useUserMediationRequests(token);
   return (
     <div className="user-mediations page-base">
@@ -26,12 +31,5 @@ function UserMediations({ token }) {
     </div>
   );
 }
-
-UserMediations.propTypes = {
-  /**
-   * The authentication token given when user is logged in.
-   */
-  token: PropTypes.string.isRequired,
-};
 
 export default UserMediations;

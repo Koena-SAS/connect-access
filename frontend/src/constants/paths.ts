@@ -37,7 +37,7 @@ export const PATHS_WITHOUT_PREFIX: Paths = {
   ADMIN_REQUEST_DETAIL: "/admin/all-requests/:requestId",
   ADMIN_TRACE_REPORTS: "/admin/all-requests/:requestId/trace-reports",
   ADMIN_REQUEST_HISTORY: "/admin/all-requests/:requestId/history",
-};
+} as const;
 
 export const PATHS: Paths = {
   ROOT: `${APP_PREFIX}${PATHS_WITHOUT_PREFIX.ROOT}`,
@@ -56,12 +56,12 @@ export const PATHS: Paths = {
   ADMIN_REQUEST_DETAIL: `${APP_PREFIX}${PATHS_WITHOUT_PREFIX.ADMIN_REQUEST_DETAIL}`,
   ADMIN_TRACE_REPORTS: `${APP_PREFIX}${PATHS_WITHOUT_PREFIX.ADMIN_TRACE_REPORTS}`,
   ADMIN_REQUEST_HISTORY: `${APP_PREFIX}${PATHS_WITHOUT_PREFIX.ADMIN_REQUEST_HISTORY}`,
-};
+} as const;
 
 export const PATHS_MANDATORY_LOGIN = [
   PATHS.USER_DETAILS,
   PATHS.USER_REQUESTS,
   PATHS.USER_REQUEST,
-];
+] as const;
 
 export type { Paths };

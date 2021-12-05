@@ -44,13 +44,13 @@ function LastNameField({
     <TextField
       id={`${componentName}-lastName`}
       name="lastName"
-      inputRef={(e) => {
+      inputRef={(input: HTMLInputElement) => {
         const rhfRef = register({
           required: required ? t`The last name is required` : undefined,
         });
-        rhfRef(e);
+        rhfRef(input);
         if (elementRef) {
-          elementRef.current = e;
+          elementRef.current = input;
         }
       }}
       label={t`Last name`}

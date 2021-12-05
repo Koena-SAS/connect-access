@@ -5,6 +5,7 @@ import { createMemoryHistory } from "history";
 import { createStore, StateMachineProvider } from "little-state-machine";
 import React from "react";
 import { Route, Router } from "react-router-dom";
+import type { Paths } from "../constants/paths";
 import { PATHS, PATHS_WITHOUT_PREFIX } from "../constants/paths";
 import { initLanguagesForTesting } from "../i18nTestHelper";
 import { click, runWithAndWithoutOrganizationPrefix } from "../testUtils";
@@ -65,61 +66,65 @@ describe("Errors on bad formatted input", () => {
 
 describe("Route correctly on previous / next step navigation buttons", () => {
   it(`routes to the correct path when click on next step button`, async () => {
-    await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
-      const history = createMemoryHistory({
-        initialEntries: [generatedPaths.ROOT],
-      });
-      const { getByText } = renderOrganizationInfo(
-        history,
-        generatedPaths,
-        paths
-      );
-      const submit = getByText("Step 4: Summary");
-      await click(submit);
-      expect(history.location.pathname).toEqual(generatedPaths.RECAP);
-    });
+    await runWithAndWithoutOrganizationPrefix(
+      async (generatedPaths: Paths, paths: Paths) => {
+        const history = createMemoryHistory({
+          initialEntries: [generatedPaths.ROOT],
+        });
+        const { getByText } = renderOrganizationInfo(
+          history,
+          generatedPaths,
+          paths
+        );
+        const submit = getByText("Step 4: Summary");
+        await click(submit);
+        expect(history.location.pathname).toEqual(generatedPaths.RECAP);
+      }
+    );
   });
 
   it(`routes to the correct path when click on previous step button`, async () => {
-    await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
-      const history = createMemoryHistory({
-        initialEntries: [generatedPaths.ROOT],
-      });
-      const { getByText } = renderOrganizationInfo(
-        history,
-        generatedPaths,
-        paths
-      );
-      const submit = getByText("Step 2: Your problem");
-      await click(submit);
-      expect(history.location.pathname).toEqual(
-        generatedPaths.PROBLEM_DESCRIPTION
-      );
-    });
+    await runWithAndWithoutOrganizationPrefix(
+      async (generatedPaths: Paths, paths: Paths) => {
+        const history = createMemoryHistory({
+          initialEntries: [generatedPaths.ROOT],
+        });
+        const { getByText } = renderOrganizationInfo(
+          history,
+          generatedPaths,
+          paths
+        );
+        const submit = getByText("Step 2: Your problem");
+        await click(submit);
+        expect(history.location.pathname).toEqual(
+          generatedPaths.PROBLEM_DESCRIPTION
+        );
+      }
+    );
   });
 });
 
 describe("Saves data", () => {
   it(`saves entered data after successful click on next step, and redisplays it
   when the component is recreated`, async () => {
-    const { getByText, getByLabelText, unmount } = renderOrganizationInfo();
-    fillStep3MandatoryFields(getByLabelText);
-    fillStep3NonMandatoryFields(getByLabelText);
-    const next = getByText("Step 4: Summary");
+    const app = renderOrganizationInfo();
+    fillStep3MandatoryFields(app);
+    fillStep3NonMandatoryFields(app);
+    const next = app.getByText("Step 4: Summary");
     await click(next);
-    unmount();
-    checkStep3FieldValues(renderOrganizationInfo().getByLabelText);
+    app.unmount();
+    checkStep3FieldValues(renderOrganizationInfo());
   });
 
   it(`saves entered data after successful click on previous step, and redisplays it
   when the component is recreated`, async () => {
-    const { getByText, getByLabelText, unmount } = renderOrganizationInfo();
-    fillStep3MandatoryFields(getByLabelText);
-    fillStep3NonMandatoryFields(getByLabelText);
-    const previous = getByText("Step 2: Your problem");
+    const app = renderOrganizationInfo();
+    fillStep3MandatoryFields(app);
+    fillStep3NonMandatoryFields(app);
+    const previous = app.getByText("Step 2: Your problem");
     await click(previous);
-    unmount();
-    checkStep3FieldValues(renderOrganizationInfo().getByLabelText);
+    app.unmount();
+    checkStep3FieldValues(renderOrganizationInfo());
   });
 });
 

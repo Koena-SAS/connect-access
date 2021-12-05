@@ -1,7 +1,5 @@
 import { Trans } from "@lingui/macro";
 import axios from "axios";
-import PropTypes from "prop-types";
-import React from "react";
 import { matchPath } from "react-router";
 import { useHistory, useLocation } from "react-router-dom";
 import { mutate } from "swr";
@@ -9,10 +7,21 @@ import { PATHS, PATHS_MANDATORY_LOGIN } from "../../constants/paths";
 import Button from "../../forms/buttons/Button";
 import { useGeneratePrefixedPath } from "../../hooks";
 
+type LogoutButtonProps = {
+  /**
+   * Set login token for user authentication.
+   */
+  setToken: (token: string) => void;
+  /**
+   * The authentication token itself.
+   */
+  token: string;
+};
+
 /**
  * Button to perform logout request.
  */
-function LogoutButton({ setToken, token }) {
+function LogoutButton({ setToken, token }: LogoutButtonProps) {
   const history = useHistory();
   const location = useLocation();
   const generatePrefixedPath = useGeneratePrefixedPath();
@@ -64,16 +73,5 @@ function LogoutButton({ setToken, token }) {
     </Button>
   );
 }
-
-LogoutButton.propTypes = {
-  /**
-   * Set login token for user authentication.
-   */
-  setToken: PropTypes.func.isRequired,
-  /**
-   * The authentication token itself.
-   */
-  token: PropTypes.string.isRequired,
-};
 
 export default LogoutButton;

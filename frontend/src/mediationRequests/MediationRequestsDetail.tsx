@@ -1,6 +1,5 @@
 import { Trans } from "@lingui/macro";
-import PropTypes from "prop-types";
-import React from "react";
+import { ReactNode } from "react";
 import {
   assistiveTechnologyMap,
   booleanMap,
@@ -10,6 +9,20 @@ import {
   urgencyLevelMap,
 } from "../constants/choicesMap";
 import { useOrganizationApp } from "../hooks";
+import type { MediationRequest } from "../types/mediationRequest";
+
+type MediationRequestsDetailProps = {
+  mediationRequest: MediationRequest;
+  /**
+   * Optional elements that will appear under each main sections
+   */
+  additionalComponents?: {
+    personalInformation: ReactNode;
+    problemDescription: ReactNode;
+    organization: ReactNode;
+  };
+  titlesHeadingLevel?: number;
+};
 
 /**
  * Display mediation request details.
@@ -17,8 +30,8 @@ import { useOrganizationApp } from "../hooks";
 function MediationRequestsDetail({
   mediationRequest,
   additionalComponents,
-  titlesHeadingLevel,
-}) {
+  titlesHeadingLevel = 3,
+}: MediationRequestsDetailProps) {
   const { organizationApp } = useOrganizationApp();
   const buildAttachedFileDisplay = () => {
     const files = mediationRequest.attachedFile;
@@ -39,7 +52,10 @@ function MediationRequestsDetail({
       return null;
     }
   };
-  const buildTitle = (titleProps, title) => {
+  const buildTitle = (
+    titleProps: React.ComponentPropsWithoutRef<"h1">,
+    title: ReactNode
+  ) => {
     switch (titlesHeadingLevel) {
       case 1:
         return <h1 {...titleProps}>{title}</h1>;
@@ -421,22 +437,5 @@ function MediationRequestsDetail({
     </>
   );
 }
-
-MediationRequestsDetail.defaultProps = {
-  titlesHeadingLevel: 3,
-};
-
-MediationRequestsDetail.propTypes = {
-  mediationRequest: PropTypes.object.isRequired,
-  /**
-   * Optional elements that will appear under each main sections
-   */
-  additionalComponents: PropTypes.exact({
-    personalInformation: PropTypes.element.isRequired,
-    problemDescription: PropTypes.element.isRequired,
-    organization: PropTypes.element.isRequired,
-  }),
-  titlesHeadingLevel: PropTypes.number,
-};
 
 export default MediationRequestsDetail;

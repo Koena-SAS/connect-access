@@ -1,9 +1,10 @@
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
-import { render, waitFor } from "@testing-library/react";
-import { createMemoryHistory } from "history";
+import { render, RenderResult, waitFor } from "@testing-library/react";
+import { createMemoryHistory, MemoryHistory } from "history";
 import { Route, Router } from "react-router-dom";
 import { cache, SWRConfig } from "swr";
+import type { Paths } from "../constants/paths";
 import { PATHS_WITHOUT_PREFIX } from "../constants/paths";
 import ConfigDataContext from "../contexts/configData";
 import { initLanguagesForTesting } from "../i18nTestHelper";
@@ -27,7 +28,12 @@ afterEach(async () => {
   await waitFor(() => cache.clear());
 });
 
-async function renderMain(initialPath, history, generatedPaths, paths) {
+async function renderMain(
+  initialPath: string,
+  history: MemoryHistory,
+  generatedPaths: Paths,
+  paths: Paths
+): Promise<RenderResult> {
   if (!paths) {
     paths = PATHS_WITHOUT_PREFIX;
   }
@@ -41,7 +47,7 @@ async function renderMain(initialPath, history, generatedPaths, paths) {
     }
   }
   if (initialPath) history.push(initialPath);
-  let main;
+  let main: RenderResult;
   function renderMainComponent() {
     return render(
       <ConfigDataContext.Provider value={configData}>
@@ -75,24 +81,34 @@ describe("Routing tests", () => {
   });
 });
 
-async function checkOnlyNeededComponentIsRendered(routeName) {
-  await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
-    const app = await renderMain(
-      generatedPaths[routeName],
-      null,
-      generatedPaths,
-      paths
-    );
-    checkExistsOnRouteEndNowhereElse("ADMIN", "Admin content", app);
-    checkExistsOnRouteEndNowhereElse("ADMIN_ALL_REQUESTS", "All requests", app);
-    checkExistsOnRouteEndNowhereElse(
-      "ADMIN_TRACE_REPORTS",
-      /Trace reports/,
-      app
-    );
-  });
+async function checkOnlyNeededComponentIsRendered(routeName: keyof Paths) {
+  await runWithAndWithoutOrganizationPrefix(
+    async (generatedPaths: Paths, paths: Paths) => {
+      const app = await renderMain(
+        generatedPaths[routeName],
+        null,
+        generatedPaths,
+        paths
+      );
+      checkExistsOnRouteEndNowhereElse("ADMIN", "Admin content", app);
+      checkExistsOnRouteEndNowhereElse(
+        "ADMIN_ALL_REQUESTS",
+        "All requests",
+        app
+      );
+      checkExistsOnRouteEndNowhereElse(
+        "ADMIN_TRACE_REPORTS",
+        /Trace reports/,
+        app
+      );
+    }
+  );
 
-  function checkExistsOnRouteEndNowhereElse(route, text, app) {
+  function checkExistsOnRouteEndNowhereElse(
+    route: keyof Paths,
+    text: string | RegExp,
+    app: RenderResult
+  ) {
     if (routeName === route) {
       const pageContent = app.getByRole("heading", { name: text });
       expect(pageContent).toBeInTheDocument();
@@ -105,43 +121,55 @@ async function checkOnlyNeededComponentIsRendered(routeName) {
 
 describe("renders correctly document title", () => {
   it(`renders correct title when visiting route /admin`, async () => {
-    await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
-      await checkRendersCorrectTitle(
-        generatedPaths.ADMIN,
-        "Connect Access - Quick access",
-        paths
-      );
-    });
+    await runWithAndWithoutOrganizationPrefix(
+      async (generatedPaths: Paths, paths: Paths) => {
+        await checkRendersCorrectTitle(
+          generatedPaths.ADMIN,
+          "Connect Access - Quick access",
+          paths
+        );
+      }
+    );
   });
   it(`renders correct title when visiting route /all-requests`, async () => {
-    await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
-      await checkRendersCorrectTitle(
-        generatedPaths.ADMIN_ALL_REQUESTS,
-        "Connect Access - All mediation requests",
-        paths
-      );
-    });
+    await runWithAndWithoutOrganizationPrefix(
+      async (generatedPaths: Paths, paths: Paths) => {
+        await checkRendersCorrectTitle(
+          generatedPaths.ADMIN_ALL_REQUESTS,
+          "Connect Access - All mediation requests",
+          paths
+        );
+      }
+    );
   });
   it(`renders correct title when visiting route /all-requests/:requestId`, async () => {
-    await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
-      await checkRendersCorrectTitle(
-        generatedPaths.ADMIN_REQUEST_DETAIL,
-        "Connect Access - Detail of the mediation request",
-        paths
-      );
-    });
+    await runWithAndWithoutOrganizationPrefix(
+      async (generatedPaths: Paths, paths: Paths) => {
+        await checkRendersCorrectTitle(
+          generatedPaths.ADMIN_REQUEST_DETAIL,
+          "Connect Access - Detail of the mediation request",
+          paths
+        );
+      }
+    );
   });
   it(`renders correct title when visiting route /all-requests/:requestId/trace-reports`, async () => {
-    await runWithAndWithoutOrganizationPrefix(async (generatedPaths, paths) => {
-      await checkRendersCorrectTitle(
-        generatedPaths.ADMIN_TRACE_REPORTS,
-        "Connect Access - Trace reports of the mediation request",
-        paths
-      );
-    });
+    await runWithAndWithoutOrganizationPrefix(
+      async (generatedPaths: Paths, paths: Paths) => {
+        await checkRendersCorrectTitle(
+          generatedPaths.ADMIN_TRACE_REPORTS,
+          "Connect Access - Trace reports of the mediation request",
+          paths
+        );
+      }
+    );
   });
 
-  async function checkRendersCorrectTitle(route, expectedTitle, paths) {
+  async function checkRendersCorrectTitle(
+    route: string,
+    expectedTitle: string,
+    paths: Paths
+  ) {
     await renderMain(route, null, null, paths);
     await waitFor(() => expect(document.title).toEqual(expectedTitle));
   }

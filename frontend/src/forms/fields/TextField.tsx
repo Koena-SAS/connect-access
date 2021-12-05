@@ -1,8 +1,8 @@
 import MUITextField from "@material-ui/core/TextField";
-import React, { Ref } from "react";
+import { forwardRef, ReactNode, Ref } from "react";
 
 type TextFieldProps = {
-  children: any;
+  children: ReactNode;
   fullwidth?: boolean;
   InputLabelProps?: any;
   FormHelperTextProps?: any;
@@ -12,7 +12,7 @@ type TextFieldProps = {
 /**
  * A wrapper around MUI TextField.
  */
-const TextField = React.forwardRef(
+const TextField = forwardRef(
   (
     {
       children,

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-function SvgLogoBpiFrance(props) {
+function SvgLogoBpiFrance(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 568 163" xmlns="http://www.w3.org/2000/svg" {...props}>
       <g fillRule="nonzero" fill="none">

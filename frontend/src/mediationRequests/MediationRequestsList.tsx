@@ -1,17 +1,27 @@
 import { t, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import ZoomInIcon from "@material-ui/icons/ZoomIn";
-import PropTypes from "prop-types";
-import React from "react";
 import { generatePath, Link, useParams } from "react-router-dom";
 import { statusMap } from "../constants/choicesMap";
 import Button from "../forms/buttons/Button";
 import Table from "../forms/Table";
+import type { MediationRequest } from "../types/mediationRequest";
+
+type MediationRequestsListProps = {
+  mediationRequests: MediationRequest[];
+  /**
+   * The path to get the mediation request detail pages.
+   */
+  detailsPath: string;
+};
 
 /**
  * List mediation requests within a table.
  */
-function MediationRequestsList({ mediationRequests, detailsPath }) {
+function MediationRequestsList({
+  mediationRequests,
+  detailsPath,
+}: MediationRequestsListProps) {
   const { organizationSlug, applicationSlug } =
     useParams<{ organizationSlug: string; applicationSlug: string }>();
   const { i18n } = useLingui();
@@ -70,13 +80,5 @@ function MediationRequestsList({ mediationRequests, detailsPath }) {
     />
   );
 }
-
-MediationRequestsList.propTypes = {
-  mediationRequests: PropTypes.arrayOf(PropTypes.object).isRequired,
-  /**
-   * The path to get the mediation request detail pages.
-   */
-  detailsPath: PropTypes.string.isRequired,
-};
 
 export default MediationRequestsList;

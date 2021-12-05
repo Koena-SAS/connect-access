@@ -6,4 +6,6 @@ type ConfigData = {
 
 type YesNo = "YES" | "NO";
 
-export type { ConfigData, YesNo };
+type Langs = "fr" | "en";
+
+export type { ConfigData, YesNo, Langs };

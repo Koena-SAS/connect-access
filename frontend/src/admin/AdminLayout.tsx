@@ -1,12 +1,13 @@
 import { Paths } from "../constants/paths";
 import { useAdminMediationRequests } from "../hooks";
 import QuickLinks from "../QuickLinks";
+import type { Langs } from "../types/types";
 import Main from "./Main";
 import Menu from "./Menu";
 
 type AdminLayoutProps = {
   token: string;
-  siteLanguage: string;
+  siteLanguage: Langs;
   toggleSiteLanguage: any;
   /**
    * The paths to be used in the main element for routes rendering.

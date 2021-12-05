@@ -16,18 +16,23 @@ import { TextField } from "../../forms";
 import CancelButton from "../../forms/buttons/CancelButton";
 import DoneButton from "../../forms/buttons/DoneButton";
 import { useAddTraceReport, useEditTraceReport } from "../../hooks";
-import { TraceReport } from "../../types/traceReport";
+import type {
+  ContactEntityType,
+  TraceReport,
+  TraceType,
+} from "../../types/traceReport";
+import type { Langs } from "../../types/types";
 
 type FormInput = {
-  traceType: string;
-  senderType: string;
+  traceType: TraceType;
+  senderType: ContactEntityType;
   senderName: string;
-  recipientType: string;
+  recipientType: ContactEntityType;
   recipientName: string;
   contactDate: Date | string;
   comment: string;
   attachedFile: string;
-  removeAttachedFile: string;
+  removeAttachedFile: boolean;
 };
 
 type ActionType = "create" | "edit";
@@ -96,18 +101,20 @@ function TraceReportForm({
   const isEditMode = report ? true : false;
 
   function onSubmit(data: FormInput) {
-    const dataToSend = produce(data, (draft) => {
-      if (typeof draft.contactDate !== "string") {
-        draft.contactDate = draft.contactDate.toJSON();
-      }
-    });
+    const dataToSend: TraceReport = {
+      ...data,
+      contactDate:
+        typeof data.contactDate !== "string"
+          ? data.contactDate.toJSON()
+          : data.contactDate,
+    };
     if (isEditMode) {
       doEditTraceReport(dataToSend);
     } else {
       doAddTraceReport(dataToSend);
     }
   }
-  function doEditTraceReport(dataToSend: FormInput) {
+  function doEditTraceReport(dataToSend: TraceReport) {
     const editDataToSend = produce(dataToSend, (draft) => {
       if (draft.removeAttachedFile) {
         draft.attachedFile = "";
@@ -120,7 +127,7 @@ function TraceReportForm({
       token,
     });
   }
-  function doAddTraceReport(dataToSend: FormInput) {
+  function doAddTraceReport(dataToSend: TraceReport) {
     addTraceReport({
       traceReport: dataToSend,
       mediationRequestId,
@@ -165,7 +172,7 @@ function TraceReportForm({
     [formOpen, reset, isEditMode, report]
   );
   const contactDateFormatError = t`The contact date must be formated following the pattern mm/dd/yyyy hh:mm (a|p)m`;
-  const localeMap = {
+  const localeMap: Record<Langs, any> = {
     en: enLocale,
     fr: frLocale,
   };
@@ -227,7 +234,7 @@ function TraceReportForm({
       >
         <LocalizationProvider
           dateAdapter={AdapterDateFns}
-          locale={localeMap[i18n.locale]}
+          locale={localeMap[i18n.locale as Langs]}
         >
           <Controller
             name="contactDate"
@@ -245,7 +252,7 @@ function TraceReportForm({
             render={({ ref, ...rest }) => (
               <DateTimePicker
                 label={t`Contact date`}
-                mask={maskMap[i18n.locale]}
+                mask={maskMap[i18n.locale as Langs]}
                 renderInput={(params) => {
                   return (
                     <TextField

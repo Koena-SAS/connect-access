@@ -5,11 +5,14 @@ import { useEffect, useState } from "react";
  * The initial value of the state is read from local storage, after that,
  * every change on the state updates the local storage value.
  *
- * @param {string} localStorageKey
- * @param {boolean} isObject indicates if the value is an object
- * @returns {List} value and setValue to read and manage the state
+ * @param localStorageKey
+ * @param isObject indicates if the value is an object.
+ * @returns value and setValue to read and manage the state.
  */
-function useStateWithLocalStorage(localStorageKey, isObject = false) {
+function useStateWithLocalStorage<Value = any>(
+  localStorageKey: string,
+  isObject: boolean = false
+): [Value, (value: Value) => void] {
   const initValue = () => {
     const localValue = localStorage.getItem(localStorageKey);
     if (localValue) {

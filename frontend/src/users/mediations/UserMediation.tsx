@@ -1,14 +1,20 @@
 import { Trans } from "@lingui/macro";
-import PropTypes from "prop-types";
 import { useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { useUserMediationRequests } from "../../hooks";
 import { MediationRequestsDetail } from "../../mediationRequests";
 
+type UserMediationProps = {
+  /**
+   * The authentication token given when user is logged in.
+   */
+  token: string;
+};
+
 /**
  * List logged in user's mediation requests.
  */
-function UserMediation({ token }) {
+function UserMediation({ token }: UserMediationProps) {
   const { userMediationRequests } = useUserMediationRequests(token);
   let { requestId } = useParams<{ requestId: string }>();
   const mediationRequest = useMemo(
@@ -36,12 +42,5 @@ function UserMediation({ token }) {
     </div>
   );
 }
-
-UserMediation.propTypes = {
-  /**
-   * The authentication token given when user is logged in.
-   */
-  token: PropTypes.string.isRequired,
-};
 
 export default UserMediation;
