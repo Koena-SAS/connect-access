@@ -23,7 +23,7 @@ This configuration enables hot reload for the frontend in development, even if i
 
 :::
 
-There are 2 exceptions where the backend serves HTML pages instead of being used as a web API by another program:
+There are currently 2 exceptions where the backend serves HTML pages instead of being used as a web API by another program:
 
 - the browsable API provided by Django Rest Framework at `/api/` when visited by a web browser, to be able to execute API calls through a web page without the frontend.
 - the admin interface provided by Django at `/admin/` (and at a secret path configured in `.envs/.production/.django` for production environment) to be able to easily manipulate database objects without having a custom frontend for it.
@@ -44,7 +44,7 @@ from django.utils.translation import gettext_lazy as _
 _("Content to translate")
 ```
 
-Once some translatable content is created, you can regenerate the locale files, add the correct translation, and create a compiled versions of the translation.
+Once some translatable content is created, you can regenerate the locale files to get the strings to translate , add the correct translation, and create a compiled versions of the translation.
 
 The translated strings are in `backend/locale/[LANG]/django.po`.
 
@@ -62,7 +62,7 @@ The frontend is written in TypeScript with the React framework. Its codebase has
 
 The styling source files are in `frontend/src/sass`.
 
-The styling is done with [SASS preprocessor](https://sass-lang.com/). The files are organized with the [7-1 architecture](https://kiranworkspace.com/sass-architecture/), and the code itself is organized with the [Block Element Modifier (BEM) methodology](http://getbem.com/).
+The styling is done with [SASS preprocessor](https://sass-lang.com/). The files are organized with the [7-1 architecture](https://kiranworkspace.com/sass-architecture/), and the code itself is organized with the [<abbr title="Block Element Modifier">BEM</abbr> methodology](http://getbem.com/).
 
 This implies that the styling blocks are independent from the React components. They may be reused or be bigger or smaller than a specific component.
 
@@ -101,7 +101,7 @@ As the backend exposes a REST API, the main communication channel is the REST ca
 
 ### Stale While Revalidate
 
-For all the resources that are regularly queried from the backend to stay up to date because the backend is the source of truth, we use [SWR](https://swr.vercel.app/) to handle de refetches when necessary. It is being used as a hook in the component that directly needs the resource.
+For all the resources that are regularly queried from the frontend to stay up to date because the backend is the source of truth, we use [SWR](https://swr.vercel.app/) to handle de refetches when necessary. It is being used as a hook in the component that directly needs the resource.
 
 ### Server side generation
 
@@ -113,7 +113,7 @@ These data are available on React side immediately after the browser starts exec
 
 ### Unit Tests
 
-Most of the backend and frontend code has been written with Test Driven Development style, by using the smallest possible iteration steps between the test and the implementation to drive the implementation from the tests. However these tests are closer to what can be called integration tests because they are done through the database for the backend, and through the UI (even if it is a light version of it with jsdom) for the frontend.
+Most of the backend and frontend code has been written with Test Driven Development style, by using the smallest possible iteration steps between the test and the implementation to drive the implementation from the tests. However these tests are closer to what can be called integration tests because they are done through the database for the backend, and through the UI (even if it is a light version of it with `jsdom`) for the frontend.
 
 As a consequence, the execution of unit tests is slower than if it was pure Python or TypeScript code, especially for the frontend tests that take more than 30 seconds to execute on a modern computer. You are therefore encouraged to unit test complex logic outside of the database for the backend, and outside of React for the frontend.
 
@@ -123,6 +123,6 @@ Regarding the frontend tests, all the API calls are mocked. They return predefin
 
 For end to end tests everything is started as in production, and the tests are done through a real browser, in visible or headless mode.
 
-These tests are much less numerous because they get easily flaky, and because one test can take from several seconds to execute and parallelization is more difficult in end to end mode.
+These tests are much less numerous because they get easily flaky, and because one test can take several seconds to execute and parallelization is more difficult in end to end mode.
 
 Instead of testing all the possible successful and error paths like with unit tests, we test the main successful path for each main feature. It especially ensures the communication between the frontend and the backend is correct.

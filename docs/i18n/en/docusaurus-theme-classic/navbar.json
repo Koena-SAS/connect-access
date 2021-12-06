@@ -4,7 +4,7 @@
     "description": "Navbar item with label Documentation"
   },
   "item.label.Source code": {
-    "message": "Code source",
+    "message": "Source code",
     "description": "Navbar item with label Source code"
   }
 }

@@ -4,11 +4,11 @@
     "description": "The title of the footer links column with title=Docs in the footer"
   },
   "link.title.Community": {
-    "message": "Communauté",
+    "message": "Community",
     "description": "The title of the footer links column with title=Community in the footer"
   },
   "link.title.More": {
-    "message": "Plus",
+    "message": "More",
     "description": "The title of the footer links column with title=More in the footer"
   },
   "link.item.label.Documentation": {
@@ -20,11 +20,11 @@
     "description": "The label of footer link with label=Stack Overflow linking to https://stackoverflow.com/questions/tagged/connect-access"
   },
   "link.item.label.Source code on GitLab": {
-    "message": "Code source sur GitLab",
+    "message": "Source code on GitLab",
     "description": "The label of footer link with label=Source code on GitLab linking to https://gitlab.com/koena/connect-access"
   },
   "copyright": {
-    "message": "Fait par <a class=\"footer__link-item\" href=\"https://koena.net\">Koena</a>. Construit à l'aide de Docusaurus.",
+    "message": "Made by <a class=\"footer__link-item\" href=\"https://koena.net\">Koena</a>. Built with Docusaurus.",
     "description": "The footer copyright"
   }
 }

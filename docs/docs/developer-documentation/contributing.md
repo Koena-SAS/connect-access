@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Contributing
 
-Thank you for considering to contribute to this project. There are many ways you can contribute, including features or bug fixes through pull requests, but also documentation improvement, opening issues for bugfixes or proposing feature requests.
+Thank you for considering to contribute to this project. There are many ways you can contribute, including features or bug fixes through merge requests, but also documentation improvement, opening issues for bugfixes or proposing feature requests.
 
 If you would like to contribute please be kind and respectful.
 
@@ -18,7 +18,7 @@ In case of bug report, providing detailed instructions to reproduce can really h
 
 The documentation you are reading is built with [Docusaurus](https://docusaurus.io/) and has its source files in the repository, in the `docs/` folder. The source files can contain markdown code but also JSX code.
 
-The documentation is built and deployed to Gitlab Pages when the branch is merged to master.
+The documentation is built and deployed to Gitlab Pages when the branch is merged to `master`.
 
 ## Code contribution
 
@@ -26,9 +26,9 @@ The documentation is built and deployed to Gitlab Pages when the branch is merge
 
 All the code contributions are made through pull/merge requests attached to an issue, to have discussion and code reviews, but also to let the CI validate that everything works.
 
-As much as possible please consider submitting your ideas and commiting/pushing your work early to get feedback, instead of working very long on something that may not be integrated. With gitlab, a new branch is created automatically with the merge request.
+As much as possible please consider submitting your ideas and commiting/pushing your work early to get feedback, instead of working very long on something that may not be integrated. With Gitlab, a new branch is created automatically with the merge request.
 
-Please try to keep your merge requests small (ideally not more than 1 or 2 days of work). To get your code integrated the tests have to pass, but the feature may not be complete. In that case you can hide the feature with CSS if needed until it is ready to be shown.
+Please try to keep your merge requests small, ideally not more than 1 or 2 days of work. To get your code integrated the tests have to pass, but the feature may not be complete. In that case you can hide the feature with CSS if needed until it is ready to be shown.
 
 ### Conventional commits
 
@@ -50,7 +50,7 @@ To begin your code contribution, please follow the [instructions for local envir
 
 The project follows the [WCAG guidelines](https://www.w3.org/WAI/standards-guidelines/wcag/), and specifically the french [RGAA norm](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/).
 
-You have to make sure as much as possible that at least the WCAG AA level rules are respected.
+You have to make sure as much as possible that at least the WCAG AA level rules are respected. These rules are the ones that have been kept in the RGAA.
 
 For some of them you may be alerted by the frontend linter that uses [eslint-plugin-jsx-a11y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y) to parse the JSX React code and find accessibility issues, and also the [axe](https://github.com/dequelabs/axe-core) tool used on the final generated HTML code during the end to end tests. But for most of them you will have to check them yourself, or with the help of a human being reviewing your code.
 

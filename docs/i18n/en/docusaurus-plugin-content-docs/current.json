@@ -1,0 +1,14 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.Developer documentation": {
+    "message": "Developer documentation",
+    "description": "The label for category Developer documentation in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.User documentation": {
+    "message": "User documentation",
+    "description": "The label for category User documentation in sidebar tutorialSidebar"
+  }
+}

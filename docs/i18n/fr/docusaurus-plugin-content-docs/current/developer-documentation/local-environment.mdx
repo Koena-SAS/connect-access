@@ -37,9 +37,9 @@ Pour commencer, vous devez cloner le dépôt localement :
 git clone https://gitlab.com/koena/connect-access.git
 ```
 
-### Configurer le hook pré-commit de Git
+### Configurer le hook pré-<span lang="en">commit</span> de Git
 
-Ensuite vous pouvez installer le paquet Python `pre-commit` et installer le hook Git pré-commit, pour vous assurer que le code que vous allez commiter a passé les vérifications de lint :
+Ensuite vous pouvez installer le paquet Python `pre-commit` et installer le hook pré-<span lang="en">commit</span> pour Git, pour vous assurer que le code que vous allez <span lang="en">commit</span> a passé les vérifications de <span lang="en">lint</span> :
 
 ```bash
 pip install pre-commit
@@ -49,7 +49,7 @@ pre-commit install
 
 :::tip
 
-Pour cette étape vous avez besoin d'avoir Python sur votre machine. Vous pourriez sauter cette étape mais vous devriez alors vous assurer que tous les outils de qualité sont appliqués avant de pousser votre code sur la branche distante, ou la CI risque d'échouer.
+Pour cette étape vous avez besoin d'avoir Python sur votre machine. Vous pourriez sauter cette étape mais vous devriez alors vous assurer que tous les outils de qualité sont appliqués avant de pousser votre code sur la branche distante, ou la <abbr title="Continuous Integration" lang="en">CI</abbr> risque d'échouer.
 
 :::
 
@@ -71,7 +71,7 @@ source .envs/.local/local_no_docker_activate
 
 ### Base de données
 
-Vous devez créer une base de données PostgreSQL pour le backend, et une autre qui sera vidée automatiquement à chaque lancement des tests de bout en bout.
+Vous devez créer une base de données PostgreSQL pour le <span lang="en">backend</span>, et une autre qui sera vidée automatiquement à chaque lancement des tests de bout en bout.
 
 Par défaut, si vous ne changez pas les valeurs copiées à partir de `.envs/local_template`, la base de données et le nom d'utilisateur seront `debug`, et la base de données pour les tests de bout en bout s'appellera `connect_access_end_to_end`.
 
@@ -94,7 +94,7 @@ CREATE ROLE debug WITH CREATEDB LOGIN PASSWORD 'debug';
 \q
 ```
 
-### Backend
+### <span lang="en">Backend</span>
 
 #### Installer
 
@@ -113,7 +113,7 @@ pip install -r backend/requirements/local.txt
 
 :::tip
 
-Si l'installation de certains paquets Python ne fonctionne pas à cause d'erreurs de compilation, sur Ubuntu vous pourriez avoir besoin d'installer les paquets apt suivants :
+Si l'installation de certains paquets Python ne fonctionne pas à cause d'erreurs de compilation, sur Ubuntu vous pourriez avoir besoin d'installer les paquets `apt` suivants :
 
 ```bash
 sudo apt install python3.9-dev libpq-dev
@@ -140,33 +140,33 @@ python manage.py compilemessages
 
 #### Démarrer le serveur de développement
 
-Pour démarrer le backend en mode dev, utilisez le serveur de développement intégré à Django :
+Pour démarrer le <span lang="en">backend</span> en mode dev, utilisez le serveur de développement intégré à Django :
 
 ```bash
 python manage.py runserver
 ```
 
-Par défaut, le backend sera disponible sur [localhost:8000](http://localhost:8000) mais sans le frontend qui tourne il n'y aura rien d'affiché là-bas, étant donné que le chemin racine affiche ce qui est disponible sur le port 3000.
+Par défaut, le <span lang="en">backend</span> sera disponible sur [localhost:8000](http://localhost:8000) mais sans le <span lang="en">frontend</span> qui tourne il n'y aura rien d'affiché là-bas, étant donné que le chemin racine affiche ce qui est disponible sur le port 3000.
 
-Vous pouvez cependant accéder à d'autres chemins servis par le backend, notamment l'API naviguable fournie par Django REST Framework sur [localhost:8000/api/](http://localhost:8000/api/), et le panel admin de Django pour gérer les objets de la base de données sur [localhost:8000/api/](http://localhost:8000/admin/).
+Vous pouvez cependant accéder à d'autres chemins servis par le <span lang="en">backend</span>, notamment l'API naviguable fournie par Django REST Framework sur [localhost:8000/api/](http://localhost:8000/api/), et le panneau d'administration de Django pour gérer les objets de la base de données sur [localhost:8000/api/](http://localhost:8000/admin/).
 
 :::info
 
-En mode développement, il n'y a pas de véritables emails envoyés. À chaque fois qu'un email doit être envoyé vous verrez son contenu apparaître dans la console du serveur de développement de Django.
+En mode développement, il n'y a pas de véritables <span lang="en">emails</span> envoyés. À chaque fois qu'un <span lang="en">email</span> doit être envoyé vous verrez son contenu apparaître dans la console du serveur de développement de Django.
 
 :::
 
-### Frontend
+### <span lang="en">Frontend</span>
 
 #### Installer
 
-Vous avez besoin d'avoir `yarn` installé pour utiliser les commandes du frontend. Si ce n'est pas le cas, vous pouvez l'installer de cette manière :
+Vous avez besoin d'avoir `yarn` installé pour utiliser les commandes du <span lang="en">frontend</span>. Si ce n'est pas le cas, vous pouvez l'installer de cette manière :
 
 ```bash
 npm install -g yarn
 ```
 
-Vous pouvez alors installer les dépendances `npm` du frontend :
+Vous pouvez alors installer les dépendances `npm` du <span lang="en">frontend</span> :
 
 ```bash
 cd frontend
@@ -183,13 +183,13 @@ yarn lang:compile
 
 #### Démarrer le serveur de développement
 
-Pour démarrer le frontend vous devez lancer le serveur de développement de React :
+Pour démarrer le <span lang="en">frontend</span> vous devez lancer le serveur de développement de React :
 
 ```bash
 yarn start
 ```
 
-Par défaut, le frontend sera disponible sur [localhost:3000](http://localhost:3000) mais vous devez accéder à l'application depuis [localhost:8000](http://localhost:8000) quand à la fois le backend et le frontend sont en fonctionnement, car le frontend est en fait servi à travers une vue particulière de l'app Django.
+Par défaut, le <span lang="en">frontend</span> sera disponible sur [localhost:3000](http://localhost:3000) mais vous devez accéder à l'application depuis [localhost:8000](http://localhost:8000) quand à la fois le <span lang="en">backend</span> et le <span lang="en">frontend</span> sont en fonctionnement, car le <span lang="en">frontend</span> est en fait servi à travers une vue particulière de l'app Django.
 
 ## Installer et démarrer avec Docker
 
@@ -197,25 +197,25 @@ Tout est construit et démarré ensemble avec `docker-compose`, et le répertoir
 
 ### Construire et démarrer les serveurs de développement
 
-Vous devez construire les images Docker d'abord, et ensuite démarrer les containers :
+Vous devez construire les images Docker d'abord, et ensuite démarrer les conteneurs :
 
 ```bash
 docker-compose -f local.yml build
 docker-compose -f local.yml up
 ```
 
-Vous pourriez aussi les lancer en mode démon, auquel cas vous n'aurez pas acces au logs depuis le terminal d'où vous avez lancé la commande, et vous devrez arrêter les containers avec une commande supplémentaire :
+Vous pourriez aussi les lancer en mode démon, auquel cas vous n'aurez pas accès aux <span lang="en">logs</span> depuis le terminal d'où vous avez lancé la commande, et vous devrez arrêter les conteneurs avec une commande supplémentaire :
 
 ```bash
 docker-compose -f local.yml up -d
 docker-compose -f local.yml down
 ```
 
-Comme avec le mode non-Docker, le serveur du frontend est disponible sur [localhost:8000](http://localhost:3000), et celui du backend est disponible sur [localhost:8000](http://localhost:8000).
+Comme avec le mode non-Docker, le serveur du <span lang="en">frontend</span> est disponible sur [localhost:8000](http://localhost:3000), et celui du <span lang="en">backend</span> est disponible sur [localhost:8000](http://localhost:8000).
 
-### Exécuter des commandes sur le frontend ou le backend
+### Exécuter des commandes sur le <span lang="en">frontend</span> ou le <span lang="en">backend</span>
 
-Il n'y a pas besoin d'exécuter `python manage.py runserver` et `yarn start` étant donné qu'ils sont déjà en train de tourner, mais vous pouvez exécuter toute autre commande sur le backend ou le frontend, par exemple :
+Il n'y a pas besoin d'exécuter `python manage.py runserver` et `yarn start` étant donné qu'ils sont déjà en train de tourner, mais vous pouvez exécuter toute autre commande sur le <span lang="en">backend</span> ou le <span lang="en">frontend</span>, par exemple :
 
 ```bash
 docker-compose -f local.yml run -w /app/backend django python manage.py compilemessages
