@@ -182,5 +182,37 @@
   "theme.tags.tagsPageTitle": {
     "message": "Tags",
     "description": "The title of the tag list page"
+  },
+  "Docusaurus was designed from the ground up to be easily installed and used to get your website up and running quickly.": {
+    "message": "Docusaurus was designed from the ground up to be easily installed and used to get your website up and running quickly.",
+    "description": "Feature 1 description"
+  },
+  "Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go ahead and move your docs into the {docs} directory.": {
+    "message": "Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go ahead and move your docs into the {docs} directory.",
+    "description": "Feature 2 description"
+  },
+  "Extend or customize your website layout by reusing React. Docusaurus can be extended while reusing the same header and footer.": {
+    "message": "Extend or customize your website layout by reusing React. Docusaurus can be extended while reusing the same header and footer.",
+    "description": "Feature 3 description"
+  },
+  "Easy to Use": {
+    "message": "Easy to Use",
+    "description": "Feature 1 title"
+  },
+  "Focus on What Matters": {
+    "message": "Focus on What Matters",
+    "description": "Feature 2 title"
+  },
+  "Powered by React": {
+    "message": "Powered by React",
+    "description": "Feature 3 title"
+  },
+  "Mediation accessibility platform": {
+    "message": "Plateforme de médiation pour l'accessibilité numérique",
+    "description": "Tagline"
+  },
+  "Read the documentation": {
+    "message": "Lire la documentation",
+    "description": "Main button to read the documentation"
   }
 }

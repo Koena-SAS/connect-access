@@ -3,3 +3,259 @@ sidebar_position: 1
 ---
 
 # Déploiement
+
+Le déploiement est fait avec Docker et Docker Compose qui empaquettent tout ce dont il y a besoin dans des conteneurs.
+
+Il faut donc ces 2 logiciels sur le serveur de production :
+
+- Docker Engine v20+
+- Docker Compose v1.29+
+
+Les deux fichiers Docker Compose <span lang="en">`staging.yml`</span> et `production.yml` couplé à des variables d'environnement correctement configurées donnent la possibilité d'avoir des conteneurs et des volumes Docker complétement séparés, de manière à ce qu'un environnement de production et un autre de pré-production puissent tourner sur la même machine indépendamment.
+
+:::info
+
+Le chiffrement SSL/TLS n'est pas fait dans une des couches Docker de cette application, vous devrez donc vous en occuper avant que le traffic n'atteigne le point d'entrée du conteneur Traefik.
+
+:::
+
+Pour commencer le déploiement, vous devez cloner le dépôt sur votre serveur :
+
+```bash
+git clone https://gitlab.com/koena/connect-access.git
+```
+
+## Variables d'environnement
+
+La majeure partie de la configuration est faite au travers de variables d'environnement qui sont chargées par Docker Compose à partir de fichiers situés dans le répertoire `.envs/`.
+
+### Créer les fichiers
+
+Tout d'abord vous devez copier `.envs/production_template/` pour les environnements de production et de pré-production :
+
+```bash
+cd connect-access
+cp -r .envs/production_template .envs/.production
+cp -r .envs/production_template .envs/.staging
+```
+
+### Renseigner les valeurs
+
+Vous devez renseigner les valeurs pour les 5 fichiers de configuration :
+
+<Tabs>
+<TabItem value="data" label="Data" default>
+
+<dl className="description-list">
+  <dt>DATA_PLATFORM_NAME</dt>
+  <dd>
+    Le nom de la plateforme qui va apparaître publiquement à la place de "<span lang="en">Connect Access</span>".
+  </dd>
+  <dt>DATA_PLATFORM_DOMAIN_NAME</dt>
+  <dd>Le nom de domaine de votre site web.</dd>
+  <dt><span className="large-span">DATA_COMPANY_NAME, </span><span className="large-span">DATA_COMPANY_EMAIL</span></dt>
+  <dd>Le nom et l'adresse <span lang="en">email</span> de votre entreprise, utilisés pour l'envoi d'<span lang="en">emails</span>.</dd>
+  <dt><span className="large-span">DATA_ADMIN_NAME, </span><span className="large-span">DATA_ADMIN_EMAIL</span></dt>
+  <dd>
+    Le nom et l'adresse <span lang="en">email</span> de l'administrateurice, pour lui envoyer des <span lang="en">emails</span> quand d'importantes erreurs se produisent.
+  </dd>
+  <dt>DATA_LOGO_FILENAME</dt>
+  <dd>
+
+Le nom du logo principal dans `frontend/src/images/`, avec une taille recommandée de 178 x 80 pixels. Si c'est votre propre image vous devrez l'ajouter dans le répertoire indiqué. Vous pouvez laisser la valeur par défaut pour cette variable d'environnement et ajouter votre image au chemin `frontend/src/images/logo_custom.png`.
+
+  </dd>
+  <dt>DATA_LOGO_FILENAME_SMALL</dt>
+  <dd>
+
+Le nom du petit logo dans `frontend/src/images/`. Ce logo apparaît dans le panneau d'administration lorsque le menu est contracté, et doit être carré.
+
+  </dd>
+</dl>
+
+</TabItem>
+<TabItem value="django" label="Django">
+
+<dl className="description-list">
+  <dt>DJANGO_SETTINGS_MODULE</dt>
+  <dd>
+    Le module de paramètres Django utilisé. Vous n'aurez probablement pas besoin de changer cette variable.
+  </dd>
+  <dt>DJANGO_SECRET_KEY</dt>
+  <dd>
+
+Une clé secrète que vous devrez générer pour votre application. Vous pouvez regarder la [documentation de Django à ce propos](https://docs.djangoproject.com/fr/3.2/ref/settings/#std:setting-SECRET_KEY), et vous pouvez trouver de nombreux générateurs sur le web.
+
+  </dd>
+  <dt>DJANGO_ADMIN_URL</dt>
+  <dd>
+
+Il s'agit du chemin de votre panneau d'administration Django : `votredomaine.com/[DJANGO_ADMIN_URL]/`. Grâce à cela, le panneau d'administration Django sera plus difficile à trouver par des attaquants.
+
+  </dd>
+  <dt>DJANGO_ALLOWED_HOSTS</dt>
+  <dd>
+
+Vous pouvez mettre ici tous les doms d'hôte autorisés à envoyer des requêtes au serveur Django, séparés par des virgules. Vous devriez principalement mettre ici vos noms de domaines. C'est utile pour éviter les attaques <span lang="en">Cross Site Scripting</span> et <span lang="en">Cross-Site Request Forgery</span>. Vous trouverez plus d'informations dans la [documentation de Django à propos de ALLOWED_HOSTS](https://docs.djangoproject.com/fr/3.2/ref/settings/#allowed-hosts).
+
+  </dd>
+  <dt>DJANGO_SERVER_EMAIL</dt>
+  <dd>L'adresse <span lang="en">email</span> que Django utilise pour indiquer l'émetteur d'un message d'erreur à destination des administrateurs.</dd>
+  <dt><span className="large-span">DJANGO_EMAIL_HOST, </span><span className="large-span">DJANGO_EMAIL_USE_TLS, </span><span className="large-span">DJANGO_EMAIL_PORT, </span><span className="large-span">DJANGO_EMAIL_HOST_USER, </span><span className="large-span">DJANGO_EMAIL_HOST_PASSWORD, </span></dt>
+  <dd>Les éléments de configuration liés à l'<span lang="en">email</span>, que vous obtiendrez de votre fournisseur de service d'envoi d'<span lang="en">email</span>.</dd>
+  <dt>WEB_CONCURRENCY</dt>
+  <dd>
+
+Le nombre de processus Gunicorn créés pour gérer les requêtes. Vous pouvez en apprendre plus sur cette fonctionnalité sur [la documentation de Gunicorn](https://docs.gunicorn.org/en/stable/settings.html#worker-processes).
+
+</dd>
+  <dt><span className="large-span">SENTRY_DSN, </span><span className="large-span">SENTRY_ENVIRONMENT, </span></dt>
+  <dd>
+
+<p>
+  <span lang="en">Connect Access</span> est configuré pour envoyer des logs
+  d'erreur à Sentry, qui est à la fois un outil open source de surveillance que
+  vous pouvez installer, et une entreprise qui opère un service utilisant des
+  instances de cet outil.
+</p>
+
+Le plus simple est de vous créer un compte sur [sentry.io](https://sentry.io) et d'utiliser la version gratuite pour voir si cet outil est utile pour vous. `SENTRY_DSN` est une URL qui vous est fournie lorsque vous créez un compte, et `SENTRY_ENVIRONMENT` est utilisé pour la configuration, pour distinguer la production de la pré-production par exemple.
+
+</dd>
+  <dt>REDIS_URL</dt>
+  <dd>Dans le cas où vous voudriez utiliser une autre instance Redis sur votre serveur.</dd>
+  <dt><span className="large-span">CELERY_FLOWER_USER, </span><span className="large-span">CELERY_FLOWER_PASSWORD, </span></dt>
+  <dd>Un nom d'utilisateur et un mot de passe aléatoires pour l'outil de survaillance de queues Flower.</dd>
+  <dt>MEDIATION_REQUEST_EMAIL</dt>
+  <dd>L'adresse <span lang="en">email</span> à laquelle un message sera envoyé à chaque fois qu'une demande de médiation est créée.</dd>
+</dl>
+
+</TabItem>
+<TabItem value="docker" label="Docker">
+<dl className="description-list">
+  <dt>COMPOSE_PROJECT_NAME</dt>
+  <dd>Il s'agit du nom de projet utilisé par Docker pour tous les conteneurs et volumes, qui pourront alors avoir le même nom mais être quand même indépendants grâce à des noms de projet différents. Vous devez changer cela à chaque fois que vous voulez une version indépendante de <span lang="en">Connect Access</span> : pour avoir une instance de pré-production et de production sur la même machine, mais aussi si vous voulez plusieurs instances de production.</dd>
+</dl>
+</TabItem>
+<TabItem value="postgres" label="Postgres">
+<dl className="description-list">
+  <dt><span className="large-span">POSTGRES_HOST, </span><span className="large-span">POSTGRES_PORT, </span><span className="large-span">POSTGRES_DB, </span><span className="large-span">POSTGRES_USER, </span><span className="large-span">POSTGRES_PASSWORD, </span></dt>
+  <dd>Ces informations définissent l'accès à la base de données PostgreSQL qui sera utilisée par le backend.</dd>
+  <dt>POSTGRES_DB_END_TO_END</dt>
+  <dd>Il s'agit ici du nom de la base de données utilisée par les tests de bout en bout. Elle est vidée à chaque fois que les tests sont lancés. Vous n'en aurez probablement pas besoin si vous voulez seulement installer un serveur de pré-production / production.</dd>
+</dl>
+</TabItem>
+<TabItem value="traefik" label="Traefik">
+<dl className="description-list">
+  <dt>APPLICATION_PORT</dt>
+  <dd>Le port du point d'entrée principal pour l'application Django. Vous devrez rediriger le traffic arrivant sur votre serveur ici, après avoir géré le chiffrement SSL/TLS</dd>
+  <dt>FLOWER_PORT</dt>
+  <dd>Le port utilisé comme point d'entrée par le conteneur de Flower. Vous n'avez pas besoin de changer ce paramètre si vous n'utilisez pas ce service.</dd>
+</dl>
+</TabItem>
+</Tabs>
+
+### Créer des fichiers fusionnés
+
+Vous ne pouvez passer qu'un seule fichier contenant des variables d'environnement à créer à `docker-compose`, donc vous devez fusionner ces fichiers à chaque fois que vous y changez quelque chose. Vous pouvez le faire avec la commande suivante :
+
+```bash
+python merge_production_dotenvs_in_dotenv.py
+```
+
+Ceci va créer 2 fichiers `.env_production` et `.env_staging` qui sont simplement des concaténations des 5 fichiers de configuration que vous avez rempli.
+
+## Construire et déployer l'application
+
+À chaque fois que vous souhaitez exécuter une commande, vous devez spécifier le bon fichier YAML de configuration à `docker-compose`, et le bon fichier fusionné de variables d'environnements.
+
+<Tabs>
+  <TabItem value="production" label="Production" default>
+
+```bash
+docker-compose -f production.yml --env-file .env_production my_command
+```
+
+</TabItem>
+<TabItem value="staging" label="Pré-production">
+
+```bash
+docker-compose -f staging.yml --env-file .env_staging my_command
+```
+
+</TabItem>
+</Tabs>
+
+Pour construire et démarrer l'application, utilisez ces commandes :
+
+<Tabs>
+  <TabItem value="production" label="Production" default>
+
+```bash
+docker-compose -f production.yml --env-file .env_production build
+docker-compose -f production.yml --env-file .env_production run django python backend/manage.py migrate
+docker-compose -f production.yml --env-file .env_production up -d
+```
+
+</TabItem>
+<TabItem value="staging" label="Pré-production">
+
+```bash
+docker-compose -f staging.yml --env-file .env_staging build
+docker-compose -f staging.yml --env-file .env_staging run django python backend/manage.py migrate
+docker-compose -f staging.yml --env-file .env_staging up -d
+```
+
+</TabItem>
+</Tabs>
+
+L'application va démarrer, et écouter sur le port spécifié par la variables d'environnement `APPLICATION_PORT`.
+
+La commande `migrate` est exécutée par Django pour créer initialement les tables dans la base de données.
+
+## Configuration
+
+Une fois que l'application est en train de tourner, vous pouvez configurer certains éléments depuis le panneau d'administration qui sera disponible à l'adresse `votredomaine.com/[DJANGO_ADMIN_URL]/`.
+
+Mais d'abord vous devez créer un compte admin avec la commande suivants (vous devrez indiquer certaines informations basiques comme votre nom, adresse <span lang="en">email</span> et mot de passe) :
+
+<Tabs>
+  <TabItem value="production" label="Production" default>
+
+```bash
+docker-compose -f production.yml --env-file .env_production run django python backend/manage.py createsuperuser
+```
+
+</TabItem>
+<TabItem value="staging" label="Pré-production">
+
+```bash
+docker-compose -f staging.yml --env-file .env_staging run django python backend/manage.py createsuperuser
+```
+
+</TabItem>
+</Tabs>
+
+Avec le compte ainsi crée vous pouvez vous connecter au panneau d'administration Django et remplir certaines informations :
+
+<dl className="description-list">
+  <dt>
+    Informations à propos de l'organisation qui gère le service de médiation
+  </dt>
+  <dd>
+    Ici vous pouvez ajouter des informations à propos de votre entreprise ou
+    organisation. Ces informations apparaîtront dans le pied de page de
+    l'application <span lang="en">Connect Access</span> dans la section "Nous
+    contacter".
+  </dd>
+  <dt>Informations à propos du service de médiation</dt>
+  <dd>
+    Ici vous pouvez ajouter des liens qui apparaîtront dans le pied de page de
+    l'application, dans la section "À propos". Chaque entrée est un lien.
+  </dd>
+  <dt>Sites</dt>
+  <dd>
+    Dans cette section, ajoutez une entrée pour chaque nom de domaine de votre
+    application.
+  </dd>
+</dl>

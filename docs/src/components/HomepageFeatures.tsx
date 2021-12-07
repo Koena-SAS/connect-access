@@ -8,6 +8,7 @@ import React from "react";
 import clsx from "clsx";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from "./HomepageFeatures.module.css";
+import Translate, { translate } from "@docusaurus/Translate";
 
 type FeatureItem = {
   title: string;
@@ -17,33 +18,46 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: "Easy to Use",
+    title: translate({
+      description: "Feature 1 title",
+      message: "Easy to Use",
+    }),
     image: "/img/undraw_docusaurus_mountain.svg",
     description: (
-      <>
+      <Translate description="Feature 1 description">
         Docusaurus was designed from the ground up to be easily installed and
         used to get your website up and running quickly.
-      </>
+      </Translate>
     ),
   },
   {
-    title: "Focus on What Matters",
+    title: translate({
+      description: "Feature 2 title",
+      message: "Focus on What Matters",
+    }),
     image: "/img/undraw_docusaurus_tree.svg",
     description: (
-      <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
-      </>
+      <Translate
+        values={{ docs: <code>docs</code> }}
+        description="Feature 2 description"
+      >
+        {
+          "Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go ahead and move your docs into the {docs} directory."
+        }
+      </Translate>
     ),
   },
   {
-    title: "Powered by React",
+    title: translate({
+      description: "Feature 3 title",
+      message: "Powered by React",
+    }),
     image: "/img/undraw_docusaurus_react.svg",
     description: (
-      <>
+      <Translate description="Feature 3 description">
         Extend or customize your website layout by reusing React. Docusaurus can
         be extended while reusing the same header and footer.
-      </>
+      </Translate>
     ),
   },
 ];

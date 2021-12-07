@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Introduction
 
-Connect Access est une plateforme qui permet de gérer des demandes de médiation.
+<span lang="en">Connect Access</span> est une plateforme qui permet de gérer des demandes de médiation.
 
 Les personnes handicapées remplissent un formulaire pour expliquer leur problème d'accessibilité sur des sites spécifiques, et sont contactées par votre organisme de médiation. Vous pouvez les aider avec une solution immédiate, et si besoin contacter l'organisation responsable du site web problématique pour trouver une solution pérenne.
 
@@ -42,6 +42,6 @@ Pour déployer en environment de production, veuillez lire la [documentation à 
 
 ## Contribuer
 
-Cette application est open source, sous la licence AGPL V3.
+Cette application est open source, sous la [licence AGPL V3](https://www.gnu.org/licenses/agpl-3.0.fr.html).
 
 Pour contribuer vous pouvez commencer par lire le [guide de contribution](./developer-documentation/contributing.md), et si vous voulez contribuer au code, vous aurez probablement besoin d'[installer l'environnement local](./developer-documentation/local-environment.mdx).

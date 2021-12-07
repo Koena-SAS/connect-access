@@ -67,7 +67,7 @@ You have to fill the values for all the 5 configuration files:
   <dt>DATA_LOGO_FILENAME</dt>
   <dd>
 
-The name of the main logo in `frontend/src/images/`, with a recommended size of 178 x 80 pixels. If it is your own image, you have to add it there. You can let the default value for this environment variable and add your image in `frontend/src/images/`.
+The name of the main logo in `frontend/src/images/`, with a recommended size of 178 x 80 pixels. If it is your own image, you have to add it there. You can let the default value for this environment variable and add your image at path `frontend/src/images/logo_custom.png`.
 
   </dd>
   <dt>DATA_LOGO_FILENAME_SMALL</dt>
@@ -84,7 +84,7 @@ The name of the small logo in `frontend/src/images/`. This logo is shown in the 
 <dl className="description-list">
   <dt>DJANGO_SETTINGS_MODULE</dt>
   <dd>
-    The Django settings python file used. You will probably not need to change
+    The Django settings Python file used. You will probably not need to change
     that.
   </dd>
   <dt>DJANGO_SECRET_KEY</dt>
@@ -102,7 +102,7 @@ This is the path of your Django admin panel: `yourdomain.com/[DJANGO_ADMIN_URL]/
   <dt>DJANGO_ALLOWED_HOSTS</dt>
   <dd>
 
-You can put here all the hostnames that are allowed to send requests to the Django server, separated by commas. You should mainly put here your domain names. This is useful to avoid Cross Site Scripting and Cross-Site Request Forgery attacks. You can find more information in the [Django Documentation abour ALLOWED_HOSTS](https://docs.djangoproject.com/en/3.2/ref/settings/#allowed-hosts).
+You can put here all the hostnames that are allowed to send requests to the Django server, separated by commas. You should mainly put here your domain names. This is useful to avoid Cross Site Scripting and Cross-Site Request Forgery attacks. You can find more information in the [Django Documentation about ALLOWED_HOSTS](https://docs.djangoproject.com/en/3.2/ref/settings/#allowed-hosts).
 
   </dd>
   <dt>DJANGO_SERVER_EMAIL</dt>
@@ -133,7 +133,7 @@ Connect Access is configured to send error logs to Sentry, which is both an open
 <TabItem value="docker" label="Docker">
 <dl className="description-list">
   <dt>COMPOSE_PROJECT_NAME</dt>
-  <dd>This is the project name used by Docker for all containers and volumes, which can have the same names and still be independent thanks to the differing project name. You have to change this everytime you would like to install an independent version of Connect Access: to have a staging and a production instance on the same machine, but also if you run several produciton instances.</dd>
+  <dd>This is the project name used by Docker for all containers and volumes, which can have the same names and still be independent thanks to the differing project name. You have to change this everytime you would like to install an independent version of Connect Access: to have a staging and a production instance on the same machine, but also if you run several production instances.</dd>
 </dl>
 </TabItem>
 <TabItem value="postgres" label="Postgres">
@@ -162,7 +162,7 @@ You can pass only one file containing environment variables to set to `docker-co
 python merge_production_dotenvs_in_dotenv.py
 ```
 
-This will create the two files `.env_production` and `.env_staging` that are simply the concatenation of the 5 separate fiels you configured.
+This will create the two files `.env_production` and `.env_staging` that are simply the concatenation of the 5 separate files you configured.
 
 ## Build and deploy the application
 

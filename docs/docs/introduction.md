@@ -42,6 +42,6 @@ To deploy to production environment please read the [documentation page about de
 
 ## Contributing
 
-This application is open source, under AGPL V3 license.
+This application is open source, under [AGPL V3 license](https://www.gnu.org/licenses/agpl-3.0.en.html).
 
 To contribute you can start by reading the [contribution guidelines](./developer-documentation/contributing.md), and if you would like to contribute to the code, you will probably need to [install the local environment](./developer-documentation/local-environment.mdx).

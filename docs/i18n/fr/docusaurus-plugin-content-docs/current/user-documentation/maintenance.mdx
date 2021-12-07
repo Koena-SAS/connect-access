@@ -3,3 +3,217 @@ sidebar_position: 2
 ---
 
 # Maintenance
+
+Une fois que vous avez une instance de <span lang="en">Connect Access</span> qui tourne, vous serez amené à faire de la maintenance.
+
+## Mettre à jour le code de l'application
+
+<span lang="en">Connect Access</span> est un logiciel open source, il est donc susceptible
+d'avoir des mises à jour régulières.
+
+Pour mettre à jour la version de votre instance en fonctionnement, vous devez suivre les étapes suivantes :
+
+### Faire une sauvegarde de votre application
+
+#### Sauvegarder la base de données
+
+Pour sauvegarder la base de données, vous devez utiliser la commande suivante :
+
+<Tabs>
+  <TabItem value="production" label="Production" default>
+
+```bash
+docker-compose -f production.yml --env-file .env_production run postgres backup
+```
+
+</TabItem>
+<TabItem value="staging" label="Pré-production">
+
+```bash
+docker-compose -f staging.yml --env-file .env_staging run postgres backup
+```
+
+</TabItem>
+</Tabs>
+
+Ces sauvegardes sont situées dans un **volume Docker** séparé de celui dans lequel se trouve la base de données PostgreSQL.
+
+#### Notez votre <span lang="en">changeset</span> Git
+
+Vous devez noter le <span lang="en">changeset</span> actuel de votre copie locale de <span lang="en">Connect Access</span>, de manière à ce que plus tard vous puissiez restaurer le dépôt à ce même <span lang="en">changeset</span>. Pour ce faire, pous pouvez lancer la commande suivante et copier quelque part le <span lang="en">hash</span> correspondant au <span lang="en">changeset</span> actuel :
+
+```bash
+git rev-parse HEAD
+```
+
+Une autre solution pourrait être de faire une copie intégrale de votre répertoire local contenant le code de <span lang="en">Connect Access</span>, de manière à ce que vous puissiez le restaurer par simple renommage si quelque chose se passait mal :
+
+```bash
+cd ..
+cp -r connect-access connect-access_backup
+cd connect-access
+```
+
+### Mettre à jour le dépôt local avec les changements distants
+
+Pour mettre à jour votre dépôt local en allant chercher les nouveaux changements, la solution la plus simple est :
+
+```bash
+git pull origin master
+```
+
+### Appliquer les migrations de la base de données
+
+Certains changements dans <span lang="en">Connect Access</span> changent la structure de la base de données. Vous devrez alors lancer les _migrations_ pour appliquer ces changements sur votre base de données :
+
+<Tabs>
+  <TabItem value="production" label="Production" default>
+
+```bash
+docker-compose -f production.yml --env-file .env_production run django python backend/manage.py migrate
+```
+
+</TabItem>
+<TabItem value="staging" label="Pré-production">
+
+```bash
+docker-compose -f staging.yml --env-file .env_staging run django python backend/manage.py migrate
+```
+
+</TabItem>
+</Tabs>
+
+### Reconstruire et redémarrer votre application
+
+Après avoir appliqué les migrations de base de données, vous aurez besoin de redémarrer votre application pour que tout fonctionne correctement.
+
+```bash
+# pour la pré-production
+docker-compose -f staging.yml --env-file .env_staging build
+docker-compose -f staging.yml --env-file .env_staging down
+docker-compose -f staging.yml --env-file .env_staging up -d
+
+# pour la production
+docker-compose -f production.yml --env-file .env_production build
+docker-compose -f production.yml --env-file .env_production down
+docker-compose -f production.yml --env-file .env_production up -d
+```
+
+## Revenir à la version précédente
+
+Dans le cas où la mise à jour n'a pas fonctionné correctement, vous pourrez revenir à la version précédente.
+
+### Restaurer la base de données
+
+Pour restaurer la base de données à partir d'une sauvegarde existante, vous pouvez lister les sauvegardes existantes avec la commande suivante :
+
+<Tabs>
+  <TabItem value="production" label="Production" default>
+
+```bash
+docker-compose -f production.yml --env-file .env_production run postgres backups
+```
+
+</TabItem>
+<TabItem value="staging" label="Pré-production">
+
+```bash
+docker-compose -f staging.yml --env-file .env_staging run postgres backups
+```
+
+</TabItem>
+</Tabs>
+
+Ensuite, vous pouvez restaurer une sauvegarde particulière avec la commande :
+
+<Tabs>
+  <TabItem value="production" label="Production" default>
+
+```bash
+docker-compose -f production.yml --env-file .env_production run postgres restore NOM_DU_FICHIER_DE_SAUVEGARDE
+```
+
+</TabItem>
+<TabItem value="staging" label="Pré-production">
+
+```bash
+docker-compose -f staging.yml --env-file .env_staging run postgres restore NOM_DU_FICHIER_DE_SAUVEGARDE
+```
+
+</TabItem>
+</Tabs>
+
+### Restaurer les fichiers
+
+Si vous avez copié le <span lang="en">hash</span> de votre <span lang="en">chageset</span> d'avant la mise à jour, vous pouvez rebasculer à ce <span lang="en">changeset</span>-là :
+
+```bash
+git checkout YOUR_CHANGESET_HASH
+```
+
+Si vous avez copié le dossier, vous pouvez restaurer l'ancien dossier :
+
+```bash
+cd ..
+rm -rf connect-access
+mv connect-access_backup connect-access
+cd connect-access
+```
+
+Vous devrez alors reconstruire et redémarrer l'application :
+
+```bash
+# pour la pré-production
+docker-compose -f staging.yml --env-file .env_staging build
+docker-compose -f staging.yml --env-file .env_staging down
+docker-compose -f staging.yml --env-file .env_staging up -d
+
+# pour la production
+docker-compose -f production.yml --env-file .env_production build
+docker-compose -f production.yml --env-file .env_production down
+docker-compose -f production.yml --env-file .env_production up -d
+```
+
+## Gérer les sauvegardes de base de données
+
+### Copier les sauvegardes ailleurs
+
+Vous pouvez obtenir les sauvegardes de base de données à partir du volume Docker, et ensuite les copier ailleurs avec la commande `docker cp`.
+
+D'abord vous devez obtenir le nom du conteneur postgres qui vous intéresse, et ensuite copier le contenu de son volume `backups` dans votre répertoire local :
+
+```bash
+docker ps
+# trouver le nom du conteneur postgres
+
+# copier toutes les sauvegardes de bases de données dans un répertoire local appelé backups
+docker cp POSTGRES_CONTAINER_NAME:/backups backups
+# copier une sauvegarde spécifique de base de données dans un répertoire local appelé backups
+docker cp POSTGRES_CONTAINER_NAME:/backups/backup_2021_04_27T15_22_59.sql.gz backups
+```
+
+### Copier la base de données de production dans l'environnement de pré-production
+
+`docker cp` fonctionne aussi pour copier un fichier de sauvegarde local dans un volume Docker au travers du conteneur qui lui est associé. Vous pouvez ainsi copier la base de données de production dans celle de pré-production :
+
+```bash
+# créer une nouvelle sauvegarde de la base de données de production
+docker-compose -f production.yml --env-file .env_production run postgres backup
+# la copier dans le répertoire local appelé backups
+docker cp NOM_DU_CONTENEUR_POSTGRES_DE_PRODUCTION:/backups/backup_XXXX_XX_XXXXX_XX_XX.sql.gz backups
+# copier le fichier de sauvegarde de base de données de production dans le volume de sauvegarde de base de données de pré-production
+docker cp backups/backup_XXXX_XX_XXXXX_XX_XX.sql.gz NOM_DU_CONTENEUR_POSTGRES_DE_PRE-PRODUCTION:/backups/
+# restaurer le fichier de sauvegarde dans la base de données de pré-production
+docker-compose -f staging.yml --env-file .env_staging run --rm postgres restore backup_XXXX_XX_XXXXX_XX_XX.sql.gz
+```
+
+## Sauvegarder les fichiers utilisateur
+
+Les images et autres fichiers téléversés par les utilisateurs ou administrateurs sont stockés dans un volume Docker spécifique aussi. Il n'y a pas de script pour le moment pour permettre de les manipuler facilement comme avec les commandes `postgres backup` / `postgres restore` pour les bases de données, mais vous pouvez toujours les obtenir à partir du volume Docker de la même manière que pour les fichiers de sauvegarde de bases de données :
+
+```bash
+# on copie tous les fichiers utilisateur dans un répertoire local appelé media_backups
+docker cp DJANGO_CONTAINER_NAME:/app/backend/connect_access/media media_backups
+# on crée une archive à partir de ces fichiers, de manière à ce que l'on puisse la copier facilement ailleurs pour la sauvegarder
+tar -zcvf backups/media_backups.tar.gz media_backups/
+```

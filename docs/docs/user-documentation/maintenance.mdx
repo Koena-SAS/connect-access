@@ -40,7 +40,7 @@ docker-compose -f staging.yml --env-file .env_staging run postgres backup
 
 These backups are stored in a **Docker volume** separate from the one that has the PostgreSQL database.
 
-#### Remember your current git changeset
+#### Remember your current Git changeset
 
 You need to remember the current git changeset of your local copy of Connect Access, so that youc an later rollback to it easily. For that you can run the following command and copy the resulting changeset hash:
 
