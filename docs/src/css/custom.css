@@ -39,9 +39,26 @@ html[data-theme="dark"] .docusaurus-highlight-code-line {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
+/* focus */
+
 *:focus {
   outline: solid 2px currentColor;
   outline-offset: 2px;
+}
+
+.hero .button--secondary.button--lg:focus {
+  outline: solid 4px currentColor;
+  outline-offset: -1px;
+}
+
+.navbar__item.dropdown--hoverable .navbar__link:focus {
+  outline: solid 2px currentColor;
+  outline-offset: 9px;
+}
+
+.navbar__item.dropdown--hoverable .dropdown__link:focus {
+  outline: solid 3px currentColor;
+  outline-offset: -1px;
 }
 
 /* underline links */
@@ -58,7 +75,13 @@ main .table-of-contents a {
   text-decoration: none;
 }
 
-/* Description lists */
+.navbar__item.dropdown--hoverable .dropdown__link--active {
+  text-decoration: underline;
+  text-underline-offset: 9px;
+}
+
+/* Description lists (dl) */
+
 .description-list {
   margin-top: 2rem;
   padding-left: 2rem;

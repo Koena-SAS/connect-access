@@ -17,3 +17,12 @@ The developer and user documentation is available in the online [Connect Access 
 ## License
 
 This application is open source, under AGPL V3 license. For more details please read the [license text](LICENSE).
+
+## Extended version
+
+A close source extension has been made by Koena to integrate features for partner organizations :
+
+- A specific interface for each partner, with customizable colors, presentation text and logo, and a specific path so that each partner can create a link on his website to redirect to his version of the main mediation request form.
+- An orientation page to inform visitors about the mediation service, and let them choose to go to it or contact the partner directly if the request isn't about accessibility.
+
+You can contact us if you are interested by this extension.

@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from "react";
-import clsx from "clsx";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from "./HomepageFeatures.module.css";
 import Translate, { translate } from "@docusaurus/Translate";
@@ -42,7 +41,7 @@ const FeatureList: FeatureItem[] = [
         description="Feature 2 description"
       >
         {
-          "Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go ahead and move your docs into the {docs} directory."
+          "Docusaurus lets you focus on your docs, and we'll do the chores. Go ahead and move your docs into the {docs} directory."
         }
       </Translate>
     ),
@@ -65,15 +64,15 @@ const FeatureList: FeatureItem[] = [
 function Feature({ title, image, description }: FeatureItem) {
   const imageUrlWithBase = useBaseUrl(image);
   return (
-    <div className={clsx("col col--4")}>
+    <li className={`col col--4 ${styles.featureListItem}`}>
       <div className="text--center">
-        <img className={styles.featureSvg} alt={title} src={imageUrlWithBase} />
+        <img className={styles.featureSvg} alt="" src={imageUrlWithBase} />
       </div>
       <div className="text--center padding-horiz--md">
-        <h3>{title}</h3>
+        <h2 className={styles.featureTitle}>{title}</h2>
         <p>{description}</p>
       </div>
-    </div>
+    </li>
   );
 }
 
@@ -81,11 +80,11 @@ export default function HomepageFeatures(): JSX.Element {
   return (
     <section className={styles.features}>
       <div className="container">
-        <div className="row">
+        <ul className={`row ${styles.featureList}`}>
           {FeatureList.map((props, idx) => (
             <Feature key={idx} {...props} />
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );

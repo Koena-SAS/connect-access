@@ -209,10 +209,18 @@
   },
   "Mediation accessibility platform": {
     "message": "Plateforme de médiation pour l'accessibilité numérique",
-    "description": "Tagline"
+    "description": "Homepage description"
   },
   "Read the documentation": {
     "message": "Lire la documentation",
     "description": "Main button to read the documentation"
+  },
+  "Homepage": {
+    "message": "Page d'accueil",
+    "description": "Homepage title"
+  },
+  "Docusaurus lets you focus on your docs, and we'll do the chores. Go ahead and move your docs into the {docs} directory.": {
+    "message": "Docusaurus lets you focus on your docs, and we'll do the chores. Go ahead and move your docs into the {docs} directory.",
+    "description": "Feature 2 description"
   }
 }

@@ -9,3 +9,16 @@
   height: 200px;
   width: 200px;
 }
+
+.featureList {
+  margin: 0;
+  padding: 0;
+}
+
+.featureListItem {
+  list-style-type: none;
+}
+
+.featureTitle {
+  font-size: var(--ifm-h3-font-size);
+}

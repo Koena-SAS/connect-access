@@ -37,6 +37,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
+        hideOnScroll: true,
         logo: {
           alt: "Connect Access",
           src: "img/logo.svg",
@@ -102,6 +103,14 @@ const config = {
   i18n: {
     defaultLocale: "en",
     locales: ["en", "fr"],
+    localeConfigs: {
+      en: {
+        label: "English language",
+      },
+      fr: {
+        label: "Langue française",
+      },
+    },
   },
 };
 
