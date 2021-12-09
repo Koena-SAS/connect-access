@@ -66,6 +66,11 @@ html[data-theme="dark"] .docusaurus-highlight-code-line {
   outline-offset: 1px;
 }
 
+main .tabs__item:focus-visible {
+  outline: solid 2px currentColor;
+  outline-offset: -2px;
+}
+
 /* underline links */
 
 .footer__link-item {
