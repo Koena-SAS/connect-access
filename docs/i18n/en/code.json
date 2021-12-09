@@ -187,10 +187,6 @@
     "message": "Docusaurus was designed from the ground up to be easily installed and used to get your website up and running quickly.",
     "description": "Feature 1 description"
   },
-  "Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go ahead and move your docs into the {docs} directory.": {
-    "message": "Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go ahead and move your docs into the {docs} directory.",
-    "description": "Feature 2 description"
-  },
   "Extend or customize your website layout by reusing React. Docusaurus can be extended while reusing the same header and footer.": {
     "message": "Extend or customize your website layout by reusing React. Docusaurus can be extended while reusing the same header and footer.",
     "description": "Feature 3 description"
@@ -222,5 +218,25 @@
   "Docusaurus lets you focus on your docs, and we'll do the chores. Go ahead and move your docs into the {docs} directory.": {
     "message": "Docusaurus lets you focus on your docs, and we'll do the chores. Go ahead and move your docs into the {docs} directory.",
     "description": "Feature 2 description"
+  },
+  "General search": {
+    "message": "General search",
+    "description": "The search label"
+  },
+  "theme.ErrorPageContent.title": {
+    "message": "This page crashed.",
+    "description": "The title of the fallback page when the page crashed"
+  },
+  "theme.ErrorPageContent.tryAgain": {
+    "message": "Try again",
+    "description": "The label of the button to try again when the page crashed"
+  },
+  "theme.DocSidebarItem.toggleCollapsedCategoryAriaLabel": {
+    "message": "Toggle the collapsible sidebar category '{label}'",
+    "description": "The ARIA label to toggle the collapsible sidebar category"
+  },
+  "Loading...": {
+    "message": "Loading...",
+    "description": "General search loading"
   }
 }

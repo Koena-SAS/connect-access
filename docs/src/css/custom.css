@@ -46,19 +46,24 @@ html[data-theme="dark"] .docusaurus-highlight-code-line {
   outline-offset: 2px;
 }
 
-.hero .button--secondary.button--lg:focus {
+.hero .button--secondary.button--lg:focus-visible {
   outline: solid 4px currentColor;
   outline-offset: -1px;
 }
 
-.navbar__item.dropdown--hoverable .navbar__link:focus {
+.navbar__item.dropdown--hoverable .navbar__link:focus-visible {
   outline: solid 2px currentColor;
   outline-offset: 9px;
 }
 
-.navbar__item.dropdown--hoverable .dropdown__link:focus {
+.navbar__item.dropdown--hoverable .dropdown__link:focus-visible {
   outline: solid 3px currentColor;
   outline-offset: -1px;
+}
+
+.navbar__search-input:focus {
+  outline: solid 2px currentColor;
+  outline-offset: 1px;
 }
 
 /* underline links */
@@ -103,4 +108,31 @@ main .table-of-contents a {
 .large-span {
   width: 100%;
   display: inline-block;
+}
+
+/* navbar */
+
+.navbar__items--right .navbar__link {
+  margin-right: 12px;
+}
+
+.navbar__search {
+  margin-left: 20px;
+}
+
+@media (max-width: 350px) {
+  .navbar__inner {
+    flex-direction: column;
+  }
+  .navbar {
+    height: 7.5rem;
+    padding-bottom: 0.85rem;
+  }
+  .navbar__search {
+    margin-left: 0;
+    width: 100%;
+  }
+  .navbar__search-input {
+    width: 100%;
+  }
 }

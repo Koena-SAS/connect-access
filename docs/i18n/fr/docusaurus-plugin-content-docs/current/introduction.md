@@ -45,3 +45,12 @@ Pour déployer en environment de production, veuillez lire la [documentation à 
 Cette application est open source, sous la [licence AGPL V3](https://www.gnu.org/licenses/agpl-3.0.fr.html).
 
 Pour contribuer vous pouvez commencer par lire le [guide de contribution](./developer-documentation/contributing.md), et si vous voulez contribuer au code, vous aurez probablement besoin d'[installer l'environnement local](./developer-documentation/local-environment.mdx).
+
+## Version étendue
+
+Une extension propriétaire a été faite par Koena pour intégrer des fonctionnalités liés aux organisations partenaires :
+
+- Une interface spécifique pour chaque partenaire, avec des couleurs, un texte de description et un logo personnalisables, et un chemin dédié de manière à ce que chaque partenaire puisse créer un lien sur son site web, pour rediriger vesa version du formulaire de demande de médiation.
+- Une page d'orientation pour informer les visiteurs du service de médiation, et les laisser choisir entre aller sur la plateforme ou contacter plutôt le partenaire directement dans le cas où la requête ne porte pas sur l'accessibilité.
+
+Vous pouvez [nous contacter](https://koena.net/) si vous êtes intéressé par cette extension.

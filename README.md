@@ -1,6 +1,6 @@
 # Connect Access
 
-Connect access is a platform that helps managing mediation accessibility requests, maintained by [Koena](https://koena.net) team.
+Connect access is a platform that helps managing mediation accessibility requests, maintained by the [Koena](https://koena.net) team.
 
 ## Features
 
@@ -12,17 +12,8 @@ Connect access is a platform that helps managing mediation accessibility request
 
 ## Documentation
 
-The developer and user documentation is available in the online [Connect Access documentation](https://connectaccess.org/docs/introduction).
+The developer and user documentation is available in the online **[Connect Access documentation](https://connectaccess.org/docs/introduction)**.
 
 ## License
 
 This application is open source, under AGPL V3 license. For more details please read the [license text](LICENSE).
-
-## Extended version
-
-A close source extension has been made by Koena to integrate features for partner organizations :
-
-- A specific interface for each partner, with customizable colors, presentation text and logo, and a specific path so that each partner can create a link on his website to redirect to his version of the main mediation request form.
-- An orientation page to inform visitors about the mediation service, and let them choose to go to it or contact the partner directly if the request isn't about accessibility.
-
-You can contact us if you are interested by this extension.
