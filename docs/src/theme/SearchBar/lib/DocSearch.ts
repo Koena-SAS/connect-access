@@ -4,18 +4,64 @@ import autocomplete from "autocomplete.js";
 import templates from "./templates";
 import utils from "./utils";
 import $ from "autocomplete.js/zepto";
+import type { Input, Hit } from "./types";
+
+type Autocomplete = {
+  setval: (value: string) => void;
+  on: (event: string, func: () => void) => void;
+  autocomplete: any;
+};
+
+type AutocompleteOptions = {
+  debug: boolean;
+  hint: boolean;
+  autoselect: boolean;
+  cssClasses?: {
+    prefix?: string;
+  };
+  ariaLabel?: string;
+};
+
+type HandleSelected =
+  | false
+  | ((
+      input: Input,
+      event: any,
+      suggestion: { url: string },
+      datasetNumber: any,
+      context?: { selectionMethod?: string }
+    ) => void);
+
+type DocSearchParams = {
+  searchDocs: Record<any, any>;
+  searchIndex: Record<any, any>;
+  inputSelector: string;
+  debug?: boolean;
+  queryDataCallback?: any;
+  autocompleteOptions: AutocompleteOptions;
+  transformData?: false | ((hits: Hit[]) => Hit[]);
+  queryHook?: false | ((query: Input) => Input);
+  handleSelected?: HandleSelected;
+  enhancedSearchInput?: boolean;
+  layout?: string;
+};
 
 /**
  * Adds an autocomplete dropdown to an input field
  * @function DocSearch
- * @param  {Object} options.searchDocs Search Documents
- * @param  {Object} options.searchIndex Lune searchIndexes
- * @param  {string} options.inputSelector  CSS selector that targets the input
+ * @param  options.searchDocs Search Documents
+ * @param  options.searchIndex Lune searchIndexes
+ * @param  options.inputSelector  CSS selector that targets the input
  * value.
- * @param  {Object} [options.autocompleteOptions] Options to pass to the underlying autocomplete instance
- * @return {Object}
+ * @param  [options.autocompleteOptions] Options to pass to the underlying autocomplete instance
  */
 class DocSearch {
+  private input: Input;
+  private client: LunrSearchAdapter;
+  private queryDataCallback: (hits: Hit[]) => void | null;
+  private autocomplete: Autocomplete;
+  private autocompleteOptions: AutocompleteOptions;
+  private isSimpleLayout: boolean;
   constructor({
     searchDocs,
     searchIndex,
@@ -32,7 +78,7 @@ class DocSearch {
     handleSelected = false,
     enhancedSearchInput = false,
     layout = "collumns",
-  }) {
+  }: DocSearchParams) {
     this.input = DocSearch.getInputFromSelector(inputSelector);
     this.queryDataCallback = queryDataCallback || null;
     const autocompleteOptionsDebug =
@@ -96,14 +142,14 @@ class DocSearch {
     }
   }
 
-  static injectSearchBox(input) {
+  static injectSearchBox(input: Input): Input {
     input.before(templates.searchBox);
     const newInput = input.prev().prev().find("input");
     input.remove();
     return newInput;
   }
 
-  static bindSearchBoxEvent() {
+  static bindSearchBoxEvent(): void {
     $('.searchbox [type="reset"]').on("click", function () {
       $("input#docsearch").focus();
       $(this).addClass("hide");
@@ -111,7 +157,8 @@ class DocSearch {
     });
 
     $("input#docsearch").on("keyup", () => {
-      const searchbox = document.querySelector("input#docsearch");
+      const searchbox =
+        document.querySelector<HTMLInputElement>("input#docsearch");
       const reset = document.querySelector('.searchbox [type="reset"]');
       reset.className = "searchbox__reset";
       if (searchbox.value.length === 0) {
@@ -123,11 +170,10 @@ class DocSearch {
   /**
    * Returns the matching input from a CSS selector, null if none matches
    * @function getInputFromSelector
-   * @param  {string} selector CSS selector that matches the search
+   * @param selector CSS selector that matches the search
    * input of the page
-   * @returns {void}
    */
-  static getInputFromSelector(selector) {
+  static getInputFromSelector(selector: string): Input | null {
     const input = $(selector).filter("input");
     return input.length ? $(input[0]) : null;
   }
@@ -136,18 +182,21 @@ class DocSearch {
    * Returns the `source` method to be passed to autocomplete.js. It will query
    * the Algolia index and call the callbacks with the formatted hits.
    * @function getAutocompleteSource
-   * @param  {function} transformData An optional function to transform the hits
-   * @param {function} queryHook An optional function to transform the query
-   * @returns {function} Method to be passed as the `source` option of
+   * @param transformData An optional function to transform the hits
+   * @param queryHook An optional function to transform the query
+   * @returns Method to be passed as the `source` option of
    * autocomplete
    */
-  getAutocompleteSource(transformData, queryHook) {
-    return (query, callback) => {
+  getAutocompleteSource(
+    transformData: false | ((hits: Hit[]) => Hit[]),
+    queryHook: false | ((query: Input) => Input)
+  ) {
+    return (query: Input, callback: (template: Hogan.Template) => void) => {
       if (queryHook) {
         // eslint-disable-next-line no-param-reassign
         query = queryHook(query) || query;
       }
-      this.client.search(query).then((hits) => {
+      this.client.search(query).then((hits: Hit[]) => {
         if (
           this.queryDataCallback &&
           typeof this.queryDataCallback == "function"
@@ -164,9 +213,9 @@ class DocSearch {
 
   // Given a list of hits returned by the API, will reformat them to be used in
   // a Hogan template
-  static formatHits(receivedHits) {
+  static formatHits(receivedHits: Hit[]): Hogan.Template {
     const clonedHits = utils.deepClone(receivedHits);
-    const hits = clonedHits.map((hit) => {
+    const hits = clonedHits.map((hit: Hit) => {
       if (hit._highlightResult) {
         // eslint-disable-next-line no-param-reassign
         hit._highlightResult = utils.mergeKeyWithParent(
@@ -237,7 +286,7 @@ class DocSearch {
     });
   }
 
-  static formatURL(hit) {
+  static formatURL(hit: Hit): string | null {
     const { url, anchor } = hit;
     if (url) {
       const containsAnchor = url.indexOf("#") !== -1;
@@ -252,10 +301,12 @@ class DocSearch {
   }
 
   static getEmptyTemplate() {
-    return (args) => Hogan.compile(templates.empty).render(args);
+    return (args: Hogan.Context) => Hogan.compile(templates.empty).render(args);
   }
 
-  static getSuggestionTemplate(isSimpleLayout) {
+  static getSuggestionTemplate(
+    isSimpleLayout: boolean
+  ): (suggestion: Hogan.Context) => string {
     const stringTemplate = isSimpleLayout
       ? templates.suggestionSimple
       : templates.suggestion;
@@ -263,7 +314,13 @@ class DocSearch {
     return (suggestion) => template.render(suggestion);
   }
 
-  handleSelected(input, event, suggestion, datasetNumber, context = {}) {
+  handleSelected(
+    input: Input,
+    event: any,
+    suggestion: { url: string },
+    datasetNumber: any,
+    context: { selectionMethod?: string } = {}
+  ): void {
     // Do nothing if click on the suggestion, as it's already a <a href>, the
     // browser will take care of it. This allow Ctrl-Clicking on results and not
     // having the main window being redirected as well
@@ -275,7 +332,7 @@ class DocSearch {
     window.location.assign(suggestion.url);
   }
 
-  handleShown(input) {
+  handleShown(input: Input): void {
     const middleOfInput = input.offset().left + input.width() / 2;
     let middleOfWindow = $(document).width() / 2;
 

@@ -33,6 +33,8 @@
   "devDependencies": {
     "@docusaurus/module-type-aliases": "2.0.0-beta.10",
     "@tsconfig/docusaurus": "^1.0.4",
+    "@types/hogan.js": "^3.0.1",
+    "@types/lunr": "^2.3.4",
     "eslint": "^8.3.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jsx-a11y": "^6.5.1",

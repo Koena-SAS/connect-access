@@ -1,13 +1,22 @@
+// @ts-ignore
 import lunr from "@generated/lunr.client";
+import { Index } from "lunr";
+import type { Input, Hit } from "./types";
+
 lunr.tokenizer.separator = /[\s\-/]+/;
 
 class LunrSearchAdapter {
-  constructor(searchDocs, searchIndex) {
+  private lunrIndex: Index;
+  private searchDocs: Record<any, any>;
+  private titleHitsRes: string[];
+  private contentHitsRes: string[];
+
+  constructor(searchDocs: Record<any, any>, searchIndex: Record<any, any>) {
     this.searchDocs = searchDocs;
     this.lunrIndex = lunr.Index.load(searchIndex);
   }
 
-  getLunrResult(input) {
+  getLunrResult(input: Input): Index.Result[] {
     return this.lunrIndex.query(function (query) {
       const tokens = lunr.tokenizer(input);
       query.term(tokens, {
@@ -19,7 +28,7 @@ class LunrSearchAdapter {
     });
   }
 
-  getHit(doc, formattedTitle, formattedContent) {
+  getHit(doc, formattedTitle, formattedContent?: string): Hit {
     return {
       hierarchy: {
         lvl0: doc.pageTitle || doc.title,
@@ -76,7 +85,7 @@ class LunrSearchAdapter {
     return this.getHit(doc, formattedTitle);
   }
 
-  getContentHit(doc, position) {
+  getContentHit(doc, position): Hit {
     const start = position[0];
     const end = position[0] + position[1];
     let previewStart = start;
@@ -127,14 +136,15 @@ class LunrSearchAdapter {
     }
     return this.getHit(doc, null, preview);
   }
-  search(input) {
+
+  search(input: Input) {
     return new Promise((resolve, rej) => {
       const results = this.getLunrResult(input);
       const hits = [];
       results.length > 5 && (results.length = 5);
       this.titleHitsRes = [];
       this.contentHitsRes = [];
-      results.forEach((result) => {
+      results.forEach((result: Index.Result) => {
         const doc = this.searchDocs[result.ref];
         const { metadata } = result.matchData;
         for (let i in metadata) {
