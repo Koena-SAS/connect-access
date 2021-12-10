@@ -37,8 +37,7 @@ function App({
   paths,
   initialOrganizationApp,
 }: AppProps) {
-  const [token, setToken] = useStateWithStorage("token");
-  const isLogged = Boolean(token);
+  const [token, setToken] = useStateWithStorage<string | undefined>("token");
   // the below hooks trigger the loading of data from server
   const { userDetails } = useUserDetails(token);
   const isUserStaff = userDetails && userDetails.isStaff;
@@ -48,7 +47,7 @@ function App({
     <>
       <Switch>
         <Route path={paths.ADMIN}>
-          {isUserStaff && (
+          {isUserStaff && token && (
             <AdminLayout
               token={token}
               paths={paths}
@@ -65,7 +64,6 @@ function App({
             initialOrganizationApp={initialOrganizationApp}
             token={token}
             setToken={setToken}
-            isLogged={isLogged}
             siteLanguage={siteLanguage}
             toggleSiteLanguage={toggleSiteLanguage}
           />

@@ -54,7 +54,9 @@ it(`redirects to the correct path when clicking on a specific
       );
       const id = getByText(/f8842f63/);
       expect(id).toBeInTheDocument();
-      const detailsButton = within(id.closest("tr")).getByText("Details");
+      const detailsButton = within(id.closest("tr") as HTMLElement).getByText(
+        "Details"
+      );
       fireEvent.click(detailsButton);
       expect(history.location.pathname).toEqual(generatedPaths.USER_REQUEST);
     }

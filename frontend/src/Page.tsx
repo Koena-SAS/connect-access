@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 type PageProps = {
   title: string;
-  children: JSX.Element;
+  children: JSX.Element | false;
 };
 
 /**
@@ -13,7 +13,7 @@ const Page = ({ title, children }: PageProps): JSX.Element => {
   useEffect(() => {
     document.title = title;
   }, [title]);
-  return children ? children : null;
+  return children ? children : <></>;
 };
 
 export default Page;

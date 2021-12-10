@@ -28,9 +28,8 @@ function renderHeader(isLogged = false) {
         <I18nProvider i18n={i18n}>
           <Router>
             <Header
-              isLogged={isLogged}
               setToken={() => null}
-              token={isLogged ? "blablabla" : null}
+              token={isLogged ? "blablabla" : undefined}
             />
           </Router>
         </I18nProvider>

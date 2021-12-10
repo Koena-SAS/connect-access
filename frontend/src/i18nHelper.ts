@@ -42,6 +42,6 @@ export async function dynamicActivate(locale: Langs) {
 export function extractTranslation(
   locale: Langs,
   object: Record<Langs, string>
-): string {
+): string | null {
   return object ? object[locale] : null;
 }

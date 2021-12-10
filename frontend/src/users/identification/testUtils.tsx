@@ -4,7 +4,7 @@ import { click, fillField, mockedAxios } from "../../testUtils";
 
 export async function fillSignupFields(
   app: RenderResult,
-  missingField: string = null,
+  missingField: string | null = null,
   postCallNumber: number = 2
 ) {
   fillField(app, /Last name/, "KOENA", missingField !== "lastName");
@@ -23,7 +23,7 @@ export async function fillSignupFields(
 
 export async function fillLoginFields(
   app: RenderResult,
-  missingField: string = null,
+  missingField: string | null = null,
   postCallNumber: number = 1
 ) {
   fillField(app, /E-mail/, "bla@bla.fr", missingField !== "email");
@@ -41,7 +41,7 @@ export async function checkBackendFieldsErrors(
   fieldName: string,
   fillFieldsFunction: (
     app: RenderResult,
-    missingField: string,
+    missingField: string | null,
     postCallNumber: number
   ) => Promise<void>,
   app: RenderResult

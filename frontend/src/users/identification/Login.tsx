@@ -30,7 +30,7 @@ type LoginProps = RouteComponentProps & {
 function Login({ setToken, handleCloseIdentification }: LoginProps) {
   const generatePrefixedPath = useGeneratePrefixedPath();
   const { register, handleSubmit, errors } = useForm<FormInput>();
-  const [nonFieldErrors, setNonFieldErrors] = useState([]);
+  const [nonFieldErrors, setNonFieldErrors] = useState<JSX.Element[]>([]);
   const [allFieldsInError, setAllFieldsInError] = useState(false);
   const onSubmit = (data: FormInput) => {
     const dataToSend = {
@@ -91,9 +91,9 @@ function Login({ setToken, handleCloseIdentification }: LoginProps) {
         </p>
       );
     } else if (nonFieldErrors.length > 1) {
-      const items = nonFieldErrors.map((value) => {
+      const items = nonFieldErrors.map((value, index) => {
         return (
-          <li role="alert" className="form__error-text" key={value}>
+          <li role="alert" className="form__error-text" key={index}>
             {value}
           </li>
         );

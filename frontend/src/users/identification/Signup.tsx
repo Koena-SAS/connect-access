@@ -43,7 +43,7 @@ type SignupProps = RouteComponentProps & {
 function Signup({ setToken, handleCloseIdentification }: SignupProps) {
   const { register, handleSubmit, errors, watch, setError } =
     useForm<FormInput>();
-  const [nonFieldErrors, setNonFieldErrors] = useState([]);
+  const [nonFieldErrors, setNonFieldErrors] = useState<JSX.Element[]>([]);
 
   const onSubmit = (data: FormInput) => {
     const dataToSend = {

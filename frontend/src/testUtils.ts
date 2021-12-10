@@ -408,8 +408,8 @@ export function generatePathsWithoutPrefix() {
   return produce(PATHS, (draftState) => {
     for (const [key, value] of getEntries(draftState)) {
       draftState[key] = generatePath(value, {
-        organizationSlug: null,
-        applicationSlug: null,
+        organizationSlug: undefined,
+        applicationSlug: undefined,
         uid: "IN",
         token: "z65e44jjlkmyu84e6fjfszqqds2az5szf",
         requestId: "f8842f63-5073-4956-a7fa-2ec8eb82f37d",

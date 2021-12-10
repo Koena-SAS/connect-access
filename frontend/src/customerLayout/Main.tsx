@@ -20,7 +20,6 @@ import {
 } from "../users";
 
 type MainProps = {
-  isLogged: boolean;
   /**
    * Set login token for user authentication.
    */
@@ -30,7 +29,7 @@ type MainProps = {
    */
   token?: string;
   activeMediationFormStep: Step;
-  setActiveMediationFormStep: (activeMediationFormStep: number) => void;
+  setActiveMediationFormStep: (activeMediationFormStep: Step) => void;
   paths: Paths;
   /**
    * The organization applicaiton data got from the backend for the first time.
@@ -44,12 +43,12 @@ type MainProps = {
 function Main({
   token,
   setToken,
-  isLogged,
   activeMediationFormStep,
   setActiveMediationFormStep,
   paths,
   initialOrganizationApp,
 }: MainProps) {
+  const isLogged = token !== undefined;
   const configData = useContext<ConfigData>(ConfigDataContext);
   const { userDetails } = useUserDetails(token);
   const [requestSuccessMessageOpen, setRequestSuccessMessageOpen] =
@@ -64,7 +63,7 @@ function Main({
   };
   const ClosePasswordConfirmSuccessMessage = (
     event: React.SyntheticEvent<any, Event>,
-    reason: SnackbarCloseReason
+    reason: SnackbarCloseReason | null
   ) => {
     if (reason === "clickaway") {
       return;
@@ -73,7 +72,7 @@ function Main({
   };
   const ClosePasswordFailureMessage = (
     event: React.SyntheticEvent<any, Event>,
-    reason: SnackbarCloseReason
+    reason: SnackbarCloseReason | null
   ) => {
     if (reason === "clickaway") {
       return;

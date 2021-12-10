@@ -39,7 +39,6 @@ async function renderRequestDetail(
       initialEntries: [generatedPaths.ADMIN_REQUEST_DETAIL],
     });
   }
-  let requestDetail: RenderResult;
   function renderTraceReportComponent() {
     return render(
       <SWRConfig value={{ dedupingInterval: 0 }}>
@@ -53,10 +52,7 @@ async function renderRequestDetail(
       </SWRConfig>
     );
   }
-  await waitFor(() => {
-    requestDetail = renderTraceReportComponent();
-  });
-  return requestDetail;
+  return await waitFor(() => renderTraceReportComponent());
 }
 
 describe("display", () => {

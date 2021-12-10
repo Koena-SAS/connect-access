@@ -21,19 +21,27 @@ async function addTraceReport({
   const dataToSend = new FormData();
   dataToSend.append("mediation_request", mediationRequestId);
   dataToSend.append("contact_date", traceReport.contactDate);
-  dataToSend.append("trace_type", traceReport.traceType);
-  dataToSend.append("sender_type", traceReport.senderType);
+  if (traceReport.traceType !== undefined) {
+    dataToSend.append("trace_type", traceReport.traceType);
+  }
+  if (traceReport.senderType !== undefined) {
+    dataToSend.append("sender_type", traceReport.senderType);
+  }
   dataToSend.append(
     "sender_name",
     traceReport.senderName ? traceReport.senderName : ""
   );
-  dataToSend.append("recipient_type", traceReport.recipientType);
+  if (traceReport.recipientType !== undefined) {
+    dataToSend.append("recipient_type", traceReport.recipientType);
+  }
   dataToSend.append(
     "recipient_name",
     traceReport.recipientName ? traceReport.recipientName : ""
   );
-  dataToSend.append("comment", traceReport.comment);
-  if (traceReport.attachedFile.length) {
+  if (traceReport.comment !== undefined) {
+    dataToSend.append("comment", traceReport.comment);
+  }
+  if (traceReport.attachedFile && traceReport.attachedFile.length) {
     dataToSend.append("attached_file", traceReport.attachedFile[0]);
   }
   try {
@@ -47,7 +55,7 @@ async function addTraceReport({
       }
     );
     return response;
-  } catch (error) {
+  } catch (error: any) {
     throw error.response ? error.response.data : [];
   }
 }
@@ -85,7 +93,7 @@ export function useAddTraceReport({
     onMutate({ input }) {
       const oldData = cache.get(key);
       const dataToSet = produce(input.traceReport, (draft) => {
-        if (!draft.attachedFile.length) {
+        if (draft.attachedFile && !draft.attachedFile.length) {
           // avoid a visual bug when updating optimistically
           // while there is no attached file
           draft.attachedFile = "";
@@ -126,21 +134,29 @@ async function editTraceReport({
   const dataToSend = new FormData();
   dataToSend.append("mediation_request", mediationRequestId);
   dataToSend.append("contact_date", traceReport.contactDate);
-  dataToSend.append("trace_type", traceReport.traceType);
-  dataToSend.append("sender_type", traceReport.senderType);
+  if (traceReport.traceType !== undefined) {
+    dataToSend.append("trace_type", traceReport.traceType);
+  }
+  if (traceReport.senderType !== undefined) {
+    dataToSend.append("sender_type", traceReport.senderType);
+  }
   dataToSend.append(
     "sender_name",
     traceReport.senderName ? traceReport.senderName : ""
   );
-  dataToSend.append("recipient_type", traceReport.recipientType);
+  if (traceReport.recipientType !== undefined) {
+    dataToSend.append("recipient_type", traceReport.recipientType);
+  }
   dataToSend.append(
     "recipient_name",
     traceReport.recipientName ? traceReport.recipientName : ""
   );
-  dataToSend.append("comment", traceReport.comment);
+  if (traceReport.comment !== undefined) {
+    dataToSend.append("comment", traceReport.comment);
+  }
   if (traceReport.removeAttachedFile) {
     dataToSend.append("attached_file", new File([], ""));
-  } else if (traceReport.attachedFile.length) {
+  } else if (traceReport.attachedFile && traceReport.attachedFile.length) {
     dataToSend.append("attached_file", traceReport.attachedFile[0]);
   }
   try {
@@ -154,7 +170,7 @@ async function editTraceReport({
       }
     );
     return response;
-  } catch (error) {
+  } catch (error: any) {
     throw error.response ? error.response.data : [];
   }
 }
@@ -199,7 +215,8 @@ export function useEditTraceReport({
             if (isTheNewReport) {
               return produce(input.traceReport, (draft) => {
                 const askForFileRemoval = draft.removeAttachedFile;
-                const noFileProvidedByUser = !draft.attachedFile.length;
+                const noFileProvidedByUser =
+                  draft.attachedFile && !draft.attachedFile.length;
                 const fileAlreadyExists = traceReport.attachedFile;
                 if (askForFileRemoval) {
                   draft.attachedFile = "";
@@ -254,7 +271,7 @@ async function deleteTraceReport({
       }
     );
     return response;
-  } catch (error) {
+  } catch (error: any) {
     throw error.response ? error.response.data : [];
   }
 }

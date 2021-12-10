@@ -122,8 +122,9 @@ function MediationRequestsDetail({
                     function generateAssistiveTechs(technology, index) {
                       if (technology) {
                         const lastElement =
+                          mediationRequest.assistiveTechnologyUsed &&
                           index <
-                          mediationRequest.assistiveTechnologyUsed.length - 1;
+                            mediationRequest.assistiveTechnologyUsed.length - 1;
                         return (
                           <span key={technology}>
                             {lastElement ? (

@@ -34,7 +34,7 @@ function ConfirmationDialog({
           /* Material UI sets the focus on the modal itself, we have to
              wait a bit (~2 rerenders, or a small time like below) before
              we are able to set the focus on the contact date input. */
-          if ("focus" in cancelElement.current) {
+          if (cancelElement.current && "focus" in cancelElement.current) {
             cancelElement.current.focus();
           }
         }, 10);

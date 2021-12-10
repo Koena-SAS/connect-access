@@ -29,33 +29,31 @@ afterEach(async () => {
 });
 
 async function renderMain(
-  initialPath: string,
-  history: MemoryHistory,
-  generatedPaths: Paths,
-  paths: Paths
+  initialPath?: string,
+  history?: MemoryHistory,
+  generatedPaths?: Paths,
+  paths?: Paths
 ): Promise<RenderResult> {
-  if (!paths) {
-    paths = PATHS_WITHOUT_PREFIX;
-  }
-  if (!history) {
+  const finalPaths = paths ? paths : PATHS_WITHOUT_PREFIX;
+  const finalHistory = history ? history : generateHistory();
+  function generateHistory() {
     if (generatedPaths) {
-      history = createMemoryHistory({
+      return createMemoryHistory({
         initialEntries: [generatedPaths.ROOT],
       });
     } else {
-      history = createMemoryHistory();
+      return createMemoryHistory();
     }
   }
-  if (initialPath) history.push(initialPath);
-  let main: RenderResult;
+  if (initialPath) finalHistory.push(initialPath);
   function renderMainComponent() {
     return render(
       <ConfigDataContext.Provider value={configData}>
         <SWRConfig value={{ dedupingInterval: 0 }}>
           <I18nProvider i18n={i18n}>
-            <Router history={history}>
-              <Route path={paths.ROOT}>
-                <Main token="oizjofjzoijf" paths={paths} />
+            <Router history={finalHistory}>
+              <Route path={finalPaths.ROOT}>
+                <Main token="oizjofjzoijf" paths={finalPaths} />
               </Route>
             </Router>
           </I18nProvider>
@@ -63,10 +61,7 @@ async function renderMain(
       </ConfigDataContext.Provider>
     );
   }
-  await waitFor(() => {
-    main = renderMainComponent();
-  });
-  return main;
+  return await waitFor(() => renderMainComponent());
 }
 
 describe("Routing tests", () => {
@@ -86,7 +81,7 @@ async function checkOnlyNeededComponentIsRendered(routeName: keyof Paths) {
     async (generatedPaths: Paths, paths: Paths) => {
       const app = await renderMain(
         generatedPaths[routeName],
-        null,
+        undefined,
         generatedPaths,
         paths
       );
@@ -170,7 +165,7 @@ describe("renders correctly document title", () => {
     expectedTitle: string,
     paths: Paths
   ) {
-    await renderMain(route, null, null, paths);
+    await renderMain(route, undefined, undefined, paths);
     await waitFor(() => expect(document.title).toEqual(expectedTitle));
   }
 });

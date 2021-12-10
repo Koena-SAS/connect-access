@@ -94,7 +94,7 @@ function FormContainer({
   };
   const handleCloseSuccessMessage = (
     event: React.SyntheticEvent<any, Event>,
-    reason: SnackbarCloseReason
+    reason: SnackbarCloseReason | null
   ) => {
     if (reason === "clickaway") {
       return;
@@ -103,7 +103,7 @@ function FormContainer({
   };
   const handleCloseFailureMessage = (
     event: React.SyntheticEvent<any, Event>,
-    reason: SnackbarCloseReason
+    reason: SnackbarCloseReason | null
   ) => {
     if (reason === "clickaway") {
       return;

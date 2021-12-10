@@ -71,7 +71,7 @@ describe("Steps routing correct display", () => {
       async (generatedPaths: Paths, paths: Paths) => {
         await testRoute(generatedPaths.ROOT, 1, generatedPaths, paths);
       },
-      null,
+      undefined,
       resetBetweenTwoSubTests
     );
   });
@@ -87,7 +87,7 @@ describe("Steps routing correct display", () => {
           paths
         );
       },
-      null,
+      undefined,
       resetBetweenTwoSubTests
     );
   });
@@ -152,9 +152,9 @@ describe("Steps routing correct display", () => {
         textToSearch
       );
     } else {
-      expect(app.queryByRole("heading", { level: 2 }).textContent).not.toMatch(
-        textToSearch
-      );
+      expect(
+        (app.queryByRole("heading", { level: 2 }) as HTMLElement).textContent
+      ).not.toMatch(textToSearch);
     }
   }
 });
@@ -171,7 +171,7 @@ describe("renders correctly document title", () => {
           paths
         );
       },
-      null,
+      undefined,
       resetBetweenTwoSubTests
     );
   });
@@ -187,7 +187,7 @@ describe("renders correctly document title", () => {
           paths
         );
       },
-      null,
+      undefined,
       resetBetweenTwoSubTests
     );
   });
@@ -214,7 +214,7 @@ describe("renders correctly document title", () => {
           paths
         );
       },
-      null,
+      undefined,
       resetBetweenTwoSubTests
     );
   });
@@ -317,7 +317,7 @@ describe("Initialize unlocked steps and do initial routing if needed", () => {
         await click(getByText2("About you"));
         expect(history.location.pathname).toEqual(generatedPaths.ROOT);
       },
-      null,
+      undefined,
       resetBetweenTwoSubTests
     );
   });
@@ -430,7 +430,7 @@ describe("Reset entered values", () => {
         await click(app.getByText("Your problem"));
         expect(history.location.pathname).toEqual(generatedPaths.ROOT);
       },
-      null,
+      undefined,
       resetBetweenTwoSubTests
     );
   });

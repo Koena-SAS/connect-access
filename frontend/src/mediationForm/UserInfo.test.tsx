@@ -126,13 +126,17 @@ describe("Accessibility", () => {
   desktop`, async () => {
     (reactDeviceDetect.isBrowser as boolean) = true;
     const desktopVersion = renderUserInfo();
-    let helperText = desktopVersion.getByText(/To select several technologies/);
+    const helperText = desktopVersion.getByText(
+      /To select several technologies/
+    );
     expect(helperText).toBeInTheDocument();
     cleanup();
     (reactDeviceDetect.isBrowser as boolean) = false;
     const mobileVersion = renderUserInfo();
-    helperText = mobileVersion.queryByText(/To select several technologies/);
-    expect(helperText).not.toBeInTheDocument();
+    const helperText2 = mobileVersion.queryByText(
+      /To select several technologies/
+    );
+    expect(helperText2).not.toBeInTheDocument();
   });
 });
 

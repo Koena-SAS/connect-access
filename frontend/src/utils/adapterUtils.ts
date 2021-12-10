@@ -5,8 +5,10 @@
  *     contain arrays.
  * @returns the same object with camel case keys.
  */
-export function keysToCamel(obj: Record<any, any>) {
-  return transformKeys(obj, toCamel);
+export function keysToCamel(
+  obj?: Record<any, any>
+): Record<any, any> | undefined {
+  return obj ? transformKeys(obj, toCamel) : obj;
 }
 
 function toCamel(str: string) {
@@ -22,8 +24,10 @@ function toCamel(str: string) {
  *     contain arrays.
  * @returns the same object with snake case keys.
  */
-export function keysToSnake(obj: Record<any, any>) {
-  return transformKeys(obj, toSnake);
+export function keysToSnake(
+  obj?: Record<any, any>
+): Record<any, any> | undefined {
+  return obj ? transformKeys(obj, toSnake) : undefined;
 }
 
 function toSnake(str: string) {

@@ -1,5 +1,5 @@
 import axios from "axios";
-import useSWR, { SWRResponse } from "swr";
+import useSWR, { SWRConfiguration, SWRResponse } from "swr";
 import { keysToCamel } from "../utils";
 
 const fetcher = (url: string, token: string) =>
@@ -34,7 +34,7 @@ const fetcher = (url: string, token: string) =>
  */
 function useSwrWithLocalStorage<Data = unknown, Error = unknown>(
   key: string,
-  token: string,
+  token?: string,
   isObject: boolean = false
 ): SWRResponse<Data, Error> {
   const initValue = () => {
@@ -46,7 +46,7 @@ function useSwrWithLocalStorage<Data = unknown, Error = unknown>(
     }
   };
   const initialValue = initValue();
-  const options = initialValue
+  const options: SWRConfiguration<Data, Error> | undefined = initialValue
     ? {
         initialData: initialValue,
       }

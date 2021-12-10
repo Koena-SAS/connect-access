@@ -13,7 +13,7 @@ import MediationRequestDetail from "./MediationRequestsDetail";
 initLanguagesForTesting();
 
 test.skip(`MediationRequestDetail display is already tested through
-the tests of mediationForm/Recap.test.js`, () => 1);
+the tests of mediationForm/Recap.test.js`, (): void => undefined);
 
 it(`displays h3 titles with titlesHeadingLevel set to 3`, async () => {
   const { getAllByRole } = renderMediationRequestDetail(3);
@@ -49,7 +49,7 @@ function renderMediationRequestDetail(
         <Route path={paths.ROOT}>
           <MediationRequestDetail
             mediationRequest={mediationRequests[0]}
-            additionalComponents={null}
+            additionalComponents={undefined}
             titlesHeadingLevel={titlesHeadingLevel}
           />
         </Route>

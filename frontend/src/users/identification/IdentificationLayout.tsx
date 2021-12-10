@@ -53,7 +53,7 @@ function IdentificationLayout({
   };
   const handleCloseSuccessMessage = (
     event: React.SyntheticEvent<any, Event>,
-    reason: SnackbarCloseReason
+    reason: SnackbarCloseReason | null
   ) => {
     if (reason === "clickaway") {
       return;
@@ -62,7 +62,7 @@ function IdentificationLayout({
   };
   const handleCloseFailureMessage = (
     event: React.SyntheticEvent<any, Event>,
-    reason: SnackbarCloseReason
+    reason: SnackbarCloseReason | null
   ) => {
     if (reason === "clickaway") {
       return;
@@ -113,7 +113,7 @@ function IdentificationLayout({
             PaperProps={{
               "aria-modal": "true",
               "aria-label": t({ id: dialogAriaLabel }),
-              "aria-labelledby": null,
+              "aria-labelledby": undefined,
             }}
           >
             <div className="identification">

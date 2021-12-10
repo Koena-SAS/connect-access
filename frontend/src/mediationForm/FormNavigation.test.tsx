@@ -417,7 +417,7 @@ describe("Accessibility", () => {
 });
 
 function renderFormNavigation(
-  history: History,
+  history: History | null,
   generatedPaths: Paths,
   paths: Paths,
   completed: Completed = {},

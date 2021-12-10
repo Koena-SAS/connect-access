@@ -42,40 +42,37 @@ afterEach(() => {
 });
 
 async function renderMain(
-  initialPath: string = null,
+  initialPath: string | null = null,
   islogged: boolean = false,
-  history: History = null,
-  generatedPaths: Paths = null,
-  paths: Paths = null
+  history: History | null = null,
+  generatedPaths: Paths | null = null,
+  paths: Paths | null = null
 ): Promise<RenderResult> {
-  if (!paths) {
-    paths = PATHS_WITHOUT_PREFIX;
-  }
-  if (!history) {
+  const finalPaths = paths ? paths : PATHS_WITHOUT_PREFIX;
+  const finalHistory = history ? history : generateHistory();
+  function generateHistory() {
     if (generatedPaths) {
-      history = createMemoryHistory({
+      return createMemoryHistory({
         initialEntries: [generatedPaths.ROOT],
       });
     } else {
-      history = createMemoryHistory();
+      return createMemoryHistory();
     }
   }
-  if (initialPath) history.push(initialPath);
-  let main: RenderResult;
+  if (initialPath) finalHistory.push(initialPath);
   function renderMainComponent() {
     return render(
       <ConfigDataContext.Provider value={configData}>
         <SWRConfig value={{ dedupingInterval: 0 }}>
           <I18nProvider i18n={i18n}>
-            <Router history={history}>
-              <Route path={paths.ROOT}>
+            <Router history={finalHistory}>
+              <Route path={finalPaths.ROOT}>
                 <Main
                   setToken={() => null}
                   token={islogged ? "e64e84sz" : undefined}
-                  isLogged={islogged}
                   activeMediationFormStep={0}
                   setActiveMediationFormStep={() => null}
-                  paths={paths}
+                  paths={finalPaths}
                 />
               </Route>
             </Router>
@@ -84,10 +81,7 @@ async function renderMain(
       </ConfigDataContext.Provider>
     );
   }
-  await waitFor(() => {
-    main = renderMainComponent();
-  });
-  return main;
+  return await waitFor(() => renderMainComponent());
 }
 
 const logged = {
@@ -250,7 +244,9 @@ describe("User mediations", () => {
           paths
         );
         const id = await waitFor(() => getByText(/f8842f63/));
-        const detailsButton = within(id.closest("tr")).getByText("Details");
+        const detailsButton = within(id.closest("tr") as HTMLElement).getByText(
+          "Details"
+        );
         fireEvent.click(detailsButton);
         expect(getByText(/Mediation request details/)).toBeInTheDocument();
       }

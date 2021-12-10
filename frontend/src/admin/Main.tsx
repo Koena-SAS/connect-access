@@ -10,7 +10,7 @@ import QuickAccess from "./QuickAccess";
 import RequestDetailContainer from "./requestDetail/RequestDetailContainer";
 
 type MainProps = {
-  token?: string;
+  token: string;
   paths: Paths;
 };
 

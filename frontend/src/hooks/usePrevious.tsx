@@ -6,8 +6,8 @@ import { useEffect, useRef } from "react";
  * @param value
  * @returns the previous state of the value
  */
-function usePrevious<T>(value: T): T {
-  const ref = useRef<T>();
+function usePrevious<T>(value: T): T | null {
+  const ref = useRef<T | null>(null);
   useEffect(() => {
     ref.current = value;
   });

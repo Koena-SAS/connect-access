@@ -35,7 +35,6 @@ afterEach(async () => {
 });
 
 async function renderAllRequests(history: History): Promise<RenderResult> {
-  let app;
   async function renderAllRequestsComponent() {
     return render(
       <SWRConfig value={{ dedupingInterval: 0 }}>
@@ -47,10 +46,7 @@ async function renderAllRequests(history: History): Promise<RenderResult> {
       </SWRConfig>
     );
   }
-  await waitFor(() => {
-    app = renderAllRequestsComponent();
-  });
-  return app;
+  return await waitFor(() => renderAllRequestsComponent());
 }
 
 it(`displays the list of the mediation requests sent by the backend`, async () => {

@@ -6,9 +6,7 @@ import { PATHS } from "../constants/paths";
 import { useGeneratePrefixedPath, useWindowDimensions } from "../hooks";
 
 type ItemIconProps = {
-  fontSize?: string;
-  className?: string;
-  color?: string;
+  [props: keyof any]: any;
 };
 
 type MenuItemProps = {

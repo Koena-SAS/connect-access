@@ -38,7 +38,7 @@ function Menu() {
     setShownMobileMenu(false);
   }
   const menuRef = useOuterClick(() => {
-    if (showMobileMenu) {
+    if (shownMobileMenu) {
       hideMobileMenu();
     }
   });

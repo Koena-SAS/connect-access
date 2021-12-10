@@ -15,7 +15,7 @@ import TraceReports from "./TraceReports";
 function RequestDetailContainer({ token }: { token: string }) {
   const configData = useContext<ConfigData>(ConfigDataContext);
   useAdminTraceReports(token);
-  const [breadcrumbs, setBreadcrumbs] = useState([]);
+  const [breadcrumbs, setBreadcrumbs] = useState<JSX.Element[]>([]);
   const { width: windowWidth } = useWindowDimensions();
   const isTablistVertical = Boolean(windowWidth <= 500);
   const tabsInfos = [

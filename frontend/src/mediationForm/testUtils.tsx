@@ -432,7 +432,7 @@ export function checkStep3FieldValues(app: RenderResult) {
 export function ResetLittleStateMachine(): null {
   const { actions } = useStateMachine({ resetState });
   useEffect(() => {
-    actions.resetState(null);
+    actions.resetState(undefined);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
   return null;
 }

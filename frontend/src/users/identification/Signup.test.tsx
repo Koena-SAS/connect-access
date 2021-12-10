@@ -2,7 +2,6 @@ import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
 import type { RenderResult } from "@testing-library/react";
 import { render, waitFor } from "@testing-library/react";
-import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { initLanguagesForTesting } from "../../i18nTestHelper";
 import { click, fillField, mockedAxios } from "../../testUtils";

@@ -173,7 +173,7 @@ describe("Accessibility", () => {
 
 async function fillFields(
   app: RenderResult,
-  missingField: string = null,
+  missingField: string | null = null,
   postCallNumber: number = 1
 ) {
   [/Last name/, /First name/, /Phone number/, /E-mail/].forEach((label) =>

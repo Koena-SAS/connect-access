@@ -17,11 +17,10 @@ import { ConfigData } from "../types/types";
 import { LogoutButton } from "../users/identification";
 
 type HeaderProps = {
-  isLogged: boolean;
   /**
    * Set login token for user authentication.
    */
-  setToken: (token: string) => void;
+  setToken: (token: string | undefined) => void;
   /**
    * The authentication token given when user is logged in.
    */
@@ -31,13 +30,16 @@ type HeaderProps = {
 /**
  * Header containing the main navbar.
  */
-function Header({ isLogged, setToken, token }: HeaderProps) {
+function Header({ setToken, token }: HeaderProps) {
+  const isLogged = token !== undefined;
   const configData = useContext<ConfigData>(ConfigDataContext);
   const location = useLocation();
   const history = useHistory();
   const { userDetails } = useUserDetails(token);
   const generatePrefixedPath = useGeneratePrefixedPath();
-  const [burgerMenuVisible, setBurgerMenuVisibile] = useState(null);
+  const [burgerMenuVisible, setBurgerMenuVisibile] = useState<boolean | null>(
+    null
+  );
   const showMenu = () => {
     setBurgerMenuVisibile(true);
   };

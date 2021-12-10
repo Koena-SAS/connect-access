@@ -2,6 +2,7 @@ import { t, Trans } from "@lingui/macro";
 import { useMemo } from "react";
 import { TextField } from "../forms";
 import { useAdminMediationRequests } from "../hooks";
+import type { MediationRequest } from "../types/mediationRequest";
 import type { ApplicationData } from "../types/organizationApp";
 
 type FilterMediationRequestsProps = {
@@ -25,19 +26,22 @@ function FilterMediationRequests({
   const applicationNames = useMemo(
     function createApplicationNames() {
       return mediationRequests
-        ? mediationRequests.reduce((accumulator, request) => {
-            if (request.applicationData) {
-              const applicationName = buildApplicationName(
-                request.applicationData
-              );
-              if (!accumulator.includes(applicationName)) {
-                accumulator.push(applicationName);
+        ? mediationRequests.reduce(
+            (accumulator: string[], request: MediationRequest) => {
+              if (request.applicationData) {
+                const applicationName = buildApplicationName(
+                  request.applicationData
+                );
+                if (!accumulator.includes(applicationName)) {
+                  accumulator.push(applicationName);
+                }
+                return accumulator;
+              } else {
+                return accumulator;
               }
-              return accumulator;
-            } else {
-              return accumulator;
-            }
-          }, [])
+            },
+            []
+          )
         : [];
     },
     [mediationRequests]
@@ -133,7 +137,7 @@ function FilterMediationRequests({
   );
 }
 
-function buildApplicationName(applicationData: ApplicationData) {
+function buildApplicationName(applicationData: ApplicationData): string {
   return `${applicationData.name} (${applicationData.organizationName})`;
 }
 

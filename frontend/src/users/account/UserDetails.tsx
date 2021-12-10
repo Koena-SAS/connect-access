@@ -33,7 +33,7 @@ function UserDetails({ token }: { token: string }) {
   };
   const handleCloseSuccessMessage = (
     event: React.SyntheticEvent<any, Event>,
-    reason: SnackbarCloseReason
+    reason: SnackbarCloseReason | null
   ) => {
     if (reason === "clickaway") {
       return;
@@ -42,7 +42,7 @@ function UserDetails({ token }: { token: string }) {
   };
   const handleCloseFailureMessage = (
     event: React.SyntheticEvent<any, Event>,
-    reason: SnackbarCloseReason
+    reason: SnackbarCloseReason | null
   ) => {
     if (reason === "clickaway") {
       return;

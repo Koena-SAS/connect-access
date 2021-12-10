@@ -18,7 +18,7 @@ function useStateWithLocalStorage<Value = any>(
     if (localValue) {
       return isObject ? JSON.parse(localValue) : localValue;
     } else {
-      return null;
+      return undefined;
     }
   };
   const [value, setValue] = useState(initValue());

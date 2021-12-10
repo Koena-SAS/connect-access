@@ -15,5 +15,14 @@ const getEntries = Object.entries as <T extends object>(
   obj: T
 ) => [keyof T, T[keyof T]][];
 
+/**
+ * TypeScript will ensure this function is never called, and if it fails to do so,
+ * JavaScript will throw an error at runtime if it is called anyway.
+ * @param message the error message.
+ */
+function error(message: string): never {
+  throw new Error(message);
+}
+
 export type { PartialRecord };
-export { getKeys, getEntries };
+export { getKeys, getEntries, error };

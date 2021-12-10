@@ -14,6 +14,7 @@ import Snackbar from "../../forms/Snackbar";
 import Table from "../../forms/Table";
 import { useAdminTraceReports, useDeleteTraceReport } from "../../hooks";
 import type { TraceReport } from "../../types/traceReport";
+import { error } from "../../types/utilTypes";
 import TraceReportForm from "./TraceReportForm";
 
 type TraceReportsProps = {
@@ -45,11 +46,14 @@ function TraceReports({ token, setBreadcrumbs }: TraceReportsProps) {
   };
   const { traceReports } = useAdminTraceReports(token);
   const [formOpen, setFormOpen] = useState(false);
-  const [confirmationDialogOptions, setConfirmationDialogOptions] = useState({
+  const [confirmationDialogOptions, setConfirmationDialogOptions] = useState<{
+    report: TraceReport | null;
+    open: boolean;
+  }>({
     report: null,
     open: false,
   });
-  const [editReport, setEditReport] = useState(null);
+  const [editReport, setEditReport] = useState<TraceReport | null>(null);
   function resetConfirmationDialogOptions() {
     setConfirmationDialogOptions({ report: null, open: false });
   }
@@ -220,7 +224,7 @@ function TraceReports({ token, setBreadcrumbs }: TraceReportsProps) {
         onClose={handleCloseReportForm}
         formOpen={formOpen}
         token={token}
-        report={editReport ? editReport : null}
+        report={editReport ? editReport : undefined}
         triggerFailureMessage={setRequestFailureMessageType}
       />
       <div className="admin-trace-reports__table-container">
@@ -237,10 +241,14 @@ function TraceReports({ token, setBreadcrumbs }: TraceReportsProps) {
           resetConfirmationDialogOptions();
         }}
         onValidate={function removeTraceReport() {
-          deleteTraceReport({
-            traceReport: confirmationDialogOptions.report,
-            token,
-          });
+          if (confirmationDialogOptions.report) {
+            deleteTraceReport({
+              traceReport: confirmationDialogOptions.report,
+              token,
+            });
+          } else {
+            error("Cannot remove a null report.");
+          }
         }}
         opened={confirmationDialogOptions.open}
       />

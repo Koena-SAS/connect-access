@@ -35,7 +35,9 @@ function MediationRequestsList({
     { text: t`Details` },
   ];
   const rowsInfos = mediationRequests.map((request) => {
-    const creationDate = new Date(request.creationDate);
+    const creationDate = new Date(
+      request.creationDate ? request.creationDate : 0
+    );
     return {
       key: request.id ? request.id : "undefined",
       infos: [
@@ -46,7 +48,7 @@ function MediationRequestsList({
           text: <Trans id={statusMap[request.status]} />,
         },
         {
-          text: request.id.substring(0, 8),
+          text: request.id ? request.id.substring(0, 8) : "Unknown ID",
         },
         {
           text: (

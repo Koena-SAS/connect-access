@@ -86,7 +86,7 @@ function Recap({
   const [shouldTriggerFocusLocal, setShouldTriggerFocusLocal] = useState(false);
 
   useEffect(() => {
-    return shouldTriggerFocusLocal ? setShouldTriggerFocus(true) : null;
+    return shouldTriggerFocusLocal ? setShouldTriggerFocus(true) : undefined;
   }, [shouldTriggerFocusLocal, setShouldTriggerFocus]);
 
   const handleClickUserInfo = () => {
@@ -111,7 +111,7 @@ function Recap({
   };
 
   const handleClickReset = () => {
-    actions.resetState(null);
+    actions.resetState(undefined);
     resetCompleted();
     history.push(generatePrefixedPath(PATHS.ROOT));
   };
@@ -120,74 +120,83 @@ function Recap({
     dataToSend.append("complainant", userId ? userId : "");
     dataToSend.append("application", organizationApp ? organizationApp.id : "");
     dataToSend.append("status", "WAITING_MEDIATOR_VALIDATION");
-    dataToSend.append("first_name", state.userInfo.firstName);
-    dataToSend.append("last_name", state.userInfo.lastName);
-    dataToSend.append("email", state.userInfo.email);
-    dataToSend.append("phone_number", state.userInfo.phoneNumber);
-    Array.isArray(state.userInfo.assistiveTechnologyUsed) &&
-      state.userInfo.assistiveTechnologyUsed.forEach((element) => {
-        dataToSend.append("assistive_technology_used", element);
-      });
-    dataToSend.append("technology_name", state.userInfo.technologyName);
-    dataToSend.append("technology_version", state.userInfo.technologyVersion);
-    dataToSend.append("urgency", state.problemDescription.urgency);
-    dataToSend.append(
-      "issue_description",
-      state.problemDescription.issueDescription
-    );
-    dataToSend.append(
-      "step_description",
-      state.problemDescription.stepDescription
-    );
-    dataToSend.append(
-      "inaccessibility_level",
-      state.problemDescription.inaccessibilityLevel
-    );
-    dataToSend.append("browser_used", state.problemDescription.browserUsed);
-    dataToSend.append("url", state.problemDescription.url);
-    dataToSend.append("browser", state.problemDescription.browser);
-    dataToSend.append(
-      "browser_version",
-      state.problemDescription.browserVersion
-    );
-    dataToSend.append("mobileAppUsed", state.problemDescription.mobileAppUsed);
-    dataToSend.append(
-      "mobileAppPlatform",
-      state.problemDescription.mobileAppPlatform
-    );
-    dataToSend.append("mobileAppName", state.problemDescription.mobileAppName);
-    dataToSend.append(
-      "otherUsedSoftware",
-      state.problemDescription.otherUsedSoftware
-    );
-
-    if (!organizationApp) {
-      dataToSend.append(
-        "did_tell_organization",
-        state.problemDescription.didTellOrganization
-      );
-      dataToSend.append(
-        "did_organization_reply",
-        state.problemDescription.didOrganizationReply
-      );
-      dataToSend.append(
-        "organization_reply",
-        state.problemDescription.organizationReply
-      );
+    if (state.userInfo !== undefined) {
+      dataToSend.append("first_name", state.userInfo.firstName);
+      dataToSend.append("last_name", state.userInfo.lastName);
+      dataToSend.append("email", state.userInfo.email);
+      dataToSend.append("phone_number", state.userInfo.phoneNumber);
+      Array.isArray(state.userInfo.assistiveTechnologyUsed) &&
+        state.userInfo.assistiveTechnologyUsed.forEach((element) => {
+          dataToSend.append("assistive_technology_used", element);
+        });
+      dataToSend.append("technology_name", state.userInfo.technologyName);
+      dataToSend.append("technology_version", state.userInfo.technologyVersion);
     }
-
-    dataToSend.append("further_info", state.problemDescription.furtherInfo);
-    if (
-      state.problemDescription.attachedFile instanceof FileList &&
-      state.problemDescription.attachedFile.length > 0
-    ) {
+    if (state.problemDescription !== undefined) {
+      dataToSend.append("urgency", state.problemDescription.urgency);
       dataToSend.append(
-        "attached_file",
-        state.problemDescription.attachedFile[0]
+        "issue_description",
+        state.problemDescription.issueDescription
       );
-    }
+      dataToSend.append(
+        "step_description",
+        state.problemDescription.stepDescription
+      );
+      dataToSend.append(
+        "inaccessibility_level",
+        state.problemDescription.inaccessibilityLevel
+      );
+      dataToSend.append("browser_used", state.problemDescription.browserUsed);
+      dataToSend.append("url", state.problemDescription.url);
+      dataToSend.append("browser", state.problemDescription.browser);
+      dataToSend.append(
+        "browser_version",
+        state.problemDescription.browserVersion
+      );
+      dataToSend.append(
+        "mobileAppUsed",
+        state.problemDescription.mobileAppUsed
+      );
+      dataToSend.append(
+        "mobileAppPlatform",
+        state.problemDescription.mobileAppPlatform
+      );
+      dataToSend.append(
+        "mobileAppName",
+        state.problemDescription.mobileAppName
+      );
+      dataToSend.append(
+        "otherUsedSoftware",
+        state.problemDescription.otherUsedSoftware
+      );
 
-    if (!organizationApp) {
+      if (!organizationApp) {
+        dataToSend.append(
+          "did_tell_organization",
+          state.problemDescription.didTellOrganization
+        );
+        dataToSend.append(
+          "did_organization_reply",
+          state.problemDescription.didOrganizationReply
+        );
+        dataToSend.append(
+          "organization_reply",
+          state.problemDescription.organizationReply
+        );
+      }
+
+      dataToSend.append("further_info", state.problemDescription.furtherInfo);
+      if (
+        state.problemDescription.attachedFile instanceof FileList &&
+        state.problemDescription.attachedFile.length > 0
+      ) {
+        dataToSend.append(
+          "attached_file",
+          state.problemDescription.attachedFile[0]
+        );
+      }
+    }
+    if (!organizationApp && state.organizationInfo !== undefined) {
       dataToSend.append("organization_name", state.organizationInfo.name);
       dataToSend.append(
         "organization_address",

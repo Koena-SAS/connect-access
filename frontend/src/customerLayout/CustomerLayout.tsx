@@ -11,7 +11,7 @@ import Main from "./Main";
 
 type CustomerLayoutProps = {
   activeMediationFormStep: Step;
-  setActiveMediationFormStep: (activeMediationStep: number) => void;
+  setActiveMediationFormStep: (activeMediationStep: Step) => void;
   /**
    * The paths to be used in the main element for routes rendering.
    */
@@ -21,8 +21,7 @@ type CustomerLayoutProps = {
    */
   initialOrganizationApp?: OrganizationAppRecieved;
   token?: string;
-  setToken: (token: string) => void;
-  isLogged: boolean;
+  setToken: (token: string | undefined) => void;
   siteLanguage: Langs;
   toggleSiteLanguage: () => void;
 };
@@ -34,7 +33,6 @@ function CustomerLayout({
   initialOrganizationApp,
   token,
   setToken,
-  isLogged,
   siteLanguage,
   toggleSiteLanguage,
 }: CustomerLayoutProps) {
@@ -54,12 +52,11 @@ function CustomerLayout({
           toggleSiteLanguage={toggleSiteLanguage}
         />
       </div>
-      <Header isLogged={isLogged} setToken={setToken} token={token} />
+      <Header setToken={setToken} token={token} />
       {!organizationInconsistent && (
         <Main
           token={token}
           setToken={setToken}
-          isLogged={isLogged}
           activeMediationFormStep={activeMediationFormStep}
           setActiveMediationFormStep={setActiveMediationFormStep}
           paths={paths}

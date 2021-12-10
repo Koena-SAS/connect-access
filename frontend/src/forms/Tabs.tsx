@@ -66,7 +66,7 @@ function Tabs({
 
   const firstTabbableElement = useRef<HTMLInputElement>(null);
   useEffect(() => {
-    if (shouldFocus) {
+    if (shouldFocus && firstTabbableElement.current) {
       firstTabbableElement.current.focus();
     }
   }, [shouldFocus]);

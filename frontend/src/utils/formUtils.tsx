@@ -6,26 +6,29 @@ import { ErrorOption } from "react-hook-form";
  * @param muiError if the error will be given to a MUI component
  */
 export function formatErrors(
-  errorsToFormat: string | string[],
+  errorsToFormat: string | string[] | JSX.Element | JSX.Element[],
   muiError: boolean
 ) {
+  let finalErrorsToFormat: (string | JSX.Element)[];
   if (!Array.isArray(errorsToFormat)) {
-    errorsToFormat = [errorsToFormat];
+    finalErrorsToFormat = [errorsToFormat];
+  } else {
+    finalErrorsToFormat = errorsToFormat;
   }
-  if (errorsToFormat.length === 1) {
+  if (finalErrorsToFormat.length === 1) {
     if (muiError) {
-      return errorsToFormat[0];
+      return finalErrorsToFormat[0];
     } else {
       return (
         <p role="alert" className="form__error-text">
-          {errorsToFormat[0]}
+          {finalErrorsToFormat[0]}
         </p>
       );
     }
-  } else if (errorsToFormat.length > 1) {
-    const items = errorsToFormat.map((value) => {
+  } else if (finalErrorsToFormat.length > 1) {
+    const items = finalErrorsToFormat.map((value, index) => {
       return (
-        <li className="{!muiError && 'form__error-text'}" key={value}>
+        <li className="{!muiError && 'form__error-text'}" key={index}>
           {value}
         </li>
       );

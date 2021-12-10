@@ -3,7 +3,7 @@ import { click, fillField, mockedAxios } from "../../testUtils";
 
 export async function fillResetPasswordFields(
   app: RenderResult,
-  missingField: string = null,
+  missingField: string | null = null,
   postCallNumber: number = 1
 ) {
   fillField(app, /E-mail/, "bla@bla.fr", missingField !== "email");
@@ -18,7 +18,7 @@ export async function fillResetPasswordFields(
 
 export async function fillResetPasswordConfirmFields(
   app: RenderResult,
-  missingField: string = null,
+  missingField: string | null = null,
   postCallNumber: number = 1
 ) {
   fillField(app, /Password/, "pass", missingField !== "password1");

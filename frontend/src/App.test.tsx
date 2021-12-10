@@ -80,9 +80,8 @@ async function renderApp(
       history = createMemoryHistory();
     }
   }
-  let main: RenderResult;
-  await waitFor(() => {
-    main = render(
+  let main = await waitFor(() =>
+    render(
       <ConfigDataContext.Provider value={configData}>
         <SWRConfig value={{ dedupingInterval: 0 }}>
           <I18nProvider i18n={i18n}>
@@ -94,8 +93,8 @@ async function renderApp(
           </I18nProvider>
         </SWRConfig>
       </ConfigDataContext.Provider>
-    );
-  });
+    )
+  );
   await waitFor(() => {
     expect(main.getByText(/Français/)).toBeInTheDocument();
   });
@@ -136,7 +135,7 @@ function ComponentWrapper({ paths }: { paths: Paths }) {
         step_color: "#3F4BFF",
         footer_color: "#000000",
       }
-    : null;
+    : undefined;
   return (
     <App
       siteLanguage={siteLanguage}
@@ -375,7 +374,9 @@ describe("Login / logout", () => {
         await loginUser(app);
         fireEvent.click(app.getByText(/My requests/));
         const id = app.getByText(/f8842f63/);
-        const detailsButton = within(id.closest("tr")).getByText("Details");
+        const detailsButton = within(id.closest("tr") as HTMLElement).getByText(
+          "Details"
+        );
         await click(detailsButton);
         await waitFor(() =>
           expect(history.location.pathname).toEqual(generatedPaths.USER_REQUEST)

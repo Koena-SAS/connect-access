@@ -42,7 +42,7 @@ function PasswordResetRequest({
   const generatePrefixedPath = useGeneratePrefixedPath();
   const firstTabbableElement = useRef<HTMLInputElement>(null);
   useEffect(() => {
-    if (shouldFocus) {
+    if (shouldFocus && firstTabbableElement.current) {
       firstTabbableElement.current.focus();
     }
   }, [shouldFocus]);

@@ -21,7 +21,7 @@ function UserMediation({ token }: UserMediationProps) {
     () =>
       userMediationRequests &&
       userMediationRequests.find((request) => {
-        return request.id.toString() === requestId.toString();
+        return request.id && request.id.toString() === requestId.toString();
       }),
     [userMediationRequests, requestId]
   );

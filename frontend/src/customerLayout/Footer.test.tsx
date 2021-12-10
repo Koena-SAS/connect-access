@@ -20,17 +20,15 @@ afterEach(() => {
 });
 
 async function renderFooter(): Promise<RenderResult> {
-  let app: RenderResult;
-  await waitFor(() => {
-    app = render(
+  return await waitFor(() =>
+    render(
       <SWRConfig value={{ dedupingInterval: 0 }}>
         <I18nProvider i18n={i18n}>
           <Footer />
         </I18nProvider>
       </SWRConfig>
-    );
-  });
-  return app;
+    )
+  );
 }
 
 it("displays about service information from the backend", async () => {

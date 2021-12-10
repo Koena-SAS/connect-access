@@ -11,7 +11,7 @@ type LogoutButtonProps = {
   /**
    * Set login token for user authentication.
    */
-  setToken: (token: string) => void;
+  setToken: (token: string | undefined) => void;
   /**
    * The authentication token itself.
    */
@@ -54,7 +54,7 @@ function LogoutButton({ setToken, token }: LogoutButtonProps) {
            for the user.*/
       });
     mutate(["/auth/users/me/", token], null, false);
-    setToken(null);
+    setToken(undefined);
     const includesMandatoryLogin = PATHS_MANDATORY_LOGIN.includes(
       location.pathname
     );

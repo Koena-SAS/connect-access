@@ -22,6 +22,7 @@ import type {
   TraceType,
 } from "../../types/traceReport";
 import type { Langs } from "../../types/types";
+import { error } from "../../types/utilTypes";
 
 type FormInput = {
   traceType: TraceType;
@@ -41,7 +42,7 @@ type TraceReportFormProps = {
   token: string;
   onClose: () => void;
   formOpen: boolean;
-  report: TraceReport;
+  report?: TraceReport;
   /**
    * In case of failure of the creation or edition in the backend.
    */
@@ -115,17 +116,21 @@ function TraceReportForm({
     }
   }
   function doEditTraceReport(dataToSend: TraceReport) {
-    const editDataToSend = produce(dataToSend, (draft) => {
-      if (draft.removeAttachedFile) {
-        draft.attachedFile = "";
-      }
-    });
-    editTraceReport({
-      traceReport: editDataToSend,
-      mediationRequestId,
-      traceReportId: report.id,
-      token,
-    });
+    if (report && report.id) {
+      const editDataToSend = produce(dataToSend, (draft) => {
+        if (draft.removeAttachedFile) {
+          draft.attachedFile = "";
+        }
+      });
+      editTraceReport({
+        traceReport: editDataToSend,
+        mediationRequestId,
+        traceReportId: report.id,
+        token,
+      });
+    } else {
+      error("Cannot edit a mediation request that has no id");
+    }
   }
   function doAddTraceReport(dataToSend: TraceReport) {
     addTraceReport({
@@ -155,7 +160,7 @@ function TraceReportForm({
     function resetDefaultValues() {
       if (formOpen) {
         reset(
-          isEditMode
+          isEditMode && report
             ? {
                 traceType: report.traceType,
                 senderType: report.senderType,
@@ -214,7 +219,7 @@ function TraceReportForm({
         "aria-label": isEditMode
           ? t`Edit a new trace report`
           : t`Add a new trace report`,
-        "aria-labelledby": null,
+        "aria-labelledby": undefined,
       }}
       maxWidth="sm"
       fullWidth
@@ -241,7 +246,10 @@ function TraceReportForm({
             control={control}
             rules={{
               validate: function checkDateFormatError() {
-                if (Boolean(errors.contactDate)) {
+                if (
+                  Boolean(errors.contactDate) &&
+                  firstTabbableElement.current
+                ) {
                   firstTabbableElement.current.focus();
                   return contactDateFormatError;
                 } else {
@@ -398,7 +406,7 @@ function TraceReportForm({
             className="admin-trace-reports-form__attached-file-input"
           />
         </div>
-        {isEditMode && report.attachedFile && (
+        {isEditMode && report && report.attachedFile && (
           <div className="admin-trace-reports-form__remove-file">
             <Checkbox
               id="removeAttachedFile"

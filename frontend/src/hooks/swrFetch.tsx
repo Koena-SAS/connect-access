@@ -17,7 +17,7 @@ import { fetcher } from "./fetcher";
 import useSwrWithStorage from "./useSwrWithStorage";
 
 type UseUserMediationRequestsReturn = {
-  userMediationRequests: MediationRequest[];
+  userMediationRequests?: MediationRequest[];
   userMediationRequestsError: unknown;
 };
 
@@ -28,7 +28,7 @@ type UseUserMediationRequestsReturn = {
  * @returns data and error if any.
  */
 function useUserMediationRequests(
-  token: string
+  token?: string
 ): UseUserMediationRequestsReturn {
   const { data, error } = useSwrWithStorage<MediationRequest[]>(
     "/api/mediation-requests/user/",
@@ -42,7 +42,7 @@ function useUserMediationRequests(
 }
 
 type UseUserDetailsReturn = {
-  userDetails: UserDetails;
+  userDetails?: UserDetails;
   userDetailsError: unknown;
 };
 
@@ -52,7 +52,7 @@ type UseUserDetailsReturn = {
  * @param token the authentication token to make the query.
  * @returns data and error if any.
  */
-function useUserDetails(token: string): UseUserDetailsReturn {
+function useUserDetails(token?: string): UseUserDetailsReturn {
   const { data, error } = useSwrWithStorage<UserDetails>(
     "/auth/users/me/",
     token,

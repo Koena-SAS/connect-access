@@ -51,7 +51,6 @@ async function renderTraceReports(
       initialEntries: [generatedPaths.ADMIN_REQUEST_DETAIL],
     });
   }
-  let traceReport;
   function renderTraceReportComponent() {
     return render(
       <SWRConfig value={{ dedupingInterval: 0 }}>
@@ -65,10 +64,7 @@ async function renderTraceReports(
       </SWRConfig>
     );
   }
-  await waitFor(() => {
-    traceReport = renderTraceReportComponent();
-  });
-  return traceReport;
+  return await waitFor(() => renderTraceReportComponent());
 }
 
 async function runBasicTest(callback: (app: RenderResult) => Promise<void>) {

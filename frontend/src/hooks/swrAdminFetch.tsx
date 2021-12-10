@@ -30,7 +30,7 @@ function useAdminMediationRequests(
 }
 
 type UseAdminMediationRequestReturn = {
-  mediationRequest: MediationRequest;
+  mediationRequest?: MediationRequest;
   mediationRequestsError: any;
   mutateMediationRequests: any;
 };
@@ -56,7 +56,7 @@ function useAdminMediationRequest(
   const mediationRequest =
     foundRequest && foundRequest.length === 1 && foundRequest[0];
   return {
-    mediationRequest: mediationRequest,
+    mediationRequest: mediationRequest ? mediationRequest : undefined,
     mediationRequestsError,
     mutateMediationRequests,
   };

@@ -5,4 +5,5 @@ type LocationState = {
 function isLocationState(state: any): state is LocationState {
   return "from" in state;
 }
+
 export { isLocationState };

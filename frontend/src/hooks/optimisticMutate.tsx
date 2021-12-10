@@ -26,7 +26,7 @@ async function modifyUserDetails({
       }
     );
     return response;
-  } catch (error) {
+  } catch (error: any) {
     throw error.response ? error.response.data : [];
   }
 }
