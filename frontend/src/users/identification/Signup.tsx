@@ -151,7 +151,9 @@ function Signup({ setToken, handleCloseIdentification }: SignupProps) {
         autoComplete="new-password"
         error={!!errors.password1}
         helperText={
-          errors.password1 ? formatErrors(errors.password1.message, true) : ""
+          errors.password1?.message
+            ? formatErrors(errors.password1.message, true)
+            : ""
         }
         FormHelperTextProps={{
           role: "alert",

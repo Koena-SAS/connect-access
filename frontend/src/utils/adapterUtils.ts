@@ -66,11 +66,11 @@ export function replaceKeyInObject(
   newKey: string,
   object: Record<any, any>
 ) {
-  if (oldKey !== newKey) {
+  if (oldKey !== newKey && oldKey in object) {
     Object.defineProperty(
       object,
       newKey,
-      Object.getOwnPropertyDescriptor(object, oldKey)
+      Object.getOwnPropertyDescriptor(object, oldKey)!
     );
     delete object[oldKey];
   }

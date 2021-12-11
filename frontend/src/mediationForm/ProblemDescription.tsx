@@ -100,9 +100,9 @@ function ProblemDescription({
     // TODO: use built-in focus funcitonnality when RHF 7.7 is out
     // cf. https://github.com/react-hook-form/react-hook-form/pull/4960
     if (shouldFocusOnFirstErrorField && errors) {
-      if (errors.issueDescription && errors.issueDescription.ref) {
+      if (errors.issueDescription?.ref?.focus) {
         errors.issueDescription.ref.focus();
-      } else if (errors.url && errors.url.ref) {
+      } else if (errors.url?.ref?.focus) {
         errors.url.ref.focus();
       }
       setShouldFocusOnFirstErrorField(false);

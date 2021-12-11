@@ -59,10 +59,10 @@ export function chooseErrorWrappingElement(errorsToWrap?: { message?: any }) {
  * @param fieldName the field in error
  * @param { Function } setError the react hook form setError function
  */
-export function setManualError(
+export function setManualError<FieldName = string>(
   errorToSet: string,
-  fieldName: string,
-  setError: (name: string, error: ErrorOption) => void
+  fieldName: FieldName,
+  setError: (name: FieldName, error: ErrorOption) => void
 ) {
   if (errorToSet) {
     setError(fieldName, {

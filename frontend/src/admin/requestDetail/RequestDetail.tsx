@@ -45,8 +45,9 @@ function RequestDetail({ token, setBreadcrumbs }: RequestDetailProps) {
     [setBreadcrumbs]
   );
   const { mediationRequest } = useAdminMediationRequest(token);
-  const previousMediationRequest =
-    usePrevious<MediationRequest>(mediationRequest);
+  const previousMediationRequest = usePrevious<MediationRequest | undefined>(
+    mediationRequest
+  );
   const { register, errors, setValue } = useForm<FormInputs>({
     defaultValues: mediationRequest
       ? produce(mediationRequest, (draft) => {

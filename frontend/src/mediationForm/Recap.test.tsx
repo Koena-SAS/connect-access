@@ -16,7 +16,7 @@ import {
   runWithAndWithoutOrganizationPrefix,
 } from "../testUtils";
 import Recap from "./Recap";
-import type { GlobalState } from "./updateAction";
+import type { GlobalState, ProblemDescription } from "./updateAction";
 
 initLanguagesForTesting();
 jest.mock("axios");
@@ -99,11 +99,12 @@ describe("Display store content", () => {
     expect(getByText(/It fails to load/)).toBeInTheDocument();
     expect(getByText(/Impossible access/)).toBeInTheDocument();
     const browserUsed = within(
-      getByText(/Did the problem occur/).parentElement
+      getByText(/Did the problem occur/).parentElement as HTMLElement
     ).getByText("Yes");
     expect(browserUsed).toBeInTheDocument();
     const didTellOrganization = within(
-      getByText(/Did you already tell the organization/).parentElement
+      getByText(/Did you already tell the organization/)
+        .parentElement as HTMLElement
     ).getByText("Yes");
     expect(didTellOrganization).toBeInTheDocument();
     expect(getByText(/Nothing to add/)).toBeInTheDocument();
@@ -145,7 +146,7 @@ describe("Display store content", () => {
         problemDescription: {
           ...storeContent.problemDescription,
           browserUsed: "YES",
-        },
+        } as ProblemDescription,
       });
       const { getByText, queryByText } = renderRecap();
       expect(getByText(/http:\/\/koena.net/)).toBeInTheDocument();
@@ -168,14 +169,14 @@ describe("Display store content", () => {
         problemDescription: {
           ...storeContent.problemDescription,
           browserUsed: "NO",
-        },
+        } as ProblemDescription,
       });
       const { getByText, queryByText } = renderRecap();
       expect(queryByText(/What is the url address/)).not.toBeInTheDocument();
       expect(queryByText(/Which web browser did/)).not.toBeInTheDocument();
       expect(queryByText(/Which web browser version/)).not.toBeInTheDocument();
       const mobileAppUsed = within(
-        getByText(/Was it a mobile app ?/).parentElement
+        getByText(/Was it a mobile app ?/).parentElement as HTMLElement
       ).getByText("Yes");
       expect(mobileAppUsed).toBeInTheDocument();
     });
@@ -189,11 +190,11 @@ describe("Display store content", () => {
             ...storeContent.problemDescription,
             browserUsed: "NO",
             mobileAppUsed: "YES",
-          },
+          } as ProblemDescription,
         });
         const { getByText, queryByText } = renderRecap();
         const mobileAppUsed = within(
-          getByText(/Was it a mobile app ?/).parentElement
+          getByText(/Was it a mobile app ?/).parentElement as HTMLElement
         ).getByText("Yes");
         expect(mobileAppUsed).toBeInTheDocument();
         expect(getByText("iOS")).toBeInTheDocument();
@@ -211,11 +212,11 @@ describe("Display store content", () => {
             ...storeContent.problemDescription,
             browserUsed: "NO",
             mobileAppUsed: "NO",
-          },
+          } as ProblemDescription,
         });
         const { getByText, queryByText } = renderRecap();
         const mobileAppUsed = within(
-          getByText(/Was it a mobile app ?/).parentElement
+          getByText(/Was it a mobile app ?/).parentElement as HTMLElement
         ).getByText("No");
         expect(mobileAppUsed).toBeInTheDocument();
         expect(queryByText(/What kind of app/)).not.toBeInTheDocument();
@@ -233,11 +234,11 @@ describe("Display store content", () => {
         problemDescription: {
           ...storeContent.problemDescription,
           didTellOrganization: "YES",
-        },
+        } as ProblemDescription,
       });
       const { getByText } = renderRecap();
       const organizationReply = within(
-        getByText(/Did they reply?/).parentElement
+        getByText(/Did they reply?/).parentElement as HTMLElement
       ).getByText("Yes");
       expect(organizationReply).toBeInTheDocument();
     });
@@ -249,7 +250,7 @@ describe("Display store content", () => {
         problemDescription: {
           ...storeContent.problemDescription,
           didTellOrganization: "NO",
-        },
+        } as ProblemDescription,
       });
       const { queryByText } = renderRecap();
       expect(queryByText(/Did they reply?/)).not.toBeInTheDocument();
@@ -265,7 +266,7 @@ describe("Display store content", () => {
             ...storeContent.problemDescription,
             didTellOrganization: "YES",
             didOrganizationReply: "YES",
-          },
+          } as ProblemDescription,
         });
         const { getByText } = renderRecap();
         expect(getByText("No reply")).toBeInTheDocument();
@@ -279,7 +280,7 @@ describe("Display store content", () => {
             ...storeContent.problemDescription,
             didTellOrganization: "YES",
             didOrganizationReply: "NO",
-          },
+          } as ProblemDescription,
         });
         const { queryByText } = renderRecap();
         expect(queryByText(/What was their reply?/)).not.toBeInTheDocument();
@@ -305,7 +306,7 @@ describe("Display store content", () => {
       problemDescription: {
         ...storeContent.problemDescription,
         attachedFile: files,
-      },
+      } as ProblemDescription,
     });
     const { queryByText } = renderRecap();
     expect(queryByText(/Failure.png/)).not.toBeInTheDocument();

@@ -6,7 +6,7 @@ import Main from "./Main";
 import Menu from "./Menu";
 
 type AdminLayoutProps = {
-  token?: string;
+  token: string;
   siteLanguage: Langs;
   toggleSiteLanguage: any;
   /**

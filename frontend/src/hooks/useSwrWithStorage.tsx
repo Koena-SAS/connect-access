@@ -2,25 +2,26 @@ import axios from "axios";
 import useSWR, { SWRConfiguration, SWRResponse } from "swr";
 import { keysToCamel } from "../utils";
 
-const fetcher = (url: string, token: string) =>
-  axios
-    .get(url, {
+function fetcher<Data>(url: string, token: string): Promise<Data> {
+  return axios
+    .get<Data>(url, {
       headers: {
         Authorization: `token ${token}`,
       },
     })
     .then((res) => {
       if (res.data) {
-        const data = keysToCamel(res.data);
+        const data = keysToCamel(res.data) as Data;
         const localValue =
           typeof data !== "string" ? JSON.stringify(data) : data;
         localStorage.setItem(url + token, localValue);
         return data;
       } else {
         localStorage.removeItem(url + token);
-        return null;
+        return res.data;
       }
     });
+}
 
 /**
  * State managed and synchronized with the backend by swr,

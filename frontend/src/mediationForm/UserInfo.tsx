@@ -87,11 +87,11 @@ function UserInfo({
     // TODO: use built-in focus funcitonnality when RHF 7.7 is out
     // cf. https://github.com/react-hook-form/react-hook-form/pull/4960
     if (shouldFocusOnFirstErrorField && errors) {
-      if (errors.firstName) {
+      if (errors.firstName?.ref?.focus) {
         errors.firstName.ref.focus();
-      } else if (errors.email) {
+      } else if (errors.email?.ref?.focus) {
         errors.email.ref.focus();
-      } else if (errors.phoneNumber) {
+      } else if (errors.phoneNumber?.ref?.focus) {
         errors.phoneNumber.ref.focus();
       }
       setShouldFocusOnFirstErrorField(false);

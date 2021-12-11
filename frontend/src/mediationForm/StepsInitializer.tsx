@@ -62,11 +62,15 @@ function StepsInitializer({
     const initialCompleted = { ...completed };
 
     function initializeCompleted() {
-      if (userInfoStepComplete(state.userInfo)) {
+      if (state.userInfo && userInfoStepComplete(state.userInfo)) {
         initialCompleted[0] = true;
-        if (problemDescriptionStepComplete(state.problemDescription)) {
+        if (
+          state.problemDescription &&
+          problemDescriptionStepComplete(state.problemDescription)
+        ) {
           initialCompleted[1] = true;
           if (
+            state.organizationInfo &&
             organizationInfoStepComplete(state.organizationInfo) &&
             !organizationApp
           ) {
@@ -97,7 +101,8 @@ function StepsInitializer({
   ) {
     for (let i = askedStep - 1; i >= 0; i--) {
       if (i === 0 || initialCompleted[(i - 1) as Step]) {
-        history.push(stepToUrl[i as Step]);
+        const url = stepToUrl[i as Step];
+        url && history.push(url);
         return;
       }
     }

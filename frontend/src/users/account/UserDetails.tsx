@@ -90,7 +90,9 @@ function UserDetails({ token }: { token: string }) {
 
   const onSubmit = (data: FormInput) => {
     const userDetailsToSend = produce(data, (draft) => {
-      draft.isStaff = userDetails.isStaff;
+      if (userDetails) {
+        draft.isStaff = userDetails.isStaff;
+      }
     });
     modifyUserDetails({ userDetails: userDetailsToSend, token });
   };

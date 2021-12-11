@@ -37,7 +37,7 @@ function TraceReports({ token, setBreadcrumbs }: TraceReportsProps) {
     useState<keyof typeof failureMessages>("none");
   const handleCloseFailureMessage = (
     event: React.SyntheticEvent<any, Event>,
-    reason: SnackbarCloseReason
+    reason: SnackbarCloseReason | null
   ) => {
     if (reason === "clickaway") {
       return;

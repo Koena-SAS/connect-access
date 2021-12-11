@@ -60,39 +60,42 @@ type OrganizationInfo = {
   contact: string;
 };
 
-function updateUserInfo(state: GlobalState, payload: Partial<UserInfo>) {
+function updateUserInfo(
+  state: GlobalState,
+  payload: Partial<UserInfo>
+): GlobalState {
   return {
     ...state,
     userInfo: {
       ...state.userInfo,
       ...payload,
-    },
+    } as UserInfo,
   };
 }
 
 function updateProblemDescription(
   state: GlobalState,
   payload: Partial<ProblemDescription>
-) {
+): GlobalState {
   return {
     ...state,
     problemDescription: {
       ...state.problemDescription,
       ...payload,
-    },
+    } as ProblemDescription,
   };
 }
 
 function updateOrganizationInfo(
   state: GlobalState,
   payload: Partial<OrganizationInfo>
-) {
+): GlobalState {
   return {
     ...state,
     organizationInfo: {
       ...state.organizationInfo,
       ...payload,
-    },
+    } as OrganizationInfo,
   };
 }
 
@@ -134,7 +137,7 @@ const initialState: GlobalState = {
   },
 };
 
-function resetState() {
+function resetState(): GlobalState {
   return initialState;
 }
 

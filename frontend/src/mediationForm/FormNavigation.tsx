@@ -64,7 +64,7 @@ function FormNavigation({
   const isTablistVertical = Boolean(windowWidth <= 850);
   useEffect(() => {
     if (shouldTriggerFocus) {
-      tabs.current[activeStep].focus();
+      tabs.current[activeStep]?.focus();
       setShouldTriggerFocus(false);
     }
   }, [shouldTriggerFocus, setShouldTriggerFocus, activeStep]);
@@ -111,7 +111,7 @@ function FormNavigation({
         } else if (newValue === 3) {
           history.push(generatePrefixedPath(PATHS.RECAP));
         }
-        tabs.current[newValue].focus();
+        tabs.current[newValue]?.focus();
         setShouldTriggerFocus(true);
       }
     }
@@ -132,7 +132,7 @@ function FormNavigation({
   const selectNextTab = (index: StepType) => {
     const nextIndex = ((index + 1) % (maxCompleted + 1)) as StepType;
     if (completed[nextIndex] || completed[(nextIndex - 1) as StepType]) {
-      tabs.current[nextIndex].focus();
+      tabs.current[nextIndex]?.focus();
     }
   };
   const selectPreviousTab = (index: StepType) => {
@@ -142,7 +142,7 @@ function FormNavigation({
       completed[previousIndex] ||
       completed[(previousIndex - 1) as StepType]
     ) {
-      tabs.current[previousIndex].focus();
+      tabs.current[previousIndex]?.focus();
     }
   };
   const handleKeyDown =
@@ -170,27 +170,33 @@ function FormNavigation({
         aria-orientation={isTablistVertical ? "vertical" : "horizontal"}
       >
         <Stepper nonLinear activeStep={activeStep} className="stepper">
-          {stepLabels.map((label: string, index: StepType) => {
+          {stepLabels.map((label: string, index: number) => {
             const disabled = index !== 0 && !completed[(index - 1) as StepType];
-            const iconLabel = completed[index] ? t`Completed` : `${index + 1}`;
+            const iconLabel = completed[index as StepType]
+              ? t`Completed`
+              : `${index + 1}`;
             const isActiveStep = activeStep === index;
             return (
               <Step
                 key={label}
                 className="stepper__step"
-                completed={completed[index]}
+                completed={completed[index as StepType]}
               >
                 <StepButton
-                  onClick={handleChangeTab(index)}
-                  onKeyDown={handleKeyDown(index)}
+                  onClick={handleChangeTab(index as StepType)}
+                  onKeyDown={handleKeyDown(index as StepType)}
                   className={`stepper__button ${isActiveStep ? "active" : ""} ${
                     !disabled ? "unlocked" : ""
                   }`}
                   tabIndex={isActiveStep ? 0 : -1}
                   aria-selected={isActiveStep ? "true" : "false"}
                   disabled={disabled}
-                  {...tabProps(index, isActiveStep)}
-                  ref={(element) => (tabs.current[index] = element)}
+                  {...tabProps(index as StepType, isActiveStep)}
+                  ref={(element) =>
+                    (tabs.current[index as StepType] = element
+                      ? element
+                      : undefined)
+                  }
                 >
                   <span className="sr-only">{iconLabel} - </span>
                   {label}
