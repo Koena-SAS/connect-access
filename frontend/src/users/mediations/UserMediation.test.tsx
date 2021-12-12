@@ -2,7 +2,6 @@ import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
 import { render, waitFor } from "@testing-library/react";
 import { createMemoryHistory } from "history";
-import React from "react";
 import { Route, Router } from "react-router-dom";
 import type { Paths } from "../../constants/paths";
 import { initLanguagesForTesting } from "../../i18nTestHelper";

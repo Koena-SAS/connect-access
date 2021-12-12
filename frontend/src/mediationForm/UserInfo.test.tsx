@@ -19,17 +19,20 @@ import UserInfo from "./UserInfo";
 initLanguagesForTesting();
 
 beforeEach(() => {
-  createStore({
-    userInfo: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      phoneNumber: "",
-      assistiveTechnologyUsed: [],
-      technologyName: "",
-      technologyVersion: "",
+  createStore(
+    {
+      userInfo: {
+        firstName: "",
+        lastName: "",
+        email: "",
+        phoneNumber: "",
+        assistiveTechnologyUsed: [],
+        technologyName: "",
+        technologyVersion: "",
+      },
     },
-  });
+    {}
+  );
   (reactDeviceDetect.isBrowser as boolean) = true;
 });
 

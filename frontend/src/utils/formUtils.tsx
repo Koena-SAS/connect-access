@@ -8,7 +8,7 @@ import { ErrorOption } from "react-hook-form";
 export function formatErrors(
   errorsToFormat: string | string[] | JSX.Element | JSX.Element[],
   muiError: boolean
-) {
+): React.ReactNode {
   let finalErrorsToFormat: (string | JSX.Element)[];
   if (!Array.isArray(errorsToFormat)) {
     finalErrorsToFormat = [errorsToFormat];
@@ -34,6 +34,8 @@ export function formatErrors(
       );
     });
     return <ul className="form__errors-list">{items}</ul>;
+  } else {
+    return null;
   }
 }
 

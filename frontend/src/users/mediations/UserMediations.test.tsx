@@ -2,7 +2,6 @@ import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
 import { render, waitFor } from "@testing-library/react";
 import { createMemoryHistory } from "history";
-import React from "react";
 import { Router } from "react-router-dom";
 import { initLanguagesForTesting } from "../../i18nTestHelper";
 import { mediationRequestsResponse, mockedAxios } from "../../testUtils";

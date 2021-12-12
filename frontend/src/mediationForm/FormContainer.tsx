@@ -19,7 +19,7 @@ import StepsInitializer from "./StepsInitializer";
 import { initialState } from "./updateAction";
 import UserInfo from "./UserInfo";
 
-createStore(initialState);
+createStore(initialState, {});
 
 type FormContainerProps = {
   activeStep: Step;

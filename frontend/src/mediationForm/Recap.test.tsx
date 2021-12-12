@@ -71,7 +71,7 @@ beforeEach(() => {
       contact: "Armony",
     },
   };
-  createStore(storeContent);
+  createStore(storeContent, {});
   resetAxiosMocks();
 });
 
@@ -141,13 +141,16 @@ describe("Display store content", () => {
   describe("Conditional on browser used or not", () => {
     it(`displays problem description correct conditional information if browser
     is used`, () => {
-      createStore({
-        ...storeContent,
-        problemDescription: {
-          ...storeContent.problemDescription,
-          browserUsed: "YES",
-        } as ProblemDescription,
-      });
+      createStore(
+        {
+          ...storeContent,
+          problemDescription: {
+            ...storeContent.problemDescription,
+            browserUsed: "YES",
+          } as ProblemDescription,
+        },
+        {}
+      );
       const { getByText, queryByText } = renderRecap();
       expect(getByText(/http:\/\/koena.net/)).toBeInTheDocument();
       expect(getByText(/Firefox/)).toBeInTheDocument();
@@ -164,13 +167,16 @@ describe("Display store content", () => {
 
     it(`displays problem description correct conditional information if browser
     is not used`, () => {
-      createStore({
-        ...storeContent,
-        problemDescription: {
-          ...storeContent.problemDescription,
-          browserUsed: "NO",
-        } as ProblemDescription,
-      });
+      createStore(
+        {
+          ...storeContent,
+          problemDescription: {
+            ...storeContent.problemDescription,
+            browserUsed: "NO",
+          } as ProblemDescription,
+        },
+        {}
+      );
       const { getByText, queryByText } = renderRecap();
       expect(queryByText(/What is the url address/)).not.toBeInTheDocument();
       expect(queryByText(/Which web browser did/)).not.toBeInTheDocument();
@@ -184,14 +190,17 @@ describe("Display store content", () => {
     describe("Conditionnal on mobile app used or not", () => {
       it(`displays problem description correct conditional information if mobile
         app is used`, () => {
-        createStore({
-          ...storeContent,
-          problemDescription: {
-            ...storeContent.problemDescription,
-            browserUsed: "NO",
-            mobileAppUsed: "YES",
-          } as ProblemDescription,
-        });
+        createStore(
+          {
+            ...storeContent,
+            problemDescription: {
+              ...storeContent.problemDescription,
+              browserUsed: "NO",
+              mobileAppUsed: "YES",
+            } as ProblemDescription,
+          },
+          {}
+        );
         const { getByText, queryByText } = renderRecap();
         const mobileAppUsed = within(
           getByText(/Was it a mobile app ?/).parentElement as HTMLElement
@@ -206,14 +215,17 @@ describe("Display store content", () => {
 
       it(`displays problem description correct conditional information if mobile
       app is not used`, () => {
-        createStore({
-          ...storeContent,
-          problemDescription: {
-            ...storeContent.problemDescription,
-            browserUsed: "NO",
-            mobileAppUsed: "NO",
-          } as ProblemDescription,
-        });
+        createStore(
+          {
+            ...storeContent,
+            problemDescription: {
+              ...storeContent.problemDescription,
+              browserUsed: "NO",
+              mobileAppUsed: "NO",
+            } as ProblemDescription,
+          },
+          {}
+        );
         const { getByText, queryByText } = renderRecap();
         const mobileAppUsed = within(
           getByText(/Was it a mobile app ?/).parentElement as HTMLElement
@@ -229,13 +241,16 @@ describe("Display store content", () => {
   describe("Conditional on did tell organization or not", () => {
     it(`displays problem description correct conditional information
     if did tell organization is true`, () => {
-      createStore({
-        ...storeContent,
-        problemDescription: {
-          ...storeContent.problemDescription,
-          didTellOrganization: "YES",
-        } as ProblemDescription,
-      });
+      createStore(
+        {
+          ...storeContent,
+          problemDescription: {
+            ...storeContent.problemDescription,
+            didTellOrganization: "YES",
+          } as ProblemDescription,
+        },
+        {}
+      );
       const { getByText } = renderRecap();
       const organizationReply = within(
         getByText(/Did they reply?/).parentElement as HTMLElement
@@ -245,13 +260,16 @@ describe("Display store content", () => {
 
     it(`displays problem description correct conditional information
     if did tell organization is false`, () => {
-      createStore({
-        ...storeContent,
-        problemDescription: {
-          ...storeContent.problemDescription,
-          didTellOrganization: "NO",
-        } as ProblemDescription,
-      });
+      createStore(
+        {
+          ...storeContent,
+          problemDescription: {
+            ...storeContent.problemDescription,
+            didTellOrganization: "NO",
+          } as ProblemDescription,
+        },
+        {}
+      );
       const { queryByText } = renderRecap();
       expect(queryByText(/Did they reply?/)).not.toBeInTheDocument();
       expect(queryByText(/What was their reply?/)).not.toBeInTheDocument();
@@ -260,28 +278,34 @@ describe("Display store content", () => {
     describe("Conditionnal on did they reply or not", () => {
       it(`displays problem description correct conditional information if
       the organization replied`, () => {
-        createStore({
-          ...storeContent,
-          problemDescription: {
-            ...storeContent.problemDescription,
-            didTellOrganization: "YES",
-            didOrganizationReply: "YES",
-          } as ProblemDescription,
-        });
+        createStore(
+          {
+            ...storeContent,
+            problemDescription: {
+              ...storeContent.problemDescription,
+              didTellOrganization: "YES",
+              didOrganizationReply: "YES",
+            } as ProblemDescription,
+          },
+          {}
+        );
         const { getByText } = renderRecap();
         expect(getByText("No reply")).toBeInTheDocument();
       });
 
       it(`displays problem description correct conditional information if
       the organization didn't reply`, () => {
-        createStore({
-          ...storeContent,
-          problemDescription: {
-            ...storeContent.problemDescription,
-            didTellOrganization: "YES",
-            didOrganizationReply: "NO",
-          } as ProblemDescription,
-        });
+        createStore(
+          {
+            ...storeContent,
+            problemDescription: {
+              ...storeContent.problemDescription,
+              didTellOrganization: "YES",
+              didOrganizationReply: "NO",
+            } as ProblemDescription,
+          },
+          {}
+        );
         const { queryByText } = renderRecap();
         expect(queryByText(/What was their reply?/)).not.toBeInTheDocument();
       });
@@ -301,13 +325,16 @@ describe("Display store content", () => {
         }),
       ])
     );
-    createStore({
-      ...storeContent,
-      problemDescription: {
-        ...storeContent.problemDescription,
-        attachedFile: files,
-      } as ProblemDescription,
-    });
+    createStore(
+      {
+        ...storeContent,
+        problemDescription: {
+          ...storeContent.problemDescription,
+          attachedFile: files,
+        } as ProblemDescription,
+      },
+      {}
+    );
     const { queryByText } = renderRecap();
     expect(queryByText(/Failure.png/)).not.toBeInTheDocument();
     expect(queryByText(/Failure2.png/)).not.toBeInTheDocument();

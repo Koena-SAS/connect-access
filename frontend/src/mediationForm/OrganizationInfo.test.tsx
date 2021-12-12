@@ -3,7 +3,6 @@ import { I18nProvider } from "@lingui/react";
 import { fireEvent, render } from "@testing-library/react";
 import { createMemoryHistory } from "history";
 import { createStore, StateMachineProvider } from "little-state-machine";
-import React from "react";
 import { Route, Router } from "react-router-dom";
 import type { Paths } from "../constants/paths";
 import { PATHS, PATHS_WITHOUT_PREFIX } from "../constants/paths";
@@ -19,15 +18,18 @@ import {
 initLanguagesForTesting();
 
 beforeEach(() => {
-  createStore({
-    organizationInfo: {
-      name: "",
-      mailingAddress: "",
-      email: "",
-      phoneNumber: "",
-      contact: "",
+  createStore(
+    {
+      organizationInfo: {
+        name: "",
+        mailingAddress: "",
+        email: "",
+        phoneNumber: "",
+        contact: "",
+      },
     },
-  });
+    {}
+  );
 });
 
 describe("Errors on bad formatted input", () => {

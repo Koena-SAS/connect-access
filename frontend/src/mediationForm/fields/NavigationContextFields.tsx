@@ -1,5 +1,4 @@
 import { t, Trans } from "@lingui/macro";
-import React from "react";
 import { BorderedFieldset, Radio, TextField } from "../../forms";
 import {
   chooseErrorWrappingElement,

@@ -29,27 +29,30 @@ const generatedPathsWithPrefix = generatePathsWithPrefix();
 const generatedPathsWithoutPrefix = generatePathsWithoutPrefix();
 
 beforeEach(async () => {
-  createStore({
-    problemDescription: {
-      urgency: "",
-      issueDescription: "",
-      stepDescription: "",
-      inaccessibilityLevel: "",
-      browserUsed: "",
-      url: "",
-      browser: "",
-      browserVersion: "",
-      mobileAppUsed: "",
-      mobileAppPlatform: "",
-      mobileAppName: "",
-      otherUsedSoftware: "",
-      didTellOrganization: "",
-      didOrganizationReply: "",
-      organizationReply: "",
-      furtherInfo: "",
-      attachedFile: null,
+  createStore(
+    {
+      problemDescription: {
+        urgency: "",
+        issueDescription: "",
+        stepDescription: "",
+        inaccessibilityLevel: "",
+        browserUsed: "",
+        url: "",
+        browser: "",
+        browserVersion: "",
+        mobileAppUsed: "",
+        mobileAppPlatform: "",
+        mobileAppName: "",
+        otherUsedSoftware: "",
+        didTellOrganization: "",
+        didOrganizationReply: "",
+        organizationReply: "",
+        furtherInfo: "",
+        attachedFile: null,
+      },
     },
-  });
+    {}
+  );
   resetAxiosMocks();
   localStorage.clear();
   await waitFor(() => cache.clear());

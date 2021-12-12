@@ -1,7 +1,6 @@
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
 import { render, RenderResult, waitFor } from "@testing-library/react";
-import React from "react";
 import { initLanguagesForTesting } from "../../i18nTestHelper";
 import {
   click,

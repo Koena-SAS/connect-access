@@ -83,7 +83,7 @@ function Login({ setToken, handleCloseIdentification }: LoginProps) {
     handleCloseIdentification();
   };
 
-  const nonFieldErrorsJsx = () => {
+  function nonFieldErrorsJsx(): React.ReactNode {
     if (nonFieldErrors.length === 1) {
       return (
         <p role="alert" className="form__error-text">
@@ -100,7 +100,8 @@ function Login({ setToken, handleCloseIdentification }: LoginProps) {
       });
       return <ul>{items}</ul>;
     }
-  };
+    return null;
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate className="login form">

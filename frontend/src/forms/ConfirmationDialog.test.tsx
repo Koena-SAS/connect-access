@@ -1,7 +1,7 @@
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
 import { render, waitFor } from "@testing-library/react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { initLanguagesForTesting } from "../i18nTestHelper";
 import ConfirmationDialog from "./ConfirmationDialog";
 

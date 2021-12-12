@@ -30,7 +30,7 @@ declare global {
  * with path priority between non organization and organization paths.
  */
 const AppWrapper = () => {
-  const [cookies, setCookie, removeCookie] = useCookies(); // eslint-disable-line @typescript-eslint/no-unused-vars
+  const [_, setCookie] = useCookies(); // eslint-disable-line @typescript-eslint/no-unused-vars
   const [siteLanguage, setSiteLanguage] = useState(
     window.SERVER_DATA.initialLanguage
   );
