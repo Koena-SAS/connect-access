@@ -183,26 +183,6 @@
     "message": "Tags",
     "description": "The title of the tag list page"
   },
-  "Docusaurus was designed from the ground up to be easily installed and used to get your website up and running quickly.": {
-    "message": "Docusaurus was designed from the ground up to be easily installed and used to get your website up and running quickly.",
-    "description": "Feature 1 description"
-  },
-  "Extend or customize your website layout by reusing React. Docusaurus can be extended while reusing the same header and footer.": {
-    "message": "Extend or customize your website layout by reusing React. Docusaurus can be extended while reusing the same header and footer.",
-    "description": "Feature 3 description"
-  },
-  "Easy to Use": {
-    "message": "Easy to Use",
-    "description": "Feature 1 title"
-  },
-  "Focus on What Matters": {
-    "message": "Focus on What Matters",
-    "description": "Feature 2 title"
-  },
-  "Powered by React": {
-    "message": "Powered by React",
-    "description": "Feature 3 title"
-  },
   "Mediation accessibility platform": {
     "message": "Plateforme de médiation pour l'accessibilité numérique",
     "description": "Homepage description"
@@ -214,10 +194,6 @@
   "Homepage": {
     "message": "Page d'accueil",
     "description": "Homepage title"
-  },
-  "Docusaurus lets you focus on your docs, and we'll do the chores. Go ahead and move your docs into the {docs} directory.": {
-    "message": "Docusaurus lets you focus on your docs, and we'll do the chores. Go ahead and move your docs into the {docs} directory.",
-    "description": "Feature 2 description"
   },
   "General search": {
     "message": "Recherche générale",
@@ -238,5 +214,33 @@
   "Loading...": {
     "message": "Chargement...",
     "description": "General search loading"
+  },
+  "Make it easy for users to report accessibility issues": {
+    "message": "Permettre facilement aux usagers de signaler les problèmes d'accessibilité",
+    "description": "Feature 1 title"
+  },
+  "Accessibility at the heart of the project": {
+    "message": "L'accessiblité au cœur du projet",
+    "description": "Feature 2 title"
+  },
+  "Join the community": {
+    "message": "Rejoignez la communauté",
+    "description": "Feature 3 title"
+  },
+  "It is free software under {license} license. You can install it and contribute to it by developing new features, reporting bugs, offering translations or contributing your ideas. We use open source software like Django and React, pay attention to code quality, and drive development by tests (TDD).": {
+    "message": "C'est un logiciel libre sous licence {license}. Vous pouvez l'installer et y contribuer en développant de nouvelles fonctionnalités, en rapportant des bugs, en proposant des traductions ou en amenant vos idées. Nous utilisons des logiciels open source comme Django et React, faisons attention à la qualité du code et pilotons le développement par les tests (TDD).",
+    "description": "Feature 3 description"
+  },
+  "https://www.gnu.org/licenses/why-affero-gpl.en.html": {
+    "message": "https://www.gnu.org/licenses/why-affero-gpl.fr.html",
+    "description": "License URL"
+  },
+  "{connectAccess} allows you to renew the dialogue with your users and follow the subject until the problem is resolved. Objective: to detect and respond to difficulties in gaining access to your digital services. This platform was designed to comply with data protection rules (GDPR).": {
+    "message": "{connectAccess} vous permet de renouer le dialogue avec vos usagers et de suivre le sujet jusqu'à résolution du problème. Objectif : détecter et répondre aux difficultés à avoir accès à vos services numériques. Cette plateforme a été pensée pour respecter les règles de protection des données (RGPD).",
+    "description": "Feature 1 description"
+  },
+  "{connectAccess} is a mediation platform that was designed with and for people with disabilities taking into account the accessibility standards (RGAA, WCAG, WAI-ARIA). In a logic of universal design, the accessibility of {connectAccess} is essential for some people, but useful for all.": {
+    "message": "{connectAccess} est une plateforme de médiation qui a été conçue avec et pour les personnes handicapées en prenant en compte les standards d'accessibilité en vigueur (RGAA, WCAG, WAI-ARIA). Dans une logique de conception universelle, l'accessibilité de {connectAccess} est essentielle pour certaines personnes, mais utile à toutes et tous.",
+    "description": "Feature 2 description"
   }
 }

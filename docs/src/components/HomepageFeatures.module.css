@@ -8,6 +8,8 @@
 .featureSvg {
   height: 200px;
   width: 200px;
+  padding: 1.3rem 0;
+  margin: 0.7rem 0;
 }
 
 .featureList {

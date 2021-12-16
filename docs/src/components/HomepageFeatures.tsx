@@ -19,29 +19,37 @@ const FeatureList: FeatureItem[] = [
   {
     title: translate({
       description: "Feature 1 title",
-      message: "Easy to Use",
+      message: "Make it easy for users to report accessibility issues",
     }),
-    image: "/img/undraw_docusaurus_mountain.svg",
+    image: "/img/feature1.svg",
     description: (
-      <Translate description="Feature 1 description">
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+      <Translate
+        values={{
+          connectAccess: <span lang="en">Connect Access</span>,
+        }}
+        description="Feature 1 description"
+      >
+        {
+          "{connectAccess} allows you to renew the dialogue with your users and follow the subject until the problem is resolved. Objective: to detect and respond to difficulties in gaining access to your digital services. This platform was designed to comply with data protection rules (GDPR)."
+        }
       </Translate>
     ),
   },
   {
     title: translate({
       description: "Feature 2 title",
-      message: "Focus on What Matters",
+      message: "Accessibility at the heart of the project",
     }),
-    image: "/img/undraw_docusaurus_tree.svg",
+    image: "/img/feature2.svg",
     description: (
       <Translate
-        values={{ docs: <code>docs</code> }}
+        values={{
+          connectAccess: <span lang="en">Connect Access</span>,
+        }}
         description="Feature 2 description"
       >
         {
-          "Docusaurus lets you focus on your docs, and we'll do the chores. Go ahead and move your docs into the {docs} directory."
+          "{connectAccess} is a mediation platform that was designed with and for people with disabilities taking into account the accessibility standards (RGAA, WCAG, WAI-ARIA). In a logic of universal design, the accessibility of {connectAccess} is essential for some people, but useful for all."
         }
       </Translate>
     ),
@@ -49,13 +57,28 @@ const FeatureList: FeatureItem[] = [
   {
     title: translate({
       description: "Feature 3 title",
-      message: "Powered by React",
+      message: "Join the community",
     }),
-    image: "/img/undraw_docusaurus_react.svg",
+    image: "/img/feature3.svg",
     description: (
-      <Translate description="Feature 3 description">
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+      <Translate
+        values={{
+          license: (
+            <a
+              href={translate({
+                description: "License URL",
+                message: "https://www.gnu.org/licenses/why-affero-gpl.en.html",
+              })}
+            >
+              AGPL3
+            </a>
+          ),
+        }}
+        description="Feature 3 description"
+      >
+        {
+          "It is free software under {license} license. You can install it and contribute to it by developing new features, reporting bugs, offering translations or contributing your ideas. We use open source software like Django and React, pay attention to code quality, and drive development by tests (TDD)."
+        }
       </Translate>
     ),
   },
