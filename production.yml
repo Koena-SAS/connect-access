@@ -18,9 +18,7 @@ services:
       - postgres
       - redis
     env_file:
-      - ./.envs/.production/.django
-      - ./.envs/.production/.data
-      - ./.envs/.production/.postgres
+      - ./.env_production
     command: /start
 
   postgres:
@@ -33,7 +31,7 @@ services:
       - production_postgres_data_backups:/backups:z
       - ./compose/production/postgres/init-scripts:/docker-entrypoint-initdb.d
     env_file:
-      - ./.envs/.production/.postgres
+      - ./.env_production
 
   traefik:
     build:

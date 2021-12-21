@@ -2,11 +2,11 @@ Feature("Mediation request");
 
 Before(({ I }) => {
   I.preparePage();
-  I.have("user", { first_name: "John", email: "user.details@koena.net" });
+  I.have("user", { first_name: "John", email: "user.details@example.com" });
 });
 
 Scenario(`Log in and see personal information.`, ({ I }) => {
-  I.login("user.details@koena.net", "strongestpasswordever");
+  I.login("user.details@example.com", "strongestpasswordever");
   I.click("My account");
   I.click("My account");
   I.click("My account");
@@ -17,7 +17,7 @@ Scenario(`Log in and see personal information.`, ({ I }) => {
 }).retry(1);
 
 Scenario(`Change personal information.`, ({ I }) => {
-  I.login("user.details@koena.net", "strongestpasswordever");
+  I.login("user.details@example.com", "strongestpasswordever");
   I.click("My account");
   I.click("My account");
   I.click("My account");

@@ -1,9 +1,10 @@
 const { setHeadlessWhen } = require("@codeceptjs/configure");
 
 setHeadlessWhen(process.env.CI);
+const serverIP = process.env.CI ? "127.0.0.1" : "localhost";
 
-var server = require("./end_to_end_server_dvelopment");
-const backendPath = "../backend";
+var server = require("./end_to_end_server_production");
+const dockerPath = "../";
 const database =
   "postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:$POSTGRES_PORT/$POSTGRES_DB_END_TO_END";
 
@@ -12,7 +13,7 @@ exports.config = {
   output: "../output",
   helpers: {
     Playwright: {
-      url: "http://localhost:3501",
+      url: `http://${serverIP}:6500`,
       show: true,
       browser: "chromium",
     },
@@ -20,7 +21,7 @@ exports.config = {
       require: "../helpers/axe_helper.js",
     },
     ApiDataFactory: {
-      endpoint: "http://localhost:3501",
+      endpoint: `http://${serverIP}:6500`,
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
@@ -38,21 +39,20 @@ exports.config = {
       },
     },
     DjangoHelper: {
-      require: "../helpers/django_helper.js",
+      require: "../helpers/django_helper_production.js",
       database: database,
-      backendPath: backendPath,
+      dockerPath: dockerPath,
     },
   },
   include: {
     I: "./steps_file.js",
   },
   async bootstrap() {
-    await server.startBackend(backendPath, database, false);
-    await server.startFrontend(true);
+    await server.buildServer(dockerPath, database, true);
+    await server.startServer(dockerPath, true);
   },
   async teardown() {
-    await server.stopFrontend(false);
-    await server.stopBackend(false);
+    await server.stopServer(dockerPath, true);
   },
   mocha: {},
   name: "connect_access",

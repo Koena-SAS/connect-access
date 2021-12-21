@@ -2,17 +2,17 @@ Feature("Mediation request");
 
 Before(({ I }) => {
   I.preparePage();
-  I.have("user", { email: "user.mediations@koena.net" });
+  I.have("user", { email: "user.mediations@example.com" });
 });
 
 Scenario(
   `Create a mediation request and see it in mediation requests
  list and mediation request detail.`,
   ({ I }) => {
-    I.login("user.mediations@koena.net", "strongestpasswordever");
+    I.login("user.mediations@example.com", "strongestpasswordever");
     I.fillField("First name", "Bill");
     I.fillField("Last name", "Blue");
-    I.fillField("E-mail", "bill@koena.net");
+    I.fillField("E-mail", "bill@example.com");
     I.checkA11y();
     I.click("Step 2: Your problem");
     I.click("Internet Explorer");
@@ -40,7 +40,7 @@ Scenario(
     );
     I.click("Step 3: The organization");
     I.fillField("Name of the organization", "Koena company");
-    I.fillField("E-mail", "roman@koena.net");
+    I.fillField("E-mail", "roman@example.com");
     I.fillField("Contact", "Roman");
     I.click("Step 4: Summary");
     I.click("Submit my mediation request");

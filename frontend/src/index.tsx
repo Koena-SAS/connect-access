@@ -15,7 +15,7 @@ if (process.env.NODE_ENV !== "production" && process.env.REACT_APP_CI !== "1") {
   });
 }
 
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === "production" && process.env.REACT_APP_CI !== "1") {
   hideLogin();
 }
 

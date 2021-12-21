@@ -9,7 +9,7 @@ module.exports = function () {
       tryTo(() => this.click("Masquer")); // eslint-disable-line no-undef
     },
     signup: function (
-      email = "john.doe@koena.net",
+      email = "john.doe@example.com",
       password = "strongestpasswordever"
     ) {
       this.click("Login");
@@ -25,7 +25,7 @@ module.exports = function () {
       });
     },
     login: function (
-      email = "john.doe@koena.net",
+      email = "john.doe@example.com",
       password = "strongestpasswordever"
     ) {
       this.click("Login");

@@ -37,6 +37,7 @@
     "lang:extract": "lingui extract",
     "lang:compile": "lingui compile",
     "e2e": "npx codeceptjs run --steps --config ./end_to_end/config/codecept_development.conf.js",
+    "e2e:prod": "npx codeceptjs run --steps --config ./end_to_end/config/codecept_production.conf.js",
     "format": "prettier --write .",
     "format-check": "prettier --check .",
     "type-check": "tsc",
