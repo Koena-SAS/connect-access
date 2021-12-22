@@ -102,7 +102,9 @@ yarn format-check
 
 The end to end tests are currently located in the frontend directory, and are using [CodeceptJS](https://codecept.io/).
 
-To run the backend and frontend in end to end tests you need also to install `pm2`:
+#### With development environment
+
+To run the backend and frontend in end to end tests with development environment you need also to install `pm2`:
 
 ```bash
 npm install -g pm2
@@ -110,7 +112,7 @@ npm install -g pm2
 
 :::info
 
-To avoid conflicting with the started development backend and frontend servers, the backend and the frontend servers for the end to end tests will be started by default on ports 3501 and 3502.
+To avoid conflicting with the started development backend and frontend servers, the backend and the frontend servers for the end to end tests will be started by default on ports **3501** and **3502**.
 
 :::
 
@@ -120,3 +122,22 @@ The tests can be run with:
 cd frontend/
 yarn e2e
 ```
+
+#### With production environment
+
+You can run the end to end tests using the Docker production environment. You will still need to have Node.js installed on your machine though.
+
+:::info
+
+To avoid conflicting with an already started production server on your machine, the backend server for the end to end tests will be started by default on port **6001**.
+
+:::
+
+The tests can be run with:
+
+```bash
+cd frontend/
+yarn e2e:prod
+```
+
+The production Docker image will be built and run, with all the information displayed in your terminal.

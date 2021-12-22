@@ -102,7 +102,9 @@ yarn format-check
 
 Les tests de bout en bout sont actuellement situés dans le répertoire du <span lang="en">frontend</span>, et utilisent [CodeceptJS](https://codecept.io/).
 
-Pour lancer le <span lang="en">backend</span> et le <span lang="en">frontend</span> dans les tests de bout en bout, vous devez installer aussi `pm2` :
+#### En utilisant l'environnement de développement
+
+Pour lancer le <span lang="en">backend</span> et le <span lang="en">frontend</span> dans les tests de bout en bout avec l'environnement de développement, vous devez installer aussi `pm2` :
 
 ```bash
 npm install -g pm2
@@ -110,7 +112,7 @@ npm install -g pm2
 
 :::info
 
-Pour éviter le conflit avec des instances démarrées de serveurs de développement de <span lang="en">backend</span> et de <span lang="en">frontend</span>, les serveurs du <span lang="en">backend</span> et du <span lang="en">frontend</span> pour les tests de bout en bout sont démarrés par défaut sur les ports 3501 et 3502.
+Pour éviter le conflit avec des instances démarrées de serveurs de développement de <span lang="en">backend</span> et de <span lang="en">frontend</span>, les serveurs du <span lang="en">backend</span> et du <span lang="en">frontend</span> pour les tests de bout en bout sont démarrés par défaut sur les ports **3501** et **3502**.
 
 :::
 
@@ -120,3 +122,22 @@ Les tests peuvent être lancés avec :
 cd frontend/
 yarn e2e
 ```
+
+#### En utilisant l'environnement de production
+
+Vous pouvez exécuter des tests de bout en bout dans l'environnement de production Docker. Cependant, vous aurez toujours besoin d'avoir Node.js installé sur votre machine.
+
+:::info
+
+Pour éviter tout conflit avec un autre serveur de production démarré sur votre machine, le serveur pour les tests de bout en bout sera démarré par défaut sur le port **6001**.
+
+:::
+
+Les tests peuvent être lancés avec :
+
+```bash
+cd frontend/
+yarn e2e:prod
+```
+
+L'image Docker de production sera construite et exécutée, et toutes les informations seront affichées dans votre terminal.

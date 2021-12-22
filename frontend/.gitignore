@@ -19,6 +19,7 @@ end_to_end/output/
 .env.development.local
 .env.test.local
 .env.production.local
+.env
 
 npm-debug.log*
 yarn-debug.log*

@@ -1,9 +1,9 @@
 const { setHeadlessWhen } = require("@codeceptjs/configure");
 
 setHeadlessWhen(process.env.CI);
-const serverIP = process.env.CI ? "127.0.0.1" : "localhost";
+const host = process.env.CI ? "docker" : "localhost";
 
-var server = require("./end_to_end_server_production");
+const server = require("./end_to_end_server_production");
 const dockerPath = "../";
 const database =
   "postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:$POSTGRES_PORT/$POSTGRES_DB_END_TO_END";
@@ -13,7 +13,7 @@ exports.config = {
   output: "../output",
   helpers: {
     Playwright: {
-      url: `http://${serverIP}:6500`,
+      url: `http://${host}:6001`,
       show: true,
       browser: "chromium",
     },
@@ -21,7 +21,7 @@ exports.config = {
       require: "../helpers/axe_helper.js",
     },
     ApiDataFactory: {
-      endpoint: `http://${serverIP}:6500`,
+      endpoint: `http://${host}:6001`,
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
