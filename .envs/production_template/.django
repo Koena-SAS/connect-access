@@ -5,6 +5,7 @@ DJANGO_SETTINGS_MODULE=config.settings.production
 DJANGO_SECRET_KEY=__CHANGEME__
 DJANGO_ADMIN_URL=__CHANGEME__/
 DJANGO_ALLOWED_HOSTS=
+DJANGO_COOKIE_SECURE=True
 
 # Email
 # ------------------------------------------------------------------------------

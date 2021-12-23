@@ -61,13 +61,17 @@ function changeEnvVariables(dockerPathCd, outputResult, database) {
     outputResult
   );
   if (process.env.CI) {
-    changeEnvVariable(
-      "DJANGO_ALLOWED_HOSTS",
-      "docker,localhost",
-      dockerPathCd,
+    execute(
+      `${dockerPathCd} && echo 'DJANGO_COOKIE_SECURE=False' >> .env_production`,
       outputResult
     );
   }
+  changeEnvVariable(
+    "DJANGO_ALLOWED_HOSTS",
+    process.env.CI ? "docker,localhost" : "localhost",
+    dockerPathCd,
+    outputResult
+  );
 }
 
 function changeEnvVariable(

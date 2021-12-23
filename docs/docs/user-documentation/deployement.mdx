@@ -105,6 +105,12 @@ This is the path of your Django admin panel: `yourdomain.com/[DJANGO_ADMIN_URL]/
 You can put here all the hostnames that are allowed to send requests to the Django server, separated by commas. You should mainly put here your domain names. This is useful to avoid Cross Site Scripting and Cross-Site Request Forgery attacks. You can find more information in the [Django Documentation about ALLOWED_HOSTS](https://docs.djangoproject.com/en/3.2/ref/settings/#allowed-hosts).
 
   </dd>
+  <dt>DJANGO_COOKIE_SECURE</dt>
+  <dd>
+
+This setting is only used in the production image, and should always be `True` in a production environment except in specific cases like non secure end to end tests being run.
+
+  </dd>
   <dt>DJANGO_SERVER_EMAIL</dt>
   <dd>The email address that Django will indicate as sender for error messages to admins.</dd>
   <dt><span className="large-span">DJANGO_EMAIL_HOST, </span><span className="large-span">DJANGO_EMAIL_USE_TLS, </span><span className="large-span">DJANGO_EMAIL_PORT, </span><span className="large-span">DJANGO_EMAIL_HOST_USER, </span><span className="large-span">DJANGO_EMAIL_HOST_PASSWORD, </span></dt>

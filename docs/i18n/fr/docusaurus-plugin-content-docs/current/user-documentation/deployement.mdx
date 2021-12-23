@@ -99,7 +99,13 @@ Il s'agit du chemin de votre panneau d'administration Django : `votredomaine.com
   <dt>DJANGO_ALLOWED_HOSTS</dt>
   <dd>
 
-Vous pouvez mettre ici tous les doms d'hôte autorisés à envoyer des requêtes au serveur Django, séparés par des virgules. Vous devriez principalement mettre ici vos noms de domaines. C'est utile pour éviter les attaques <span lang="en">Cross Site Scripting</span> et <span lang="en">Cross-Site Request Forgery</span>. Vous trouverez plus d'informations dans la [documentation de Django à propos de ALLOWED_HOSTS](https://docs.djangoproject.com/fr/3.2/ref/settings/#allowed-hosts).
+Vous pouvez mettre ici tous les noms d'hôte autorisés à envoyer des requêtes au serveur Django, séparés par des virgules. Vous devriez principalement mettre ici vos noms de domaines. C'est utile pour éviter les attaques <span lang="en">Cross Site Scripting</span> et <span lang="en">Cross-Site Request Forgery</span>. Vous trouverez plus d'informations dans la [documentation de Django à propos de ALLOWED_HOSTS](https://docs.djangoproject.com/fr/3.2/ref/settings/#allowed-hosts).
+
+  </dd>
+  <dt>DJANGO_COOKIE_SECURE</dt>
+  <dd>
+
+Ce paramètre n'est utilisé que dans l'image de production et doit toujours être `True` dans un environnement de production, sauf dans des cas spécifiques tels que l'exécution de tests de bout en bout non sécurisés.
 
   </dd>
   <dt>DJANGO_SERVER_EMAIL</dt>
