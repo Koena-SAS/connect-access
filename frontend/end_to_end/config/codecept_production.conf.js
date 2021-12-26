@@ -10,7 +10,7 @@ const database =
   "postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:$POSTGRES_PORT/$POSTGRES_DB_END_TO_END";
 
 exports.config = {
-  tests: "../*_test.ts",
+  tests: "../tests/*_test.ts",
   output: "../output",
   helpers: {
     Playwright: {

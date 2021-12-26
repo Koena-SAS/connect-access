@@ -13,6 +13,7 @@
     "noUnusedParameters": false,
     "baseUrl": ".",
     "types": ["node", "codeceptjs", "axe-playwright", "./config/steps"],
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "outDir": "build"
   }
 }

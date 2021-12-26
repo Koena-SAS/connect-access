@@ -9,6 +9,7 @@
 /coverage
 .eslintcache
 end_to_end/output/
+end_to_end/build/
 
 # production
 /build

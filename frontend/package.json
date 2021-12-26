@@ -40,8 +40,8 @@
     "e2e:prod": "TS_NODE_PROJECT='./end_to_end/tsconfig.json' npx codeceptjs run --steps --config ./end_to_end/config/codecept_production.conf.js",
     "format": "prettier --write .",
     "format-check": "prettier --check .",
-    "type-check": "tsc",
-    "type-check:e2e": "tsc -p end_to_end/tsconfig.json",
+    "type-check": "tsc --noEmit",
+    "type-check:e2e": "tsc -p end_to_end/tsconfig.json --noEmit",
     "test-all": "yarn lint && yarn type-check && yarn type-check:e2e && yarn test --watchAll=false",
     "build:svg": "svgr src/images/svg/ -d src/images/buildSvg/ --typescript",
     "eject": "react-scripts eject"
