@@ -1,15 +1,18 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+import type { Rule } from "axe-core";
+
 Feature("Translation");
+
 Before(({ I }) => {
   I.preparePage();
 });
-const a11yIssuesToIgnore = [
+
+const a11yIssuesToIgnore: Rule[] = [
   {
     id: "color-contrast",
     selector: "*:not(.button)",
   },
 ];
+
 Scenario("Translate main page", ({ I }) => {
   I.checkA11y(a11yIssuesToIgnore);
   I.see("Login");
@@ -19,3 +22,5 @@ Scenario("Translate main page", ({ I }) => {
   I.see("English");
   I.checkA11y(a11yIssuesToIgnore);
 }).retry(1);
+
+export {};

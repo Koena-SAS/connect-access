@@ -89,6 +89,7 @@ Ce qui correspond à l'ensemble de ces commandes lancées une par une :
 ```bash
 yarn lint # pour le lint
 yarn type-check # pour la vérification statique des types
+yarn type-check:e2e # pour la vérification statique des types des tests de bout en bout
 yarn test # pour les tests unitaires
 ```
 

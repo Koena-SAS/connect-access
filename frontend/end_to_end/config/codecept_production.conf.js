@@ -1,3 +1,4 @@
+require("ts-node/register");
 const { setHeadlessWhen } = require("@codeceptjs/configure");
 
 setHeadlessWhen(process.env.CI);
@@ -9,7 +10,7 @@ const database =
   "postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:$POSTGRES_PORT/$POSTGRES_DB_END_TO_END";
 
 exports.config = {
-  tests: "../*_test.js",
+  tests: "../*_test.ts",
   output: "../output",
   helpers: {
     Playwright: {
@@ -18,7 +19,7 @@ exports.config = {
       browser: "chromium",
     },
     AxeHelper: {
-      require: "../helpers/axe_helper.js",
+      require: "../helpers/axe_helper.ts",
     },
     ApiDataFactory: {
       endpoint: `http://${host}:6001`,
@@ -39,7 +40,7 @@ exports.config = {
       },
     },
     DjangoHelper: {
-      require: "../helpers/django_helper_production.js",
+      require: "../helpers/django_helper_production.ts",
       database: database,
       dockerPath: dockerPath,
     },

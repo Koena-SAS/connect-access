@@ -1,19 +1,16 @@
-"use strict";
-var __importDefault =
-  (this && this.__importDefault) ||
-  function (mod) {
-    return mod && mod.__esModule ? mod : { default: mod };
-  };
-const helper_1 = __importDefault(require("@codeceptjs/helper"));
-const axe_playwright_1 = require("axe-playwright");
+import Helper from "@codeceptjs/helper";
+import type { Rule } from "axe-core";
+import { checkA11y, configureAxe, injectAxe } from "axe-playwright";
+
 /**
  * Helper to check accessibility rules with axe.
  */
-class AxeHelper extends helper_1.default {
-  async injectAxe() {
+class AxeHelper extends Helper {
+  async injectAxe(): Promise<void> {
     const { page } = this.helpers.Playwright;
-    await (0, axe_playwright_1.injectAxe)(page);
+    await injectAxe(page);
   }
+
   /**
    * Check accessibility issues with axe library.
    * @param {array of object} excludedRulesPerNodes
@@ -21,13 +18,16 @@ class AxeHelper extends helper_1.default {
    * @param {array of array of string} excludedNodes
    *  The CSS nodes to exclude from axe check
    */
-  async checkA11y(excludedRulesPerNodes = [], excludedNodes = []) {
+  async checkA11y(
+    excludedRulesPerNodes: Rule[] = [],
+    excludedNodes: string[] | string[][] = []
+  ) {
     const { page } = this.helpers.Playwright;
-    await (0, axe_playwright_1.configureAxe)(page, {
+    await configureAxe(page, {
       // cf. https://github.com/dequelabs/axe-core/issues/1785#issuecomment-733861005
       rules: excludedRulesPerNodes,
     });
-    await (0, axe_playwright_1.checkA11y)(
+    await checkA11y(
       page,
       {
         exclude: [["#djDebug"], ...excludedNodes],
@@ -45,4 +45,5 @@ class AxeHelper extends helper_1.default {
     );
   }
 }
-module.exports = AxeHelper;
+
+export = AxeHelper;

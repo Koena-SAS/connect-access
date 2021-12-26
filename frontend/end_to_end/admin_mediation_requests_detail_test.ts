@@ -1,15 +1,17 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 Feature("Admin Mediation requests detail");
+
 BeforeSuite(({ I }) => {
   I.runDjangoCommand("createmediationsfortest");
 });
+
 AfterSuite(({ I }) => {
   I.runDjangoCommand("deletemediations");
 });
+
 Before(({ I }) => {
   I.preparePage();
 });
+
 Scenario(
   `See existing trace reports listed in "Trace reports" page`,
   ({ I }) => {
@@ -28,6 +30,7 @@ Scenario(
     I.click("Logout");
   }
 ).retry(1);
+
 Scenario(
   `Add a new trace report, see it among the trace reports' list, then delete it`,
   ({ I }) => {
@@ -55,6 +58,7 @@ Scenario(
     I.click("Logout");
   }
 ).retry(1);
+
 Scenario(`Edit an existing trace report and see it edited`, ({ I }) => {
   I.loginAsAdmin();
   I.click("Admin");
@@ -88,3 +92,5 @@ Scenario(`Edit an existing trace report and see it edited`, ({ I }) => {
   I.click("Connect Access");
   I.click("Logout");
 }).retry(1);
+
+export {};

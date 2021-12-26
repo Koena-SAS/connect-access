@@ -1,10 +1,10 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 Feature("Mediation request");
+
 Before(({ I }) => {
   I.preparePage();
   I.have("user", { email: "user.mediations@example.com" });
 });
+
 Scenario(
   `Create a mediation request and see it in mediation requests
  list and mediation request detail.`,
@@ -55,3 +55,5 @@ Scenario(
     I.checkA11y();
   }
 ).retry(1);
+
+export {};

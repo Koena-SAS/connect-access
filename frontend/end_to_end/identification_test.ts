@@ -1,10 +1,12 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+import type { Rule } from "axe-core";
+
 Feature("Identification");
+
 Before(({ I }) => {
   I.preparePage();
 });
-const a11yIssuesToIgnore = [
+
+const a11yIssuesToIgnore: Rule[] = [
   {
     id: "aria-roles",
     selector: "*:not(.MuiDialog-container)",
@@ -15,6 +17,7 @@ const a11yIssuesToIgnore = [
       "*:not(.MuiTab-wrapper):not(#email-desc-login):not(.MuiButton-label)",
   },
 ];
+
 Scenario("Sign in and see user information", ({ I }) => {
   I.checkA11y(a11yIssuesToIgnore);
   I.click("Login");
@@ -32,6 +35,7 @@ Scenario("Sign in and see user information", ({ I }) => {
   I.see("Logout");
   I.click("Logout");
 }).retry(1);
+
 Scenario("Log in and see user information", ({ I }) => {
   I.checkA11y(a11yIssuesToIgnore);
   I.click("Login");
@@ -44,3 +48,5 @@ Scenario("Log in and see user information", ({ I }) => {
   I.see("Logout");
   I.click("Logout");
 }).retry(1);
+
+export {};

@@ -1,15 +1,17 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 Feature("Admin Mediation requests");
+
 BeforeSuite(({ I }) => {
   I.runDjangoCommand("createmediationsfortest");
 });
+
 AfterSuite(({ I }) => {
   I.runDjangoCommand("deletemediations");
 });
+
 Before(({ I }) => {
   I.preparePage();
 });
+
 Scenario(
   `See existing mediation requests listed in "All requests" page`,
   ({ I }) => {
@@ -23,3 +25,5 @@ Scenario(
     I.click("Logout");
   }
 ).retry(1);
+
+export {};

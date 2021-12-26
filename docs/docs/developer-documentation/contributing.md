@@ -89,6 +89,7 @@ Which corresponds to these commands run one by one:
 ```bash
 yarn lint # for linting
 yarn type-check # for static type checking
+yarn type-check:e2e # for static type checking end to end tests
 yarn test # for unit testing
 ```
 
