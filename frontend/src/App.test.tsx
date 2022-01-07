@@ -580,6 +580,7 @@ describe("Mediation form", () => {
       {
         id: "f8842f63-5073-4956-a7fa-2ec8eb82f37d",
         creation_date: "2021-02-03",
+        request_date: "2021-02-03",
         status: "WAITING_MEDIATOR_VALIDATION",
         first_name: "John",
         last_name: "Doe",

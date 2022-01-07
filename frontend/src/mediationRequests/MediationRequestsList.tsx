@@ -35,13 +35,11 @@ function MediationRequestsList({
     { text: t`Details` },
   ];
   const rowsInfos = mediationRequests.map((request) => {
-    const creationDate = new Date(
-      request.creationDate ? request.creationDate : 0
-    );
+    const requestDate = new Date(request.requestDate ? request.requestDate : 0);
     return {
       key: request.id ? request.id : "undefined",
       infos: [
-        { text: creationDate.toLocaleString(i18n.locale) },
+        { text: requestDate.toLocaleString(i18n.locale) },
         { text: request.organizationName },
         { text: request.issueDescription },
         {
