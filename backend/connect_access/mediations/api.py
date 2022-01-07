@@ -33,7 +33,7 @@ class MediationRequestViewSet(viewsets.ModelViewSet):
 
     """
 
-    queryset = MediationRequest.objects.all()
+    queryset = MediationRequest.objects.order_by("-request_date")
     permission_classes = [AnonCreateAndUpdateOwnerOnly & ListDeleteAdminOnly]
     authentication_classes = [authentication.TokenAuthentication]
     serializer_class = MediationRequestSerializer

@@ -18,6 +18,7 @@ class Command(BaseCommand):
                 first_name="Roman",
                 email="roman@koena.net",
                 issue_description="Difficulties to connect.",
+                request_date="2020-05-28T23:10:05.084022+02:00",
             )
             TraceReport.objects.create(
                 mediation_request=mediation_request1,
@@ -37,6 +38,7 @@ class Command(BaseCommand):
                 first_name="Anonymous",
                 email="anon@anon.anon",
                 issue_description="I have an empty link and I dont know where it points to.",
+                request_date="2020-05-27T23:10:05.084022+02:00",
             )
         except Exception as e:
             raise CommandError('Exception "%s"' % e)

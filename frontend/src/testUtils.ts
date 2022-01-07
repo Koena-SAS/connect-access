@@ -23,6 +23,7 @@ export const mediationRequestsResponse: MediationRequestRecieved[] = [
   {
     id: "4ae77193-1b66-4182-82af-bc9ce432b0e0",
     creation_date: "2021-02-03",
+    request_date: "2021-02-03",
     status: "WAITING_MEDIATOR_VALIDATION",
     first_name: "John",
     last_name: "Doe",
@@ -46,6 +47,7 @@ export const mediationRequestsResponse: MediationRequestRecieved[] = [
   {
     id: "f8842f63-5073-4956-a7fa-2ec8eb82f37d",
     creation_date: "2021-01-08",
+    request_date: "2021-01-08",
     status: "WAITING_CONTACT",
     application_data: {
       id: "7c15b8d0-dcb4-4257-9e5b-2bb2e9364558",
@@ -91,6 +93,7 @@ export const mediationRequests: MediationRequest[] = [
   {
     id: "4ae77193-1b66-4182-82af-bc9ce432b0e0",
     creationDate: "2021-02-03",
+    requestDate: "2021-02-03",
     status: "WAITING_MEDIATOR_VALIDATION",
     firstName: "John",
     lastName: "Doe",
@@ -114,6 +117,7 @@ export const mediationRequests: MediationRequest[] = [
   {
     id: "f8842f63-5073-4956-a7fa-2ec8eb82f37d",
     creationDate: "2021-01-08",
+    requestDate: "2021-01-08",
     status: "WAITING_CONTACT",
     applicationData: {
       id: "7c15b8d0-dcb4-4257-9e5b-2bb2e9364558",

@@ -31,7 +31,25 @@ def test_mediation_requests_list_contains_all_mediation_requests():
     assertContains(response, mediation_request2.issue_description)
 
 
-def test_mediation_request_create_with_authorized_status_succeeds(
+def test_mediation_requests_list_sorts_requests_by_request_date_from_the_most_recent_to_the_oldest():
+    mediation_request1 = MediationRequestFactory(
+        request_date="2020-05-27T23:10:05.084022+02:00"
+    )
+    mediation_request2 = MediationRequestFactory(
+        request_date="2020-05-28T23:10:05.084022+02:00"
+    )
+    mediation_request3 = MediationRequestFactory(
+        request_date="2020-05-27T23:05:08.084022+02:00"
+    )
+    request = APIRequestFactory().get(_get_mediation_request_absolute_url("list"))
+    _authenticate_request_as_admin(request)
+    response = MediationRequestViewSet.as_view({"get": "list"})(request)
+    assert response.data[0]["request_date"] == mediation_request2.request_date
+    assert response.data[1]["request_date"] == mediation_request1.request_date
+    assert response.data[2]["request_date"] == mediation_request3.request_date
+
+
+def test_mediation_request_create_with_authorirequest_dateed_status_succeeds(
     request_data_for_mediation_request,
 ):
     number_of_tests = 0
