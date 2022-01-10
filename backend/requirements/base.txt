@@ -29,3 +29,4 @@ django-sass-processor==1.0.1  # https://github.com/jrief/django-sass-processor
 django-compressor==2.4.1  # https://github.com/django-compressor/django-compressor
 django-solo==1.2.0  # https://github.com/lazybird/django-solo
 django-extensions==3.1.2  # https://github.com/django-extensions/django-extensions
+django-csp==3.7  # https://github.com/mozilla/django-csp

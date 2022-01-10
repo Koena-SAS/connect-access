@@ -208,3 +208,6 @@ WEBPACK_LOADER = {
 # https://github.com/pmclanahan/django-celery-email
 INSTALLED_APPS += ["djcelery_email"]  # noqa F405
 EMAIL_BACKEND = "djcelery_email.backends.CeleryEmailBackend"
+
+# django-csp - https://django-csp.readthedocs.io/en/latest/configuration.html
+CSP_DEFAULT_SRC += [env("DATA_PLATFORM_DOMAIN_NAME")]  # noqa F405

@@ -73,3 +73,6 @@ WEBPACK_LOADER = {
         "STATS_FILE": str(FRONTEND_DIR / "webpack-stats.dev.json"),  # noqa F405
     }
 }
+
+# django-csp - https://django-csp.readthedocs.io/en/latest/configuration.html
+CSP_DEFAULT_SRC += ["http://localhost:*", "ws://localhost:*"]  # noqa F405
