@@ -18,6 +18,7 @@ urlpatterns += [
     path("api/", include("config.api_router")),
     path("auth/", include("djoser.urls")),
     path("auth/", include("djoser.urls.authtoken")),
+    path("", include("drfpasswordless.urls")),
 ]
 
 urlpatterns += [

@@ -74,6 +74,7 @@ THIRD_PARTY_APPS = [
     "django_celery_beat",
     "rest_framework",
     "rest_framework.authtoken",
+    "drfpasswordless",
     "corsheaders",
     "webpack_loader",
     "djoser",
@@ -329,3 +330,16 @@ MEDIATION_REQUEST_EMAIL = env("MEDIATION_REQUEST_EMAIL", default="")
 
 # django-csp - https://django-csp.readthedocs.io/en/latest/configuration.html
 CSP_DEFAULT_SRC = ["'self'", "'unsafe-inline'", "data:"]
+
+# django-rest-framework-passwordless - https://github.com/aaronn/django-rest-framework-passwordless
+PASSWORDLESS_AUTH = {
+    "PASSWORDLESS_AUTH_PREFIX": "passwordless-auth/",
+    "PASSWORDLESS_AUTH_TYPES": ["EMAIL"],
+    "PASSWORDLESS_EMAIL_NOREPLY_ADDRESS": env("DATA_COMPANY_EMAIL"),
+    "PASSWORDLESS_TOKEN_EXPIRE_TIME": 60 * 60,
+    "PASSWORDLESS_TOKEN_GENERATION_ATTEMPTS": 10,
+    "PASSWORDLESS_EMAIL_SUBJECT": _("Your Login Token"),
+    "PASSWORDLESS_EMAIL_PLAINTEXT_MESSAGE": _("Enter this token to sign in: %s"),
+    "PASSWORDLESS_EMAIL_TOKEN_HTML_TEMPLATE_NAME": "users/emails/passwordless_token_email.html",
+    "PASSWORDLESS_REGISTER_NEW_USERS": False,
+}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-23 12:20+0100\n"
+"POT-Creation-Date: 2022-01-11 16:41+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,8 +26,17 @@ msgstr "Français"
 msgid "English"
 msgstr "Anglais"
 
+#: config/settings/base.py:341
+msgid "Your Login Token"
+msgstr "Votre jeton de connexion"
+
+#: config/settings/base.py:342
+#, python-format
+msgid "Enter this token to sign in: %s"
+msgstr "Veuillez entrer ce jeton pour vous connecter : %s"
+
 #: connect_access/configuration/admin.py:16
-#: connect_access/configuration/admin.py:36
+#: connect_access/configuration/admin.py:39
 #: connect_access/mediations/admin.py:27
 msgid "Main information"
 msgstr "Informations principales"
@@ -43,46 +52,62 @@ msgstr ""
 msgid "URL must be valid, eg. http://domain.extension"
 msgstr "L'URL doit être valide, par exemple http://domain.extension"
 
-#: connect_access/configuration/models.py:29
 #: connect_access/configuration/models.py:30
+#: connect_access/configuration/models.py:33
 msgid "Information about the organization running the mediation service"
 msgstr ""
 "Informations à propos de l'organisation qui gère le service de médiation"
 
-#: connect_access/configuration/models.py:33
+#: connect_access/configuration/models.py:37
 #: connect_access/mediations/models.py:210 connect_access/users/models.py:27
 msgid "Email address"
 msgstr "Adresse électronique"
 
-#: connect_access/configuration/models.py:37
+#: connect_access/configuration/models.py:41
+#, fuzzy
+#| msgid "Email address"
+msgid "Email address display text"
+msgstr "Adresse électronique"
+
+#: connect_access/configuration/models.py:46
 #: connect_access/mediations/models.py:212 connect_access/users/models.py:37
 msgid "Phone number"
 msgstr "Numéro de téléphone"
 
-#: connect_access/configuration/models.py:45
+#: connect_access/configuration/models.py:54
+#, fuzzy
+#| msgid "Phone number"
+msgid "Phone number display text"
+msgstr "Numéro de téléphone"
+
+#: connect_access/configuration/models.py:59
 msgid "Website URL"
 msgstr "URL du site web"
 
-#: connect_access/configuration/models.py:79
-#: connect_access/configuration/models.py:80
+#: connect_access/configuration/models.py:67
+msgid "Website display text"
+msgstr ""
+
+#: connect_access/configuration/models.py:98
+#: connect_access/configuration/models.py:99
 msgid "About mediation service information"
 msgstr "Informations à propos du service de médiation"
 
-#: connect_access/configuration/models.py:83
+#: connect_access/configuration/models.py:102
 #: connect_access/mediations/models.py:182
 #: connect_access/mediations/models.py:386 connect_access/users/models.py:22
 msgid "Public identifier"
 msgstr "Identifiant public"
 
-#: connect_access/configuration/models.py:89
+#: connect_access/configuration/models.py:108
 msgid "The order in which the link is displayed"
 msgstr "L'ordre dans lequel le lien est affiché"
 
-#: connect_access/configuration/models.py:94
+#: connect_access/configuration/models.py:113
 msgid "The link text"
 msgstr "Le texte du lien"
 
-#: connect_access/configuration/models.py:98
+#: connect_access/configuration/models.py:117
 msgid "The link URL to the page containing the information"
 msgstr "L'URL du lien vers la page contenant l'information"
 
@@ -678,3 +703,12 @@ msgstr "Merci d'utiliser notre site !"
 #, python-format
 msgid "The %(site_name)s team"
 msgstr "L'équipe %(site_name)s"
+
+#: connect_access/users/templates/users/emails/passwordless_token_email.html:7
+msgid "Your Login Token!"
+msgstr "Votre jeton de connexion !"
+
+#: connect_access/users/templates/users/emails/passwordless_token_email.html:10
+#, python-format
+msgid "Use this code to log in: %(callback_token)s"
+msgstr "Veuillez utiliser ce code pour vous connecter : %(callback_token)s"
