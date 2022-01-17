@@ -174,6 +174,8 @@ export let axiosPostResponseTraceReports: any;
 export let axiosPatchResponseTraceReports: any;
 export let axiosGetResponseAboutService: any;
 export let axiosGetResponseContactInformation: any;
+export let axiosPostResponsePasswordlessLoginEmail: any;
+export let axiosPostResponsePasswordlessLoginToken: any;
 
 /**
  * Set mocks for axios methods to be as close as possible
@@ -265,6 +267,12 @@ export const resetAxiosMocks = () => {
       re_new_password: "pass_new",
     },
   };
+  axiosPostResponsePasswordlessLoginEmail = {
+    data: { detail: "A login token has been sent to you." },
+  };
+  axiosPostResponsePasswordlessLoginToken = {
+    data: { token: "fhzfmhoizeoncmzecnadh" },
+  };
   axiosPatchResponseTraceReports = {
     data: {
       id: "abcbd6f0-ae8a-4f66-9eb6-910e4c686774",
@@ -341,6 +349,10 @@ export const resetAxiosMocks = () => {
       return Promise.resolve(axiosPostResponseResetPassword);
     } else if (url === "/auth/users/reset_password_confirm/") {
       return Promise.resolve(axiosPostResponseResetPasswordConfirm);
+    } else if (url === "/passwordless-auth/email/") {
+      return Promise.resolve(axiosPostResponsePasswordlessLoginEmail);
+    } else if (url === "/passwordless-auth/token/") {
+      return Promise.resolve(axiosPostResponsePasswordlessLoginToken);
     } else if (url === "/api/mediation-requests/") {
       return Promise.resolve(axiosPostResponseMediationRequests);
     } else if (url === "/api/trace-reports/") {

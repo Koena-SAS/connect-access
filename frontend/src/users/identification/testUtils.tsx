@@ -27,6 +27,8 @@ export async function fillLoginFields(
   postCallNumber: number = 1
 ) {
   fillField(app, /E-mail/, "bla@bla.fr", missingField !== "email");
+  const withPassword = app.getByLabelText(/with password/);
+  await click(withPassword);
   fillField(app, /Password/, "pass", missingField !== "password");
   const submit = app.getByTestId("loginSubmit");
   await click(submit);

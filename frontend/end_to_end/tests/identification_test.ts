@@ -42,6 +42,7 @@ Scenario("Log in and see user information", ({ I }) => {
   within(".identification", () => {
     I.checkA11y(a11yIssuesToIgnore, [["#root"]]);
     I.fillField("E-mail", "john.doe@example.com");
+    I.click("Log in with password");
     I.fillField("Password", "strongestpasswordever");
     I.click("$loginSubmit");
   });

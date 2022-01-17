@@ -4,6 +4,10 @@
     display: flex;
     flex-wrap: wrap;
   }
+  &__withPassword {
+    margin-top: 1.6rem;
+    margin-left: -10px;
+  }
   &__submit.button,
   &__cancel.button {
     flex: auto;

@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { generatePath, useParams } from "react-router-dom";
 
 /**
@@ -11,13 +12,16 @@ function useGeneratePrefixedPath() {
     applicationSlug: string;
     requestId: string;
   }>();
-  const generatePrefixedPath = (path: string): string => {
-    return generatePath(path, {
-      organizationSlug,
-      applicationSlug,
-      requestId,
-    });
-  };
+  const generatePrefixedPath = useCallback(
+    (path: string): string => {
+      return generatePath(path, {
+        organizationSlug,
+        applicationSlug,
+        requestId,
+      });
+    },
+    [applicationSlug, organizationSlug, requestId]
+  );
   return generatePrefixedPath;
 }
 

@@ -1,7 +1,7 @@
 import { t } from "@lingui/macro";
 import type { SnackbarCloseReason } from "@material-ui/core";
 import Dialog from "@material-ui/core/Dialog";
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { PATHS } from "../../constants/paths";
 import ConfigDataContext from "../../contexts/configData";
@@ -69,13 +69,13 @@ function IdentificationLayout({
     }
     setRequestFailureMessageOpen(false);
   };
-  const handleCloseIdentification = () => {
+  const handleCloseIdentification = useCallback(() => {
     if (location.state && isLocationState(location.state)) {
       history.push(location.state.from);
     } else {
       history.push(generatePrefixedPath(PATHS.ROOT));
     }
-  };
+  }, [generatePrefixedPath, history, location.state]);
   const handleClosePassword = () => {
     history.push(generatePrefixedPath(PATHS.LOGIN));
   };

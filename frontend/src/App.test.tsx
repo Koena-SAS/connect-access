@@ -220,6 +220,7 @@ describe("Navbar clicking & display", () => {
   it("displays correct elements when click on login", async () => {
     const { getByText, getByLabelText, queryByText } = await renderApp();
     fireEvent.click(getByText(/Login/));
+    await click(getByLabelText(/with password/));
     const loginForm = getByLabelText(/Password/);
     const myAccount = queryByText(/My account/);
     expect(loginForm).toBeInTheDocument();
@@ -282,9 +283,16 @@ describe("Navbar clicking & display", () => {
 
 describe("Login / logout", () => {
   describe("Login", () => {
-    it("displays unlog button instead of login one after login", async () => {
+    it("displays unlog button instead of login one after login with password", async () => {
       const app = await renderApp();
       await loginUser(app);
+      expect(app.queryByText(/Login/)).not.toBeInTheDocument();
+      expect(app.getByText(/Logout/)).toBeInTheDocument();
+    });
+
+    it("displays unlog button instead of login one after login without password", async () => {
+      const app = await renderApp();
+      await loginUser(app, true, 2, false);
       expect(app.queryByText(/Login/)).not.toBeInTheDocument();
       expect(app.getByText(/Logout/)).toBeInTheDocument();
     });
@@ -303,7 +311,7 @@ describe("Login / logout", () => {
       mockedAxios.post.mockRejectedValue({ data: "" });
       await loginUser(app, false);
       resetAxiosMocks();
-      await loginUser(app, true);
+      await loginUser(app, true, 2);
       expect(app.queryByText(/Login/)).not.toBeInTheDocument();
       expect(app.getByText(/Logout/)).toBeInTheDocument();
     });
@@ -497,19 +505,51 @@ describe("Login / logout", () => {
   });
 });
 
-async function loginUser(app: RenderResult, getRequestDone = true) {
+async function loginUser(
+  app: RenderResult,
+  getRequestDone = true,
+  numberOfPostCalls = 1,
+  withPassword = true
+) {
   fireEvent.click(app.getByText(/Login/));
   const idDialog = app.getByRole("dialog");
   fireEvent.change(within(idDialog).getByLabelText(/E-mail/), {
     target: { value: "john@doe.com" },
   });
-  fireEvent.change(within(idDialog).getByLabelText(/Password/), {
-    target: { value: "ozjeriovooijsm" },
-  });
+  await clickOnWithPasswordCheckBox(app, withPassword);
+  if (withPassword) {
+    fireEvent.change(within(idDialog).getByLabelText(/Password/), {
+      target: { value: "ozjeriovooijsm" },
+    });
+  } else {
+    fireEvent.click(within(idDialog).getByTestId("loginSubmit"));
+    const tokenField = await waitFor(() =>
+      within(idDialog).getByLabelText(/Token/)
+    );
+    fireEvent.change(tokenField, {
+      target: { value: "845134" },
+    });
+  }
   fireEvent.click(within(idDialog).getByTestId("loginSubmit"));
-  await waitFor(() => expect(mockedAxios.post).toHaveBeenCalledTimes(1));
+  await waitFor(() =>
+    expect(mockedAxios.post).toHaveBeenCalledTimes(numberOfPostCalls)
+  );
   if (getRequestDone) {
     await waitFor(() => expect(mockedAxios.get).toHaveBeenCalled());
+  }
+}
+
+async function clickOnWithPasswordCheckBox(
+  app: RenderResult,
+  withPassword: boolean
+) {
+  const withPasswordField = app.getByLabelText(
+    /with password/
+  ) as HTMLInputElement;
+  const shouldClickOnCheckBox =
+    Boolean(withPassword) !== Boolean(withPasswordField.checked);
+  if (shouldClickOnCheckBox) {
+    await click(app.getByLabelText(/with password/));
   }
 }
 

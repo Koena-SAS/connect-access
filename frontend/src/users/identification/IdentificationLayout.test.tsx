@@ -31,7 +31,7 @@ afterEach(() => {
 
 describe("Cancel button", () => {
   it(`does not display login form and changes path to previous path when clicking
-  on cancel button from login modal`, async () => {
+  on cancel button from login modal first step`, async () => {
     await runWithAndWithoutOrganizationPrefix(
       async (generatedPaths: Paths, paths: Paths) => {
         const history = createMemoryHistory();
@@ -108,7 +108,30 @@ path and clicking on cancel button `, async () => {
 
 describe("Submit button unsuccessful", () => {
   it(`keeps displaying login form when we validate the form without
-  entering anyhthing`, async () => {
+  entering anyhthing, when logging in with password`, async () => {
+    await runWithAndWithoutOrganizationPrefix(
+      async (generatedPaths: Paths, paths: Paths) => {
+        const history = createMemoryHistory();
+        history.push({
+          pathname: generatedPaths.LOGIN,
+          state: {
+            from: generatedPaths.ROOT,
+          },
+        });
+        const { getByTestId, getByLabelText } = renderIdentificationLayout(
+          history,
+          generatedPaths,
+          paths
+        );
+        await click(getByLabelText(/with password/));
+        await click(getByTestId("loginSubmit"));
+        expect(getByTestId("loginSubmit")).toBeInTheDocument();
+        expect(history.location.pathname).toEqual(generatedPaths.LOGIN);
+      }
+    );
+  });
+  it(`keeps displaying login form when we validate the form without
+  entering anyhthing, when logging in without password`, async () => {
     await runWithAndWithoutOrganizationPrefix(
       async (generatedPaths: Paths, paths: Paths) => {
         await clickSubmitUnsuccessful(
@@ -121,7 +144,6 @@ describe("Submit button unsuccessful", () => {
       }
     );
   });
-
   it(`keeps displaying signup form when we validate the form without
   entering anyhthing`, async () => {
     await runWithAndWithoutOrganizationPrefix(
@@ -135,7 +157,6 @@ describe("Submit button unsuccessful", () => {
       }
     );
   });
-
   it(`keeps displaying reset password form when we validate the form without
   entering anyhthing`, async () => {
     await runWithAndWithoutOrganizationPrefix(
@@ -191,7 +212,7 @@ describe("Submit button successful", () => {
           generatedPaths,
           paths,
           "loginSubmit",
-          fillLoginFields,
+          (app: RenderResult) => fillLoginFields(app, null, 2),
           true
         );
       }
@@ -307,8 +328,9 @@ when clicking on forgot password link in login modal`, async () => {
       async (generatedPaths: Paths, paths: Paths) => {
         const history = createMemoryHistory();
         history.push(generatedPaths.LOGIN);
-        const { getByText, queryByTestId, queryByText } =
+        const { getByText, queryByTestId, queryByText, getByLabelText } =
           renderIdentificationLayout(history, generatedPaths, paths);
+        await click(getByLabelText(/with password/));
         await click(getByText("Password forgotten?"));
         expect(history.location.pathname).toEqual(
           generatedPaths.RESET_PASSWORD

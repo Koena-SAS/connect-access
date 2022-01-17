@@ -31,6 +31,7 @@ module.exports = function () {
       this.click("Login");
       within(".identification", () => {
         this.fillField("E-mail", email);
+        this.click("Log in with password");
         this.fillField("Password", password);
         this.click("$loginSubmit");
       });
@@ -40,6 +41,7 @@ module.exports = function () {
       this.click("Login");
       within(".identification", () => {
         this.fillField("E-mail", "admin@admin.com");
+        this.click("Log in with password");
         this.fillField("Password", "admin");
         this.click("$loginSubmit");
       });
