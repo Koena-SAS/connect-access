@@ -124,10 +124,10 @@ function Footer() {
           <Trans>Project funded as part of the Innov'Up experimentation</Trans>
         </p>
         <div className="footer__logoBPI">
-          <LogoBPI height="100%" />
+          <LogoBPI height="100%" role="img" aria-label="BPI France" />
         </div>
         <div className="footer__logoIDF">
-          <LogoIDF height="100%" />
+          <LogoIDF height="100%" role="img" aria-label="Île-de-France" />
         </div>
       </div>
     </footer>
