@@ -62,17 +62,28 @@
       align-items: center;
     }
   }
+  &__logoBPI,
+  &__logoIDF {
+    border: 1px solid #aaa;
+    border-radius: 0.5rem;
+    background-color: black;
+  }
   &__logoBPI {
     margin-right: 2rem;
+    padding: 0.5rem 0.9rem;
     height: 2.3rem;
-    padding: 0.3rem;
+
+    @media (max-width: 550px) {
+      margin-right: 0;
+      margin-bottom: 1rem;
+    }
     @media (max-width: 400px) {
       height: 2.1rem;
     }
   }
   &__logoIDF {
     height: 2rem;
-    padding: 0.3rem;
+    padding: 0.65rem 0.9rem;
     @media (max-width: 400px) {
       height: 1.8rem;
     }
