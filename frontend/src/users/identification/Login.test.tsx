@@ -23,6 +23,22 @@ afterEach(() => {
   jest.clearAllMocks();
 });
 
+describe("Display", () => {
+  it(`displays a helper text only in the email validation step of passwordless
+  login`, async () => {
+    const app = renderLogin();
+    const helperText = /You will receive an email/;
+    expect(app.getByText(helperText)).toBeInTheDocument();
+    await click(app.getByLabelText(/with password/));
+    expect(app.queryByText(helperText)).not.toBeInTheDocument();
+    fillField(app, /E-mail/, "bla@bla.fr");
+    await click(app.getByLabelText(/with password/));
+    await click(app.getByTestId("loginSubmit"));
+    await waitFor(() => app.getByLabelText(/Token/));
+    expect(app.queryByText(helperText)).not.toBeInTheDocument();
+  });
+});
+
 describe("Back button", () => {
   it(`goes back to email validation when click on cancel button from the final step
   of passwordless login`, async () => {
@@ -43,6 +59,7 @@ describe("Errors on mandatory fields", () => {
     const error = app.getByRole("alert");
     expect(error.textContent).toMatch(/The e-mail is required/);
   });
+
   it(`displays an error message when the password mode is checked and the password
   is missing`, async () => {
     const app = renderLogin();
@@ -50,6 +67,7 @@ describe("Errors on mandatory fields", () => {
     const error = app.getByRole("alert");
     expect(error.textContent).toMatch(/The password is required/);
   });
+
   it(`displays an error message when the token mode is checked and the token
   is missing`, async () => {
     const app = renderLogin();
@@ -76,68 +94,87 @@ describe("Errors on fields' format", () => {
 });
 
 describe("Errors from the backend", () => {
-  it(`displays an error message when the backend replies without response
-  data when logging in with password`, async () => {
-    const app = renderLogin();
-    mockedAxios.post.mockRejectedValue({ data: "" });
-    await fillLoginFields(app);
-    const error = app.getByRole("alert");
-    expect(error.textContent).toMatch(/We were unable to log you in/);
-  });
-  it(`displays an error message when the backend replies without response
-  data when validating the email while logging in without password`, async () => {
-    const app = renderLogin();
-    mockedAxios.post.mockRejectedValue({ data: "" });
-    fillField(app, /E-mail/, "bla@bla.fr");
-    await click(app.getByTestId("loginSubmit"));
-    const error = app.getByRole("alert");
-    expect(error.textContent).toMatch(/We were unable to send the email/);
-  });
-  it(`displays an error message when the backend replies without response
-  data when logging in without password`, async () => {
-    const app = renderLogin();
-    fillField(app, /E-mail/, "bla@bla.fr");
-    await click(app.getByTestId("loginSubmit"));
-    mockedAxios.post.mockRejectedValue({ data: "" });
-    const tokenField = await waitFor(() => app.getByLabelText(/Token/));
-    fireEvent.change(tokenField, { target: { value: "531684" } });
-    await click(app.getByTestId("loginSubmit"));
-    const error = app.getByRole("alert");
-    expect(error.textContent).toMatch(/We were unable to log you in/);
+  describe("Login with password", () => {
+    it(`displays an error message when the backend replies without response data`, async () => {
+      const app = renderLogin();
+      mockedAxios.post.mockRejectedValue({ data: "" });
+      await fillLoginFields(app);
+      const error = app.getByRole("alert");
+      expect(error.textContent).toMatch(/We were unable to log you in/);
+    });
+
+    it(`displays an error message *coming from the backend* when the backend
+    says the identifiers are incorrect`, async () => {
+      const app = renderLogin();
+      mockedAxios.post.mockRejectedValue({
+        response: {
+          data: {
+            non_field_errors: ["A first specific error", "A second error"],
+          },
+        },
+      });
+      await fillLoginFields(app);
+      const errors = app.getAllByRole("alert");
+      expect(errors[0].textContent).toMatch(/A first specific error/);
+      expect(errors[1].textContent).toMatch(/A second error/);
+    });
   });
 
-  it(`displays an error message *coming from the backend* when the backend
-  says the identifiers are incorrect, when logging in with password`, async () => {
-    const app = renderLogin();
-    mockedAxios.post.mockRejectedValue({
-      response: {
-        data: {
-          non_field_errors: ["A first specific error", "A second error"],
-        },
-      },
+  describe("Login without password", () => {
+    it(`displays an error message when the backend replies without response
+    data when validating the email`, async () => {
+      const app = renderLogin();
+      mockedAxios.post.mockRejectedValue({ data: "" });
+      fillField(app, /E-mail/, "bla@bla.fr");
+      await click(app.getByTestId("loginSubmit"));
+      const error = app.getByRole("alert");
+      expect(error.textContent).toMatch(/We were unable to send the email/);
     });
-    await fillLoginFields(app);
-    const errors = app.getAllByRole("alert");
-    expect(errors[0].textContent).toMatch(/A first specific error/);
-    expect(errors[1].textContent).toMatch(/A second error/);
-  });
-  it(`displays an error message when the backend says the identifiers
-  are incorrect, when logging in without password`, async () => {
-    const app = renderLogin();
-    fillField(app, /E-mail/, "bla@bla.fr");
-    await click(app.getByTestId("loginSubmit"));
-    mockedAxios.post.mockRejectedValue({
-      response: {
-        data: {
-          non_field_errors: ["A first specific error", "A second error"],
-        },
-      },
+
+    it(`displays an error message when the backend replies without response
+    data when trying to log in`, async () => {
+      const app = renderLogin();
+      fillField(app, /E-mail/, "bla@bla.fr");
+      await click(app.getByTestId("loginSubmit"));
+      mockedAxios.post.mockRejectedValue({ data: "" });
+      const tokenField = await waitFor(() => app.getByLabelText(/Token/));
+      fireEvent.change(tokenField, { target: { value: "531684" } });
+      await click(app.getByTestId("loginSubmit"));
+      const error = app.getByRole("alert");
+      expect(error.textContent).toMatch(/We were unable to log you in/);
     });
-    const tokenField = await waitFor(() => app.getByLabelText(/Token/));
-    fireEvent.change(tokenField, { target: { value: "531684" } });
-    await click(app.getByTestId("loginSubmit"));
-    const error = app.getByRole("alert");
-    expect(error.textContent).toMatch(/We were unable to log you in/);
+
+    it(`removes the displayed error message from the backend in the logging in step,
+    when clicking on back button`, async () => {
+      const app = renderLogin();
+      fillField(app, /E-mail/, "bla@bla.fr");
+      await click(app.getByTestId("loginSubmit"));
+      mockedAxios.post.mockRejectedValue({ data: "" });
+      const tokenField = await waitFor(() => app.getByLabelText(/Token/));
+      fireEvent.change(tokenField, { target: { value: "531684" } });
+      await click(app.getByTestId("loginSubmit"));
+      await click(app.getByText("Cancel"));
+      expect(app.queryByRole("alert")).not.toBeInTheDocument();
+    });
+
+    it(`displays an error message when the backend says the identifiers
+    are incorrect`, async () => {
+      const app = renderLogin();
+      fillField(app, /E-mail/, "bla@bla.fr");
+      await click(app.getByTestId("loginSubmit"));
+      mockedAxios.post.mockRejectedValue({
+        response: {
+          data: {
+            non_field_errors: ["A first specific error", "A second error"],
+          },
+        },
+      });
+      const tokenField = await waitFor(() => app.getByLabelText(/Token/));
+      fireEvent.change(tokenField, { target: { value: "531684" } });
+      await click(app.getByTestId("loginSubmit"));
+      const error = app.getByRole("alert");
+      expect(error.textContent).toMatch(/We were unable to log you in/);
+    });
   });
 });
 
@@ -150,6 +187,7 @@ describe("Accessibility", () => {
     await click(submit);
     expect(app.getByLabelText(/E-mail/)).toHaveFocus();
   });
+
   it("gives focus to the token field, when validating the email without password", async () => {
     const app = renderLogin();
     fillField(app, /E-mail/, "bla@bla.fr");

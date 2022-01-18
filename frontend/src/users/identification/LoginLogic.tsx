@@ -10,7 +10,8 @@ type FormStepSideEffect =
   | "SEND_EMAIL"
   | "FETCH_WITH_PASSWORD"
   | "FETCH_WITH_TOKEN"
-  | "CLOSE_WINDOW";
+  | "CLOSE_WINDOW"
+  | "REMOVE_ERRORS";
 
 type FormStepState = {
   name: FormStepName;
@@ -19,6 +20,7 @@ type FormStepState = {
   showEmailField: boolean;
   showTokenField: boolean;
   showPasswordField: boolean;
+  showPasswordlessHelperText: boolean;
   submitButtonText: React.ReactNode;
 };
 
@@ -28,7 +30,8 @@ const emailValidationWithoutPassword: FormStepState = {
   showEmailField: true,
   showTokenField: false,
   showPasswordField: false,
-  submitButtonText: <Trans>Log in with email</Trans>,
+  showPasswordlessHelperText: true,
+  submitButtonText: <Trans>Send the email</Trans>,
 } as const;
 
 const finalValidationWithoutPassword: FormStepState = {
@@ -37,6 +40,7 @@ const finalValidationWithoutPassword: FormStepState = {
   showEmailField: false,
   showTokenField: true,
   showPasswordField: false,
+  showPasswordlessHelperText: false,
   submitButtonText: <Trans>Log in</Trans>,
 } as const;
 
@@ -46,6 +50,7 @@ const finalValidationWithPassword: FormStepState = {
   showEmailField: true,
   showTokenField: false,
   showPasswordField: true,
+  showPasswordlessHelperText: false,
   submitButtonText: <Trans>Log in</Trans>,
 } as const;
 
@@ -102,16 +107,25 @@ function formStepReducer(
             sideEffects: [...formStep.sideEffects, "CLOSE_WINDOW"],
           };
         case "FINAL_VALIDATION_WITHOUT_PASSWORD":
-          return emailValidationWithoutPassword;
+          return {
+            ...emailValidationWithoutPassword,
+            sideEffects: [...formStep.sideEffects, "REMOVE_ERRORS"],
+          };
         default:
           return formStep;
       }
     case "TOGGLE_PASSWORD":
       switch (formStep.name) {
         case "EMAIL_VALIDATION_WITHTOUT_PASSWORD":
-          return finalValidationWithPassword;
+          return {
+            ...finalValidationWithPassword,
+            sideEffects: [...formStep.sideEffects, "REMOVE_ERRORS"],
+          };
         case "FINAL_VALIDATION_WITH_PASSWORD":
-          return emailValidationWithoutPassword;
+          return {
+            ...emailValidationWithoutPassword,
+            sideEffects: [...formStep.sideEffects, "REMOVE_ERRORS"],
+          };
         default:
           return formStep;
       }

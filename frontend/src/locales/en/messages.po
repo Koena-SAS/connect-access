@@ -17,7 +17,7 @@ msgstr ""
 msgid "<0>Adapted navigation dispositive</0>"
 msgstr "<0>Adapted navigation dispositive</0>"
 
-#: src/mediationForm/fields/NavigationContextFields.tsx:255
+#: src/mediationForm/fields/NavigationContextFields.tsx:254
 msgid "<0>Android</0>"
 msgstr "<0>Android</0>"
 
@@ -25,23 +25,23 @@ msgstr "<0>Android</0>"
 msgid "<0>Braille display</0>"
 msgstr "<0>Braille display</0>"
 
-#: src/admin/requestDetail/TraceReportForm.tsx:283
+#: src/admin/requestDetail/TraceReportForm.tsx:315
 msgid "<0>Call</0>"
 msgstr "<0>Call</0>"
 
-#: src/mediationForm/fields/NavigationContextFields.tsx:45
+#: src/mediationForm/fields/NavigationContextFields.tsx:44
 msgid "<0>Chrome</0>"
 msgstr "Chrome"
 
-#: src/admin/Menu.tsx:93
+#: src/admin/Menu.tsx:92
 msgid "<0>Close sidebar</0>"
 msgstr "<0>Close sidebar</0>"
 
-#: src/admin/FilterMediationRequests.tsx:88
+#: src/admin/FilterMediationRequests.tsx:103
 msgid "<0>Closed</0>"
 msgstr "<0>Closed</0>"
 
-#: src/admin/requestDetail/TraceReportForm.tsx:162
+#: src/admin/requestDetail/TraceReportForm.tsx:191
 msgid "<0>Complainant</0>"
 msgstr "<0>Complainant</0>"
 
@@ -49,9 +49,9 @@ msgstr "<0>Complainant</0>"
 msgid "<0>DYS Disorder software</0>"
 msgstr "<0>DYS Disorder software</0>"
 
-#: src/customerLayout/Footer.tsx:27
-#: src/mediationRequests/MediationRequestsDetail.tsx:81
-#: src/mediationRequests/MediationRequestsDetail.tsx:390
+#: src/customerLayout/Footer.tsx:51
+#: src/mediationRequests/MediationRequestsDetail.tsx:97
+#: src/mediationRequests/MediationRequestsDetail.tsx:407
 msgid "<0>E-mail:</0>"
 msgstr "E-mail:"
 
@@ -64,19 +64,19 @@ msgstr "E-mail"
 msgid "<0>Exclusive keyboard navigation</0>"
 msgstr "<0>Exclusive keyboard navigation</0>"
 
-#: src/admin/requestDetail/TraceReportForm.tsx:171
+#: src/admin/requestDetail/TraceReportForm.tsx:200
 msgid "<0>External organization</0>"
 msgstr "<0>External organization</0>"
 
-#: src/mediationForm/fields/NavigationContextFields.tsx:40
+#: src/mediationForm/fields/NavigationContextFields.tsx:39
 msgid "<0>Firefox</0>"
 msgstr "Firefox"
 
-#: src/admin/FilterMediationRequests.tsx:61
+#: src/admin/FilterMediationRequests.tsx:76
 msgid "<0>Incomplete</0>"
 msgstr "<0>Incomplete</0>"
 
-#: src/mediationForm/fields/NavigationContextFields.tsx:50
+#: src/mediationForm/fields/NavigationContextFields.tsx:49
 msgid "<0>Internet Explorer</0>"
 msgstr "Internet Explorer"
 
@@ -84,39 +84,39 @@ msgstr "Internet Explorer"
 msgid "<0>Keyboard</0>"
 msgstr "<0>Keyboard</0>"
 
-#: src/admin/requestDetail/TraceReportForm.tsx:289
+#: src/admin/requestDetail/TraceReportForm.tsx:321
 msgid "<0>Letter</0>"
 msgstr "<0>Letter</0>"
 
-#: src/admin/FilterMediationRequests.tsx:85
+#: src/admin/FilterMediationRequests.tsx:100
 msgid "<0>Mediating</0>"
 msgstr "<0>Mediating</0>"
 
-#: src/admin/FilterMediationRequests.tsx:91
+#: src/admin/FilterMediationRequests.tsx:106
 msgid "<0>Mediation failed</0>"
 msgstr "<0>Mediation failed</0>"
 
-#: src/admin/requestDetail/TraceReportForm.tsx:165
+#: src/admin/requestDetail/TraceReportForm.tsx:194
 msgid "<0>Mediator</0>"
 msgstr "<0>Mediator</0>"
 
-#: src/mediationForm/fields/NavigationContextFields.tsx:55
+#: src/mediationForm/fields/NavigationContextFields.tsx:54
 msgid "<0>Microsoft Edge</0>"
 msgstr "Microsoft Edge"
 
-#: src/admin/requestDetail/TraceReportForm.tsx:168
+#: src/admin/requestDetail/TraceReportForm.tsx:197
 msgid "<0>Organization (partner)</0>"
 msgstr "<0>Organization (partner)</0>"
 
-#: src/admin/FilterMediationRequests.tsx:108
-#: src/admin/requestDetail/TraceReportForm.tsx:174
-#: src/admin/requestDetail/TraceReportForm.tsx:292
+#: src/admin/FilterMediationRequests.tsx:123
+#: src/admin/requestDetail/TraceReportForm.tsx:203
+#: src/admin/requestDetail/TraceReportForm.tsx:324
 #: src/mediationForm/fields/AssitiveTechnologyFields.tsx:108
-#: src/mediationForm/fields/NavigationContextFields.tsx:261
+#: src/mediationForm/fields/NavigationContextFields.tsx:260
 msgid "<0>Other</0>"
 msgstr "<0>Other</0>"
 
-#: src/admin/FilterMediationRequests.tsx:69
+#: src/admin/FilterMediationRequests.tsx:84
 msgid "<0>Request filed</0>"
 msgstr "<0>Request filed</0>"
 
@@ -132,23 +132,27 @@ msgstr "<0>Virtual keyboard</0>"
 msgid "<0>Vocal command software</0>"
 msgstr "<0>Vocal command software</0>"
 
-#: src/admin/FilterMediationRequests.tsx:72
+#: src/admin/FilterMediationRequests.tsx:87
 msgid "<0>Waiting for administrative validation</0>"
 msgstr "<0>Waiting for administrative validation</0>"
 
-#: src/admin/FilterMediationRequests.tsx:77
+#: src/admin/FilterMediationRequests.tsx:92
 msgid "<0>Waiting for contact</0>"
 msgstr "<0>Waiting for contact</0>"
 
-#: src/admin/FilterMediationRequests.tsx:64
+#: src/admin/FilterMediationRequests.tsx:79
 msgid "<0>Waiting for mediator validation</0>"
 msgstr "<0>Waiting for mediator validation</0>"
 
-#: src/admin/FilterMediationRequests.tsx:80
+#: src/admin/FilterMediationRequests.tsx:95
 msgid "<0>Waiting for second contact</0>"
 msgstr "<0>Waiting for second contact</0>"
 
-#: src/mediationForm/fields/NavigationContextFields.tsx:258
+#: src/customerLayout/Footer.tsx:69
+msgid "<0>Website:</0>"
+msgstr "<0>Website:</0>"
+
+#: src/mediationForm/fields/NavigationContextFields.tsx:257
 msgid "<0>Windows phone</0>"
 msgstr "<0>Windows phone</0>"
 
@@ -156,11 +160,11 @@ msgstr "<0>Windows phone</0>"
 msgid "<0>Zoom software</0>"
 msgstr "<0>Zoom software</0>"
 
-#: src/mediationForm/fields/NavigationContextFields.tsx:252
+#: src/mediationForm/fields/NavigationContextFields.tsx:251
 msgid "<0>iOS</0>"
 msgstr "<0>iOS</0>"
 
-#: src/customerLayout/Footer.tsx:36
+#: src/customerLayout/Footer.tsx:89
 msgid "About"
 msgstr "About"
 
@@ -176,47 +180,43 @@ msgstr "About the organization"
 msgid "About the organization's answer"
 msgstr "About the organization's answer"
 
-#: src/mediationForm/fields/NavigationContextFields.tsx:203
+#: src/mediationForm/fields/NavigationContextFields.tsx:202
 msgid "About the platform"
 msgstr "About the platform"
 
-#: src/customerLayout/Footer.tsx:45
-msgid "About us"
-msgstr "About us"
-
-#: src/mediationForm/FormNavigation.tsx:40
-#: src/mediationForm/FormNavigation.tsx:43
-#: src/mediationRequests/MediationRequestsDetail.tsx:59
+#: src/mediationForm/FormNavigation.tsx:73
+#: src/mediationForm/FormNavigation.tsx:76
+#: src/mediationRequests/MediationRequestsDetail.tsx:75
 msgid "About you"
 msgstr "About you"
 
-#: src/constants/choicesMap.tsx:40
+#: src/constants/choicesMap.tsx:50
 #: src/mediationForm/fields/AboutIssueFields.tsx:100
 msgid "Access possible by bypass but difficult"
 msgstr "Access possible by bypass but difficult"
 
-#: src/admin/requestDetail/TraceReports.tsx:90
+#: src/admin/requestDetail/TraceReports.tsx:105
 msgid "Actions"
 msgstr "Actions"
 
-#: src/constants/choicesMap.tsx:11
+#: src/constants/choicesMap.tsx:21
 msgid "Adapted navigation dispositive"
 msgstr "Adapted navigation dispositive"
 
-#: src/admin/requestDetail/TraceReportForm.tsx:192
+#: src/admin/requestDetail/TraceReportForm.tsx:221
 msgid "Add a new trace report"
 msgstr "Add a new trace report"
 
-#: src/admin/requestDetail/TraceReportForm.tsx:203
-#: src/admin/requestDetail/TraceReports.tsx:206
+#: src/admin/requestDetail/TraceReportForm.tsx:232
+#: src/admin/requestDetail/TraceReports.tsx:221
 msgid "Add a trace report"
 msgstr "Add a trace report"
 
-#: src/admin/requestDetail/TraceReportForm.tsx:394
+#: src/admin/requestDetail/TraceReportForm.tsx:426
 msgid "Add the report"
 msgstr "Add the report"
 
-#: src/customerLayout/Header.tsx:121
+#: src/customerLayout/Header.tsx:139
 msgid "Admin"
 msgstr "Admin"
 
@@ -224,30 +224,30 @@ msgstr "Admin"
 msgid "Admin content"
 msgstr "Admin content"
 
-#: src/admin/FilterMediationRequests.tsx:60
-#: src/admin/FilterMediationRequests.tsx:107
+#: src/admin/FilterMediationRequests.tsx:75
+#: src/admin/FilterMediationRequests.tsx:122
 msgid "All"
 msgstr "All"
 
-#: src/admin/AllRequests.tsx:54
-#: src/admin/AllRequests.tsx:57
-#: src/admin/Menu.tsx:146
-#: src/admin/requestDetail/History.tsx:13
-#: src/admin/requestDetail/RequestDetail.tsx:36
-#: src/admin/requestDetail/TraceReports.tsx:65
-#: src/users/mediations/UserMediations.tsx:16
+#: src/admin/AllRequests.tsx:53
+#: src/admin/AllRequests.tsx:56
+#: src/admin/Menu.tsx:163
+#: src/admin/requestDetail/History.tsx:16
+#: src/admin/requestDetail/RequestDetail.tsx:41
+#: src/admin/requestDetail/TraceReports.tsx:80
+#: src/users/mediations/UserMediations.tsx:21
 msgid "All requests"
 msgstr "All requests"
 
-#: src/users/identification/IdentificationLayout.tsx:129
+#: src/users/identification/IdentificationLayout.tsx:147
 msgid "An error occured, please try again."
 msgstr "An error occured, please try again."
 
-#: src/users/identification/Login.tsx:58
+#: src/users/identification/Login.tsx:85
 msgid "An unexpected error occurred."
 msgstr "An unexpected error occurred."
 
-#: src/constants/choicesMap.tsx:33
+#: src/constants/choicesMap.tsx:43
 msgid "Android"
 msgstr "Android"
 
@@ -255,7 +255,7 @@ msgstr "Android"
 msgid "Anything else about your problem?"
 msgstr "Anything else about your problem?"
 
-#: src/admin/FilterMediationRequests.tsx:102
+#: src/admin/FilterMediationRequests.tsx:117
 msgid "Application:"
 msgstr "Application:"
 
@@ -264,7 +264,7 @@ msgstr "Application:"
 msgid "Assistive technologies used"
 msgstr "Assistive technologies used"
 
-#: src/mediationRequests/MediationRequestsDetail.tsx:101
+#: src/mediationRequests/MediationRequestsDetail.tsx:117
 msgid "Assistive technologies used:"
 msgstr "Assistive technologies used:"
 
@@ -272,7 +272,7 @@ msgstr "Assistive technologies used:"
 msgid "Assistive technology name(s)"
 msgstr "Assistive technology name(s)"
 
-#: src/mediationRequests/MediationRequestsDetail.tsx:134
+#: src/mediationRequests/MediationRequestsDetail.tsx:151
 msgid "Assistive technology name(s):"
 msgstr "Assistive technology name(s):"
 
@@ -280,83 +280,83 @@ msgstr "Assistive technology name(s):"
 msgid "Assistive technology version(s)"
 msgstr "Assistive technology version(s)"
 
-#: src/mediationRequests/MediationRequestsDetail.tsx:142
+#: src/mediationRequests/MediationRequestsDetail.tsx:159
 msgid "Assistive technology version(s):"
 msgstr "Assistive technology version(s):"
 
-#: src/users/identification/Signup.tsx:147
-#: src/users/password/PasswordResetConfirm.tsx:104
+#: src/users/identification/Signup.tsx:166
+#: src/users/password/PasswordResetConfirm.tsx:119
 msgid "At least 8 characters, not fully numeric, and must not be a too common word"
 msgstr "At least 8 characters, not fully numeric, and must not be a too common word"
 
-#: src/admin/requestDetail/TraceReportForm.tsx:367
-#: src/admin/requestDetail/TraceReports.tsx:89
+#: src/admin/requestDetail/TraceReportForm.tsx:399
+#: src/admin/requestDetail/TraceReports.tsx:104
 msgid "Attached file"
 msgstr "Attached file"
 
-#: src/mediationRequests/MediationRequestsDetail.tsx:354
+#: src/mediationRequests/MediationRequestsDetail.tsx:371
 msgid "Attached file:"
 msgstr "Attached file:"
 
-#: src/constants/choicesMap.tsx:6
+#: src/constants/choicesMap.tsx:16
 msgid "Braille display"
 msgstr "Braille display"
 
-#: src/constants/choicesMap.tsx:62
+#: src/constants/choicesMap.tsx:72
 msgid "Call"
 msgstr "Call"
 
-#: src/admin/requestDetail/TraceReportForm.tsx:401
-#: src/users/identification/Login.tsx:120
-#: src/users/identification/Signup.tsx:176
-#: src/users/password/PasswordResetRequest.tsx:73
+#: src/admin/requestDetail/TraceReportForm.tsx:433
+#: src/users/identification/Login.tsx:290
+#: src/users/identification/Signup.tsx:195
+#: src/users/password/PasswordResetRequest.tsx:92
 msgid "Cancel"
 msgstr "Cancel"
 
-#: src/users/password/PasswordResetConfirm.tsx:129
+#: src/users/password/PasswordResetConfirm.tsx:144
 msgid "Change your password"
 msgstr "Change your password"
 
-#: src/users/password/PasswordResetConfirm.tsx:74
+#: src/users/password/PasswordResetConfirm.tsx:89
 msgid "Choose a new password"
 msgstr "Choose a new password"
 
-#: src/constants/choicesMap.tsx:24
+#: src/constants/choicesMap.tsx:34
 msgid "Chrome"
 msgstr "Chrome"
 
-#: src/forms/Snackbar.tsx:21
+#: src/forms/Snackbar.tsx:24
 msgid "Close message"
 msgstr "Close message"
 
-#: src/admin/Menu.tsx:69
-#: src/customerLayout/Header.tsx:83
+#: src/admin/Menu.tsx:68
+#: src/customerLayout/Header.tsx:101
 msgid "Close the menu"
 msgstr "Close the menu"
 
-#: src/constants/choicesMap.tsx:57
+#: src/constants/choicesMap.tsx:67
 msgid "Closed"
 msgstr "Closed"
 
-#: src/admin/requestDetail/TraceReportForm.tsx:358
-#: src/admin/requestDetail/TraceReports.tsx:88
+#: src/admin/requestDetail/TraceReportForm.tsx:390
+#: src/admin/requestDetail/TraceReports.tsx:103
 msgid "Comment"
 msgstr "Comment"
 
-#: src/constants/choicesMap.tsx:69
+#: src/constants/choicesMap.tsx:79
 msgid "Complainant"
 msgstr "Complainant"
 
-#: src/mediationForm/FormNavigation.tsx:131
+#: src/mediationForm/FormNavigation.tsx:176
 msgid "Completed"
 msgstr "Completed"
 
-#: src/users/identification/Signup.tsx:160
-#: src/users/password/PasswordResetConfirm.tsx:118
+#: src/users/identification/Signup.tsx:179
+#: src/users/password/PasswordResetConfirm.tsx:133
 msgid "Confirm password"
 msgstr "Confirm password"
 
-#: src/forms/ConfirmationDialog.tsx:43
+#: src/forms/ConfirmationDialog.tsx:60
 msgid "Confirmation"
 msgstr "Confirmation"
 
@@ -364,45 +364,45 @@ msgstr "Confirmation"
 msgid "Contact"
 msgstr "Contact"
 
-#: src/admin/requestDetail/TraceReports.tsx:85
+#: src/admin/requestDetail/TraceReports.tsx:100
 msgid "Contact Type"
 msgstr "Contact Type"
 
-#: src/admin/requestDetail/TraceReportForm.tsx:230
+#: src/admin/requestDetail/TraceReportForm.tsx:262
 msgid "Contact date"
 msgstr "Contact date"
 
-#: src/admin/requestDetail/TraceReportForm.tsx:279
+#: src/admin/requestDetail/TraceReportForm.tsx:311
 msgid "Contact type"
 msgstr "Contact type"
 
-#: src/customerLayout/Footer.tsx:19
+#: src/customerLayout/Footer.tsx:24
 msgid "Contact us"
 msgstr "Contact us"
 
-#: src/mediationRequests/MediationRequestsDetail.tsx:410
+#: src/mediationRequests/MediationRequestsDetail.tsx:427
 msgid "Contact:"
 msgstr "Contact:"
 
-#: src/QuickLinks.tsx:29
+#: src/QuickLinks.tsx:39
 msgid "Content"
 msgstr "Content"
 
-#: src/admin/Menu.tsx:160
+#: src/admin/Menu.tsx:177
 msgid "Custom menu management"
 msgstr "Custom menu management"
 
-#: src/constants/choicesMap.tsx:9
+#: src/constants/choicesMap.tsx:19
 msgid "DYS Disorder software"
 msgstr "DYS Disorder software"
 
-#: src/admin/Menu.tsx:127
+#: src/admin/Menu.tsx:144
 #: src/admin/QuickAccess.tsx:14
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: src/admin/requestDetail/TraceReports.tsx:84
-#: src/mediationRequests/MediationRequestsList.tsx:19
+#: src/admin/requestDetail/TraceReports.tsx:99
+#: src/mediationRequests/MediationRequestsList.tsx:30
 msgid "Date"
 msgstr "Date"
 
@@ -410,30 +410,30 @@ msgstr "Date"
 msgid "Describe every step you did in order to access the wanted content or features"
 msgstr "Describe every step you did in order to access the wanted content or features"
 
-#: src/mediationRequests/MediationRequestsDetail.tsx:169
+#: src/mediationRequests/MediationRequestsDetail.tsx:186
 msgid "Describe every step you did in order to access the wanted content or features:"
 msgstr "Describe every step you did in order to access the wanted content or features:"
 
-#: src/admin/requestDetail/History.tsx:14
-#: src/admin/requestDetail/RequestDetail.tsx:37
-#: src/admin/requestDetail/TraceReports.tsx:66
-#: src/mediationRequests/MediationRequestsList.tsx:24
-#: src/mediationRequests/MediationRequestsList.tsx:54
+#: src/admin/requestDetail/History.tsx:17
+#: src/admin/requestDetail/RequestDetail.tsx:42
+#: src/admin/requestDetail/TraceReports.tsx:81
+#: src/mediationRequests/MediationRequestsList.tsx:35
+#: src/mediationRequests/MediationRequestsList.tsx:65
 msgid "Details"
 msgstr "Details"
 
-#: src/mediationForm/fields/NavigationContextFields.tsx:74
-#: src/mediationRequests/MediationRequestsDetail.tsx:208
+#: src/mediationForm/fields/NavigationContextFields.tsx:73
+#: src/mediationRequests/MediationRequestsDetail.tsx:225
 msgid "Did the problem occur while using a web browser?"
 msgstr "Did the problem occur while using a web browser?"
 
 #: src/mediationForm/fields/OrganizationAnswerFields.tsx:77
-#: src/mediationRequests/MediationRequestsDetail.tsx:322
+#: src/mediationRequests/MediationRequestsDetail.tsx:339
 msgid "Did they reply?"
 msgstr "Did they reply?"
 
 #: src/mediationForm/fields/OrganizationAnswerFields.tsx:43
-#: src/mediationRequests/MediationRequestsDetail.tsx:305
+#: src/mediationRequests/MediationRequestsDetail.tsx:322
 msgid "Did you already tell the organization in charge about the problem?"
 msgstr "Did you already tell the organization in charge about the problem?"
 
@@ -441,43 +441,43 @@ msgstr "Did you already tell the organization in charge about the problem?"
 msgid "Do not hesitate to upload any file that may be useful to better understand your problem"
 msgstr "Do not hesitate to upload any file that may be useful to better understand your problem"
 
-#: src/admin/requestDetail/TraceReports.tsx:224
+#: src/admin/requestDetail/TraceReports.tsx:239
 msgid "Do you really want to delete the trace report?"
 msgstr "Do you really want to delete the trace report?"
 
-#: src/constants/choicesMap.tsx:28
+#: src/constants/choicesMap.tsx:38
 msgid "Don't Know"
 msgstr "Don't Know"
 
-#: src/mediationForm/fields/NavigationContextFields.tsx:180
+#: src/mediationForm/fields/NavigationContextFields.tsx:179
 msgid "Don't know"
 msgstr "Don't know"
 
-#: src/admin/requestDetail/TraceReports.tsx:163
+#: src/admin/requestDetail/TraceReports.tsx:178
 msgid "Download the file"
 msgstr "Download the file"
 
-#: src/constants/choicesMap.tsx:63
+#: src/constants/choicesMap.tsx:73
 msgid "E-mail"
 msgstr "E-mail"
 
-#: src/admin/requestDetail/TraceReports.tsx:188
+#: src/admin/requestDetail/TraceReports.tsx:203
 msgid "Edit"
 msgstr "Edit"
 
-#: src/admin/requestDetail/TraceReportForm.tsx:191
+#: src/admin/requestDetail/TraceReportForm.tsx:220
 msgid "Edit a new trace report"
 msgstr "Edit a new trace report"
 
-#: src/admin/requestDetail/TraceReportForm.tsx:201
+#: src/admin/requestDetail/TraceReportForm.tsx:230
 msgid "Edit a trace report"
 msgstr "Edit a trace report"
 
-#: src/admin/requestDetail/TraceReportForm.tsx:392
+#: src/admin/requestDetail/TraceReportForm.tsx:424
 msgid "Edit the report"
 msgstr "Edit the report"
 
-#: src/admin/requestDetail/TraceReportForm.tsx:268
+#: src/admin/requestDetail/TraceReportForm.tsx:300
 msgid "Example of correct format: 09/01/2021 06:52 PM"
 msgstr "Example of correct format: 09/01/2021 06:52 PM"
 
@@ -486,35 +486,35 @@ msgstr "Example of correct format: 09/01/2021 06:52 PM"
 msgid "Example of correct format: name@domain.com"
 msgstr "Example of correct format: name@domain.com"
 
-#: src/constants/choicesMap.tsx:12
+#: src/constants/choicesMap.tsx:22
 msgid "Exclusive keyboard navigation"
 msgstr "Exclusive keyboard navigation"
 
-#: src/constants/choicesMap.tsx:72
+#: src/constants/choicesMap.tsx:82
 msgid "External organization"
 msgstr "External organization"
 
-#: src/admin/FilterMediationRequests.tsx:46
+#: src/admin/FilterMediationRequests.tsx:61
 msgid "Filter by:"
 msgstr "Filter by:"
 
-#: src/constants/choicesMap.tsx:23
+#: src/constants/choicesMap.tsx:33
 msgid "Firefox"
 msgstr "Firefox"
 
-#: src/forms/fields/FirstNameField.tsx:58
+#: src/forms/fields/FirstNameField.tsx:57
 msgid "First name / username"
 msgstr "First name / username"
 
-#: src/mediationRequests/MediationRequestsDetail.tsx:65
+#: src/mediationRequests/MediationRequestsDetail.tsx:81
 msgid "First name / username:"
 msgstr "First name / username:"
 
-#: src/QuickLinks.tsx:35
+#: src/QuickLinks.tsx:45
 msgid "Footer"
 msgstr "Footer"
 
-#: src/admin/Menu.tsx:159
+#: src/admin/Menu.tsx:176
 msgid "Form management"
 msgstr "Form management"
 
@@ -522,39 +522,39 @@ msgstr "Form management"
 msgid "Further information"
 msgstr "Further information"
 
-#: src/mediationRequests/MediationRequestsDetail.tsx:346
+#: src/mediationRequests/MediationRequestsDetail.tsx:363
 msgid "Further information:"
 msgstr "Further information:"
 
-#: src/admin/Menu.tsx:153
+#: src/admin/Menu.tsx:170
 msgid "General Settings"
 msgstr "General Settings"
 
-#: src/customerLayout/Footer.tsx:74
+#: src/customerLayout/Footer.tsx:114
 msgid "Help"
 msgstr "Help"
 
-#: src/admin/requestDetail/History.tsx:15
+#: src/admin/requestDetail/History.tsx:18
 msgid "History"
 msgstr "History"
 
-#: src/users/identification/IdentificationLayout.tsx:67
+#: src/users/identification/IdentificationLayout.tsx:85
 msgid "Identification - Login"
 msgstr "Identification - Login"
 
-#: src/users/identification/IdentificationLayout.tsx:75
+#: src/users/identification/IdentificationLayout.tsx:93
 msgid "Identification - Reset your password"
 msgstr "Identification - Reset your password"
 
-#: src/users/identification/IdentificationLayout.tsx:70
+#: src/users/identification/IdentificationLayout.tsx:88
 msgid "Identification - Signup"
 msgstr "Identification - Signup"
 
-#: src/mediationRequests/MediationRequestsList.tsx:23
+#: src/mediationRequests/MediationRequestsList.tsx:34
 msgid "Identifier"
 msgstr "Identifier"
 
-#: src/users/identification/IdentificationLayout.tsx:123
+#: src/users/identification/IdentificationLayout.tsx:141
 msgid "If an account exists with this e-mail, you will receive a password reset link soon."
 msgstr "If an account exists with this e-mail, you will receive a password reset link soon."
 
@@ -570,12 +570,12 @@ msgstr ""
 "technologies to compensate for your disability in numeric\n"
 "usage, any details would help us to process your demand."
 
-#: src/constants/choicesMap.tsx:39
+#: src/constants/choicesMap.tsx:49
 #: src/mediationForm/fields/AboutIssueFields.tsx:92
 msgid "Impossible access"
 msgstr "Impossible access"
 
-#: src/constants/choicesMap.tsx:50
+#: src/constants/choicesMap.tsx:60
 msgid "Incomplete"
 msgstr "Incomplete"
 
@@ -583,49 +583,50 @@ msgstr "Incomplete"
 msgid "Information about assistive technology used"
 msgstr "Information about assistive technology used"
 
-#: src/constants/choicesMap.tsx:25
+#: src/constants/choicesMap.tsx:35
 msgid "Internet Explorer"
 msgstr "Internet Explorer"
 
 #: src/mediationForm/fields/AboutIssueFields.tsx:125
-#: src/mediationRequests/MediationRequestsDetail.tsx:198
+#: src/mediationRequests/MediationRequestsDetail.tsx:215
 msgid "Is your problem urgent?"
 msgstr "Is your problem urgent?"
 
-#: src/constants/choicesMap.tsx:4
+#: src/constants/choicesMap.tsx:14
 msgid "Keyboard"
 msgstr "Keyboard"
 
-#: src/forms/fields/LastNameField.tsx:56
+#: src/forms/fields/LastNameField.tsx:55
 msgid "Last name"
 msgstr "Last name"
 
-#: src/mediationRequests/MediationRequestsDetail.tsx:73
+#: src/mediationRequests/MediationRequestsDetail.tsx:89
 msgid "Last name:"
 msgstr "Last name:"
 
-#: src/customerLayout/Footer.tsx:54
-msgid "Legal information"
-msgstr "Legal information"
-
-#: src/constants/choicesMap.tsx:64
+#: src/constants/choicesMap.tsx:74
 msgid "Letter"
 msgstr "Letter"
 
-#: src/users/identification/Identification.tsx:22
-#: src/users/identification/Login.tsx:117
+#: src/users/identification/Identification.tsx:37
+#: src/users/identification/LoginLogic.tsx:44
+#: src/users/identification/LoginLogic.tsx:54
 msgid "Log in"
 msgstr "Log in"
 
-#: src/users/identification/Identification.tsx:38
+#: src/users/identification/Identification.tsx:53
 msgid "Log in or sign up"
 msgstr "Log in or sign up"
 
-#: src/customerLayout/Header.tsx:109
+#: src/users/identification/Login.tsx:247
+msgid "Log in with password"
+msgstr "Log in with password"
+
+#: src/customerLayout/Header.tsx:127
 msgid "Login"
 msgstr "Login"
 
-#: src/users/identification/LogoutButton.tsx:63
+#: src/users/identification/LogoutButton.tsx:72
 msgid "Logout"
 msgstr "Logout"
 
@@ -633,61 +634,61 @@ msgstr "Logout"
 msgid "Mailing address"
 msgstr "Mailing address"
 
-#: src/mediationRequests/MediationRequestsDetail.tsx:382
+#: src/mediationRequests/MediationRequestsDetail.tsx:399
 msgid "Mailing adress:"
 msgstr "Mailing adress:"
 
-#: src/constants/choicesMap.tsx:56
+#: src/constants/choicesMap.tsx:66
 msgid "Mediating"
 msgstr "Mediating"
 
-#: src/admin/AllRequests.tsx:57
-#: src/admin/Menu.tsx:140
-#: src/admin/requestDetail/History.tsx:12
-#: src/admin/requestDetail/RequestDetail.tsx:35
-#: src/admin/requestDetail/TraceReports.tsx:64
+#: src/admin/AllRequests.tsx:56
+#: src/admin/Menu.tsx:157
+#: src/admin/requestDetail/History.tsx:15
+#: src/admin/requestDetail/RequestDetail.tsx:40
+#: src/admin/requestDetail/TraceReports.tsx:79
 msgid "Mediation"
 msgstr "Mediation"
 
-#: src/constants/choicesMap.tsx:58
+#: src/constants/choicesMap.tsx:68
 msgid "Mediation failed"
 msgstr "Mediation failed"
 
-#: src/users/mediations/UserMediation.tsx:25
+#: src/users/mediations/UserMediation.tsx:31
 msgid "Mediation request details:"
 msgstr "Mediation request details:"
 
-#: src/constants/choicesMap.tsx:70
+#: src/constants/choicesMap.tsx:80
 msgid "Mediator"
 msgstr "Mediator"
 
-#: src/QuickLinks.tsx:23
+#: src/QuickLinks.tsx:33
 msgid "Menu"
 msgstr "Menu"
 
-#: src/constants/choicesMap.tsx:26
+#: src/constants/choicesMap.tsx:36
 msgid "Microsoft Edge"
 msgstr "Microsoft Edge"
 
-#: src/constants/choicesMap.tsx:18
+#: src/constants/choicesMap.tsx:28
 #: src/mediationForm/fields/AboutIssueFields.tsx:139
 msgid "Moderately, I can wait, but not too long"
 msgstr "Moderately, I can wait, but not too long"
 
-#: src/mediationForm/Recap.tsx:199
+#: src/mediationForm/Recap.tsx:256
 msgid "Modify organization data"
 msgstr "Modify organization data"
 
-#: src/mediationForm/Recap.tsx:179
+#: src/mediationForm/Recap.tsx:236
 msgid "Modify your data"
 msgstr "Modify your data"
 
-#: src/mediationForm/Recap.tsx:189
+#: src/mediationForm/Recap.tsx:246
 msgid "Modify your problem description"
 msgstr "Modify your problem description"
 
-#: src/customerLayout/Header.tsx:144
-#: src/users/account/Account.tsx:13
+#: src/customerLayout/Header.tsx:162
+#: src/users/account/Account.tsx:11
 msgid "My account"
 msgstr "My account"
 
@@ -695,7 +696,7 @@ msgstr "My account"
 msgid "My personal information"
 msgstr "My personal information"
 
-#: src/customerLayout/Header.tsx:134
+#: src/customerLayout/Header.tsx:152
 msgid "My requests"
 msgstr "My requests"
 
@@ -703,292 +704,292 @@ msgstr "My requests"
 msgid "Name of the organization"
 msgstr "Name of the organization"
 
-#: src/mediationRequests/MediationRequestsDetail.tsx:374
+#: src/mediationRequests/MediationRequestsDetail.tsx:391
 msgid "Name of the organization:"
 msgstr "Name of the organization:"
 
-#: src/mediationForm/fields/NavigationContextFields.tsx:64
+#: src/mediationForm/fields/NavigationContextFields.tsx:63
 msgid "Navigation context"
 msgstr "Navigation context"
 
-#: src/constants/choicesMap.tsx:46
-#: src/forms/ConfirmationDialog.tsx:64
-#: src/mediationForm/fields/NavigationContextFields.tsx:88
-#: src/mediationForm/fields/NavigationContextFields.tsx:228
+#: src/constants/choicesMap.tsx:56
+#: src/forms/ConfirmationDialog.tsx:81
+#: src/mediationForm/fields/NavigationContextFields.tsx:87
+#: src/mediationForm/fields/NavigationContextFields.tsx:227
 #: src/mediationForm/fields/OrganizationAnswerFields.tsx:59
 #: src/mediationForm/fields/OrganizationAnswerFields.tsx:91
 msgid "No"
 msgstr "No"
 
-#: src/mediationForm/OrganizationInfo.tsx:87
+#: src/mediationForm/OrganizationInfo.tsx:120
 msgid "No field is required. If you have information about the owner of the digital service, you can indicate it, or go to the next step if not."
 msgstr "No field is required. If you have information about the owner of the digital service, you can indicate it, or go to the next step if not."
 
-#: src/admin/requestDetail/TraceReportForm.tsx:161
-#: src/admin/requestDetail/TraceReportForm.tsx:282
+#: src/admin/requestDetail/TraceReportForm.tsx:190
+#: src/admin/requestDetail/TraceReportForm.tsx:314
 #: src/mediationForm/fields/AboutIssueFields.tsx:116
 #: src/mediationForm/fields/AboutIssueFields.tsx:153
 #: src/mediationForm/fields/AssitiveTechnologyFields.tsx:70
-#: src/mediationForm/fields/NavigationContextFields.tsx:95
-#: src/mediationForm/fields/NavigationContextFields.tsx:187
-#: src/mediationForm/fields/NavigationContextFields.tsx:235
-#: src/mediationForm/fields/NavigationContextFields.tsx:251
+#: src/mediationForm/fields/NavigationContextFields.tsx:94
+#: src/mediationForm/fields/NavigationContextFields.tsx:186
+#: src/mediationForm/fields/NavigationContextFields.tsx:234
+#: src/mediationForm/fields/NavigationContextFields.tsx:250
 #: src/mediationForm/fields/OrganizationAnswerFields.tsx:66
 #: src/mediationForm/fields/OrganizationAnswerFields.tsx:98
 msgid "Not specified"
 msgstr "Not specified"
 
-#: src/constants/choicesMap.tsx:19
+#: src/constants/choicesMap.tsx:29
 #: src/mediationForm/fields/AboutIssueFields.tsx:146
 msgid "Not urgent at all, but would like a solution as soon as possible"
 msgstr "Not urgent at all, but would like a solution as soon as possible"
 
-#: src/mediationForm/ProblemDescription.tsx:139
+#: src/mediationForm/ProblemDescription.tsx:173
 msgid "Only the 1st field \"What was the issue?\" is required."
 msgstr "Only the 1st field \"What was the issue?\" is required."
 
-#: src/mediationForm/UserInfo.tsx:92
+#: src/mediationForm/UserInfo.tsx:127
 msgid "Only the fields \"First name / username\" and \"Email\" are required."
 msgstr "Only the fields \"First name / username\" and \"Email\" are required."
 
-#: src/admin/Menu.tsx:101
+#: src/admin/Menu.tsx:100
 msgid "Open sidebar"
 msgstr "Open sidebar"
 
-#: src/admin/Menu.tsx:69
-#: src/customerLayout/Header.tsx:83
+#: src/admin/Menu.tsx:68
+#: src/customerLayout/Header.tsx:101
 msgid "Open the menu"
 msgstr "Open the menu"
 
-#: src/admin/Menu.tsx:168
+#: src/admin/Menu.tsx:185
 msgid "Organazations list"
 msgstr "Organazations list"
 
-#: src/mediationRequests/MediationRequestsList.tsx:20
+#: src/mediationRequests/MediationRequestsList.tsx:31
 msgid "Organization"
 msgstr "Organization"
 
-#: src/constants/choicesMap.tsx:71
+#: src/constants/choicesMap.tsx:81
 msgid "Organization (partner)"
 msgstr "Organization (partner)"
 
-#: src/constants/choicesMap.tsx:13
-#: src/constants/choicesMap.tsx:27
-#: src/constants/choicesMap.tsx:35
-#: src/constants/choicesMap.tsx:65
-#: src/constants/choicesMap.tsx:73
-#: src/mediationForm/fields/NavigationContextFields.tsx:173
+#: src/constants/choicesMap.tsx:23
+#: src/constants/choicesMap.tsx:37
+#: src/constants/choicesMap.tsx:45
+#: src/constants/choicesMap.tsx:75
+#: src/constants/choicesMap.tsx:83
+#: src/mediationForm/fields/NavigationContextFields.tsx:172
 msgid "Other"
 msgstr "Other"
 
-#: src/users/identification/Login.tsx:106
-#: src/users/identification/Signup.tsx:131
-#: src/users/password/PasswordResetConfirm.tsx:87
+#: src/users/identification/Login.tsx:272
+#: src/users/identification/Signup.tsx:148
+#: src/users/password/PasswordResetConfirm.tsx:102
 msgid "Password"
 msgstr "Password"
 
-#: src/users/identification/Signup.tsx:157
-#: src/users/password/PasswordResetConfirm.tsx:115
+#: src/users/identification/Signup.tsx:176
+#: src/users/password/PasswordResetConfirm.tsx:130
 msgid "Password confirmation is required"
 msgstr "Password confirmation is required"
 
-#: src/users/identification/Login.tsx:130
+#: src/users/identification/Login.tsx:301
 msgid "Password forgotten?"
 msgstr "Password forgotten?"
 
-#: src/users/identification/Signup.tsx:98
-#: src/users/password/PasswordResetConfirm.tsx:68
+#: src/users/identification/Signup.tsx:115
+#: src/users/password/PasswordResetConfirm.tsx:83
 msgid "Passwords do not match."
 msgstr "Passwords do not match."
 
 #: src/admin/requestDetail/PersonalInformationFields.tsx:37
-#: src/users/account/UserDetails.tsx:91
+#: src/users/account/UserDetails.tsx:103
 msgid "Personal information"
 msgstr "Personal information"
 
-#: src/forms/fields/PhoneField.tsx:62
+#: src/forms/fields/PhoneField.tsx:61
 #: src/mediationForm/fields/AboutOrganizationFields.tsx:112
 msgid "Phone number"
 msgstr "Phone number"
 
-#: src/customerLayout/Footer.tsx:23
-#: src/mediationRequests/MediationRequestsDetail.tsx:91
-#: src/mediationRequests/MediationRequestsDetail.tsx:402
+#: src/customerLayout/Footer.tsx:31
+#: src/mediationRequests/MediationRequestsDetail.tsx:107
+#: src/mediationRequests/MediationRequestsDetail.tsx:419
 msgid "Phone number:"
 msgstr "Phone number:"
 
-#: src/customerLayout/Footer.tsx:63
-msgid "Privacy"
-msgstr "Privacy"
-
-#: src/admin/Menu.tsx:164
+#: src/admin/Menu.tsx:181
 msgid "Pro Offer"
 msgstr "Pro Offer"
 
-#: src/mediationRequests/MediationRequestsList.tsx:21
+#: src/mediationRequests/MediationRequestsList.tsx:32
 msgid "Problem Description"
 msgstr "Problem Description"
 
-#: src/customerLayout/Footer.tsx:84
+#: src/customerLayout/Footer.tsx:124
 msgid "Project funded as part of the Innov'Up experimentation"
 msgstr "Project funded as part of the Innov'Up experimentation"
 
-#: src/admin/Menu.tsx:133
+#: src/admin/Menu.tsx:150
 #: src/admin/QuickAccess.tsx:14
 msgid "Quick Access"
 msgstr "Quick Access"
 
-#: src/constants/choicesMap.tsx:41
+#: src/constants/choicesMap.tsx:51
 #: src/mediationForm/fields/AboutIssueFields.tsx:108
 msgid "Random access, sometimes it works and sometimes it does not"
 msgstr "Random access, sometimes it works and sometimes it does not"
 
-#: src/admin/requestDetail/TraceReports.tsx:87
+#: src/admin/requestDetail/TraceReports.tsx:102
 msgid "Recipient"
 msgstr "Recipient"
 
-#: src/admin/requestDetail/TraceReportForm.tsx:346
+#: src/admin/requestDetail/TraceReportForm.tsx:378
 msgid "Recipient name(s)"
 msgstr "Recipient name(s)"
 
-#: src/admin/requestDetail/TraceReportForm.tsx:334
+#: src/admin/requestDetail/TraceReportForm.tsx:366
 msgid "Recipient type"
 msgstr "Recipient type"
 
-#: src/admin/requestDetail/TraceReports.tsx:180
+#: src/admin/requestDetail/TraceReports.tsx:195
 msgid "Remove"
 msgstr "Remove"
 
-#: src/admin/requestDetail/TraceReportForm.tsx:385
+#: src/admin/requestDetail/TraceReportForm.tsx:417
 msgid "Remove the attached file"
 msgstr "Remove the attached file"
 
-#: src/users/password/PasswordResetRequest.tsx:51
+#: src/users/password/PasswordResetRequest.tsx:70
 msgid "Request a password reset"
 msgstr "Request a password reset"
 
-#: src/admin/requestDetail/RequestDetail.tsx:65
+#: src/admin/requestDetail/RequestDetail.tsx:73
 msgid "Request detail"
 msgstr "Request detail"
 
-#: src/admin/requestDetail/History.tsx:23
+#: src/admin/requestDetail/History.tsx:26
 msgid "Request detail: History"
 msgstr "Request detail: History"
 
-#: src/admin/requestDetail/TraceReports.tsx:199
+#: src/admin/requestDetail/TraceReports.tsx:214
 msgid "Request detail: Trace reports"
 msgstr "Request detail: Trace reports"
 
-#: src/admin/requestDetail/RequestDetailContainer.tsx:26
+#: src/admin/requestDetail/RequestDetailContainer.tsx:25
 msgid "Request details"
 msgstr "Request details"
 
-#: src/constants/choicesMap.tsx:52
+#: src/constants/choicesMap.tsx:62
 msgid "Request filed"
 msgstr "Request filed"
 
-#: src/admin/Menu.tsx:149
+#: src/admin/Menu.tsx:166
 msgid "Requests management"
 msgstr "Requests management"
 
-#: src/mediationForm/Recap.tsx:256
+#: src/mediationForm/Recap.tsx:313
 msgid "Reset all entered data"
 msgstr "Reset all entered data"
 
-#: src/users/password/PasswordResetRequest.tsx:67
+#: src/users/password/PasswordResetRequest.tsx:86
 msgid "Reset password"
 msgstr "Reset password"
 
-#: src/constants/choicesMap.tsx:5
+#: src/constants/choicesMap.tsx:15
 msgid "Screen reader with vocal synthesis"
 msgstr "Screen reader with vocal synthesis"
 
-#: src/admin/requestDetail/TraceReports.tsx:86
+#: src/users/identification/LoginLogic.tsx:34
+msgid "Send the email"
+msgstr "Send the email"
+
+#: src/admin/requestDetail/TraceReports.tsx:101
 msgid "Sender"
 msgstr "Sender"
 
-#: src/admin/requestDetail/TraceReportForm.tsx:318
+#: src/admin/requestDetail/TraceReportForm.tsx:350
 msgid "Sender name(s)"
 msgstr "Sender name(s)"
 
-#: src/admin/requestDetail/TraceReportForm.tsx:306
+#: src/admin/requestDetail/TraceReportForm.tsx:338
 msgid "Sender type"
 msgstr "Sender type"
 
-#: src/users/identification/Signup.tsx:173
+#: src/users/identification/Signup.tsx:192
 msgid "Sign up"
 msgstr "Sign up"
 
-#: src/users/identification/Identification.tsx:30
+#: src/users/identification/Identification.tsx:45
 msgid "Signup"
 msgstr "Signup"
 
-#: src/customerLayout/Footer.tsx:77
+#: src/customerLayout/Footer.tsx:117
 msgid "Sitemap"
 msgstr "Sitemap"
 
-#: src/admin/Menu.tsx:136
+#: src/admin/Menu.tsx:153
 msgid "Statistics"
 msgstr "Statistics"
 
-#: src/mediationRequests/MediationRequestsList.tsx:22
+#: src/mediationRequests/MediationRequestsList.tsx:33
 msgid "Status"
 msgstr "Status"
 
-#: src/admin/FilterMediationRequests.tsx:55
+#: src/admin/FilterMediationRequests.tsx:70
 msgid "Status:"
 msgstr "Status:"
 
-#: src/mediationForm/ProblemDescription.tsx:176
-#: src/mediationForm/UserInfo.tsx:83
+#: src/mediationForm/ProblemDescription.tsx:210
+#: src/mediationForm/UserInfo.tsx:118
 msgid "Step 1: About yourself"
 msgstr "Step 1: About yourself"
 
-#: src/mediationForm/OrganizationInfo.tsx:104
-#: src/mediationForm/ProblemDescription.tsx:134
-#: src/mediationForm/Recap.tsx:244
-#: src/mediationForm/UserInfo.tsx:106
+#: src/mediationForm/OrganizationInfo.tsx:137
+#: src/mediationForm/ProblemDescription.tsx:168
+#: src/mediationForm/Recap.tsx:301
+#: src/mediationForm/UserInfo.tsx:141
 msgid "Step 2: Your problem"
 msgstr "Step 2: Your problem"
 
-#: src/mediationForm/ProblemDescription.tsx:185
-#: src/mediationForm/Recap.tsx:223
+#: src/mediationForm/ProblemDescription.tsx:219
+#: src/mediationForm/Recap.tsx:280
 msgid "Step 3: Summary"
 msgstr "Step 3: Summary"
 
-#: src/mediationForm/OrganizationInfo.tsx:82
-#: src/mediationForm/ProblemDescription.tsx:187
-#: src/mediationForm/Recap.tsx:246
+#: src/mediationForm/OrganizationInfo.tsx:115
+#: src/mediationForm/ProblemDescription.tsx:221
+#: src/mediationForm/Recap.tsx:303
 msgid "Step 3: The organization"
 msgstr "Step 3: The organization"
 
-#: src/mediationForm/OrganizationInfo.tsx:112
-#: src/mediationForm/Recap.tsx:225
+#: src/mediationForm/OrganizationInfo.tsx:145
+#: src/mediationForm/Recap.tsx:282
 msgid "Step 4: Summary"
 msgstr "Step 4: Summary"
 
-#: src/mediationForm/FormContainer.tsx:94
+#: src/mediationForm/FormContainer.tsx:119
 msgid "Submit a mediation request"
 msgstr "Submit a mediation request"
 
-#: src/mediationForm/Recap.tsx:265
+#: src/mediationForm/Recap.tsx:322
 msgid "Submit my mediation request"
 msgstr "Submit my mediation request"
 
-#: src/mediationForm/FormNavigation.tsx:40
-#: src/mediationForm/FormNavigation.tsx:46
+#: src/mediationForm/FormNavigation.tsx:73
+#: src/mediationForm/FormNavigation.tsx:79
 msgid "Summary"
 msgstr "Summary"
 
-#: src/mediationForm/fields/NavigationContextFields.tsx:107
+#: src/mediationForm/fields/NavigationContextFields.tsx:106
 msgid "The URL format is invalid"
 msgstr "The URL format is invalid"
 
-#: src/mediationForm/fields/NavigationContextFields.tsx:124
+#: src/mediationForm/fields/NavigationContextFields.tsx:123
 msgid "The URL must be a valid http address, with at least domain.extension"
 msgstr "The URL must be a valid http address, with at least domain.extension"
 
-#: src/admin/requestDetail/TraceReportForm.tsx:150
+#: src/admin/requestDetail/TraceReportForm.tsx:179
 msgid "The contact date must be formated following the pattern mm/dd/yyyy hh:mm (a|p)m"
 msgstr "The contact date must be formated following the pattern mm/dd/yyyy hh:mm (a|p)m"
 
@@ -1004,60 +1005,64 @@ msgstr "The e-mail is required"
 msgid "The e-mail must be formated like this: name@domain.extension"
 msgstr "The e-mail must be formated like this: name@domain.extension"
 
-#: src/forms/fields/FirstNameField.tsx:50
+#: src/forms/fields/FirstNameField.tsx:49
 msgid "The first name / username is required"
 msgstr "The first name / username is required"
 
-#: src/forms/fields/LastNameField.tsx:49
+#: src/forms/fields/LastNameField.tsx:48
 msgid "The last name is required"
 msgstr "The last name is required"
 
-#: src/mediationForm/FormNavigation.tsx:45
-#: src/mediationRequests/MediationRequestsDetail.tsx:368
+#: src/mediationForm/FormNavigation.tsx:78
+#: src/mediationRequests/MediationRequestsDetail.tsx:385
 msgid "The organization"
 msgstr "The organization"
 
-#: src/users/identification/Login.tsx:105
-#: src/users/identification/Signup.tsx:130
-#: src/users/password/PasswordResetConfirm.tsx:86
+#: src/users/identification/Login.tsx:271
+#: src/users/identification/Signup.tsx:147
+#: src/users/password/PasswordResetConfirm.tsx:101
 msgid "The password is required"
 msgstr "The password is required"
 
-#: src/forms/fields/PhoneField.tsx:54
+#: src/forms/fields/PhoneField.tsx:53
 #: src/mediationForm/fields/AboutOrganizationFields.tsx:53
 msgid "The phone number format is invalid"
 msgstr "The phone number format is invalid"
 
-#: src/forms/fields/PhoneField.tsx:51
+#: src/forms/fields/PhoneField.tsx:50
 msgid "The phone number is required"
 msgstr "The phone number is required"
 
-#: src/forms/fields/PhoneField.tsx:80
+#: src/forms/fields/PhoneField.tsx:79
 #: src/mediationForm/fields/AboutOrganizationFields.tsx:128
 msgid "The phone number must be 9 to 15 digits long and can be preceded by the + sign"
 msgstr "The phone number must be 9 to 15 digits long and can be preceded by the + sign"
 
-#: src/admin/requestDetail/TraceReports.tsx:25
+#: src/admin/requestDetail/TraceReports.tsx:32
 msgid "The report creation was not successful. Please retry later."
 msgstr "The report creation was not successful. Please retry later."
 
-#: src/admin/requestDetail/TraceReports.tsx:27
+#: src/admin/requestDetail/TraceReports.tsx:34
 msgid "The report deletion was not successful. Please retry later."
 msgstr "The report deletion was not successful. Please retry later."
 
-#: src/admin/requestDetail/TraceReports.tsx:26
+#: src/admin/requestDetail/TraceReports.tsx:33
 msgid "The report update was not successful. Please retry later."
 msgstr "The report update was not successful. Please retry later."
 
-#: src/users/identification/Login.tsx:48
+#: src/users/identification/Login.tsx:256
+msgid "The token is required"
+msgstr "The token is required"
+
+#: src/users/identification/Login.tsx:58
 msgid "There was a problem, please reload the page."
 msgstr "There was a problem, please reload the page."
 
-#: src/mediationForm/FormContainer.tsx:104
+#: src/mediationForm/FormContainer.tsx:129
 msgid "There was a technical error and the submission failed, please try again later"
 msgstr "There was a technical error and the submission failed, please try again later"
 
-#: src/users/account/UserDetails.tsx:94
+#: src/users/account/UserDetails.tsx:106
 msgid "This information is used to identify you, you can modify it at any time."
 msgstr "This information is used to identify you, you can modify it at any time."
 
@@ -1065,136 +1070,145 @@ msgstr "This information is used to identify you, you can modify it at any time.
 msgid "To select several technologies, first hold down Ctrl key (or Cmd under macOS), then use the mouse click, or on the keyboard the directional arrows to move and Space to select them."
 msgstr "To select several technologies, first hold down Ctrl key (or Cmd under macOS), then use the mouse click, or on the keyboard the directional arrows to move and Space to select them."
 
-#: src/admin/requestDetail/RequestDetailContainer.tsx:32
-#: src/admin/requestDetail/TraceReports.tsx:67
-#: src/admin/requestDetail/TraceReports.tsx:217
+#: src/users/identification/Login.tsx:260
+msgid "Token received by email"
+msgstr "Token received by email"
+
+#: src/admin/requestDetail/RequestDetailContainer.tsx:31
+#: src/admin/requestDetail/TraceReports.tsx:82
+#: src/admin/requestDetail/TraceReports.tsx:232
 msgid "Trace reports"
 msgstr "Trace reports"
 
-#: src/admin/Menu.tsx:158
+#: src/admin/Menu.tsx:175
 msgid "User management"
 msgstr "User management"
 
-#: src/customerLayout/Footer.tsx:70
+#: src/customerLayout/Footer.tsx:110
 msgid "Utilization"
 msgstr "Utilization"
 
-#: src/users/account/UserDetails.tsx:159
+#: src/users/account/UserDetails.tsx:171
 msgid "Validate your new personal information"
 msgstr "Validate your new personal information"
 
-#: src/admin/requestDetail/RequestDetailContainer.tsx:45
+#: src/admin/requestDetail/RequestDetailContainer.tsx:44
 msgid "Views for a particular mediation request"
 msgstr "Views for a particular mediation request"
 
-#: src/constants/choicesMap.tsx:10
+#: src/constants/choicesMap.tsx:20
 msgid "Virtual keyboard"
 msgstr "Virtual keyboard"
 
-#: src/constants/choicesMap.tsx:8
+#: src/constants/choicesMap.tsx:18
 msgid "Vocal command software"
 msgstr "Vocal command software"
 
-#: src/constants/choicesMap.tsx:53
+#: src/constants/choicesMap.tsx:63
 msgid "Waiting for administrative validation"
 msgstr "Waiting for administrative validation"
 
-#: src/constants/choicesMap.tsx:54
+#: src/constants/choicesMap.tsx:64
 msgid "Waiting for contact"
 msgstr "Waiting for contact"
 
-#: src/constants/choicesMap.tsx:51
+#: src/constants/choicesMap.tsx:61
 msgid "Waiting for mediator validation"
 msgstr "Waiting for mediator validation"
 
-#: src/constants/choicesMap.tsx:55
+#: src/constants/choicesMap.tsx:65
 msgid "Waiting for second contact"
 msgstr "Waiting for second contact"
 
-#: src/mediationForm/fields/NavigationContextFields.tsx:214
-#: src/mediationRequests/MediationRequestsDetail.tsx:253
+#: src/mediationForm/fields/NavigationContextFields.tsx:213
+#: src/mediationRequests/MediationRequestsDetail.tsx:270
 msgid "Was it a mobile app?"
 msgstr "Was it a mobile app?"
 
-#: src/users/account/UserDetails.tsx:152
+#: src/users/account/UserDetails.tsx:164
 msgid "We could'nt update your personal information. Please retry later."
 msgstr "We could'nt update your personal information. Please retry later."
 
-#: src/customerLayout/Main.tsx:114
+#: src/customerLayout/Main.tsx:141
 msgid "We were unable to change your password, please try again later."
 msgstr "We were unable to change your password, please try again later."
 
-#: src/users/identification/Login.tsx:62
-#: src/users/identification/Signup.tsx:60
+#: src/users/identification/Login.tsx:90
+#: src/users/identification/Login.tsx:120
+#: src/users/identification/Signup.tsx:77
 msgid "We were unable to log you in, please try again later."
 msgstr "We were unable to log you in, please try again later."
 
-#: src/users/identification/Signup.tsx:76
+#: src/users/identification/Login.tsx:154
+msgid "We were unable to send the email."
+msgstr "We were unable to send the email."
+
+#: src/users/identification/Signup.tsx:93
 msgid "We were unable to sign you up, please try again later."
 msgstr "We were unable to sign you up, please try again later."
 
-#: src/mediationForm/fields/NavigationContextFields.tsx:110
+#: src/mediationForm/fields/NavigationContextFields.tsx:109
 msgid "What is the URL address where you have encountered the problem?"
 msgstr "What is the URL address where you have encountered the problem?"
 
-#: src/mediationRequests/MediationRequestsDetail.tsx:220
+#: src/mediationRequests/MediationRequestsDetail.tsx:237
 msgid "What is the url address where you have encountered the problem?"
 msgstr "What is the url address where you have encountered the problem?"
 
-#: src/mediationForm/fields/NavigationContextFields.tsx:248
-#: src/mediationRequests/MediationRequestsDetail.tsx:265
+#: src/mediationForm/fields/NavigationContextFields.tsx:247
+#: src/mediationRequests/MediationRequestsDetail.tsx:282
 msgid "What kind of app was it?"
 msgstr "What kind of app was it?"
 
 #: src/mediationForm/fields/AboutIssueFields.tsx:52
-#: src/mediationRequests/MediationRequestsDetail.tsx:161
+#: src/mediationRequests/MediationRequestsDetail.tsx:178
 msgid "What was the issue?"
 msgstr "What was the issue?"
 
 #: src/mediationForm/fields/AboutIssueFields.tsx:85
-#: src/mediationRequests/MediationRequestsDetail.tsx:180
+#: src/mediationRequests/MediationRequestsDetail.tsx:197
 msgid "What was the level of inaccessibility encountered?"
 msgstr "What was the level of inaccessibility encountered?"
 
-#: src/mediationForm/fields/NavigationContextFields.tsx:270
-#: src/mediationRequests/MediationRequestsDetail.tsx:281
+#: src/mediationForm/fields/NavigationContextFields.tsx:269
+#: src/mediationRequests/MediationRequestsDetail.tsx:298
 msgid "What was the name of the app?"
 msgstr "What was the name of the app?"
 
 #: src/mediationForm/fields/OrganizationAnswerFields.tsx:106
-#: src/mediationRequests/MediationRequestsDetail.tsx:335
+#: src/mediationRequests/MediationRequestsDetail.tsx:352
 msgid "What was their reply?"
 msgstr "What was their reply?"
 
-#: src/mediationForm/fields/NavigationContextFields.tsx:280
-#: src/mediationRequests/MediationRequestsDetail.tsx:292
+#: src/mediationForm/fields/NavigationContextFields.tsx:279
+#: src/mediationRequests/MediationRequestsDetail.tsx:309
 msgid "Which software, connected object or other did you use?"
 msgstr "Which software, connected object or other did you use?"
 
-#: src/mediationForm/fields/NavigationContextFields.tsx:138
-#: src/mediationRequests/MediationRequestsDetail.tsx:231
+#: src/mediationForm/fields/NavigationContextFields.tsx:137
+#: src/mediationRequests/MediationRequestsDetail.tsx:248
 msgid "Which web browser did you use?"
 msgstr "Which web browser did you use?"
 
-#: src/mediationForm/fields/NavigationContextFields.tsx:194
-#: src/mediationRequests/MediationRequestsDetail.tsx:241
+#: src/mediationForm/fields/NavigationContextFields.tsx:193
+#: src/mediationRequests/MediationRequestsDetail.tsx:258
 msgid "Which web browser version did you use?"
 msgstr "Which web browser version did you use?"
 
-#: src/constants/choicesMap.tsx:34
+#: src/constants/choicesMap.tsx:44
 msgid "Windows phone"
 msgstr "Windows phone"
 
-#: src/constants/choicesMap.tsx:45
-#: src/forms/ConfirmationDialog.tsx:57
-#: src/mediationForm/fields/NavigationContextFields.tsx:81
-#: src/mediationForm/fields/NavigationContextFields.tsx:221
+#: src/constants/choicesMap.tsx:55
+#: src/forms/ConfirmationDialog.tsx:74
+#: src/mediationForm/fields/NavigationContextFields.tsx:80
+#: src/mediationForm/fields/NavigationContextFields.tsx:220
 #: src/mediationForm/fields/OrganizationAnswerFields.tsx:52
 #: src/mediationForm/fields/OrganizationAnswerFields.tsx:84
 msgid "Yes"
 msgstr "Yes"
 
-#: src/constants/choicesMap.tsx:17
+#: src/constants/choicesMap.tsx:27
 #: src/mediationForm/fields/AboutIssueFields.tsx:132
 msgid "Yes, very urgent: need a quick answer"
 msgstr "Yes, very urgent: need a quick answer"
@@ -1203,109 +1217,106 @@ msgstr "Yes, very urgent: need a quick answer"
 msgid "You have to describe your problem"
 msgstr "You have to describe your problem"
 
-#: src/mediationForm/FormContainer.tsx:98
+#: src/users/identification/Login.tsx:232
+msgid "You will receive an email with a token you will have to enter to log in."
+msgstr "You will receive an email with a token you will have to enter to log in."
+
+#: src/mediationForm/FormContainer.tsx:123
 msgid "Your mediation request has been successfully sent !"
 msgstr "Your mediation request has been successfully sent !"
 
-#: src/mediationRequests/MediationRequestsList.tsx:65
+#: src/mediationRequests/MediationRequestsList.tsx:76
 msgid "Your mediation requests' list sorted by date"
 msgstr "Your mediation requests' list sorted by date"
 
-#: src/customerLayout/Main.tsx:108
+#: src/customerLayout/Main.tsx:135
 msgid "Your password has been successfully changed."
 msgstr "Your password has been successfully changed."
 
-#: src/users/account/UserDetails.tsx:146
+#: src/users/account/UserDetails.tsx:158
 msgid "Your personal information was successfully updated."
 msgstr "Your personal information was successfully updated."
 
-#: src/mediationForm/FormNavigation.tsx:40
-#: src/mediationForm/FormNavigation.tsx:44
-#: src/mediationRequests/MediationRequestsDetail.tsx:155
+#: src/mediationForm/FormNavigation.tsx:73
+#: src/mediationForm/FormNavigation.tsx:77
+#: src/mediationRequests/MediationRequestsDetail.tsx:172
 msgid "Your problem"
 msgstr "Your problem"
 
-#: src/constants/choicesMap.tsx:7
+#: src/constants/choicesMap.tsx:17
 msgid "Zoom software"
 msgstr "Zoom software"
 
-#: src/customerLayout/Footer.tsx:59
-msgid "https://koena.net/en/koenas-privacy/"
-msgstr "https://koena.net/en/koenas-privacy/"
-
-#: src/customerLayout/Footer.tsx:50
-msgid "https://koena.net/en/legal-information-and-credits/"
-msgstr "https://koena.net/en/legal-information-and-credits/"
-
-#: src/constants/choicesMap.tsx:32
+#: src/constants/choicesMap.tsx:42
 msgid "iOS"
 msgstr "iOS"
 
-#: src/admin/requestDetail/TraceReportForm.tsx:286
+#: src/admin/requestDetail/TraceReportForm.tsx:318
 msgid "optionsEmail"
 msgstr "<0>E-mail</0>"
 
-#: src/admin/Main.tsx:26
+#: src/admin/Main.tsx:31
 msgid "{0} - All mediation requests"
 msgstr "{0} - All mediation requests"
 
-#: src/customerLayout/Main.tsx:80
+#: src/customerLayout/Main.tsx:107
 msgid "{0} - Confirm password reset"
 msgstr "{0} - Confirm password reset"
 
-#: src/admin/requestDetail/RequestDetailContainer.tsx:25
+#: src/admin/requestDetail/RequestDetailContainer.tsx:24
 msgid "{0} - Detail of the mediation request"
 msgstr "{0} - Detail of the mediation request"
 
-#: src/users/identification/Identification.tsx:21
+#: src/users/identification/Identification.tsx:36
 msgid "{0} - Login"
 msgstr "{0} - Login"
 
-#: src/customerLayout/Main.tsx:90
+#: src/customerLayout/Main.tsx:117
 msgid "{0} - My account"
 msgstr "{0} - My account"
 
-#: src/customerLayout/Main.tsx:101
+#: src/customerLayout/Main.tsx:128
 msgid "{0} - My mediation request detail"
 msgstr "{0} - My mediation request detail"
 
-#: src/customerLayout/Main.tsx:95
+#: src/customerLayout/Main.tsx:122
 msgid "{0} - My mediation requests"
 msgstr "{0} - My mediation requests"
 
-#: src/admin/Main.tsx:21
+#: src/admin/Main.tsx:26
 msgid "{0} - Quick access"
 msgstr "{0} - Quick access"
 
-#: src/users/identification/IdentificationLayout.tsx:104
+#: src/users/identification/IdentificationLayout.tsx:122
 msgid "{0} - Reset your password"
 msgstr "{0} - Reset your password"
 
-#: src/users/identification/Identification.tsx:29
+#: src/users/identification/Identification.tsx:44
 msgid "{0} - Signup"
 msgstr "{0} - Signup"
 
-#: src/mediationForm/FormContainer.tsx:160
+#: src/mediationForm/FormContainer.tsx:184
 msgid "{0} - Submit a mediation request: summary"
 msgstr "{0} - Submit a mediation request: summary"
 
-#: src/mediationForm/FormContainer.tsx:146
+#: src/mediationForm/FormContainer.tsx:170
 msgid "{0} - Submit a mediation request: the organization"
 msgstr "{0} - Submit a mediation request: the organization"
 
-#: src/mediationForm/FormContainer.tsx:118
+#: src/mediationForm/FormContainer.tsx:142
 msgid "{0} - Submit a mediation request: your details"
 msgstr "{0} - Submit a mediation request: your details"
 
-#: src/mediationForm/FormContainer.tsx:132
+#: src/mediationForm/FormContainer.tsx:156
 msgid "{0} - Submit a mediation request: your problem"
 msgstr "{0} - Submit a mediation request: your problem"
 
-#: src/admin/requestDetail/RequestDetailContainer.tsx:31
+#: src/admin/requestDetail/RequestDetailContainer.tsx:30
 msgid "{0} - Trace reports of the mediation request"
 msgstr "{0} - Trace reports of the mediation request"
 
-#: src/admin/Menu.tsx:119
-#: src/customerLayout/Header.tsx:72
+#: src/admin/Menu.tsx:127
+#: src/admin/Menu.tsx:137
+#: src/customerLayout/Header.tsx:90
 msgid "{0} homepage"
 msgstr "{0} homepage"

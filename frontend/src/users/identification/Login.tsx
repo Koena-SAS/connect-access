@@ -170,6 +170,20 @@ function Login({ setToken, handleCloseIdentification }: LoginProps) {
   );
 
   useEffect(
+    function removeErrors() {
+      if (formStep.sideEffects.includes("REMOVE_ERRORS")) {
+        setNonFieldErrors([]);
+        setAllFieldsInError(false);
+        dispatchFormStep({
+          type: "SIDE_EFFECTS_DONE",
+          sideEffects: ["REMOVE_ERRORS"],
+        });
+      }
+    },
+    [formStep.sideEffects]
+  );
+
+  useEffect(
     function focusOnTokenField() {
       if (formStep.showTokenField && tokenFieldRef.current) {
         tokenFieldRef.current.focus();
@@ -213,6 +227,14 @@ function Login({ setToken, handleCloseIdentification }: LoginProps) {
           required={true}
         />
       </div>
+      {formStep.showPasswordlessHelperText && (
+        <p className="login_passwordlessHelperText">
+          <Trans>
+            You will receive an email with a token you will have to enter to log
+            in.
+          </Trans>
+        </p>
+      )}
       {formStep.showEmailField && (
         <div className="login__withPassword">
           <Checkbox
