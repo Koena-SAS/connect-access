@@ -66,6 +66,7 @@ function AssitiveTechnologyFields({
                   }
                 : {}
             }
+            classes={{ select: "assistive-technology__technologyUsedSelect" }}
           >
             <option label={t`Not specified`} value="" />
             <Trans>
