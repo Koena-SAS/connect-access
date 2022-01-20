@@ -8,6 +8,14 @@
   a {
     color: var(--secondary-text-color);
     padding-top: 0.1rem;
+    transition: text-decoration-color 0.1s ease;
+
+    &:hover {
+      text-decoration-color: transparent;
+    }
+    &:focus {
+      text-decoration: none;
+    }
   }
   &__links {
     background-color: var(--footer-color);
