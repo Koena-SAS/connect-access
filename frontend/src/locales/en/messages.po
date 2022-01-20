@@ -1218,8 +1218,8 @@ msgid "You have to describe your problem"
 msgstr "You have to describe your problem"
 
 #: src/users/identification/Login.tsx:232
-msgid "You will receive an email with a token you will have to enter to log in."
-msgstr "You will receive an email with a token you will have to enter to log in."
+msgid "You will receive an email with a 6-digit token you will have to enter to log in."
+msgstr "You will receive an email with a 6-digit token you will have to enter to log in."
 
 #: src/mediationForm/FormContainer.tsx:123
 msgid "Your mediation request has been successfully sent !"

@@ -230,8 +230,8 @@ function Login({ setToken, handleCloseIdentification }: LoginProps) {
       {formStep.showPasswordlessHelperText && (
         <p className="login_passwordlessHelperText">
           <Trans>
-            You will receive an email with a token you will have to enter to log
-            in.
+            You will receive an email with a 6-digit token you will have to
+            enter to log in.
           </Trans>
         </p>
       )}

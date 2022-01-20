@@ -1214,8 +1214,8 @@ msgid "You have to describe your problem"
 msgstr "La description du problème est obligatoire"
 
 #: src/users/identification/Login.tsx:232
-msgid "You will receive an email with a token you will have to enter to log in."
-msgstr "Vous allez recevoir un courriel, avec un jeton dedans qu'il vous faudra renseigner."
+msgid "You will receive an email with a 6-digit token you will have to enter to log in."
+msgstr "Vous allez recevoir un courriel, avec un code à 6 chiffres dedans qu'il vous faudra renseigner."
 
 #: src/mediationForm/FormContainer.tsx:123
 msgid "Your mediation request has been successfully sent !"
