@@ -41,7 +41,9 @@ function Snackbar({
         role={severity === "error" ? "alert" : "status"}
         className="snackbar-alert"
       >
-        {notificationText}
+        <span role={severity === "error" ? "alert" : "status"}>
+          {notificationText}
+        </span>
       </MuiAlert>
     </MUISnackbar>
   );

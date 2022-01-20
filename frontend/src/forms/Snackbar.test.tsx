@@ -10,7 +10,7 @@ it("displays a message with role=status when severity is set to success", async 
       severity="success"
     />
   );
-  expect(getAllByRole("status").length).toEqual(1);
+  expect(getAllByRole("status").length).toBeGreaterThan(0);
   expect(queryAllByRole("alert").length).toEqual(0);
 });
 
@@ -23,6 +23,6 @@ it("displays a message with role=alert when severity is set to error", async () 
       severity="error"
     />
   );
-  expect(getAllByRole("alert").length).toEqual(1);
+  expect(getAllByRole("alert").length).toBeGreaterThan(0);
   expect(queryAllByRole("status").length).toEqual(0);
 });
