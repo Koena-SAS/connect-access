@@ -180,6 +180,7 @@ function AssitiveTechnologyFields({
         </p>
         <div className="assistive-technology__isUsedItems">
           <Radio
+            name="technologyIsUsed"
             id="technologyIsUsedYes"
             value="YES"
             label={t`Yes`}
@@ -188,6 +189,7 @@ function AssitiveTechnologyFields({
             checked={assistiveTechnologiesUsed.isUsed === "YES"}
           />
           <Radio
+            name="technologyIsUsed"
             id="technologyIsUsedNo"
             value="NO"
             label={t`No`}
@@ -196,6 +198,7 @@ function AssitiveTechnologyFields({
             checked={assistiveTechnologiesUsed.isUsed === "NO"}
           />
           <Radio
+            name="technologyIsUsed"
             id="technologyIsUsedNotSpecified"
             value=""
             label={t`Would rather not to mention`}
