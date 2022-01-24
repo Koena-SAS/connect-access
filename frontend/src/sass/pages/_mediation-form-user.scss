@@ -92,9 +92,10 @@
   }
   &__isUsedItems {
     display: flex;
-    justify-content: space-around;
-    max-width: 50rem;
+    justify-content: space-between;
+    max-width: 35rem;
     margin-top: 0.3rem;
+    margin-left: -0.2rem;
   }
   &__isUsedItem {
     width: auto;
@@ -102,7 +103,7 @@
   &__type {
     display: flex;
     flex-direction: column;
-    margin-top: 2.5rem;
+    margin-top: 2.6rem;
   }
   &__typeTitle {
     font-size: 1.2rem;
@@ -112,6 +113,7 @@
     justify-content: start;
     flex-wrap: wrap;
     margin-top: 0.3rem;
+    margin-left: -0.7rem;
   }
   &__typeItem {
     width: auto;
@@ -121,10 +123,11 @@
   &__nameAndVersion {
     display: flex;
     flex-direction: column;
-    margin-top: 2.5rem;
+    margin-top: 2.6rem;
   }
   &__nameAndVersionTitle {
     font-size: 1.2rem;
+    margin-bottom: 0;
   }
   &__nameAndVersionItems {
     display: flex;
