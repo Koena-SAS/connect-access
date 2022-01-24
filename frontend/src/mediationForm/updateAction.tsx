@@ -6,7 +6,7 @@ import type {
   MobileAppPlatform,
   Urgency,
 } from "../types/mediationRequest";
-import { YesNo } from "../types/types";
+import type { YesNo } from "../types/types";
 
 declare module "little-state-machine" {
   interface GlobalState {
@@ -22,14 +22,21 @@ type GlobalState = {
   organizationInfo?: OrganizationInfo;
 };
 
+type AssistiveTechnologiesUsed = {
+  isUsed: YesNo | "";
+  technologies: {
+    technologyType: AssistiveTechnology;
+    technologyName: string;
+    technologyVersion: string;
+  }[];
+};
+
 type UserInfo = {
   firstName: string;
   lastName: string;
   email: string;
   phoneNumber: string;
-  assistiveTechnologyUsed: AssistiveTechnology[] | [];
-  technologyName: string;
-  technologyVersion: string;
+  assistiveTechnologiesUsed: AssistiveTechnologiesUsed;
 };
 
 type ProblemDescription = {
@@ -105,9 +112,7 @@ const initialState: GlobalState = {
     lastName: "",
     email: "",
     phoneNumber: "",
-    assistiveTechnologyUsed: [],
-    technologyName: "",
-    technologyVersion: "",
+    assistiveTechnologiesUsed: { isUsed: "", technologies: [] },
   },
   problemDescription: {
     urgency: "",
@@ -148,4 +153,10 @@ export {
   initialState,
   resetState,
 };
-export type { GlobalState, UserInfo, ProblemDescription, OrganizationInfo };
+export type {
+  GlobalState,
+  UserInfo,
+  ProblemDescription,
+  OrganizationInfo,
+  AssistiveTechnologiesUsed,
+};

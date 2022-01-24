@@ -1,5 +1,8 @@
-import type { MediationRequest } from "../types/mediationRequest";
-import type { GlobalState } from "./updateAction";
+import type {
+  AssistiveTechnology,
+  MediationRequest,
+} from "../types/mediationRequest";
+import type { AssistiveTechnologiesUsed, GlobalState } from "./updateAction";
 
 /**
  * The main mediation form holds its information in a state hendled by
@@ -20,11 +23,19 @@ export function formStateToMediationRequests(
     email: formState.userInfo ? formState.userInfo.email : "",
     phoneNumber: formState.userInfo ? formState.userInfo.phoneNumber : "",
     assistiveTechnologyUsed: formState.userInfo
-      ? formState.userInfo.assistiveTechnologyUsed
+      ? technologyTypesToMediationRequest(
+          formState.userInfo.assistiveTechnologiesUsed
+        )
       : [],
-    technologyName: formState.userInfo ? formState.userInfo.technologyName : "",
+    technologyName: formState.userInfo
+      ? technologyNamesToMediationRequest(
+          formState.userInfo.assistiveTechnologiesUsed
+        )
+      : "",
     technologyVersion: formState.userInfo
-      ? formState.userInfo.technologyVersion
+      ? technologyVersionsToMediationRequest(
+          formState.userInfo.assistiveTechnologiesUsed
+        )
       : "",
     urgency: formState.problemDescription
       ? formState.problemDescription.urgency
@@ -91,4 +102,62 @@ export function formStateToMediationRequests(
       ? formState.organizationInfo.contact
       : "",
   };
+}
+
+export function technologyTypesToMediationRequest(
+  assistiveTechnologiesUsed: AssistiveTechnologiesUsed
+): AssistiveTechnology[] {
+  if (
+    assistiveTechnologiesUsed.isUsed === "YES" &&
+    Array.isArray(assistiveTechnologiesUsed.technologies)
+  ) {
+    const technologyTypes = [] as AssistiveTechnology[];
+    assistiveTechnologiesUsed.technologies.forEach((technology) => {
+      technologyTypes.push(technology.technologyType);
+    });
+    return technologyTypes;
+  }
+  return [];
+}
+
+export function technologyNamesToMediationRequest(
+  assistiveTechnologiesUsed: AssistiveTechnologiesUsed
+): string {
+  if (
+    assistiveTechnologiesUsed.isUsed === "YES" &&
+    Array.isArray(assistiveTechnologiesUsed.technologies)
+  ) {
+    let assistiveTechnologyNames = "";
+    assistiveTechnologiesUsed.technologies.forEach((technology) => {
+      if (technology.technologyName) {
+        assistiveTechnologyNames += `${technology.technologyName}, `;
+      }
+    });
+    if (assistiveTechnologyNames) {
+      assistiveTechnologyNames = assistiveTechnologyNames.slice(0, -2);
+    }
+    return assistiveTechnologyNames;
+  }
+  return "";
+}
+
+export function technologyVersionsToMediationRequest(
+  assistiveTechnologiesUsed: AssistiveTechnologiesUsed
+): string {
+  if (
+    assistiveTechnologiesUsed.isUsed === "YES" &&
+    Array.isArray(assistiveTechnologiesUsed.technologies)
+  ) {
+    let assistiveTechnologyVersions = "";
+    assistiveTechnologiesUsed.technologies.forEach((technology) => {
+      if (technology.technologyVersion) {
+        assistiveTechnologyVersions += `${technology.technologyVersion}, `;
+      }
+    });
+    if (assistiveTechnologyVersions) {
+      assistiveTechnologyVersions = assistiveTechnologyVersions.slice(0, -2);
+    }
+    return assistiveTechnologyVersions;
+  }
+  return "";
 }

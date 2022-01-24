@@ -12,7 +12,10 @@ import type { OrganizationAppRecieved } from "../types/organizationApp";
 import { AssitiveTechnologyFields, PersonalInformationFields } from "./fields";
 import FormNavigation from "./FormNavigation";
 import type { Completed, Step } from "./StepsInitializer";
-import type { UserInfo as UserInfoType } from "./updateAction";
+import type {
+  AssistiveTechnologiesUsed,
+  UserInfo as UserInfoType,
+} from "./updateAction";
 import { updateUserInfo } from "./updateAction";
 
 type FormInput = UserInfoType;
@@ -67,8 +70,18 @@ function UserInfo({
     useForm<FormInput>({
       defaultValues: state.userInfo,
     });
+  const [assistiveTechnologiesUsed, setAssistiveTechnologiesUsed] =
+    useState<AssistiveTechnologiesUsed>(
+      state.userInfo
+        ? state.userInfo.assistiveTechnologiesUsed
+        : { isUsed: "", technologies: [] }
+    );
   const onSubmit = (data: FormInput) => {
-    actions.updateUserInfo(data);
+    const dataToSave: UserInfoType = {
+      ...data,
+      assistiveTechnologiesUsed: assistiveTechnologiesUsed,
+    };
+    actions.updateUserInfo(dataToSave);
     setStepCompleted();
     history.push(generatePrefixedPath(PATHS.PROBLEM_DESCRIPTION));
     setShouldTriggerFocus(true);
@@ -76,7 +89,11 @@ function UserInfo({
   const handleChangeTab = async () => {
     const isValid = await trigger();
     if (isValid) {
-      actions.updateUserInfo(getValues());
+      const dataToSave: UserInfoType = {
+        ...getValues(),
+        assistiveTechnologiesUsed: assistiveTechnologiesUsed,
+      };
+      actions.updateUserInfo(dataToSave);
       return true;
     } else {
       setShouldFocusOnFirstErrorField(true);
@@ -132,7 +149,8 @@ function UserInfo({
             className="mediation-tabpanel__personal-info"
           />
           <AssitiveTechnologyFields
-            register={register}
+            assistiveTechnologiesUsed={assistiveTechnologiesUsed}
+            setAssistiveTechnologiesUsed={setAssistiveTechnologiesUsed}
             className="mediation-tabpanel__assistive-technology"
             isUserFacing={true}
           />
@@ -161,3 +179,4 @@ export function userInfoStepComplete(userInfoState: UserInfoType) {
 }
 
 export default withRouter(UserInfo);
+export type { AssistiveTechnologiesUsed };

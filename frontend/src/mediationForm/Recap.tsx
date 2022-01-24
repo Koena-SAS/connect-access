@@ -15,7 +15,12 @@ import type { OrganizationAppRecieved } from "../types/organizationApp";
 import FormNavigation from "./FormNavigation";
 import type { Completed, Step } from "./StepsInitializer";
 import { resetState } from "./updateAction";
-import { formStateToMediationRequests } from "./utils";
+import {
+  formStateToMediationRequests,
+  technologyNamesToMediationRequest,
+  technologyTypesToMediationRequest,
+  technologyVersionsToMediationRequest,
+} from "./utils";
 
 type RecapProps = RouteComponentProps & {
   /**
@@ -125,12 +130,23 @@ function Recap({
       dataToSend.append("last_name", state.userInfo.lastName);
       dataToSend.append("email", state.userInfo.email);
       dataToSend.append("phone_number", state.userInfo.phoneNumber);
-      Array.isArray(state.userInfo.assistiveTechnologyUsed) &&
-        state.userInfo.assistiveTechnologyUsed.forEach((element) => {
-          dataToSend.append("assistive_technology_used", element);
-        });
-      dataToSend.append("technology_name", state.userInfo.technologyName);
-      dataToSend.append("technology_version", state.userInfo.technologyVersion);
+      technologyTypesToMediationRequest(
+        state.userInfo.assistiveTechnologiesUsed
+      ).forEach((technologyType) => {
+        dataToSend.append("assistive_technology_used", technologyType);
+      });
+      dataToSend.append(
+        "technology_name",
+        technologyNamesToMediationRequest(
+          state.userInfo.assistiveTechnologiesUsed
+        )
+      );
+      dataToSend.append(
+        "technology_version",
+        technologyVersionsToMediationRequest(
+          state.userInfo.assistiveTechnologiesUsed
+        )
+      );
     }
     if (state.problemDescription !== undefined) {
       dataToSend.append("urgency", state.problemDescription.urgency);

@@ -10,17 +10,37 @@ import type {
 import type { ContactEntityType, TraceType } from "../types/traceReport";
 import type { YesNo } from "../types/types";
 
-export const assistiveTechnologyMap: Record<AssistiveTechnology, string> = {
-  KEYBOARD: t`Keyboard`,
-  SCREEN_READER_VOCAL_SYNTHESIS: t`Screen reader with vocal synthesis`,
-  BRAILLE_DISPLAY: t`Braille display`,
-  ZOOM_SOFTWARE: t`Zoom software`,
-  VOCAL_COMMAND_SOFTWARE: t`Vocal command software`,
-  DYS_DISORDER_SOFTWARE: t`DYS Disorder software`,
-  VIRTUAL_KEYBOARD: t`Virtual keyboard`,
-  ADAPTED_NAVIGATION_DISPOSITIVE: t`Adapted navigation dispositive`,
-  EXCLUSIVE_KEYBOARD_NAVIGATION: t`Exclusive keyboard navigation`,
-  OTHER: t`Other`,
+// This one is translated right here to be able to access the translated values
+// and manipulate them in the javascript code for sorting purposes.
+export const assistiveTechnologyMap: Record<
+  AssistiveTechnology,
+  { en: string; fr: string }
+> = {
+  KEYBOARD: { en: "Keyboard", fr: "Clavier" },
+  SCREEN_READER_VOCAL_SYNTHESIS: {
+    en: "Screen reader with vocal synthesis",
+    fr: "Lecteur d'écran avec synthèse vocale",
+  },
+  BRAILLE_DISPLAY: { en: "Braille display", fr: "Plage braille" },
+  ZOOM_SOFTWARE: { en: "Zoom software", fr: "Logiciel d'agrandissement" },
+  VOCAL_COMMAND_SOFTWARE: {
+    en: "Vocal command software",
+    fr: "Logiciel de commande vocale",
+  },
+  DYS_DISORDER_SOFTWARE: {
+    en: "DYS Disorder software",
+    fr: "Logiciel pour troubles DYS",
+  },
+  VIRTUAL_KEYBOARD: { en: "Virtual keyboard", fr: "Clavier virtuel" },
+  ADAPTED_NAVIGATION_DISPOSITIVE: {
+    en: "Adapted navigation dispositive",
+    fr: "Dispositif de navigation adaptée (boule de commande, clavier adapté, licorne, navigation par les yeux…)",
+  },
+  EXCLUSIVE_KEYBOARD_NAVIGATION: {
+    en: "Exclusive keyboard navigation",
+    fr: "Navigation clavier exclusive",
+  },
+  OTHER: { en: "Other", fr: "Autre" },
 } as const;
 
 export const urgencyLevelMap: Record<Urgency, string> = {

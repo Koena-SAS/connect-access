@@ -1,15 +1,32 @@
 import { t, Trans } from "@lingui/macro";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import Select from "@material-ui/core/Select";
-import { isBrowser } from "react-device-detect";
-import { BorderedFieldset, TextField, Warning } from "../../forms";
+import { useLingui } from "@lingui/react";
+import Checkbox from "@material-ui/core/Checkbox";
+import produce from "immer";
+import { useMemo } from "react";
+import { assistiveTechnologyMap } from "../../constants/choicesMap";
+import { BorderedFieldset, Radio, TextField, Warning } from "../../forms";
+import type { AssistiveTechnology } from "../../types/mediationRequest";
+import { Langs, YesNo } from "../../types/types";
+import type { AssistiveTechnologiesUsed } from "../UserInfo";
+
+const technologyTypes: readonly AssistiveTechnology[] = [
+  "KEYBOARD",
+  "SCREEN_READER_VOCAL_SYNTHESIS",
+  "BRAILLE_DISPLAY",
+  "ZOOM_SOFTWARE",
+  "VOCAL_COMMAND_SOFTWARE",
+  "DYS_DISORDER_SOFTWARE",
+  "VIRTUAL_KEYBOARD",
+  "ADAPTED_NAVIGATION_DISPOSITIVE",
+  "EXCLUSIVE_KEYBOARD_NAVIGATION",
+  "OTHER",
+] as const;
 
 type AssitiveTechnologyFieldsProps = {
-  /**
-   * React hook form register() function
-   */
-  register: any;
+  assistiveTechnologiesUsed: AssistiveTechnologiesUsed;
+  setAssistiveTechnologiesUsed: (
+    assistiveTechnologiesUsed: AssistiveTechnologiesUsed
+  ) => void;
   /**
    * Wether this component is shown to a lambda user who needs more explanation.
    */
@@ -25,15 +42,118 @@ type AssitiveTechnologyFieldsProps = {
  * Fields for assistive technology of the main mediation form.
  */
 function AssitiveTechnologyFields({
-  register,
+  assistiveTechnologiesUsed,
+  setAssistiveTechnologiesUsed,
   className,
   isUserFacing,
   ...borderFieldsetProps
 }: AssitiveTechnologyFieldsProps) {
+  const { i18n } = useLingui();
+  const lang = i18n.locale as Langs;
+  const sortedTechnologyTypes = useMemo(() => {
+    return getAllSortedTechnologyTypes(lang);
+  }, [lang]);
+
+  function getUsedTechnologyTypes(): AssistiveTechnology[] {
+    return assistiveTechnologiesUsed.technologies.map(
+      (technology) => technology.technologyType
+    );
+  }
+
+  function getUsedTechnologyFromType(type: AssistiveTechnology) {
+    const technology = assistiveTechnologiesUsed.technologies.filter(
+      (technology) => technology.technologyType === type
+    );
+    if (technology.length === 0) {
+      throw new Error(`The technology type ${type} was not selected.`);
+    }
+    return technology[0];
+  }
+
+  function handleIsUsedChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setAssistiveTechnologiesUsed(
+      produce(assistiveTechnologiesUsed, (draftState) => {
+        draftState.isUsed = event.currentTarget.value as "" | YesNo;
+      })
+    );
+  }
+
+  function handleTechnologyTypeChange(
+    event: React.ChangeEvent<HTMLInputElement>,
+    type: AssistiveTechnology
+  ) {
+    if (event.target.checked) {
+      setAssistiveTechnologiesUsed(
+        produce(assistiveTechnologiesUsed, function addTechnology(draftState) {
+          draftState.technologies.push({
+            technologyType: type,
+            technologyName: "",
+            technologyVersion: "",
+          });
+        })
+      );
+    } else {
+      setAssistiveTechnologiesUsed(
+        produce(
+          assistiveTechnologiesUsed,
+          function removeTechnology(draftState) {
+            draftState.technologies = draftState.technologies.filter(
+              (technology) => {
+                return technology.technologyType !== type;
+              }
+            );
+          }
+        )
+      );
+    }
+  }
+
+  function handleTechnologyNameChange(
+    event: React.ChangeEvent<HTMLInputElement>,
+    type: AssistiveTechnology
+  ) {
+    setAssistiveTechnologiesUsed(
+      produce(
+        assistiveTechnologiesUsed,
+        function updateTechnologyName(draftState) {
+          for (let i = 0; i < draftState.technologies.length; i++) {
+            if (draftState.technologies[i].technologyType === type) {
+              draftState.technologies[i].technologyName = event.target.value;
+              break;
+            }
+          }
+        }
+      )
+    );
+  }
+
+  function handleTechnologyVersionChange(
+    event: React.ChangeEvent<HTMLInputElement>,
+    type: AssistiveTechnology
+  ) {
+    setAssistiveTechnologiesUsed(
+      produce(
+        assistiveTechnologiesUsed,
+        function updateTechnologyVersion(draftState) {
+          for (let i = 0; i < draftState.technologies.length; i++) {
+            if (draftState.technologies[i].technologyType === type) {
+              draftState.technologies[i].technologyVersion = event.target.value;
+              break;
+            }
+          }
+        }
+      )
+    );
+  }
+
+  const areAssistiveTechnologiesUsed =
+    assistiveTechnologiesUsed.isUsed === "YES";
+  const areAssistiveTechnologiesSelected =
+    assistiveTechnologiesUsed.technologies.length > 0;
   return (
     <BorderedFieldset
       legend={t`Information about assistive technology used`}
-      fieldsetClassName={`assistive-technology ${className ? className : ""}`}
+      fieldsetClassName={`${className ? className : ""} assistive-technology`}
       level={3}
       legendClassName="assistive-technology__title"
       {...borderFieldsetProps}
@@ -47,107 +167,175 @@ function AssitiveTechnologyFields({
             usage, any details would help us to process your demand.`}
         />
       )}
-      <div className="assistive-technology__technologyUsed">
-        <FormControl fullWidth>
-          <InputLabel shrink htmlFor="assistiveTechnologyUsed">
-            <Trans>Assistive technologies used</Trans>
-          </InputLabel>
-          <Select
-            id="assistiveTechnologyUsed"
-            name="assistiveTechnologyUsed"
-            multiple
-            native
-            label={t`Assistive technologies used`}
-            inputRef={register()}
-            inputProps={
-              isBrowser
-                ? {
-                    "aria-describedby": "assistiveTechnologyUsed-desc",
-                  }
-                : {}
-            }
-            classes={{ select: "assistive-technology__technologyUsedSelect" }}
-          >
-            <option label={t`Not specified`} value="" />
-            <Trans>
-              <option value="KEYBOARD">Keyboard</option>
-            </Trans>
-            <Trans>
-              <option value="SCREEN_READER_VOCAL_SYNTHESIS">
-                Screen reader with vocal synthesis
-              </option>
-            </Trans>
-            <Trans>
-              <option value="BRAILLE_DISPLAY">Braille display</option>
-            </Trans>
-            <Trans>
-              <option value="ZOOM_SOFTWARE">Zoom software</option>
-            </Trans>
-            <Trans>
-              <option value="VOCAL_COMMAND_SOFTWARE">
-                Vocal command software
-              </option>
-            </Trans>
-            <Trans>
-              <option value="DYS_DISORDER_SOFTWARE">
-                DYS Disorder software
-              </option>
-            </Trans>
-            <Trans>
-              <option value="VIRTUAL_KEYBOARD">Virtual keyboard</option>
-            </Trans>
-            <Trans>
-              <option value="EXCLUSIVE_KEYBOARD_NAVIGATION">
-                Exclusive keyboard navigation
-              </option>
-            </Trans>
-            <Trans>
-              <option value="ADAPTED_NAVIGATION_DISPOSITIVE">
-                Adapted navigation dispositive
-              </option>
-            </Trans>
-            <Trans>
-              <option value="OTHER">Other</option>
-            </Trans>
-          </Select>
-        </FormControl>
-        {isBrowser && (
+      <div
+        role="radiogroup"
+        aria-labelledby="technologyIsUsed"
+        className="radio-container assistive-technology__isUsed"
+      >
+        <p
+          id="technologyIsUsed"
+          className="label radio-container assistive-technology__isUsedTitle"
+        >
+          <Trans>Do you use assistive technologies?</Trans>
+        </p>
+        <div className="assistive-technology__isUsedItems">
+          <Radio
+            id="technologyIsUsedYes"
+            value="YES"
+            label={t`Yes`}
+            containerClassName="assistive-technology__isUsedItem"
+            onChange={handleIsUsedChange}
+            checked={assistiveTechnologiesUsed.isUsed === "YES"}
+          />
+          <Radio
+            id="technologyIsUsedNo"
+            value="NO"
+            label={t`No`}
+            containerClassName="assistive-technology__isUsedItem"
+            onChange={handleIsUsedChange}
+            checked={assistiveTechnologiesUsed.isUsed === "NO"}
+          />
+          <Radio
+            id="technologyIsUsedNotSpecified"
+            value=""
+            label={t`Would rather not to mention`}
+            containerClassName="assistive-technology__isUsedItem"
+            onChange={handleIsUsedChange}
+            checked={assistiveTechnologiesUsed.isUsed === ""}
+          />
+        </div>
+      </div>
+      {areAssistiveTechnologiesUsed && (
+        <div
+          role="group"
+          aria-labelledby="technologyTypes"
+          className="checkbox-container assistive-technology__type"
+        >
           <p
-            id="assistiveTechnologyUsed-desc"
-            className="form__helper-text assistive-technology__technologyUsed-helper"
+            id="technologyTypes"
+            className="label checkbox-container assistive-technology__typeTitle"
           >
-            <Trans>
-              To select several technologies, first hold down Ctrl key (or Cmd
-              under macOS), then use the mouse click, or on the keyboard the
-              directional arrows to move and Space to select them.
-            </Trans>
+            <Trans>Assistive technologies used</Trans>
           </p>
-        )}
-      </div>
-      <div className="assistive-technology__technologyName">
-        <TextField
-          id="technologyName"
-          name="technologyName"
-          inputRef={register()}
-          label={t`Assistive technology name(s)`}
-          type="text"
-          multiline={true}
-          minRows={3}
-        />
-      </div>
-      <div className="assistive-technology__technologyVersion">
-        <TextField
-          id="technologyVersion"
-          name="technologyVersion"
-          inputRef={register()}
-          label={t`Assistive technology version(s)`}
-          type="text"
-          multiline={true}
-          minRows={3}
-        />
-      </div>
+          <div className="assistive-technology__typeItems">
+            {sortedTechnologyTypes.map((technology) => {
+              return (
+                <div
+                  className="assistive-technology__typeItem"
+                  key={technology}
+                >
+                  <Checkbox
+                    inputProps={{ id: `technologyTypes${technology}` }}
+                    color="success"
+                    checked={getUsedTechnologyTypes().includes(technology)}
+                    onChange={(event) =>
+                      handleTechnologyTypeChange(event, technology)
+                    }
+                  />
+                  <label
+                    htmlFor={`technologyTypes${technology}`}
+                    className="label"
+                  >
+                    {assistiveTechnologyMap[technology][lang]}
+                  </label>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+      {areAssistiveTechnologiesUsed && areAssistiveTechnologiesSelected && (
+        <div
+          role="group"
+          aria-labelledby="technologyNameAndVersion"
+          className="checkbox-container assistive-technology__nameAndVersion"
+        >
+          <p
+            id="technologyNameAndVersion"
+            className="label checkbox-container assistive-technology__nameAndVersionTitle"
+          >
+            <Trans>Assistive technology name(s) and version(s)</Trans>
+          </p>
+          <div className="assistive-technology__nameAndVersionItems">
+            {assistiveTechnologiesUsed.technologies.map((technologyUsed) => {
+              return (
+                <div
+                  role="group"
+                  className="assistive-technology__nameAndVersionItem"
+                  aria-labelledby={`technologyNameAndVersion${technologyUsed.technologyType}`}
+                  key={technologyUsed.technologyType}
+                >
+                  <p
+                    className="label assistive-technology__nameAndVersionItemLegend"
+                    id={`technologyNameAndVersion${technologyUsed.technologyType}`}
+                  >
+                    {
+                      assistiveTechnologyMap[technologyUsed.technologyType][
+                        lang
+                      ]
+                    }
+                  </p>
+                  <div className="label assistive-technology__nameAndVersionField">
+                    <TextField
+                      id="technologyName"
+                      onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                        handleTechnologyNameChange(
+                          event,
+                          technologyUsed.technologyType
+                        )
+                      }
+                      label={t`Name`}
+                      type="text"
+                      value={
+                        getUsedTechnologyFromType(technologyUsed.technologyType)
+                          .technologyName
+                      }
+                    />
+                  </div>
+                  <div className="label assistive-technology__nameAndVersionField assistive-technology__nameAndVersionFieldVersion">
+                    <TextField
+                      id="technologyVersion"
+                      onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                        handleTechnologyVersionChange(
+                          event,
+                          technologyUsed.technologyType
+                        )
+                      }
+                      label={t`Version`}
+                      type="text"
+                      value={
+                        getUsedTechnologyFromType(technologyUsed.technologyType)
+                          .technologyVersion
+                      }
+                      className="label assistive-technology__nameAndVersionField"
+                    />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </BorderedFieldset>
   );
+}
+
+function getAllSortedTechnologyTypes(lang: Langs): AssistiveTechnology[] {
+  function alphabeticalTranslationCompare(
+    a: AssistiveTechnology,
+    b: AssistiveTechnology
+  ): number {
+    const translatedA = assistiveTechnologyMap[a][lang];
+    const translatedB = assistiveTechnologyMap[b][lang];
+    if (translatedA < translatedB) {
+      return -1;
+    } else if (translatedA > translatedB) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+  return technologyTypes.slice().sort(alphabeticalTranslationCompare);
 }
 
 export default AssitiveTechnologyFields;

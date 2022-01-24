@@ -33,9 +33,16 @@ beforeEach(() => {
       lastName: "Blue",
       email: "bluebill@koena.net",
       phoneNumber: "5555555555",
-      assistiveTechnologyUsed: ["KEYBOARD"],
-      technologyName: "Fictive technology",
-      technologyVersion: "3.5.2",
+      assistiveTechnologiesUsed: {
+        isUsed: "YES",
+        technologies: [
+          {
+            technologyType: "KEYBOARD",
+            technologyName: "Fictive technology",
+            technologyVersion: "3.5.2",
+          },
+        ],
+      },
     },
     problemDescription: {
       urgency: "VERY_URGENT",

@@ -1,6 +1,5 @@
 import type { RenderResult } from "@testing-library/react";
-import { fireEvent, screen, within } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { fireEvent, within } from "@testing-library/react";
 import { useStateMachine } from "little-state-machine";
 import { useEffect } from "react";
 import { click } from "../testUtils";
@@ -32,21 +31,37 @@ export function fillStep1MandatoryFields(
  * Util function to fill the optional fields for step 1 "About you"
  * @param { Function } getByLabelText
  */
-export function fillStep1NonMandatoryFields(app: RenderResult) {
+export async function fillStep1NonMandatoryFields(app: RenderResult) {
   fireEvent.change(app.getByLabelText(/Last name/), {
     target: { value: "Blue" },
   });
   fireEvent.change(app.getByLabelText("Phone number"), {
     target: { value: "01234567890" },
   });
-  userEvent.selectOptions(app.getByLabelText(/Assistive technologies used/), [
-    "BRAILLE_DISPLAY",
-    "KEYBOARD",
-  ]);
-  fireEvent.change(app.getByLabelText("Assistive technology name(s)"), {
+  const assistiveTechnologiesUsedValue = "Yes";
+  await click(
+    within(
+      app.getByLabelText(/Do you use assistive technologies?/)
+    ).getByLabelText(assistiveTechnologiesUsedValue)
+  );
+  const assistiveTechnologiesTypeValues = ["Keyboard", "Zoom software"];
+  await click(
+    within(app.getByLabelText(/Assistive technologies used/)).getByLabelText(
+      assistiveTechnologiesTypeValues[0]
+    )
+  );
+  await click(
+    within(app.getByLabelText(/Assistive technologies used/)).getByLabelText(
+      assistiveTechnologiesTypeValues[1]
+    )
+  );
+  const fieldset1 = within(
+    app.getByLabelText("Assistive technology name(s) and version(s)")
+  ).getByRole("group", { name: assistiveTechnologiesTypeValues[0] });
+  fireEvent.change(within(fieldset1).getByLabelText("Name"), {
     target: { value: "Fictive technology" },
   });
-  fireEvent.change(app.getByLabelText("Assistive technology version(s)"), {
+  fireEvent.change(within(fieldset1).getByLabelText("Version"), {
     target: { value: "3.5.2" },
   });
 }
@@ -68,29 +83,36 @@ export function checkStep1FieldValues(app: RenderResult) {
   expect((app.getByLabelText("Phone number") as HTMLInputElement).value).toBe(
     "01234567890"
   );
-  const keyboard = screen.getByRole("option", {
-    name: "Keyboard",
-  }) as HTMLOptionElement;
-  expect(keyboard.selected).toBe(true);
-  const screenReader = screen.getByRole("option", {
-    name: "Screen reader with vocal synthesis",
-  }) as HTMLOptionElement;
-  expect(screenReader.selected).toBe(false);
-  const brailleDisplay = screen.getByRole("option", {
-    name: "Braille display",
-  }) as HTMLOptionElement;
-  expect(brailleDisplay.selected).toBe(true);
-  const zoomSoftware = screen.getByRole("option", {
-    name: "Zoom software",
-  }) as HTMLOptionElement;
-  expect(zoomSoftware.selected).toBe(false);
+  const assistiveTechnologiesUsedValue = "Yes";
   expect(
-    (app.getByLabelText("Assistive technology name(s)") as HTMLInputElement)
-      .value
+    within(
+      app.getByLabelText(/Do you use assistive technologies?/)
+    ).getByLabelText(assistiveTechnologiesUsedValue)
+  ).toBeChecked();
+  const assistiveTechnologiesTypeValues = ["Keyboard", "Zoom software"];
+  expect(
+    within(app.getByLabelText(/Assistive technologies used/)).getByLabelText(
+      assistiveTechnologiesTypeValues[0]
+    )
+  ).toBeChecked();
+  expect(
+    within(app.getByLabelText(/Assistive technologies used/)).getByLabelText(
+      assistiveTechnologiesTypeValues[1]
+    )
+  ).toBeChecked();
+  expect(
+    within(app.getByLabelText(/Assistive technologies used/)).getByLabelText(
+      "Other"
+    )
+  ).not.toBeChecked();
+  const fieldset1 = within(
+    app.getByLabelText("Assistive technology name(s) and version(s)")
+  ).getByRole("group", { name: assistiveTechnologiesTypeValues[0] });
+  expect(
+    (within(fieldset1).getByLabelText("Name") as HTMLInputElement).value
   ).toBe("Fictive technology");
   expect(
-    (app.getByLabelText("Assistive technology version(s)") as HTMLInputElement)
-      .value
+    (within(fieldset1).getByLabelText("Version") as HTMLInputElement).value
   ).toBe("3.5.2");
 }
 

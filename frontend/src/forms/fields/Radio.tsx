@@ -1,6 +1,6 @@
 type RadioProps = {
   id: string;
-  register: any;
+  register?: any;
   label: any;
   containerClassName?: string;
   value?: string;

@@ -1,4 +1,5 @@
 import { Trans } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import { ReactNode } from "react";
 import {
   assistiveTechnologyMap,
@@ -10,6 +11,7 @@ import {
 } from "../constants/choicesMap";
 import { useOrganizationApp } from "../hooks";
 import type { MediationRequest } from "../types/mediationRequest";
+import { Langs } from "../types/types";
 
 type MediationRequestsDetailProps = {
   mediationRequest: MediationRequest;
@@ -32,6 +34,8 @@ function MediationRequestsDetail({
   additionalComponents,
   titlesHeadingLevel = 3,
 }: MediationRequestsDetailProps) {
+  const { i18n } = useLingui();
+  const lang = i18n.locale as Langs;
   const { organizationApp } = useOrganizationApp();
   const buildAttachedFileDisplay = () => {
     const files = mediationRequest.attachedFile;
@@ -117,8 +121,8 @@ function MediationRequestsDetail({
                 <Trans>Assistive technologies used:</Trans>
               </span>{" "}
               <span className="mediation-request-detail__answer">
-                {mediationRequest.assistiveTechnologyUsed?.length &&
-                  mediationRequest.assistiveTechnologyUsed.map(
+                {Boolean(mediationRequest.assistiveTechnologyUsed?.length) &&
+                  mediationRequest.assistiveTechnologyUsed?.map(
                     function generateAssistiveTechs(technology, index) {
                       if (technology) {
                         const lastElement =
@@ -128,14 +132,9 @@ function MediationRequestsDetail({
                         return (
                           <span key={technology}>
                             {lastElement ? (
-                              <>
-                                <Trans
-                                  id={assistiveTechnologyMap[technology]}
-                                />
-                                ,{" "}
-                              </>
+                              <>{assistiveTechnologyMap[technology][lang]}, </>
                             ) : (
-                              <Trans id={assistiveTechnologyMap[technology]} />
+                              assistiveTechnologyMap[technology][lang]
                             )}
                           </span>
                         );

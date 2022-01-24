@@ -72,73 +72,131 @@
 }
 
 .assistive-technology {
-  display: grid;
-  grid-template:
-    ". warning warning warning warning ." auto
-    "used used used used used used" auto
-    "name name name version version version" auto /
-    0.3fr 0.7fr 0.5fr 0.5fr 0.7fr 0.3fr;
-  justify-content: center;
-  @media (max-width: 1100px) {
-    grid-template:
-      ". warning ." auto
-      "used used used" auto
-      "name name name" auto
-      "version version version" auto /
-      0.3fr 2.4fr 0.3fr;
-  }
-  @media (max-width: 750px) {
-    grid-template:
-      "warning" auto
-      "used" auto
-      "name" auto
-      "version" auto /
-      1fr;
-  }
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   &__title {
     margin-top: 4rem;
   }
   &__warning {
-    grid-area: warning;
-    margin-bottom: 2.8rem;
-    @media (max-width: 450px) {
+    width: 80%;
+    align-self: center;
+  }
+  &__isUsed {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2.8rem;
+  }
+  &__isUsedTitle {
+    font-size: 1.2rem;
+  }
+  &__isUsedItems {
+    display: flex;
+    justify-content: space-around;
+    max-width: 50rem;
+    margin-top: 0.3rem;
+  }
+  &__isUsedItem {
+    width: auto;
+  }
+  &__type {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2.5rem;
+  }
+  &__typeTitle {
+    font-size: 1.2rem;
+  }
+  &__typeItems {
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+    margin-top: 0.3rem;
+  }
+  &__typeItem {
+    width: auto;
+    margin-right: 0.4rem;
+    margin-top: 0.1rem;
+  }
+  &__nameAndVersion {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2.5rem;
+  }
+  &__nameAndVersionTitle {
+    font-size: 1.2rem;
+  }
+  &__nameAndVersionItems {
+    display: flex;
+    flex-direction: column;
+  }
+  &__nameAndVersionItem {
+    margin-top: 1.9rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  &__nameAndVersionItemLegend {
+    font-size: 1.15rem;
+    flex-basis: 20%;
+    margin-top: 0.4rem;
+  }
+  &__nameAndVersionField {
+    flex-basis: 35%;
+  }
+
+  @media (max-width: 1150px) {
+    &__typeItems {
+      flex-direction: column;
+    }
+    &__nameAndVersionItemLegend {
+      flex-basis: 100%;
+    }
+    &__nameAndVersionField {
+      flex-basis: 47%;
+    }
+  }
+
+  @media (max-width: 900px) {
+    &__nameAndVersionItem {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    &__nameAndVersionItemLegend {
+      flex-basis: auto;
+    }
+    &__nameAndVersionField {
+      flex-basis: auto;
+    }
+    &__nameAndVersionFieldVersion {
+      margin-top: 0.7rem;
+    }
+  }
+
+  @media (max-width: 850px) {
+    &__isUsedItems {
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 750px) {
+    &__warning {
+      max-width: 90%;
+      width: auto;
+    }
+  }
+
+  @media (max-width: 450px) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    &__warning {
       flex-direction: column;
       .warning__text {
         margin-left: 0;
         margin-top: 1rem;
       }
-    }
-  }
-  &__technologyUsed {
-    grid-area: used;
-    padding: 0 3% 0 3%;
-    @media (max-width: 1100px) {
-      padding: 0 6% 0 6%;
-    }
-    @media (max-width: 750px) {
-      padding: 0;
-    }
-  }
-  &__technologyUsedSelect {
-    overflow: scroll;
-  }
-  &__technologyUsed-helper {
-    margin: 5px 0 0 0;
-  }
-  &__technologyName {
-    grid-area: name;
-    padding: 0 6% 0 6%;
-    margin-top: 2rem;
-    @media (max-width: 750px) {
-      padding: 0;
-    }
-  }
-  &__technologyVersion {
-    grid-area: version;
-    padding: 0 6% 0 6%;
-    margin-top: 2rem;
-    @media (max-width: 750px) {
-      padding: 0;
     }
   }
 }

@@ -3,10 +3,8 @@ import produce from "immer";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useAdminMediationRequest, usePrevious } from "../../hooks";
-import {
-  AboutIssueFields,
-  AssitiveTechnologyFields,
-} from "../../mediationForm/fields";
+import { AboutIssueFields } from "../../mediationForm/fields";
+import AssitiveTechnologyFields from "../../mediationForm/fields/AssitiveTechnologyAdminFields";
 import { MediationRequest } from "../../types/mediationRequest";
 import PersonalInformationFields from "./PersonalInformationFields";
 

@@ -1,6 +1,11 @@
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
-import { cleanup, fireEvent, render } from "@testing-library/react";
+import {
+  fireEvent,
+  render,
+  RenderResult,
+  within,
+} from "@testing-library/react";
 import { createMemoryHistory } from "history";
 import { createStore, StateMachineProvider } from "little-state-machine";
 import * as reactDeviceDetect from "react-device-detect";
@@ -26,14 +31,123 @@ beforeEach(() => {
         lastName: "",
         email: "",
         phoneNumber: "",
-        assistiveTechnologyUsed: [],
-        technologyName: "",
-        technologyVersion: "",
+        assistiveTechnologiesUsed: {
+          isUsed: "",
+          technologies: [],
+        },
       },
     },
     {}
   );
   (reactDeviceDetect.isBrowser as boolean) = true;
+});
+
+describe("Display field blocks", () => {
+  it(`displays only the block about wether assistive technologies are used at
+  the beginning`, () => {
+    const { getByText, queryByText } = renderUserInfo();
+    expect(getByText("Do you use assistive technologies?")).toBeInTheDocument();
+    expect(queryByText("Assistive technologies used")).not.toBeInTheDocument();
+    expect(
+      queryByText("Assistive technology name(s) and version(s)")
+    ).not.toBeInTheDocument();
+  });
+
+  it(`displays only the block about wether assistive technologies are used and
+  the block about what type of assistive technologies, if "Yes" has been
+  selected `, async () => {
+    const { getByText, queryByText, getByLabelText } = renderUserInfo();
+    await click(
+      within(
+        getByLabelText(/Do you use assistive technologies?/)
+      ).getByLabelText("Yes")
+    );
+    expect(getByText("Do you use assistive technologies?")).toBeInTheDocument();
+    expect(getByText("Assistive technologies used")).toBeInTheDocument();
+    expect(
+      queryByText("Assistive technology name(s) and version(s)")
+    ).not.toBeInTheDocument();
+  });
+
+  it(`displays all the 3 blocks if "Yes" has been selected in the first, and at
+  least one technology type has been checked in the second`, async () => {
+    const { getByText, getByLabelText } = renderUserInfo();
+    await click(
+      within(
+        getByLabelText("Do you use assistive technologies?")
+      ).getByLabelText("Yes")
+    );
+    await click(
+      within(getByLabelText("Assistive technologies used")).getByLabelText(
+        "Braille display"
+      )
+    );
+    expect(getByText("Do you use assistive technologies?")).toBeInTheDocument();
+    expect(getByText("Assistive technologies used")).toBeInTheDocument();
+    expect(
+      getByText("Assistive technology name(s) and version(s)")
+    ).toBeInTheDocument();
+  });
+
+  it(`displays one fieldset in the 3rd block, for each selected technology type
+  in the second block`, async () => {
+    const app = renderUserInfo();
+    await click(
+      within(
+        app.getByLabelText(/Do you use assistive technologies?/)
+      ).getByLabelText("Yes")
+    );
+
+    await clickLabelInSecondBlock(app, "Braille display");
+    checkDisplayedInThirdBlock(app, [
+      { label: "Braille display", isDisplayed: true },
+      { label: "Keyboard", isDisplayed: false },
+      { label: "Zoom software", isDisplayed: false },
+    ]);
+
+    await clickLabelInSecondBlock(app, "Keyboard");
+    checkDisplayedInThirdBlock(app, [
+      { label: "Braille display", isDisplayed: true },
+      { label: "Keyboard", isDisplayed: true },
+      { label: "Zoom software", isDisplayed: false },
+    ]);
+
+    await clickLabelInSecondBlock(app, "Zoom software");
+    checkDisplayedInThirdBlock(app, [
+      { label: "Braille display", isDisplayed: true },
+      { label: "Keyboard", isDisplayed: true },
+      { label: "Zoom software", isDisplayed: true },
+    ]);
+  });
+
+  async function clickLabelInSecondBlock(app: RenderResult, label: string) {
+    await click(
+      within(app.getByLabelText("Assistive technologies used")).getByLabelText(
+        label
+      )
+    );
+  }
+
+  function checkDisplayedInThirdBlock(
+    app: RenderResult,
+    areLabelsDisplayed: { label: string; isDisplayed: boolean }[]
+  ) {
+    areLabelsDisplayed.forEach((labelDisplayed) => {
+      if (labelDisplayed.isDisplayed) {
+        expect(
+          within(
+            app.getByLabelText("Assistive technology name(s) and version(s)")
+          ).getByRole("group", { name: labelDisplayed.label })
+        ).toBeInTheDocument();
+      } else {
+        expect(
+          within(
+            app.getByLabelText("Assistive technology name(s) and version(s)")
+          ).queryByRole("group", { name: labelDisplayed.label })
+        ).not.toBeInTheDocument();
+      }
+    });
+  }
 });
 
 describe("Errors on mandatory fields", () => {
@@ -113,7 +227,7 @@ describe("Accessibility", () => {
     expect(app.getByLabelText(/First name/)).toHaveFocus();
   });
 
-  it("gives focus to the first error when click another tab", async () => {
+  it("gives focus to the first error when clicking on another tab", async () => {
     const app = renderUserInfo();
     fillStep1MandatoryFields(app, "email");
     const inputPhone = app.getByLabelText(/Phone number/);
@@ -125,25 +239,25 @@ describe("Accessibility", () => {
     expect(app.getByLabelText(/E-mail/)).toHaveFocus();
   });
 
-  it(`displays a helper text for the assistive technology used field only when on
-  desktop`, async () => {
-    (reactDeviceDetect.isBrowser as boolean) = true;
-    const desktopVersion = renderUserInfo();
-    const helperText = desktopVersion.getByText(
-      /To select several technologies/
+  it("displays the technology types sorted by alphabetical order", async () => {
+    const { getByLabelText } = renderUserInfo();
+    await click(
+      within(
+        getByLabelText(/Do you use assistive technologies?/)
+      ).getByLabelText("Yes")
     );
-    expect(helperText).toBeInTheDocument();
-    cleanup();
-    (reactDeviceDetect.isBrowser as boolean) = false;
-    const mobileVersion = renderUserInfo();
-    const helperText2 = mobileVersion.queryByText(
-      /To select several technologies/
+    const technologyTypeLabels = getByLabelText(
+      "Assistive technologies used"
+    ).querySelectorAll("label");
+    expect(technologyTypeLabels[0]).toHaveTextContent(
+      "Adapted navigation dispositive"
     );
-    expect(helperText2).not.toBeInTheDocument();
+    expect(technologyTypeLabels[1]).toHaveTextContent("Braille display");
+    expect(technologyTypeLabels[2]).toHaveTextContent("DYS Disorder software");
   });
 });
 
-describe("Route correctly on previous / next step navigation buttons", () => {
+describe("Route correctly on previous/next step navigation buttons", () => {
   it("routes to the correct path when click on next step button", async () => {
     await runWithAndWithoutOrganizationPrefix(
       async (generatedPaths: Paths, paths: Paths) => {
@@ -167,7 +281,7 @@ describe("Saves data", () => {
   when the component is recreated`, async () => {
     const app = renderUserInfo();
     fillStep1MandatoryFields(app);
-    fillStep1NonMandatoryFields(app);
+    await fillStep1NonMandatoryFields(app);
     const next = app.getByText("Step 2: Your problem");
     await click(next);
     app.unmount();

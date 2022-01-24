@@ -385,7 +385,7 @@ describe("Saving values with tabs", () => {
     const app = renderFormContainer();
     await unlockStep(app, 1);
     await click(app.getByText("About you"));
-    fillStep1NonMandatoryFields(app);
+    await fillStep1NonMandatoryFields(app);
     await click(app.getByText("Your problem"));
     await click(app.getByText("About you"));
     checkStep1FieldValues(app);
@@ -440,7 +440,7 @@ describe("Reset entered values", () => {
     const { getByText, queryByText, getByRole, unmount } = app;
     await unlockStep(app, 3);
     await click(within(getByRole("tablist")).getByText("About you"));
-    fillStep1NonMandatoryFields(app);
+    await fillStep1NonMandatoryFields(app);
     await click(within(getByRole("tablist")).getByText("Summary"));
     const resetData = getByText("Reset all entered data");
     expect(getByText(/Bill/)).toBeInTheDocument();
