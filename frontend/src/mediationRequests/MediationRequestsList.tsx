@@ -73,7 +73,7 @@ function MediationRequestsList({
 
   return (
     <Table
-      captionText={t`Your mediation requests' list sorted by ascending date`}
+      captionText={t`Your mediation requests' list sorted by date (the most recent first)`}
       className="admin-trace-reports"
       headsInfos={headsInfos}
       rowsInfos={rowsInfos}

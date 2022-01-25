@@ -257,7 +257,7 @@ msgstr "Application :"
 
 #: src/mediationForm/fields/AssitiveTechnologyAdminFields.tsx:56
 #: src/mediationForm/fields/AssitiveTechnologyAdminFields.tsx:63
-#: src/mediationForm/fields/AssitiveTechnologyFields.tsx:218
+#: src/mediationForm/fields/AssitiveTechnologyFields.tsx:221
 msgid "Assistive technologies used"
 msgstr "Technologies d'assistance utilisées"
 
@@ -269,7 +269,7 @@ msgstr "Technologies d'assistance utilisées :"
 msgid "Assistive technology name(s)"
 msgstr "Nom de la ou des technologies d'assistance utilisées"
 
-#: src/mediationForm/fields/AssitiveTechnologyFields.tsx:257
+#: src/mediationForm/fields/AssitiveTechnologyFields.tsx:260
 msgid "Assistive technology name(s) and version(s)"
 msgstr "Nom(s) et version(s) des technologies d'assistance"
 
@@ -304,7 +304,7 @@ msgid "Call"
 msgstr "Appel"
 
 #: src/admin/requestDetail/TraceReportForm.tsx:433
-#: src/users/identification/Login.tsx:290
+#: src/users/identification/Login.tsx:306
 #: src/users/identification/Signup.tsx:195
 #: src/users/password/PasswordResetRequest.tsx:92
 msgid "Cancel"
@@ -687,7 +687,7 @@ msgstr "Mes informations personnelles"
 msgid "My requests"
 msgstr "Mes demandes"
 
-#: src/mediationForm/fields/AssitiveTechnologyFields.tsx:287
+#: src/mediationForm/fields/AssitiveTechnologyFields.tsx:290
 msgid "Name"
 msgstr "Nom"
 
@@ -705,7 +705,7 @@ msgstr "Contexte de navigation"
 
 #: src/constants/choicesMap.tsx:76
 #: src/forms/ConfirmationDialog.tsx:81
-#: src/mediationForm/fields/AssitiveTechnologyFields.tsx:193
+#: src/mediationForm/fields/AssitiveTechnologyFields.tsx:195
 #: src/mediationForm/fields/NavigationContextFields.tsx:87
 #: src/mediationForm/fields/NavigationContextFields.tsx:227
 #: src/mediationForm/fields/OrganizationAnswerFields.tsx:59
@@ -784,7 +784,7 @@ msgstr "Mot de passe"
 msgid "Password confirmation is required"
 msgstr "La confirmation du mot de passe est obligatoire"
 
-#: src/users/identification/Login.tsx:301
+#: src/users/identification/Login.tsx:291
 msgid "Password forgotten?"
 msgstr "Mot de passe oublié ?"
 
@@ -1079,7 +1079,7 @@ msgstr "Utilisation"
 msgid "Validate your new personal information"
 msgstr "Valider vos nouvelles informations personnelles"
 
-#: src/mediationForm/fields/AssitiveTechnologyFields.tsx:304
+#: src/mediationForm/fields/AssitiveTechnologyFields.tsx:307
 msgid "Version"
 msgstr "Version"
 
@@ -1182,13 +1182,13 @@ msgstr "Quelle version du navigateur avez-vous utilisée ?"
 msgid "Windows phone"
 msgstr "Windows phone"
 
-#: src/mediationForm/fields/AssitiveTechnologyFields.tsx:201
+#: src/mediationForm/fields/AssitiveTechnologyFields.tsx:204
 msgid "Would rather not to mention"
 msgstr "Non renseigné"
 
 #: src/constants/choicesMap.tsx:75
 #: src/forms/ConfirmationDialog.tsx:74
-#: src/mediationForm/fields/AssitiveTechnologyFields.tsx:185
+#: src/mediationForm/fields/AssitiveTechnologyFields.tsx:186
 #: src/mediationForm/fields/NavigationContextFields.tsx:80
 #: src/mediationForm/fields/NavigationContextFields.tsx:220
 #: src/mediationForm/fields/OrganizationAnswerFields.tsx:52
@@ -1214,8 +1214,8 @@ msgid "Your mediation request has been successfully sent !"
 msgstr "Votre demande de médiation a bien été envoyée !"
 
 #: src/mediationRequests/MediationRequestsList.tsx:76
-msgid "Your mediation requests' list sorted by date"
-msgstr "Vos demandes de médiation triées par date"
+msgid "Your mediation requests' list sorted by date (the most recent first)"
+msgstr "Vos demandes de médiation triées par date (les plus récentes en premier)"
 
 #: src/customerLayout/Main.tsx:135
 msgid "Your password has been successfully changed."
