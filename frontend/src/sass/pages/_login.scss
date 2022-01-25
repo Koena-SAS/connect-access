@@ -1,4 +1,8 @@
 .login {
+  &__buttons-container {
+    display: flex;
+    flex-direction: column-reverse;
+  }
   &__buttons {
     padding-top: 50px;
     display: flex;

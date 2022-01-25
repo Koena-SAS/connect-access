@@ -279,29 +279,34 @@ function Login({ setToken, handleCloseIdentification }: LoginProps) {
         />
       )}
       {nonFieldErrorsJsx()}
-      <div className="login__buttons">
-        <DoneButton className="button login__submit" data-testid="loginSubmit">
-          {formStep.submitButtonText}
-        </DoneButton>
-        <CancelButton
-          className="login__cancel"
-          onClick={() => dispatchFormStep({ type: "CANCEL" })}
-        >
-          <Trans>Cancel</Trans>
-        </CancelButton>
-      </div>
-      {formStep.showPasswordField && (
-        <div className="login__forgotten-password-container">
-          <Link
-            to={{
-              pathname: generatePrefixedPath(PATHS.RESET_PASSWORD),
-            }}
-            className="login__forgotten-password"
+      <div className="login__buttons-container">
+        {formStep.showPasswordField && (
+          <div className="login__forgotten-password-container">
+            <Link
+              to={{
+                pathname: generatePrefixedPath(PATHS.RESET_PASSWORD),
+              }}
+              className="login__forgotten-password"
+            >
+              <Trans>Password forgotten?</Trans>
+            </Link>
+          </div>
+        )}
+        <div className="login__buttons">
+          <DoneButton
+            className="button login__submit"
+            data-testid="loginSubmit"
           >
-            <Trans>Password forgotten?</Trans>
-          </Link>
+            {formStep.submitButtonText}
+          </DoneButton>
+          <CancelButton
+            className="login__cancel"
+            onClick={() => dispatchFormStep({ type: "CANCEL" })}
+          >
+            <Trans>Cancel</Trans>
+          </CancelButton>
         </div>
-      )}
+      </div>
     </form>
   );
 }
