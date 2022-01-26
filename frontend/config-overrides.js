@@ -37,6 +37,15 @@ module.exports = {
         })
       );
     }
+
+    /* to avoid error "Can't import the named export 'Children' from non EcmaScript module (only default export is available)"
+    cf. https://github.com/formatjs/formatjs/issues/1395#issuecomment-518823361
+    */
+    config.module.rules.push({
+      test: /\.mjs$/,
+      include: /node_modules/,
+      type: "javascript/auto",
+    });
     return config;
   },
   devServer: function (configFunction) {

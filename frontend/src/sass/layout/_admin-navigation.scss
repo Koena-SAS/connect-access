@@ -159,6 +159,9 @@
       display: none;
     }
   }
+  &__list-container {
+    overflow: hidden;
+  }
   &__item {
     opacity: 0.8;
     position: relative;

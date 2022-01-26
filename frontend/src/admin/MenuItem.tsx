@@ -1,5 +1,6 @@
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
+import { AnimatePresence, motion } from "framer-motion";
 import React, { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { PATHS } from "../constants/paths";
@@ -117,39 +118,47 @@ function MenuItem({
               )}
             </button>
           </h2>
-
-          <ul
-            className={
-              showSubmenu
-                ? "admin-navigation-item__list"
-                : "admin-navigation-item__list hidden"
-            }
-            id={`${id}-submenu`}
-          >
-            {subItems.map((item) => {
-              const isActiveForAdminRoot = location.pathname === item.link;
-              const isActiveForOtherPaths =
-                location.pathname.startsWith(item.link) &&
-                item.link !== generatePrefixedPath(PATHS.ADMIN);
-              const isActive = isActiveForAdminRoot || isActiveForOtherPaths;
-              return (
-                <li
-                  className={`admin-navigation-item__item ${
-                    isActive ? "active" : ""
-                  }`}
-                  key={item.text}
+          <AnimatePresence initial={false}>
+            {showSubmenu && (
+              <motion.div
+                initial={{ height: 0 }}
+                animate={{ height: "auto" }}
+                exit={{ height: 0 }}
+                className="admin-navigation-item__list-container"
+              >
+                <ul
+                  className="admin-navigation-item__list"
+                  id={`${id}-submenu`}
                 >
-                  <NavLink
-                    exact={true}
-                    to={item.link}
-                    className="admin-navigation-item__link"
-                  >
-                    {item.text}
-                  </NavLink>
-                </li>
-              );
-            })}
-          </ul>
+                  {subItems.map((item) => {
+                    const isActiveForAdminRoot =
+                      location.pathname === item.link;
+                    const isActiveForOtherPaths =
+                      location.pathname.startsWith(item.link) &&
+                      item.link !== generatePrefixedPath(PATHS.ADMIN);
+                    const isActive =
+                      isActiveForAdminRoot || isActiveForOtherPaths;
+                    return (
+                      <li
+                        className={`admin-navigation-item__item ${
+                          isActive ? "active" : ""
+                        }`}
+                        key={item.text}
+                      >
+                        <NavLink
+                          exact={true}
+                          to={item.link}
+                          className="admin-navigation-item__link"
+                        >
+                          {item.text}
+                        </NavLink>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </li>
       ) : (
         <li
