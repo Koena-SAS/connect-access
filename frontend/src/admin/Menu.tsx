@@ -5,7 +5,7 @@ import DomainIcon from "@material-ui/icons/Domain";
 import ForumIcon from "@material-ui/icons/Forum";
 import MenuIcon from "@material-ui/icons/Menu";
 import SettingsIcon from "@material-ui/icons/Settings";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { PATHS } from "../constants/paths";
 import ConfigDataContext from "../contexts/configData";
@@ -27,6 +27,7 @@ function Menu() {
   const generatePrefixedPath = useGeneratePrefixedPath();
   const [shownDesktopMenu, setshownDesktopMenu] = useState(true);
   const [shownMobileMenu, setShownMobileMenu] = useState(false);
+  const titleButtonsRef = useRef<HTMLElement[]>([]);
   const { width: windowWidth } = useWindowDimensions();
   const mobileMenu = windowWidth <= 1100;
   const openedOrMobileMenu = Boolean(shownDesktopMenu || mobileMenu);
@@ -58,6 +59,44 @@ function Menu() {
 
   function handleToggleDesktopMenu() {
     setshownDesktopMenu(!shownDesktopMenu);
+  }
+  function handlePreviousTitleButton() {
+    for (let i = 1; i < titleButtonsRef.current.length; i++) {
+      if (titleButtonsRef.current[i] === document.activeElement) {
+        titleButtonsRef.current[i - 1].focus();
+        break;
+      }
+    }
+  }
+  function handleNextTitleButton() {
+    for (let i = 0; i < titleButtonsRef.current.length - 1; i++) {
+      if (titleButtonsRef.current[i] === document.activeElement) {
+        titleButtonsRef.current[i + 1].focus();
+        break;
+      }
+    }
+  }
+  function handleFirstTitleButton() {
+    titleButtonsRef.current[0].focus();
+  }
+  function handleLastTitleButton() {
+    titleButtonsRef.current[titleButtonsRef.current.length - 1].focus();
+  }
+  function setTitleButtonRef(
+    index: number
+  ): (element: HTMLButtonElement) => void {
+    return (element) => {
+      titleButtonsRef.current[index] = element;
+    };
+  }
+  function generteKeyDownProps(index: number) {
+    return {
+      onNextTitleButton: handleNextTitleButton,
+      onPreviousTitleButton: handlePreviousTitleButton,
+      onFirstTitleButton: handleFirstTitleButton,
+      onLastTitleButton: handleLastTitleButton,
+      setTitleButtonRef: setTitleButtonRef(index),
+    };
   }
   return (
     <>
@@ -110,35 +149,45 @@ function Menu() {
         id="nav-menu"
       >
         <nav role="navigation">
+          <h1 className="admin-navigation__title">
+            <Trans>Main menu</Trans>
+          </h1>
           <ul className="admin-navigation__list">
             <li className="admin-navigation__home admin-navigation__item">
-              <NavLink exact={true} to={generatePrefixedPath(PATHS.ROOT)}>
-                {openedOrMobileMenu ? (
-                  <>
-                    <img
-                      src={logoBackground}
-                      alt=""
-                      className="admin-navigation__logo-background"
-                    />
+              <h2 className="admin-navigation__title-logo">
+                <NavLink
+                  exact={true}
+                  to={generatePrefixedPath(PATHS.ROOT)}
+                  className="admin-navigation__title-logo-link"
+                >
+                  {openedOrMobileMenu ? (
+                    <>
+                      <img
+                        src={logoBackground}
+                        alt=""
+                        className="admin-navigation__logo-background"
+                      />
+                      <img
+                        src={
+                          require(`../images/${configData.logoFilename}`)
+                            .default
+                        }
+                        alt={t`${configData.platformName} homepage`}
+                        className="admin-navigation__logo"
+                      />
+                    </>
+                  ) : (
                     <img
                       src={
-                        require(`../images/${configData.logoFilename}`).default
+                        require(`../images/${configData.logoFilenameSmall}`)
+                          .default
                       }
                       alt={t`${configData.platformName} homepage`}
-                      className="admin-navigation__logo"
+                      className="admin-navigation__logo-small"
                     />
-                  </>
-                ) : (
-                  <img
-                    src={
-                      require(`../images/${configData.logoFilenameSmall}`)
-                        .default
-                    }
-                    alt={t`${configData.platformName} homepage`}
-                    className="admin-navigation__logo-small"
-                  />
-                )}
-              </NavLink>
+                  )}
+                </NavLink>
+              </h2>
             </li>
             <MenuItem
               itemText={t`Dashboard`}
@@ -152,6 +201,7 @@ function Menu() {
                 },
                 { text: t`Statistics`, link: "#" },
               ]}
+              {...generteKeyDownProps(0)}
             />
             <MenuItem
               itemText={t`Mediation`}
@@ -165,6 +215,7 @@ function Menu() {
                 },
                 { text: t`Requests management`, link: "#" },
               ]}
+              {...generteKeyDownProps(1)}
             />
             <MenuItem
               itemText={t`General Settings`}
@@ -176,6 +227,7 @@ function Menu() {
                 { text: t`Form management`, link: "#" },
                 { text: t`Custom menu management`, link: "#" },
               ]}
+              {...generteKeyDownProps(2)}
             />
             <MenuItem
               itemText={t`Pro Offer`}
@@ -183,6 +235,7 @@ function Menu() {
               id="pro-offer"
               shownDesktopMenu={shownDesktopMenu}
               subItems={[{ text: t`Organazations list`, link: "#" }]}
+              {...generteKeyDownProps(3)}
             />
           </ul>
         </nav>

@@ -1,6 +1,6 @@
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
-import { useState } from "react";
+import React, { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { PATHS } from "../constants/paths";
 import { useGeneratePrefixedPath, useWindowDimensions } from "../hooks";
@@ -21,6 +21,27 @@ type MenuItemProps = {
     text: string;
     link: string;
   }[];
+  /**
+   * Function called when the user has the focus on a title button of the
+   * accordion widget, and presses the arrow down key.
+   */
+  onNextTitleButton: () => void;
+  /**
+   * Function called when the user has the focus on a title button of the
+   * accordion widget, and presses the arrow up key.
+   */
+  onPreviousTitleButton: () => void;
+  /**
+   * Function called when the user has the focus on a title button of the
+   * accordion widget, and presses the arrow Home key.
+   */
+  onFirstTitleButton: () => void;
+  /**
+   * Function called when the user has the focus on a title button of the
+   * accordion widget, and presses the arrow End key.
+   */
+  onLastTitleButton: () => void;
+  setTitleButtonRef: (element: HTMLButtonElement) => void;
 };
 
 /**
@@ -32,6 +53,11 @@ function MenuItem({
   id,
   subItems,
   shownDesktopMenu,
+  onNextTitleButton,
+  onPreviousTitleButton,
+  onFirstTitleButton,
+  onLastTitleButton,
+  setTitleButtonRef,
 }: MenuItemProps) {
   const generatePrefixedPath = useGeneratePrefixedPath();
   const location = useLocation();
@@ -48,28 +74,49 @@ function MenuItem({
     return accumulator || location.pathname === current.link;
   },
   false);
+  function handleTitleButtonKeyDown(
+    event: React.KeyboardEvent<HTMLButtonElement>
+  ) {
+    if (event.key === "ArrowUp") {
+      event.preventDefault();
+      onPreviousTitleButton();
+    } else if (event.key === "ArrowDown") {
+      event.preventDefault();
+      onNextTitleButton();
+    } else if (event.key === "Home") {
+      event.preventDefault();
+      onFirstTitleButton();
+    } else if (event.key === "End") {
+      event.preventDefault();
+      onLastTitleButton();
+    }
+  }
   return (
     <>
       {Boolean(shownDesktopMenu || mobileMenu) ? (
         <li className="admin-navigation__item admin-navigation-item">
-          <button
-            className="admin-navigation-item__button button"
-            aria-controls={`${id}-submenu`}
-            onClick={handleToggleSubmenu}
-            aria-expanded={showSubmenu ? true : false}
-          >
-            <ItemIcon
-              fontSize="small"
-              className="admin-navigation-item__icon-before"
-              color="action"
-            />
-            {itemText}
-            {showSubmenu ? (
-              <KeyboardArrowDownIcon className="admin-navigation-item__icon-after" />
-            ) : (
-              <KeyboardArrowRightIcon className="admin-navigation-item__icon-after" />
-            )}
-          </button>
+          <h2 className="admin-navigation-item__title">
+            <button
+              className="admin-navigation-item__button button"
+              aria-controls={`${id}-submenu`}
+              onClick={handleToggleSubmenu}
+              aria-expanded={showSubmenu ? true : false}
+              ref={setTitleButtonRef}
+              onKeyDown={handleTitleButtonKeyDown}
+            >
+              <ItemIcon
+                fontSize="small"
+                className="admin-navigation-item__icon-before"
+                color="action"
+              />
+              {itemText}
+              {showSubmenu ? (
+                <KeyboardArrowDownIcon className="admin-navigation-item__icon-after" />
+              ) : (
+                <KeyboardArrowRightIcon className="admin-navigation-item__icon-after" />
+              )}
+            </button>
+          </h2>
 
           <ul
             className={
