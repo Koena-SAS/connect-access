@@ -4,9 +4,7 @@ import { PATHS } from "../constants/paths";
 import { useAdminMediationRequests } from "../hooks";
 import { MediationRequestsList } from "../mediationRequests";
 import Breadcrumbs from "./Breadcrumbs";
-import FilterMediationRequests, {
-  buildApplicationName,
-} from "./FilterMediationRequests";
+import FilterMediationRequests from "./FilterMediationRequests";
 
 /**
  * List all the mediation requests with filtering options.
@@ -14,7 +12,6 @@ import FilterMediationRequests, {
 function AllRequests({ token }: { token: string }) {
   const { mediationRequests } = useAdminMediationRequests(token);
   const [chosenStatus, setChosenStatus] = useState("");
-  const [chosenApplication, setChosenApplication] = useState("");
 
   const filteredRequests = useMemo(
     function filterRequests() {
@@ -26,25 +23,11 @@ function AllRequests({ token }: { token: string }) {
             } else {
               statusOk = request.status === chosenStatus;
             }
-            let applicationOk;
-            if (chosenApplication === "") {
-              applicationOk = true;
-            } else if (chosenApplication === "OTHER") {
-              applicationOk = !Boolean(request.applicationData);
-            } else {
-              if (request.applicationData) {
-                applicationOk =
-                  buildApplicationName(request.applicationData) ===
-                  chosenApplication;
-              } else {
-                applicationOk = false;
-              }
-            }
-            return Boolean(statusOk && applicationOk);
+            return Boolean(statusOk);
           })
         : [];
     },
-    [mediationRequests, chosenStatus, chosenApplication]
+    [mediationRequests, chosenStatus]
   );
 
   return (
@@ -55,11 +38,7 @@ function AllRequests({ token }: { token: string }) {
       <Breadcrumbs
         items={[<Trans>Mediation</Trans>, <Trans>All requests</Trans>]}
       />
-      <FilterMediationRequests
-        setChosenStatus={setChosenStatus}
-        setChosenApplication={setChosenApplication}
-        token={token}
-      />
+      <FilterMediationRequests setChosenStatus={setChosenStatus} />
       <div className="admin-page-base__content admin-mediations__content">
         <MediationRequestsList
           mediationRequests={filteredRequests}

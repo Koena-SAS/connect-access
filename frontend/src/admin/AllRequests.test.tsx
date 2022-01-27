@@ -71,22 +71,4 @@ describe("Filter requests", () => {
     expect(getByText("4ae77193")).toBeInTheDocument();
     expect(queryByText("f8842f63")).not.toBeInTheDocument();
   });
-
-  it(`filters correctly by organization all the mediation requests`, async () => {
-    const history = createMemoryHistory();
-    const { getByText, queryByText, getByLabelText } = await renderAllRequests(
-      history
-    );
-    fireEvent.change(getByLabelText(/Application/), {
-      target: { value: "Site (Stivo)" },
-    });
-    expect(queryByText("4ae77193")).not.toBeInTheDocument();
-    expect(getByText("f8842f63")).toBeInTheDocument();
-
-    fireEvent.change(getByLabelText(/Application/), {
-      target: { value: "OTHER" },
-    });
-    expect(getByText("4ae77193")).toBeInTheDocument();
-    expect(queryByText("f8842f63")).not.toBeInTheDocument();
-  });
 });

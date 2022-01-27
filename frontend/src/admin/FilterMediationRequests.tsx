@@ -1,17 +1,8 @@
 import { t, Trans } from "@lingui/macro";
-import { useMemo } from "react";
 import { TextField } from "../forms";
-import { useAdminMediationRequests } from "../hooks";
-import type { MediationRequest } from "../types/mediationRequest";
-import type { ApplicationData } from "../types/organizationApp";
 
 type FilterMediationRequestsProps = {
   setChosenStatus: (value: string) => void;
-  setChosenApplication: (value: string) => void;
-  /**
-   * The authentication token given when user is logged in.
-   */
-  token: string;
 };
 
 /**
@@ -19,40 +10,9 @@ type FilterMediationRequestsProps = {
  */
 function FilterMediationRequests({
   setChosenStatus,
-  setChosenApplication,
-  token,
 }: FilterMediationRequestsProps) {
-  const { mediationRequests } = useAdminMediationRequests(token);
-  const applicationNames = useMemo(
-    function createApplicationNames() {
-      return mediationRequests
-        ? mediationRequests.reduce(
-            (accumulator: string[], request: MediationRequest) => {
-              if (request.applicationData) {
-                const applicationName = buildApplicationName(
-                  request.applicationData
-                );
-                if (!accumulator.includes(applicationName)) {
-                  accumulator.push(applicationName);
-                }
-                return accumulator;
-              } else {
-                return accumulator;
-              }
-            },
-            []
-          )
-        : [];
-    },
-    [mediationRequests]
-  );
   const handleChangeStatus = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChosenStatus(event.target.value);
-  };
-  const handleChangeApplication = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setChosenApplication(event.target.value);
   };
 
   return (
@@ -114,39 +74,8 @@ function FilterMediationRequests({
           <option value="MEDIATION_FAILED">Mediation failed</option>
         </Trans>
       </TextField>
-      <TextField
-        id="mediationApplication"
-        name="mediationApplication"
-        select
-        SelectProps={{
-          native: true,
-        }}
-        label={t`Application:`}
-        onChange={handleChangeApplication}
-        className="filter-mediation-requests__option last"
-        fullwidth={false}
-      >
-        <option label={t`All`} value="" />
-        <Trans>
-          <option value="OTHER">Other</option>
-        </Trans>
-        {applicationNames.map(function buildApplicationJsx(applicationName) {
-          return (
-            <option
-              label={applicationName}
-              value={applicationName}
-              key={applicationName}
-            />
-          );
-        })}
-      </TextField>
     </div>
   );
 }
 
-function buildApplicationName(applicationData: ApplicationData): string {
-  return `${applicationData.name} (${applicationData.organizationName})`;
-}
-
 export default FilterMediationRequests;
-export { buildApplicationName };
