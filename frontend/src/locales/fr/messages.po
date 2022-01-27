@@ -1257,7 +1257,7 @@ msgstr "{0} - Confirmer la réinitialisation du mot de passe"
 
 #: src/admin/requestDetail/RequestDetailContainer.tsx:24
 msgid "{0} - Detail of the mediation request"
-msgstr "{0} - "
+msgstr "{0} - Détail de la demande de médiation"
 
 #: src/users/identification/Identification.tsx:36
 msgid "{0} - Login"
@@ -1265,15 +1265,15 @@ msgstr "{0} - Connexion"
 
 #: src/customerLayout/Main.tsx:117
 msgid "{0} - My account"
-msgstr "{0} - Détail de la demande de médiation"
+msgstr "{0} - Mon compte"
 
 #: src/customerLayout/Main.tsx:128
 msgid "{0} - My mediation request detail"
-msgstr "{0} - "
+msgstr "{0} - Détail de ma demande de médiation"
 
 #: src/customerLayout/Main.tsx:122
 msgid "{0} - My mediation requests"
-msgstr "{0} - Détails de ma demande de médiation"
+msgstr "{0} - Mes demandes de médiation"
 
 #: src/admin/Main.tsx:26
 msgid "{0} - Quick access"
