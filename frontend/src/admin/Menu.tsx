@@ -148,7 +148,7 @@ function Menu() {
         ref={menuRef}
         id="nav-menu"
       >
-        <nav role="navigation">
+        <nav role="navigation" id="navigation">
           <h1 className="admin-navigation__title">
             <Trans>Main menu</Trans>
           </h1>
