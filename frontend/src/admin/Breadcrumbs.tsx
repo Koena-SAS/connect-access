@@ -1,3 +1,4 @@
+import { t } from "@lingui/macro";
 import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
 import { useWindowDimensions } from "../hooks";
 
@@ -21,7 +22,7 @@ function Breadcrumbs({
   const { width: windowWidth } = useWindowDimensions();
   const isVertical = Boolean(windowWidth <= widthToChangeOrientation);
   return (
-    <nav aria-label="Breadcrumb" className="admin-breadcrumbs" {...props}>
+    <nav aria-label={t`Breadcrumbs`} className="admin-breadcrumbs" {...props}>
       <ol className={`admin-breadcrumbs__list ${isVertical ? "vertical" : ""}`}>
         {items.map((item, index) => (
           <li className="admin-breadcrumbs__item" key={index}>

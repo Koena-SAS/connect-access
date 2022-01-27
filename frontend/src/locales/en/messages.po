@@ -33,7 +33,7 @@ msgstr "<0>Call</0>"
 msgid "<0>Chrome</0>"
 msgstr "Chrome"
 
-#: src/admin/Menu.tsx:92
+#: src/admin/Menu.tsx:131
 msgid "<0>Close sidebar</0>"
 msgstr "<0>Close sidebar</0>"
 
@@ -227,7 +227,7 @@ msgstr "All"
 
 #: src/admin/AllRequests.tsx:53
 #: src/admin/AllRequests.tsx:56
-#: src/admin/Menu.tsx:163
+#: src/admin/Menu.tsx:213
 #: src/admin/requestDetail/History.tsx:16
 #: src/admin/requestDetail/RequestDetail.tsx:39
 #: src/admin/requestDetail/TraceReports.tsx:80
@@ -299,6 +299,10 @@ msgstr "Attached file"
 msgid "Attached file:"
 msgstr "Attached file:"
 
+#: src/admin/Breadcrumbs.tsx:25
+msgid "Breadcrumbs"
+msgstr "Breadcrumbs"
+
 #: src/constants/choicesMap.tsx:92
 msgid "Call"
 msgstr "Call"
@@ -326,7 +330,7 @@ msgstr "Chrome"
 msgid "Close message"
 msgstr "Close message"
 
-#: src/admin/Menu.tsx:68
+#: src/admin/Menu.tsx:107
 #: src/customerLayout/Header.tsx:101
 msgid "Close the menu"
 msgstr "Close the menu"
@@ -385,11 +389,11 @@ msgstr "Contact:"
 msgid "Content"
 msgstr "Content"
 
-#: src/admin/Menu.tsx:177
+#: src/admin/Menu.tsx:228
 msgid "Custom menu management"
 msgstr "Custom menu management"
 
-#: src/admin/Menu.tsx:144
+#: src/admin/Menu.tsx:193
 #: src/admin/QuickAccess.tsx:14
 msgid "Dashboard"
 msgstr "Dashboard"
@@ -507,7 +511,7 @@ msgstr "First name / username:"
 msgid "Footer"
 msgstr "Footer"
 
-#: src/admin/Menu.tsx:176
+#: src/admin/Menu.tsx:227
 msgid "Form management"
 msgstr "Form management"
 
@@ -519,7 +523,7 @@ msgstr "Further information"
 msgid "Further information:"
 msgstr "Further information:"
 
-#: src/admin/Menu.tsx:170
+#: src/admin/Menu.tsx:221
 msgid "General Settings"
 msgstr "General Settings"
 
@@ -629,12 +633,16 @@ msgstr "Mailing address"
 msgid "Mailing adress:"
 msgstr "Mailing adress:"
 
+#: src/admin/Menu.tsx:153
+msgid "Main menu"
+msgstr "Main menu"
+
 #: src/constants/choicesMap.tsx:86
 msgid "Mediating"
 msgstr "Mediating"
 
 #: src/admin/AllRequests.tsx:56
-#: src/admin/Menu.tsx:157
+#: src/admin/Menu.tsx:207
 #: src/admin/requestDetail/History.tsx:15
 #: src/admin/requestDetail/RequestDetail.tsx:38
 #: src/admin/requestDetail/TraceReports.tsx:79
@@ -748,16 +756,16 @@ msgstr "Only the 1st field \"What was the issue?\" is required."
 msgid "Only the fields \"First name / username\" and \"Email\" are required."
 msgstr "Only the fields \"First name / username\" and \"Email\" are required."
 
-#: src/admin/Menu.tsx:100
+#: src/admin/Menu.tsx:139
 msgid "Open sidebar"
 msgstr "Open sidebar"
 
-#: src/admin/Menu.tsx:68
+#: src/admin/Menu.tsx:107
 #: src/customerLayout/Header.tsx:101
 msgid "Open the menu"
 msgstr "Open the menu"
 
-#: src/admin/Menu.tsx:185
+#: src/admin/Menu.tsx:237
 msgid "Organazations list"
 msgstr "Organazations list"
 
@@ -813,7 +821,7 @@ msgstr "Phone number"
 msgid "Phone number:"
 msgstr "Phone number:"
 
-#: src/admin/Menu.tsx:181
+#: src/admin/Menu.tsx:233
 msgid "Pro Offer"
 msgstr "Pro Offer"
 
@@ -825,7 +833,7 @@ msgstr "Problem Description"
 msgid "Project funded as part of the Innov'Up experimentation"
 msgstr "Project funded as part of the Innov'Up experimentation"
 
-#: src/admin/Menu.tsx:150
+#: src/admin/Menu.tsx:199
 #: src/admin/QuickAccess.tsx:14
 msgid "Quick Access"
 msgstr "Quick Access"
@@ -879,7 +887,7 @@ msgstr "Request details"
 msgid "Request filed"
 msgstr "Request filed"
 
-#: src/admin/Menu.tsx:166
+#: src/admin/Menu.tsx:216
 msgid "Requests management"
 msgstr "Requests management"
 
@@ -919,7 +927,7 @@ msgstr "Signup"
 msgid "Sitemap"
 msgstr "Sitemap"
 
-#: src/admin/Menu.tsx:153
+#: src/admin/Menu.tsx:202
 msgid "Statistics"
 msgstr "Statistics"
 
@@ -1071,7 +1079,7 @@ msgstr "Token received by email"
 msgid "Trace reports"
 msgstr "Trace reports"
 
-#: src/admin/Menu.tsx:175
+#: src/admin/Menu.tsx:226
 msgid "User management"
 msgstr "User management"
 
@@ -1303,8 +1311,8 @@ msgstr "{0} - Submit a mediation request: your problem"
 msgid "{0} - Trace reports of the mediation request"
 msgstr "{0} - Trace reports of the mediation request"
 
-#: src/admin/Menu.tsx:127
-#: src/admin/Menu.tsx:137
+#: src/admin/Menu.tsx:175
+#: src/admin/Menu.tsx:185
 #: src/customerLayout/Header.tsx:90
 msgid "{0} homepage"
 msgstr "{0} homepage"
