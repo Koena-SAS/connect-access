@@ -1,6 +1,7 @@
 import { useMemo } from "react";
+import slugify from "react-slugify";
 
-type PorderFieldsetProps = {
+type BorderFieldsetProps = {
   /**
    * The text of the legend.
    */
@@ -32,8 +33,8 @@ function BorderedFieldset({
   smallMarginTop,
   smallPaddingTop,
   ...props
-}: PorderFieldsetProps) {
-  const legendId = useMemo(() => hashCode(legend), [legend]);
+}: BorderFieldsetProps) {
+  const legendId = useMemo(() => slugify(legend), [legend]);
   const legendElement = useMemo(() => {
     const legendProps = {
       id: legendId,
@@ -73,18 +74,6 @@ function BorderedFieldset({
       </div>
     </>
   );
-}
-
-function hashCode(str: string): string {
-  var hash = 0,
-    i = 0,
-    chr = 0;
-  for (i = 0; i < str.length; i++) {
-    chr = str.charCodeAt(i);
-    hash = (hash << 5) - hash + chr;
-    hash |= 0; // Convert to 32bit integer
-  }
-  return hash.toString();
 }
 
 export default BorderedFieldset;

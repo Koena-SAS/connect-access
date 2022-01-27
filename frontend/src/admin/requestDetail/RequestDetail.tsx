@@ -79,7 +79,6 @@ function RequestDetail({ token, setBreadcrumbs }: RequestDetailProps) {
         />
         <AssitiveTechnologyFields
           register={register}
-          errors={errors}
           isUserFacing={false}
           legendClassName="admin-request-detail__fieldset-legend"
           level={2}

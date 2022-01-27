@@ -19,7 +19,7 @@ type AssitiveTechnologyFieldsProps = {
    */
   className?: string;
   [borderFieldsetProps: string]: any;
-};
+} & { errors?: never };
 
 /**
  * Fields for assistive technology of the main mediation form.
