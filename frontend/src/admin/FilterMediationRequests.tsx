@@ -56,8 +56,15 @@ function FilterMediationRequests({
   };
 
   return (
-    <div className="filter-mediation-requests form">
-      <span className="filter-mediation-requests__text">
+    <div
+      className="filter-mediation-requests form"
+      role="group"
+      aria-labelledby="filterMediationRequests"
+    >
+      <span
+        className="filter-mediation-requests__text"
+        id="filterMediationRequests"
+      >
         <Trans>Filter by:</Trans>
       </span>
       <TextField
