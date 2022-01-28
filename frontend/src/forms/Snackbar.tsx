@@ -27,7 +27,7 @@ function Snackbar({
   return (
     <MUISnackbar
       open={open}
-      autoHideDuration={10000}
+      autoHideDuration={20000}
       onClose={onClose}
       anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
       {...props}
