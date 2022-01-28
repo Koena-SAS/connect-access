@@ -243,7 +243,7 @@ describe("User mediations", () => {
           generatedPaths,
           paths
         );
-        const id = await waitFor(() => getByText(/f8842f63/));
+        const id = await waitFor(() => getByText("f8842f63"));
         const detailsButton = within(id.closest("tr") as HTMLElement).getByText(
           "Details"
         );

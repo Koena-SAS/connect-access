@@ -320,6 +320,13 @@ describe("Login / logout", () => {
   describe("Logout", () => {
     describe(`displays login button and no more user details after logout,
     and redirects to homepage`, () => {
+      it(`with organization prefix`, async () => {
+        await test(generatedPathsWithPrefix, PATHS);
+      });
+      it(`without organization prefix`, async () => {
+        await test(generatedPathsWithoutPrefix, PATHS_WITHOUT_PREFIX);
+      });
+
       async function test(generatedPaths: Paths, paths: Paths): Promise<void> {
         const userPhoneNumber = /2463259871/;
         const [app, history] = await checkInfoAndPathsOnLogin(
@@ -336,19 +343,19 @@ describe("Login / logout", () => {
           generatedPaths.ROOT
         );
       }
+    });
 
+    describe(`displays login button and no more user's mediation requests after logout,
+    and redirects to homepage`, () => {
       it(`with organization prefix`, async () => {
         await test(generatedPathsWithPrefix, PATHS);
       });
       it(`without organization prefix`, async () => {
         await test(generatedPathsWithoutPrefix, PATHS_WITHOUT_PREFIX);
       });
-    });
 
-    describe(`displays login button and no more user's mediation requests after logout,
-    and redirects to homepage`, () => {
       async function test(generatedPaths: Paths, paths: Paths): Promise<void> {
-        const mediationRequestId = /f8842f63/;
+        const mediationRequestId = "f8842f63";
         const [app, history] = await checkInfoAndPathsOnLogin(
           mediationRequestId,
           generatedPaths.USER_REQUESTS,
@@ -363,17 +370,17 @@ describe("Login / logout", () => {
           generatedPaths.ROOT
         );
       }
+    });
 
+    describe(`displays login button and no more user's mediation request detail after logout,
+    and redirects to homepage`, () => {
       it(`with organization prefix`, async () => {
         await test(generatedPathsWithPrefix, PATHS);
       });
       it(`without organization prefix`, async () => {
         await test(generatedPathsWithoutPrefix, PATHS_WITHOUT_PREFIX);
       });
-    });
 
-    describe(`displays login button and no more user's mediation request detail after logout,
-    and redirects to homepage`, () => {
       async function test(generatedPaths: Paths, paths: Paths): Promise<void> {
         const history = createMemoryHistory({
           initialEntries: [generatedPaths.ROOT],
@@ -381,7 +388,7 @@ describe("Login / logout", () => {
         const app = await renderApp(history, generatedPaths, paths);
         await loginUser(app);
         fireEvent.click(app.getByText(/My requests/));
-        const id = app.getByText(/f8842f63/);
+        const id = app.getByText("f8842f63");
         const detailsButton = within(id.closest("tr") as HTMLElement).getByText(
           "Details"
         );
@@ -398,13 +405,6 @@ describe("Login / logout", () => {
           generatedPaths.ROOT
         );
       }
-
-      it(`with organization prefix`, async () => {
-        await test(generatedPathsWithPrefix, PATHS);
-      });
-      it(`without organization prefix`, async () => {
-        await test(generatedPathsWithoutPrefix, PATHS_WITHOUT_PREFIX);
-      });
     });
 
     async function checkInfoAndPathsOnLogin(

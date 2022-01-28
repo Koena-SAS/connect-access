@@ -31,8 +31,8 @@ it(`displays the list of the user mediation requests sent by the backend`, async
       </Router>
     </I18nProvider>
   );
-  const firstMediationRequestId = await waitFor(() => getByText(/4ae77193/));
-  const secondMediationRequestId = getByText(/f8842f63/);
+  const firstMediationRequestId = await waitFor(() => getByText("4ae77193"));
+  const secondMediationRequestId = getByText("f8842f63");
   expect(firstMediationRequestId).toBeInTheDocument();
   expect(secondMediationRequestId).toBeInTheDocument();
 });

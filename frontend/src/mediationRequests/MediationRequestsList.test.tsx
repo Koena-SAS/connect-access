@@ -28,8 +28,8 @@ afterEach(() => {
 it("displays the list of given mediation requests", async () => {
   const history = createMemoryHistory();
   const { getByText, getAllByText } = renderMediationRequestList(history);
-  expect(getByText(/f8842f63/)).toBeInTheDocument();
-  expect(getByText(/4ae77193/)).toBeInTheDocument();
+  expect(getByText("f8842f63")).toBeInTheDocument();
+  expect(getByText("4ae77193")).toBeInTheDocument();
   expect(getAllByText(/2021/).length).toEqual(2);
   expect(getAllByText(/Koena/).length).toEqual(2);
   expect(
@@ -52,7 +52,7 @@ it(`redirects to the correct path when clicking on a specific
         generatedPaths,
         paths
       );
-      const id = getByText(/f8842f63/);
+      const id = getByText("f8842f63");
       expect(id).toBeInTheDocument();
       const detailsButton = within(id.closest("tr") as HTMLElement).getByText(
         "Details"

@@ -53,8 +53,8 @@ it(`displays the list of the mediation requests sent by the backend`, async () =
   mockedAxios.get.mockResolvedValue({ data: mediationsResponse });
   const history = createMemoryHistory();
   const { getByText } = await renderAllRequests(history);
-  const firstMediationRequestId = getByText(/4ae77193/);
-  const secondMediationRequestId = getByText(/f8842f63/);
+  const firstMediationRequestId = getByText("4ae77193");
+  const secondMediationRequestId = getByText("f8842f63");
   expect(firstMediationRequestId).toBeInTheDocument();
   expect(secondMediationRequestId).toBeInTheDocument();
 });

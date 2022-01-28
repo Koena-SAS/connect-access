@@ -36,6 +36,7 @@ function MediationRequestsList({
   ];
   const rowsInfos = mediationRequests.map((request) => {
     const requestDate = new Date(request.requestDate ? request.requestDate : 0);
+    const requestId = request.id ? request.id.substring(0, 8) : "Unknown ID";
     return {
       key: request.id ? request.id : "undefined",
       infos: [
@@ -46,7 +47,7 @@ function MediationRequestsList({
           text: <Trans id={statusMap[request.status]} />,
         },
         {
-          text: request.id ? request.id.substring(0, 8) : "Unknown ID",
+          text: requestId,
         },
         {
           text: (
@@ -62,7 +63,9 @@ function MediationRequestsList({
                 })}
                 startIcon={<ZoomInIcon />}
               >
-                <Trans>Details</Trans>
+                <Trans>
+                  Details<span className="sr-only">: {requestId}</span>
+                </Trans>
               </Button>
             </>
           ),

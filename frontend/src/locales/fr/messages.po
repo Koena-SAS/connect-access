@@ -37,7 +37,7 @@ msgstr "<0>Chrome</0>"
 msgid "<0>Close sidebar</0>"
 msgstr "<0>Cacher le menu</0>"
 
-#: src/admin/FilterMediationRequests.tsx:103
+#: src/admin/FilterMediationRequests.tsx:70
 msgid "<0>Closed</0>"
 msgstr "<0>Fermé</0>"
 
@@ -72,7 +72,7 @@ msgstr "<0>Organisation externe</0>"
 msgid "<0>Firefox</0>"
 msgstr "<0>Firefox</0>"
 
-#: src/admin/FilterMediationRequests.tsx:76
+#: src/admin/FilterMediationRequests.tsx:43
 msgid "<0>Incomplete</0>"
 msgstr "<0>Incomplet</0>"
 
@@ -88,11 +88,11 @@ msgstr "<0>Clavier</0>"
 msgid "<0>Letter</0>"
 msgstr "<0>Lettre</0>"
 
-#: src/admin/FilterMediationRequests.tsx:100
+#: src/admin/FilterMediationRequests.tsx:67
 msgid "<0>Mediating</0>"
 msgstr "<0>En cours de médiation</0>"
 
-#: src/admin/FilterMediationRequests.tsx:106
+#: src/admin/FilterMediationRequests.tsx:73
 msgid "<0>Mediation failed</0>"
 msgstr "<0>La médiation a échoué</0>"
 
@@ -108,7 +108,6 @@ msgstr "<0>Microsoft Edge</0>"
 msgid "<0>Organization (partner)</0>"
 msgstr "<0>Organisation partenaire</0>"
 
-#: src/admin/FilterMediationRequests.tsx:123
 #: src/admin/requestDetail/TraceReportForm.tsx:203
 #: src/admin/requestDetail/TraceReportForm.tsx:324
 #: src/mediationForm/fields/AssitiveTechnologyAdminFields.tsx:112
@@ -116,7 +115,7 @@ msgstr "<0>Organisation partenaire</0>"
 msgid "<0>Other</0>"
 msgstr "<0>Autre</0>"
 
-#: src/admin/FilterMediationRequests.tsx:84
+#: src/admin/FilterMediationRequests.tsx:51
 msgid "<0>Request filed</0>"
 msgstr "<0>Demande déposée</0>"
 
@@ -132,19 +131,19 @@ msgstr "<0>Clavier virtuel</0>"
 msgid "<0>Vocal command software</0>"
 msgstr "<0>Logiciel de commande vocale</0>"
 
-#: src/admin/FilterMediationRequests.tsx:87
+#: src/admin/FilterMediationRequests.tsx:54
 msgid "<0>Waiting for administrative validation</0>"
 msgstr "<0>En attente de validation administrative</0>"
 
-#: src/admin/FilterMediationRequests.tsx:92
+#: src/admin/FilterMediationRequests.tsx:59
 msgid "<0>Waiting for contact</0>"
 msgstr "<0>En attente de réponse de l'organisation</0>"
 
-#: src/admin/FilterMediationRequests.tsx:79
+#: src/admin/FilterMediationRequests.tsx:46
 msgid "<0>Waiting for mediator validation</0>"
 msgstr "<0>En attente de validation par le médiateur</0>"
 
-#: src/admin/FilterMediationRequests.tsx:95
+#: src/admin/FilterMediationRequests.tsx:62
 msgid "<0>Waiting for second contact</0>"
 msgstr "<0>En attente de réponse après relance</0>"
 
@@ -220,13 +219,12 @@ msgstr "Admin"
 msgid "Admin content"
 msgstr "Contenu de l'interface d'administration"
 
-#: src/admin/FilterMediationRequests.tsx:75
-#: src/admin/FilterMediationRequests.tsx:122
+#: src/admin/FilterMediationRequests.tsx:42
 msgid "All"
 msgstr "Toutes"
 
-#: src/admin/AllRequests.tsx:53
-#: src/admin/AllRequests.tsx:56
+#: src/admin/AllRequests.tsx:36
+#: src/admin/AllRequests.tsx:39
 #: src/admin/Menu.tsx:213
 #: src/admin/requestDetail/History.tsx:16
 #: src/admin/requestDetail/RequestDetail.tsx:39
@@ -250,10 +248,6 @@ msgstr "Android"
 #: src/mediationForm/fields/FurtherInfoFields.tsx:34
 msgid "Anything else about your problem?"
 msgstr "Autre chose concernant votre problème ?"
-
-#: src/admin/FilterMediationRequests.tsx:117
-msgid "Application:"
-msgstr "Application :"
 
 #: src/mediationForm/fields/AssitiveTechnologyAdminFields.tsx:56
 #: src/mediationForm/fields/AssitiveTechnologyAdminFields.tsx:63
@@ -415,9 +409,12 @@ msgstr "Décrivez les actions que vous avez faites pour accéder au contenu ou a
 #: src/admin/requestDetail/RequestDetail.tsx:40
 #: src/admin/requestDetail/TraceReports.tsx:81
 #: src/mediationRequests/MediationRequestsList.tsx:35
-#: src/mediationRequests/MediationRequestsList.tsx:65
 msgid "Details"
 msgstr "Détails"
+
+#: src/mediationRequests/MediationRequestsList.tsx:66
+msgid "Details<0>: {requestId}</0>"
+msgstr "Détails<0> : {requestId}</0>"
 
 #: src/mediationForm/fields/NavigationContextFields.tsx:73
 #: src/mediationRequests/MediationRequestsDetail.tsx:224
@@ -491,7 +488,7 @@ msgstr "Exemple de format correct : nom@domaine.fr"
 msgid "External organization"
 msgstr "Organisation externe"
 
-#: src/admin/FilterMediationRequests.tsx:61
+#: src/admin/FilterMediationRequests.tsx:28
 msgid "Filter by:"
 msgstr "Filtrer par :"
 
@@ -637,7 +634,7 @@ msgstr "Menu principal"
 msgid "Mediating"
 msgstr "En cours de médiation"
 
-#: src/admin/AllRequests.tsx:56
+#: src/admin/AllRequests.tsx:39
 #: src/admin/Menu.tsx:207
 #: src/admin/requestDetail/History.tsx:15
 #: src/admin/requestDetail/RequestDetail.tsx:38
@@ -931,7 +928,7 @@ msgstr "Statistiques"
 msgid "Status"
 msgstr "Statut"
 
-#: src/admin/FilterMediationRequests.tsx:70
+#: src/admin/FilterMediationRequests.tsx:37
 msgid "Status:"
 msgstr "Statut :"
 
@@ -1221,7 +1218,7 @@ msgstr "Vous allez recevoir un courriel, avec un code à 6 chiffres dedans qu'il
 msgid "Your mediation request has been successfully sent !"
 msgstr "Votre demande de médiation a bien été envoyée !"
 
-#: src/mediationRequests/MediationRequestsList.tsx:76
+#: src/mediationRequests/MediationRequestsList.tsx:79
 msgid "Your mediation requests' list sorted by date (the most recent first)"
 msgstr "Vos demandes de médiation triées par date (les plus récentes en premier)"
 
