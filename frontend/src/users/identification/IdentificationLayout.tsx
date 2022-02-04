@@ -1,10 +1,10 @@
 import { t } from "@lingui/macro";
 import type { SnackbarCloseReason } from "@material-ui/core";
-import Dialog from "@material-ui/core/Dialog";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { PATHS } from "../../constants/paths";
 import ConfigDataContext from "../../contexts/configData";
+import Dialog from "../../forms/Dialog";
 import Snackbar from "../../forms/Snackbar";
 import { useGeneratePrefixedPath } from "../../hooks";
 import Page from "../../Page";

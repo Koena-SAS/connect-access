@@ -1,8 +1,8 @@
 import { Trans } from "@lingui/macro";
-import Dialog from "@material-ui/core/Dialog";
 import { ReactNode, useEffect, useRef } from "react";
 import CancelButton from "../forms/buttons/CancelButton";
 import DoneButton from "../forms/buttons/DoneButton";
+import Dialog from "./Dialog";
 
 type ConfirmationDialogProps = {
   questionText: ReactNode;

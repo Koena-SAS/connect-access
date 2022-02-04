@@ -1,7 +1,6 @@
 import { t, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import Checkbox from "@material-ui/core/Checkbox";
-import Dialog from "@material-ui/core/Dialog";
 import AdapterDateFns from "@material-ui/lab/AdapterDateFns";
 import DateTimePicker from "@material-ui/lab/DateTimePicker";
 import LocalizationProvider from "@material-ui/lab/LocalizationProvider";
@@ -15,6 +14,7 @@ import { mutate } from "swr";
 import { TextField } from "../../forms";
 import CancelButton from "../../forms/buttons/CancelButton";
 import DoneButton from "../../forms/buttons/DoneButton";
+import Dialog from "../../forms/Dialog";
 import { useAddTraceReport, useEditTraceReport } from "../../hooks";
 import type {
   ContactEntityType,
