@@ -110,9 +110,6 @@ describe("Accessibility", () => {
       .getAllByRole("heading", {
         level: 2,
       })
-      .filter(function removeLogo(element: HTMLElement, index: number) {
-        return index > 0;
-      })
       .map(function getTitleButton(element: HTMLElement) {
         return within(element).getByRole("button");
       });

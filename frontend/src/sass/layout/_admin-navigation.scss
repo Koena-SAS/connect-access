@@ -6,7 +6,6 @@
   top: 25px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   overflow-y: auto;
   overflow-x: hidden;
   transition: all ease 0.3s;
@@ -91,6 +90,13 @@
   }
   &__title {
     @include sr-only;
+  }
+  &__title-logo {
+    border-bottom: 1px solid #ebebeb;
+    display: flex;
+    justify-content: center;
+    margin: 1.5rem 0 0.3rem;
+    padding: 0;
   }
   &__title-logo-link {
     display: block;

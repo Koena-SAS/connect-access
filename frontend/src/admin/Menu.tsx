@@ -148,47 +148,45 @@ function Menu() {
         ref={menuRef}
         id="nav-menu"
       >
+        <header role="banner" className="admin-navigation__title-logo">
+          <h1>
+            <NavLink
+              exact={true}
+              to={generatePrefixedPath(PATHS.ROOT)}
+              className="admin-navigation__title-logo-link"
+            >
+              {openedOrMobileMenu ? (
+                <>
+                  <img
+                    src={logoBackground}
+                    alt=""
+                    className="admin-navigation__logo-background"
+                  />
+                  <img
+                    src={
+                      require(`../images/${configData.logoFilename}`).default
+                    }
+                    alt={t`${configData.platformName} homepage`}
+                    className="admin-navigation__logo"
+                  />
+                </>
+              ) : (
+                <img
+                  src={
+                    require(`../images/${configData.logoFilenameSmall}`).default
+                  }
+                  alt={t`${configData.platformName} homepage`}
+                  className="admin-navigation__logo-small"
+                />
+              )}
+            </NavLink>
+          </h1>
+        </header>
         <nav role="navigation" id="navigation">
           <h1 className="admin-navigation__title">
             <Trans>Main menu</Trans>
           </h1>
           <ul className="admin-navigation__list">
-            <li className="admin-navigation__home admin-navigation__item">
-              <h2 className="admin-navigation__title-logo">
-                <NavLink
-                  exact={true}
-                  to={generatePrefixedPath(PATHS.ROOT)}
-                  className="admin-navigation__title-logo-link"
-                >
-                  {openedOrMobileMenu ? (
-                    <>
-                      <img
-                        src={logoBackground}
-                        alt=""
-                        className="admin-navigation__logo-background"
-                      />
-                      <img
-                        src={
-                          require(`../images/${configData.logoFilename}`)
-                            .default
-                        }
-                        alt={t`${configData.platformName} homepage`}
-                        className="admin-navigation__logo"
-                      />
-                    </>
-                  ) : (
-                    <img
-                      src={
-                        require(`../images/${configData.logoFilenameSmall}`)
-                          .default
-                      }
-                      alt={t`${configData.platformName} homepage`}
-                      className="admin-navigation__logo-small"
-                    />
-                  )}
-                </NavLink>
-              </h2>
-            </li>
             <MenuItem
               itemText={t`Dashboard`}
               ItemIcon={DashboardIcon}
