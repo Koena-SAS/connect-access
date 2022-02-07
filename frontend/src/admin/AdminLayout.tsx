@@ -2,8 +2,8 @@ import { Paths } from "../constants/paths";
 import { useAdminMediationRequests } from "../hooks";
 import QuickLinks from "../QuickLinks";
 import type { Langs } from "../types/types";
+import Aside from "./Aside";
 import Main from "./Main";
-import Menu from "./Menu";
 
 type AdminLayoutProps = {
   token: string;
@@ -36,7 +36,7 @@ function AdminLayout({
           excludeFooter={true}
         />
       </div>
-      <Menu />
+      <Aside />
       <Main token={token} paths={paths} />
     </div>
   );

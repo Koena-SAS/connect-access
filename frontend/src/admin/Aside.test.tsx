@@ -12,11 +12,11 @@ import { PATHS_WITHOUT_PREFIX } from "../constants/paths";
 import ConfigDataContext from "../contexts/configData";
 import { initLanguagesForTesting } from "../i18nTestHelper";
 import { configData } from "../testUtils";
-import Menu from "./Menu";
+import Aside from "./Aside";
 
 initLanguagesForTesting();
 
-function renderMenu(history?: any, generatedPaths?: any, paths?: any) {
+function renderAside(history?: any, generatedPaths?: any, paths?: any) {
   if (!paths) {
     paths = PATHS_WITHOUT_PREFIX;
   }
@@ -34,7 +34,7 @@ function renderMenu(history?: any, generatedPaths?: any, paths?: any) {
       <I18nProvider i18n={i18n}>
         <Router history={history}>
           <Route path={paths.ROOT}>
-            <Menu />
+            <Aside />
           </Route>
         </Router>
       </I18nProvider>
@@ -45,7 +45,7 @@ function renderMenu(history?: any, generatedPaths?: any, paths?: any) {
 describe("Accessibility", () => {
   it(`switches to the next accordion title when using the down arrow, until
   the last title`, () => {
-    const app = renderMenu();
+    const app = renderAside();
     const titleButtons = getTitleButtons(app);
     titleButtons[0].focus();
     for (let i = 0; i < titleButtons.length; i++) {
@@ -60,7 +60,7 @@ describe("Accessibility", () => {
 
   it(`switches to the previous accordion title when using the up arrow, until
   the first title.`, () => {
-    const app = renderMenu();
+    const app = renderAside();
     const titleButtons = getTitleButtons(app);
     titleButtons[titleButtons.length - 1].focus();
     for (let i = titleButtons.length - 1; i >= 0; i--) {
@@ -74,7 +74,7 @@ describe("Accessibility", () => {
   });
 
   it(`switches to the first accordion title when using the home key`, () => {
-    const app = renderMenu();
+    const app = renderAside();
     const titleButtons = getTitleButtons(app);
     titleButtons[2].focus();
     fireEvent.keyDown(titleButtons[2], {
@@ -90,7 +90,7 @@ describe("Accessibility", () => {
   });
 
   it(`switches to the last accordion title when using the end key`, () => {
-    const app = renderMenu();
+    const app = renderAside();
     const titleButtons = getTitleButtons(app);
     titleButtons[1].focus();
     fireEvent.keyDown(titleButtons[1], {
