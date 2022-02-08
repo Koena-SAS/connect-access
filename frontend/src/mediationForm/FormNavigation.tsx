@@ -83,11 +83,15 @@ function FormNavigation({
     type TabProps = {
       id: string;
       role: string;
+      "aria-selected": "true" | "false";
       "aria-controls"?: string;
+      tabIndex: 0 | -1;
     };
     const props: TabProps = {
       id: `mediation-tab-${index}`,
       role: "tab",
+      "aria-selected": isActiveTab ? "true" : "false",
+      tabIndex: isActiveTab ? 0 : -1,
     };
     if (isActiveTab) {
       props["aria-controls"] = `mediation-tabpanel-${index}`;
@@ -163,13 +167,15 @@ function FormNavigation({
 
   return (
     <>
-      <div
-        role="tablist"
-        className="mediation-request__navigation"
-        aria-labelledby="mediation-form-title"
-        aria-orientation={isTablistVertical ? "vertical" : "horizontal"}
-      >
-        <Stepper nonLinear activeStep={activeStep} className="stepper">
+      <div className="mediation-request__navigation">
+        <Stepper
+          nonLinear
+          activeStep={activeStep}
+          className="stepper"
+          role="tablist"
+          aria-labelledby="mediation-form-title"
+          aria-orientation={isTablistVertical ? "vertical" : "horizontal"}
+        >
           {stepLabels.map((label: string, index: number) => {
             const disabled = index !== 0 && !completed[(index - 1) as StepType];
             const iconLabel = completed[index as StepType]
@@ -188,10 +194,8 @@ function FormNavigation({
                   className={`stepper__button ${isActiveStep ? "active" : ""} ${
                     !disabled ? "unlocked" : ""
                   }`}
-                  tabIndex={isActiveStep ? 0 : -1}
-                  aria-selected={isActiveStep ? "true" : "false"}
-                  disabled={disabled}
                   {...tabProps(index as StepType, isActiveStep)}
+                  disabled={disabled}
                   ref={(element) =>
                     (tabs.current[index as StepType] = element
                       ? element
