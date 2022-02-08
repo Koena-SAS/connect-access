@@ -28,12 +28,12 @@ msgstr "Anglais"
 
 #: config/settings/base.py:341
 msgid "Your Login Token"
-msgstr "Votre jeton de connexion"
+msgstr "Votre code de connexion"
 
 #: config/settings/base.py:342
 #, python-format
 msgid "Enter this token to sign in: %s"
-msgstr "Veuillez entrer ce jeton pour vous connecter : %s"
+msgstr "Veuillez entrer ce code pour vous connecter : %s"
 
 #: connect_access/configuration/admin.py:16
 #: connect_access/configuration/admin.py:39
@@ -706,7 +706,7 @@ msgstr "L'équipe %(site_name)s"
 
 #: connect_access/users/templates/users/emails/passwordless_token_email.html:7
 msgid "Your Login Token!"
-msgstr "Votre jeton de connexion !"
+msgstr "Votre code de connexion !"
 
 #: connect_access/users/templates/users/emails/passwordless_token_email.html:10
 #, python-format
