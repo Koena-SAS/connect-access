@@ -81,6 +81,7 @@ THIRD_PARTY_APPS = [
     "colorfield",
     "sass_processor",
     "solo.apps.SoloAppConfig",
+    "pagedown.apps.PagedownConfig",
 ]
 
 LOCAL_APPS = [

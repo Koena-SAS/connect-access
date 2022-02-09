@@ -31,3 +31,4 @@ django-solo==1.2.0  # https://github.com/lazybird/django-solo
 django-extensions==3.1.2  # https://github.com/django-extensions/django-extensions
 django-csp==3.7  # https://github.com/mozilla/django-csp
 drfpasswordless==1.5.7  # https://github.com/aaronn/django-rest-framework-passwordless
+django-pagedown==2.2.1  # https://github.com/timmyomahony/django-pagedown

@@ -21,6 +21,8 @@ class ContactInformationFactory(DjangoModelFactory):
     website_en = Faker("url")
     website_text_fr = Faker("paragraph")
     website_text_en = Faker("paragraph")
+    terms_of_servce_fr = Faker("paragraph")
+    terms_of_servce_en = Faker("paragraph")
 
     class Meta:
         model = ContactInformation

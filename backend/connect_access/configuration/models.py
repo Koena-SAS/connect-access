@@ -67,6 +67,11 @@ class ContactInformation(SingletonModel):
             verbose_name=_("Website display text"), max_length=255, blank=True
         )
     )
+    terms_of_servce = TranslatedField(
+        models.TextField(
+            verbose_name=_("Terms of service (please use Markdown format)"), blank=True
+        )
+    )
 
     def __str__(self) -> str:
         return str(self.email)

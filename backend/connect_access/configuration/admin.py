@@ -1,5 +1,7 @@
 from django.contrib import admin
+from django.db import models
 from django.utils.translation import gettext_lazy as _
+from pagedown.widgets import AdminPagedownWidget
 from translated_fields import TranslatedFieldAdmin
 
 from .models import AboutServiceInformation, ContactInformation
@@ -25,7 +27,14 @@ class ContactInformationAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
                 )
             },
         ),
+        (
+            _("Terms of service"),
+            {"fields": ((*ContactInformation.terms_of_servce.fields,),)},
+        ),
     )
+    formfield_overrides = {
+        models.TextField: {"widget": AdminPagedownWidget},
+    }
 
 
 class AboutServiceInformationAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
