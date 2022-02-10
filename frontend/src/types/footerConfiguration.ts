@@ -49,6 +49,10 @@ type ContactInformation = {
     fr: string;
     en: string;
   };
+  termsOfService?: {
+    fr: string;
+    en: string;
+  };
 };
 
 type ContactInformationRecieved = {

@@ -121,9 +121,9 @@ function useFooterAboutService(): UseFooterAboutServiceReturn {
   };
 }
 
-type UseFooterContactInformationReturn = {
-  footerContactInformation: ContactInformation;
-  footerContactInformationError: unknown;
+type UseContactInformationReturn = {
+  contactInformation: ContactInformation;
+  contactInformationError: unknown;
 };
 
 /**
@@ -131,14 +131,14 @@ type UseFooterContactInformationReturn = {
  *
  * @returns data and error if any.
  */
-function useFooterContactInformation(): UseFooterContactInformationReturn {
+function useContactInformation(): UseContactInformationReturn {
   const { data, error } = useSWR<ContactInformationRecieved>(
     "/api/configuration/contact-information/",
     fetcher
   );
   return {
-    footerContactInformation: keysToCamel(data) as ContactInformation,
-    footerContactInformationError: error,
+    contactInformation: keysToCamel(data) as ContactInformation,
+    contactInformationError: error,
   };
 }
 
@@ -147,5 +147,5 @@ export {
   useUserDetails,
   useOrganizationApp,
   useFooterAboutService,
-  useFooterContactInformation,
+  useContactInformation,
 };

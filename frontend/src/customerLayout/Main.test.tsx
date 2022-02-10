@@ -115,6 +115,9 @@ describe("Routing tests when not logged in", () => {
   it("displays correct item when visiting route /user-requests/:id and not logged", async () => {
     await checkOnlyNeededComponentIsRendered("USER_REQUEST", logged.NO);
   });
+  it("displays correct item when visiting route /terms-of-service and not logged", async () => {
+    await checkOnlyNeededComponentIsRendered("TERMS_OF_SERVICE", logged.NO);
+  });
 });
 
 describe("Routing tests when logged in", () => {
@@ -143,6 +146,9 @@ describe("Routing tests when logged in", () => {
   it("displays correct item when visiting route /user-requests/:id and logged", async () => {
     await checkOnlyNeededComponentIsRendered("USER_REQUEST", logged.YES);
   });
+  it("displays correct item when visiting route /terms-of-service and logged", async () => {
+    await checkOnlyNeededComponentIsRendered("TERMS_OF_SERVICE", logged.YES);
+  });
 });
 
 async function checkOnlyNeededComponentIsRendered(
@@ -159,7 +165,8 @@ async function checkOnlyNeededComponentIsRendered(
         generatedPaths,
         paths
       );
-      const { queryByTestId, queryByText, getByText, getByTestId } = app;
+      const { queryByTestId, queryByText, getByText, getByTestId, getByRole } =
+        app;
       if (routeName === "LOGIN" && !isLogged) {
         const loginModal = getByTestId("loginSubmit");
         expect(loginModal).toBeInTheDocument();
@@ -201,6 +208,15 @@ async function checkOnlyNeededComponentIsRendered(
       } else {
         const userMediation = queryByText(/Mediation request details/);
         expect(userMediation).not.toBeInTheDocument();
+      }
+      if (routeName === "TERMS_OF_SERVICE") {
+        const termsOfService = getByRole("heading", {
+          name: /Terms of service/,
+        });
+        expect(termsOfService).toBeInTheDocument();
+      } else {
+        const termsOfService = queryByText(/Terms of service/);
+        expect(termsOfService).not.toBeInTheDocument();
       }
     }
   );
@@ -319,6 +335,17 @@ describe("renders correctly document title", () => {
         await checkRendersCorrectTitle(
           generatedPaths.USER_REQUEST,
           "Connect Access - My mediation request detail",
+          paths
+        );
+      }
+    );
+  });
+  it(`renders correct title when visiting route /terms-of-service`, async () => {
+    await runWithAndWithoutOrganizationPrefix(
+      async (generatedPaths: Paths, paths: Paths) => {
+        await checkRendersCorrectTitle(
+          generatedPaths.TERMS_OF_SERVICE,
+          "Connect Access - Terms of service",
           paths
         );
       }

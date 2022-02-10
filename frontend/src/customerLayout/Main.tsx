@@ -2,6 +2,7 @@ import { t } from "@lingui/macro";
 import { SnackbarCloseReason } from "@material-ui/core/Snackbar";
 import { useContext, useState } from "react";
 import { Route, Switch } from "react-router-dom";
+import TermsOfService from "../additionalPages/TermsOfService";
 import type { Paths } from "../constants/paths";
 import ConfigDataContext from "../contexts/configData";
 import Snackbar from "../forms/Snackbar";
@@ -128,6 +129,11 @@ function Main({
             title={t`${configData.platformName} - My mediation request detail`}
           >
             {isLogged && <UserMediation token={token} />}
+          </Page>
+        </Route>
+        <Route path={paths.TERMS_OF_SERVICE} exact>
+          <Page title={t`${configData.platformName} - Terms of service`}>
+            <TermsOfService />
           </Page>
         </Route>
       </Switch>

@@ -29,7 +29,7 @@ class ContactInformationAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
         ),
         (
             _("Terms of service"),
-            {"fields": ((*ContactInformation.terms_of_servce.fields,),)},
+            {"fields": ((*ContactInformation.terms_of_service.fields,),)},
         ),
     )
     formfield_overrides = {

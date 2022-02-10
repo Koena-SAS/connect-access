@@ -336,6 +336,10 @@ export const resetAxiosMocks = () => {
         fr: "koena.net",
         en: "koena.net",
       },
+      terms_of_service: {
+        fr: "Contenu des conditions générales d'utilisation",
+        en: "Terms of service content",
+      },
     },
   };
   mockedAxios.post.mockImplementation((url) => {

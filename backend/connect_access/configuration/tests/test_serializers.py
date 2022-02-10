@@ -25,8 +25,8 @@ def test_contact_information_serializes_correctly_all_fields():
     assertContains(response, contact_information.website_en)
     assertContains(response, contact_information.website_text_fr)
     assertContains(response, contact_information.website_text_en)
-    assertContains(response, contact_information.terms_of_servce_fr)
-    assertContains(response, contact_information.terms_of_servce_en)
+    assertContains(response, contact_information.terms_of_service_fr)
+    assertContains(response, contact_information.terms_of_service_en)
 
 
 def test_about_services_serializes_correctly_all_fields():

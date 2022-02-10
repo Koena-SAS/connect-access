@@ -33,7 +33,7 @@ class ContactInformationSerializer(serializers.ModelSerializer, TranslatableSeri
         data = self._reorganize_fields_with_lang("phone_number_text", data)
         data = self._reorganize_fields_with_lang("website", data)
         data = self._reorganize_fields_with_lang("website_text", data)
-        data = self._reorganize_fields_with_lang("terms_of_servce", data)
+        data = self._reorganize_fields_with_lang("terms_of_service", data)
         return data
 
     class Meta:
@@ -46,7 +46,7 @@ class ContactInformationSerializer(serializers.ModelSerializer, TranslatableSeri
             + ContactInformation.phone_number_text.fields
             + ContactInformation.website.fields
             + ContactInformation.website_text.fields
-            + ContactInformation.terms_of_servce.fields
+            + ContactInformation.terms_of_service.fields
         )
 
 
