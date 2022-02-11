@@ -4,10 +4,10 @@ import { render, RenderResult, waitFor } from "@testing-library/react";
 import { cache, SWRConfig } from "swr";
 import { initLanguagesForTesting } from "../i18nTestHelper";
 import { resetAxiosMocks } from "../testUtils";
+import "../__mocks__/ReactMarkdown";
 import TermsOfService from "./TermsOfService";
 
 initLanguagesForTesting();
-jest.mock("axios");
 
 beforeEach(async () => {
   resetAxiosMocks();

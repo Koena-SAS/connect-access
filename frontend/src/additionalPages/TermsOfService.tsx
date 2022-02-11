@@ -1,5 +1,6 @@
 import { Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import ReactMarkdown from "react-markdown";
 import { useContactInformation } from "../hooks";
 import { Langs } from "../types/types";
 
@@ -12,8 +13,11 @@ function TermsOfService() {
         <Trans>Terms of service</Trans>
       </h1>
       <div className="page-base__content terms-of-service__content">
-        {contactInformation?.termsOfService &&
-          contactInformation.termsOfService[i18n.locale as Langs]}
+        {contactInformation?.termsOfService && (
+          <ReactMarkdown>
+            {contactInformation.termsOfService[i18n.locale as Langs]}
+          </ReactMarkdown>
+        )}
       </div>
     </div>
   );

@@ -32,9 +32,17 @@ import {
 import type { MediationRequestRecieved } from "./types/mediationRequest";
 import type { Langs } from "./types/types";
 
-initLanguagesForTesting();
-jest.mock("axios");
+jest.mock(
+  "react-markdown",
+  () =>
+    ({ children }: { children: React.ReactNode }) => {
+      return <>{children}</>;
+    }
+);
 
+initLanguagesForTesting();
+
+jest.mock("axios");
 const resetStateMachine = () => {
   // this is needed to clean the store in jsdom sessionStorage
   render(

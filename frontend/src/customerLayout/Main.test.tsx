@@ -23,6 +23,7 @@ import {
 } from "../testUtils";
 import type { MediationRequestRecieved } from "../types/mediationRequest";
 import { fillResetPasswordConfirmFields } from "../users/password/testUtils";
+import "../__mocks__/ReactMarkdown";
 import Main from "./Main";
 
 initLanguagesForTesting();

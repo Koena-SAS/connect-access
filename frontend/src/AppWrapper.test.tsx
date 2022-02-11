@@ -7,6 +7,14 @@ import { initLanguagesForTesting } from "./i18nTestHelper";
 import { messages as frMessages } from "./locales/fr/messages";
 import { configData } from "./testUtils";
 
+jest.mock(
+  "react-markdown",
+  () =>
+    ({ children }: { children: React.ReactNode }) => {
+      return <>{children}</>;
+    }
+);
+
 initLanguagesForTesting();
 i18n.load({
   fr: frMessages,
