@@ -1,4 +1,5 @@
-import { mediationRequests, mediationRequestsResponse } from "../testUtils";
+import { mediationRequests } from "../testUtils";
+import { mediationRequestsResponse } from "../__mocks__/axiosMock";
 import { keysToCamel, keysToSnake } from "./adapterUtils";
 
 it("transforms snake case keys to camel case keys", () => {

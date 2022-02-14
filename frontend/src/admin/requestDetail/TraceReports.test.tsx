@@ -15,14 +15,12 @@ import { initLanguagesForTesting } from "../../i18nTestHelper";
 import {
   click,
   generatePathsWithoutPrefix,
-  mockedAxios,
-  resetAxiosMocks,
   runWithAndWithoutOrganizationPrefix,
 } from "../../testUtils";
+import { mockedAxios, resetAxiosMocks } from "../../__mocks__/axiosMock";
 import TraceReports from "./TraceReports";
 
 initLanguagesForTesting();
-jest.mock("axios");
 
 beforeEach(async () => {
   resetAxiosMocks();

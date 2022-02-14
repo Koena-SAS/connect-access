@@ -4,16 +4,19 @@ import {
   fireEvent,
   render,
   RenderResult,
+  waitFor,
   within,
 } from "@testing-library/react";
 import { createMemoryHistory } from "history";
 import { createStore, StateMachineProvider } from "little-state-machine";
 import * as reactDeviceDetect from "react-device-detect";
 import { Route, Router } from "react-router-dom";
+import { cache } from "swr";
 import type { Paths } from "../constants/paths";
 import { PATHS, PATHS_WITHOUT_PREFIX } from "../constants/paths";
 import { initLanguagesForTesting } from "../i18nTestHelper";
 import { click, runWithAndWithoutOrganizationPrefix } from "../testUtils";
+import { resetAxiosMocks } from "../__mocks__/axiosMock";
 import {
   checkStep1FieldValues,
   fillStep1MandatoryFields,
@@ -23,7 +26,7 @@ import UserInfo from "./UserInfo";
 
 initLanguagesForTesting();
 
-beforeEach(() => {
+beforeEach(async () => {
   createStore(
     {
       userInfo: {
@@ -39,6 +42,9 @@ beforeEach(() => {
     },
     {}
   );
+  resetAxiosMocks();
+  localStorage.clear();
+  await waitFor(() => cache.clear());
   (reactDeviceDetect.isBrowser as boolean) = true;
 });
 

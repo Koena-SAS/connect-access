@@ -1,13 +1,15 @@
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, waitFor } from "@testing-library/react";
 import { createMemoryHistory } from "history";
 import { createStore, StateMachineProvider } from "little-state-machine";
 import { Route, Router } from "react-router-dom";
+import { cache } from "swr";
 import type { Paths } from "../constants/paths";
 import { PATHS, PATHS_WITHOUT_PREFIX } from "../constants/paths";
 import { initLanguagesForTesting } from "../i18nTestHelper";
 import { click, runWithAndWithoutOrganizationPrefix } from "../testUtils";
+import { resetAxiosMocks } from "../__mocks__/axiosMock";
 import OrganizationInfo from "./OrganizationInfo";
 import {
   checkStep3FieldValues,
@@ -17,7 +19,7 @@ import {
 
 initLanguagesForTesting();
 
-beforeEach(() => {
+beforeEach(async () => {
   createStore(
     {
       organizationInfo: {
@@ -30,6 +32,9 @@ beforeEach(() => {
     },
     {}
   );
+  resetAxiosMocks();
+  localStorage.clear();
+  await waitFor(() => cache.clear());
 });
 
 describe("Errors on bad formatted input", () => {

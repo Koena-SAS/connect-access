@@ -12,9 +12,9 @@ import {
   click,
   generatePathsWithoutPrefix,
   generatePathsWithPrefix,
-  resetAxiosMocks,
   runWithAndWithoutOrganizationPrefix,
 } from "../testUtils";
+import { resetAxiosMocks } from "../__mocks__/axiosMock";
 import ProblemDescription from "./ProblemDescription";
 import {
   checkStep2FieldValues,
@@ -23,7 +23,6 @@ import {
 } from "./testUtils";
 
 initLanguagesForTesting();
-jest.mock("axios");
 
 const generatedPathsWithPrefix = generatePathsWithPrefix();
 const generatedPathsWithoutPrefix = generatePathsWithoutPrefix();

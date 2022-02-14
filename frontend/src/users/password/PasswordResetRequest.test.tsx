@@ -3,16 +3,11 @@ import { I18nProvider } from "@lingui/react";
 import { render, waitFor } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { initLanguagesForTesting } from "../../i18nTestHelper";
-import {
-  click,
-  fillField,
-  mockedAxios,
-  resetAxiosMocks,
-} from "../../testUtils";
+import { click, fillField } from "../../testUtils";
+import { mockedAxios, resetAxiosMocks } from "../../__mocks__/axiosMock";
 import PasswordResetRequest from "./PasswordResetRequest";
 import { fillResetPasswordFields } from "./testUtils";
 
-jest.mock("axios");
 initLanguagesForTesting();
 
 beforeEach(() => {

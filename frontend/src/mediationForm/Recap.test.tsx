@@ -11,15 +11,13 @@ import {
   click,
   generatePathsWithoutPrefix,
   generatePathsWithPrefix,
-  mockedAxios,
-  resetAxiosMocks,
   runWithAndWithoutOrganizationPrefix,
 } from "../testUtils";
+import { mockedAxios, resetAxiosMocks } from "../__mocks__/axiosMock";
 import Recap from "./Recap";
 import type { GlobalState, ProblemDescription } from "./updateAction";
 
 initLanguagesForTesting();
-jest.mock("axios");
 
 let storeContent: GlobalState;
 

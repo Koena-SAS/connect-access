@@ -16,10 +16,9 @@ import {
   configData,
   generatePathsWithoutPrefix,
   generatePathsWithPrefix,
-  mockedAxios,
-  resetAxiosMocks,
   runWithAndWithoutOrganizationPrefix,
 } from "../testUtils";
+import { mockedAxios, resetAxiosMocks } from "../__mocks__/axiosMock";
 import FormContainer from "./FormContainer";
 import type { Step } from "./StepsInitializer";
 import {
@@ -34,7 +33,6 @@ import {
 } from "./testUtils";
 
 initLanguagesForTesting();
-jest.mock("axios");
 
 const generatedPathsWithPrefix = generatePathsWithPrefix();
 const generatedPathsWithoutPrefix = generatePathsWithoutPrefix();

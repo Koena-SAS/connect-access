@@ -12,14 +12,13 @@ import {
   click,
   generatePathsWithoutPrefix,
   generatePathsWithPrefix,
-  resetAxiosMocks,
   runWithAndWithoutOrganizationPrefix,
 } from "../testUtils";
+import { resetAxiosMocks } from "../__mocks__/axiosMock";
 import FormNavigation from "./FormNavigation";
 import type { Completed, Step } from "./StepsInitializer";
 
 initLanguagesForTesting();
-jest.mock("axios");
 
 const generatedPathsWithPrefix = generatePathsWithPrefix();
 const generatedPathsWithoutPrefix = generatePathsWithoutPrefix();

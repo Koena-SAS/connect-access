@@ -1,5 +1,6 @@
 import { RenderResult, waitFor } from "@testing-library/react";
-import { click, fillField, mockedAxios } from "../../testUtils";
+import { click, fillField } from "../../testUtils";
+import { mockedAxios } from "../../__mocks__/axiosMock";
 
 export async function fillResetPasswordFields(
   app: RenderResult,

@@ -4,11 +4,11 @@ import type { RenderResult } from "@testing-library/react";
 import { render, waitFor } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { initLanguagesForTesting } from "../../i18nTestHelper";
-import { click, fillField, mockedAxios } from "../../testUtils";
+import { click, fillField } from "../../testUtils";
+import { mockedAxios } from "../../__mocks__/axiosMock";
 import Signup from "./Signup";
 import { checkBackendFieldsErrors, fillSignupFields } from "./testUtils";
 
-jest.mock("axios");
 initLanguagesForTesting();
 
 afterEach(() => {

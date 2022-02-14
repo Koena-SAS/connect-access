@@ -14,20 +14,18 @@ import type { Paths } from "../constants/paths";
 import { PATHS_WITHOUT_PREFIX } from "../constants/paths";
 import ConfigDataContext from "../contexts/configData";
 import { initLanguagesForTesting } from "../i18nTestHelper";
+import { configData, runWithAndWithoutOrganizationPrefix } from "../testUtils";
+import type { MediationRequestRecieved } from "../types/mediationRequest";
+import { fillResetPasswordConfirmFields } from "../users/password/testUtils";
 import {
-  configData,
   mediationRequestsResponse,
   mockedAxios,
   resetAxiosMocks,
-  runWithAndWithoutOrganizationPrefix,
-} from "../testUtils";
-import type { MediationRequestRecieved } from "../types/mediationRequest";
-import { fillResetPasswordConfirmFields } from "../users/password/testUtils";
-import "../__mocks__/ReactMarkdown";
+} from "../__mocks__/axiosMock";
+import "../__mocks__/reactMarkdownMock";
 import Main from "./Main";
 
 initLanguagesForTesting();
-jest.mock("axios");
 
 let userMediationsResponse: MediationRequestRecieved[];
 

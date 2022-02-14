@@ -10,15 +10,13 @@ import { initLanguagesForTesting } from "../../i18nTestHelper";
 import {
   click,
   configData,
-  mockedAxios,
-  resetAxiosMocks,
   runWithAndWithoutOrganizationPrefix,
 } from "../../testUtils";
+import { mockedAxios, resetAxiosMocks } from "../../__mocks__/axiosMock";
 import { fillResetPasswordFields } from "../password/testUtils";
 import IdentificationLayout from "./IdentificationLayout";
 import { fillLoginFields, fillSignupFields } from "./testUtils";
 
-jest.mock("axios");
 initLanguagesForTesting();
 
 beforeEach(() => {

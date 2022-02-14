@@ -5,16 +5,15 @@ import { createMemoryHistory } from "history";
 import { Route, Router } from "react-router-dom";
 import type { Paths } from "../../constants/paths";
 import { initLanguagesForTesting } from "../../i18nTestHelper";
+import { runWithAndWithoutOrganizationPrefix } from "../../testUtils";
+import type { MediationRequestRecieved } from "../../types/mediationRequest";
 import {
   mediationRequestsResponse,
   mockedAxios,
-  runWithAndWithoutOrganizationPrefix,
-} from "../../testUtils";
-import type { MediationRequestRecieved } from "../../types/mediationRequest";
+} from "../../__mocks__/axiosMock";
 import UserMediation from "./UserMediation";
 
 initLanguagesForTesting();
-jest.mock("axios");
 
 let userMediationsResponse: MediationRequestRecieved[];
 

@@ -21,17 +21,20 @@ import { initLanguagesForTesting } from "./i18nTestHelper";
 import type { Step } from "./mediationForm/StepsInitializer";
 import { ResetLittleStateMachine, unlockStep } from "./mediationForm/testUtils";
 import {
-  axiosGetResponseMe,
   click,
   configData,
   generatePathsWithoutPrefix,
   generatePathsWithPrefix,
-  mockedAxios,
-  resetAxiosMocks,
 } from "./testUtils";
 import type { MediationRequestRecieved } from "./types/mediationRequest";
 import type { Langs } from "./types/types";
+import {
+  axiosGetResponseMe,
+  mockedAxios,
+  resetAxiosMocks,
+} from "./__mocks__/axiosMock";
 
+initLanguagesForTesting();
 jest.mock(
   "react-markdown",
   () =>
@@ -39,9 +42,6 @@ jest.mock(
       return <>{children}</>;
     }
 );
-
-initLanguagesForTesting();
-
 jest.mock("axios");
 const resetStateMachine = () => {
   // this is needed to clean the store in jsdom sessionStorage

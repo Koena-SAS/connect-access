@@ -5,11 +5,11 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { cache, SWRConfig } from "swr";
 import ConfigDataContext from "../contexts/configData";
 import { initLanguagesForTesting } from "../i18nTestHelper";
-import { configData, mockedAxios, resetAxiosMocks } from "../testUtils";
+import { configData } from "../testUtils";
+import { mockedAxios, resetAxiosMocks } from "../__mocks__/axiosMock";
 import Header from "./Header";
 
 initLanguagesForTesting();
-jest.mock("axios");
 
 beforeEach(() => {
   resetAxiosMocks();

@@ -10,16 +10,15 @@ import { createMemoryHistory, History } from "history";
 import { Router } from "react-router-dom";
 import { cache, SWRConfig } from "swr";
 import { initLanguagesForTesting } from "../i18nTestHelper";
+import { MediationRequestRecieved } from "../types/mediationRequest";
 import {
   mediationRequestsResponse,
   mockedAxios,
   resetAxiosMocks,
-} from "../testUtils";
-import { MediationRequestRecieved } from "../types/mediationRequest";
+} from "../__mocks__/axiosMock";
 import AllRequests from "./AllRequests";
 
 initLanguagesForTesting();
-jest.mock("axios");
 
 let mediationsResponse: MediationRequestRecieved[];
 
