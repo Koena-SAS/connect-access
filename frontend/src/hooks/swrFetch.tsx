@@ -132,9 +132,11 @@ type UseContactInformationReturn = {
  * @returns data and error if any.
  */
 function useContactInformation(): UseContactInformationReturn {
+  const tenMinutes = 1000 * 60 * 10;
   const { data, error } = useSWR<ContactInformationRecieved>(
     "/api/configuration/contact-information/",
-    fetcher
+    fetcher,
+    { dedupingInterval: tenMinutes }
   );
   return {
     contactInformation: keysToCamel(data) as ContactInformation,

@@ -9,10 +9,15 @@ from .models import AboutServiceInformation, ContactInformation
 
 class ContactInformationAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
     list_display = (
-        "email",
-        "phone_number",
+        "get_email_text",
+        "phone_number_text",
         "website",
     )
+
+    def get_email_text(self, obj):
+        return obj.email_text if obj.email_text else "-----"
+
+    get_email_text.short_description = _("Email address display text")  # type: ignore
     fieldsets = (
         (
             _("Main information"),
