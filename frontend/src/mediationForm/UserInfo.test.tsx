@@ -14,7 +14,6 @@ import { Route, Router } from "react-router-dom";
 import { cache } from "swr";
 import type { Paths } from "../constants/paths";
 import { PATHS, PATHS_WITHOUT_PREFIX } from "../constants/paths";
-import { initLanguagesForTesting } from "../i18nTestHelper";
 import { click, runWithAndWithoutOrganizationPrefix } from "../testUtils";
 import { resetAxiosMocks } from "../__mocks__/axiosMock";
 import {
@@ -23,8 +22,6 @@ import {
   fillStep1NonMandatoryFields,
 } from "./testUtils";
 import UserInfo from "./UserInfo";
-
-initLanguagesForTesting();
 
 beforeEach(async () => {
   createStore(

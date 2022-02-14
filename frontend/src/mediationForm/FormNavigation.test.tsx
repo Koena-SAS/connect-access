@@ -7,7 +7,6 @@ import { createMemoryHistory } from "history";
 import { Route, Router } from "react-router-dom";
 import type { Paths } from "../constants/paths";
 import { PATHS, PATHS_WITHOUT_PREFIX } from "../constants/paths";
-import { initLanguagesForTesting } from "../i18nTestHelper";
 import {
   click,
   generatePathsWithoutPrefix,
@@ -17,8 +16,6 @@ import {
 import { resetAxiosMocks } from "../__mocks__/axiosMock";
 import FormNavigation from "./FormNavigation";
 import type { Completed, Step } from "./StepsInitializer";
-
-initLanguagesForTesting();
 
 const generatedPathsWithPrefix = generatePathsWithPrefix();
 const generatedPathsWithoutPrefix = generatePathsWithoutPrefix();

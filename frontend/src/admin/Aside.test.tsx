@@ -10,11 +10,8 @@ import { createMemoryHistory } from "history";
 import { Route, Router } from "react-router-dom";
 import { PATHS_WITHOUT_PREFIX } from "../constants/paths";
 import ConfigDataContext from "../contexts/configData";
-import { initLanguagesForTesting } from "../i18nTestHelper";
 import { configData } from "../testUtils";
 import Aside from "./Aside";
-
-initLanguagesForTesting();
 
 function renderAside(history?: any, generatedPaths?: any, paths?: any) {
   if (!paths) {

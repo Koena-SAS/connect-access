@@ -10,7 +10,6 @@ import { cache, SWRConfig } from "swr";
 import type { Paths } from "../constants/paths";
 import { PATHS, PATHS_WITHOUT_PREFIX } from "../constants/paths";
 import ConfigDataContext from "../contexts/configData";
-import { initLanguagesForTesting } from "../i18nTestHelper";
 import {
   click,
   configData,
@@ -31,8 +30,6 @@ import {
   ResetLittleStateMachine,
   unlockStep,
 } from "./testUtils";
-
-initLanguagesForTesting();
 
 const generatedPathsWithPrefix = generatePathsWithPrefix();
 const generatedPathsWithoutPrefix = generatePathsWithoutPrefix();

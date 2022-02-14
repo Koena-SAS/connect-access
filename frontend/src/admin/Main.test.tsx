@@ -7,12 +7,9 @@ import { cache, SWRConfig } from "swr";
 import type { Paths } from "../constants/paths";
 import { PATHS_WITHOUT_PREFIX } from "../constants/paths";
 import ConfigDataContext from "../contexts/configData";
-import { initLanguagesForTesting } from "../i18nTestHelper";
 import { configData, runWithAndWithoutOrganizationPrefix } from "../testUtils";
 import { resetAxiosMocks } from "../__mocks__/axiosMock";
 import Main from "./Main";
-
-initLanguagesForTesting();
 
 beforeEach(() => {
   resetAxiosMocks();

@@ -5,12 +5,9 @@ import { createMemoryHistory } from "history";
 import { Route, Router } from "react-router-dom";
 import { cache, SWRConfig } from "swr";
 import { PATHS_WITHOUT_PREFIX } from "../../constants/paths";
-import { initLanguagesForTesting } from "../../i18nTestHelper";
 import { generatePathsWithoutPrefix } from "../../testUtils";
 import { resetAxiosMocks } from "../../__mocks__/axiosMock";
 import RequestDetail from "./RequestDetail";
-
-initLanguagesForTesting();
 
 beforeEach(() => {
   resetAxiosMocks();

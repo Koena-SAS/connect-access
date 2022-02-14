@@ -6,7 +6,6 @@ import { Route, Router } from "react-router-dom";
 import type { Paths } from "../../constants/paths";
 import { PATHS_WITHOUT_PREFIX } from "../../constants/paths";
 import ConfigDataContext from "../../contexts/configData";
-import { initLanguagesForTesting } from "../../i18nTestHelper";
 import {
   click,
   configData,
@@ -16,8 +15,6 @@ import { mockedAxios, resetAxiosMocks } from "../../__mocks__/axiosMock";
 import { fillResetPasswordFields } from "../password/testUtils";
 import IdentificationLayout from "./IdentificationLayout";
 import { fillLoginFields, fillSignupFields } from "./testUtils";
-
-initLanguagesForTesting();
 
 beforeEach(() => {
   resetAxiosMocks();

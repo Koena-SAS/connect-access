@@ -5,15 +5,12 @@ import { createMemoryHistory } from "history";
 import { Route, Router } from "react-router-dom";
 import type { Paths } from "../constants/paths";
 import { PATHS, PATHS_WITHOUT_PREFIX } from "../constants/paths";
-import { initLanguagesForTesting } from "../i18nTestHelper";
 import {
   mediationRequests as mediationRequestsConst,
   runWithAndWithoutOrganizationPrefix,
 } from "../testUtils";
 import type { MediationRequest } from "../types/mediationRequest";
 import MediationRequestsList from "./MediationRequestsList";
-
-initLanguagesForTesting();
 
 let mediationRequests: MediationRequest[];
 

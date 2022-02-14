@@ -3,15 +3,12 @@ import { I18nProvider } from "@lingui/react";
 import { render, waitFor } from "@testing-library/react";
 import { createMemoryHistory } from "history";
 import { Router } from "react-router-dom";
-import { initLanguagesForTesting } from "../../i18nTestHelper";
 import type { MediationRequestRecieved } from "../../types/mediationRequest";
 import {
   mediationRequestsResponse,
   mockedAxios,
 } from "../../__mocks__/axiosMock";
 import UserMediations from "./UserMediations";
-
-initLanguagesForTesting();
 
 let userMediationsResponse: MediationRequestRecieved[];
 

@@ -6,15 +6,12 @@ import { Route, Router } from "react-router-dom";
 import type { Paths } from "../../constants/paths";
 import { PATHS_WITHOUT_PREFIX } from "../../constants/paths";
 import ConfigDataContext from "../../contexts/configData";
-import { initLanguagesForTesting } from "../../i18nTestHelper";
 import {
   click,
   configData,
   runWithAndWithoutOrganizationPrefix,
 } from "../../testUtils";
 import Identification from "./Identification";
-
-initLanguagesForTesting();
 
 describe("Click on tabs to chose login or signup", () => {
   it("displays only signup form when on /login path and clicking on signup tab", async () => {

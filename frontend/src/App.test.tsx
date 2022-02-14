@@ -17,7 +17,6 @@ import App from "./App";
 import type { Paths } from "./constants/paths";
 import { PATHS, PATHS_WITHOUT_PREFIX } from "./constants/paths";
 import ConfigDataContext from "./contexts/configData";
-import { initLanguagesForTesting } from "./i18nTestHelper";
 import type { Step } from "./mediationForm/StepsInitializer";
 import { ResetLittleStateMachine, unlockStep } from "./mediationForm/testUtils";
 import {
@@ -34,7 +33,6 @@ import {
   resetAxiosMocks,
 } from "./__mocks__/axiosMock";
 
-initLanguagesForTesting();
 jest.mock(
   "react-markdown",
   () =>

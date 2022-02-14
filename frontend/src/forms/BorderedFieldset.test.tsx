@@ -2,10 +2,7 @@ import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
 import { render } from "@testing-library/react";
 import React from "react";
-import { initLanguagesForTesting } from "../i18nTestHelper";
 import BorderedFieldset from "./BorderedFieldset";
-
-initLanguagesForTesting();
 
 const TestingProvider = ({ children }: { children: React.ReactNode }) => (
   <I18nProvider i18n={i18n}>{children}</I18nProvider>

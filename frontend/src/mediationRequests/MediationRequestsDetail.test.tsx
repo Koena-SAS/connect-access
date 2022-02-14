@@ -6,11 +6,8 @@ import { createMemoryHistory } from "history";
 import { Route, Router } from "react-router-dom";
 import type { Paths } from "../constants/paths";
 import { PATHS_WITHOUT_PREFIX } from "../constants/paths";
-import { initLanguagesForTesting } from "../i18nTestHelper";
 import { mediationRequests } from "../testUtils";
 import MediationRequestDetail from "./MediationRequestsDetail";
-
-initLanguagesForTesting();
 
 test.skip(`MediationRequestDetail display is already tested through
 the tests of mediationForm/Recap.test.js`, (): void => undefined);

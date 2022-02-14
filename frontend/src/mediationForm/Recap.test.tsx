@@ -6,7 +6,6 @@ import { createStore, StateMachineProvider } from "little-state-machine";
 import { Route, Router } from "react-router-dom";
 import type { Paths } from "../constants/paths";
 import { PATHS, PATHS_WITHOUT_PREFIX } from "../constants/paths";
-import { initLanguagesForTesting } from "../i18nTestHelper";
 import {
   click,
   generatePathsWithoutPrefix,
@@ -16,8 +15,6 @@ import {
 import { mockedAxios, resetAxiosMocks } from "../__mocks__/axiosMock";
 import Recap from "./Recap";
 import type { GlobalState, ProblemDescription } from "./updateAction";
-
-initLanguagesForTesting();
 
 let storeContent: GlobalState;
 

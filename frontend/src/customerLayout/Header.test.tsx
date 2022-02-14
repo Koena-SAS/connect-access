@@ -4,12 +4,9 @@ import { fireEvent, render, waitFor } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { cache, SWRConfig } from "swr";
 import ConfigDataContext from "../contexts/configData";
-import { initLanguagesForTesting } from "../i18nTestHelper";
 import { configData } from "../testUtils";
 import { mockedAxios, resetAxiosMocks } from "../__mocks__/axiosMock";
 import Header from "./Header";
-
-initLanguagesForTesting();
 
 beforeEach(() => {
   resetAxiosMocks();

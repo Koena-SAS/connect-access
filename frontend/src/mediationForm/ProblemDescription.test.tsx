@@ -7,7 +7,6 @@ import { Route, Router } from "react-router-dom";
 import { cache, SWRConfig } from "swr";
 import type { Paths } from "../constants/paths";
 import { PATHS, PATHS_WITHOUT_PREFIX } from "../constants/paths";
-import { initLanguagesForTesting } from "../i18nTestHelper";
 import {
   click,
   generatePathsWithoutPrefix,
@@ -21,8 +20,6 @@ import {
   fillStep2MandatoryFields,
   fillStep2NonMandatoryFields,
 } from "./testUtils";
-
-initLanguagesForTesting();
 
 const generatedPathsWithPrefix = generatePathsWithPrefix();
 const generatedPathsWithoutPrefix = generatePathsWithoutPrefix();

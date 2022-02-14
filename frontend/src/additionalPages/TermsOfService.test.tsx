@@ -2,12 +2,9 @@ import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
 import { render, RenderResult, waitFor } from "@testing-library/react";
 import { cache, SWRConfig } from "swr";
-import { initLanguagesForTesting } from "../i18nTestHelper";
 import { resetAxiosMocks } from "../__mocks__/axiosMock";
 import "../__mocks__/reactMarkdownMock";
 import TermsOfService from "./TermsOfService";
-
-initLanguagesForTesting();
 
 beforeEach(async () => {
   resetAxiosMocks();

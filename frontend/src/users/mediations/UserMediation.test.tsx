@@ -4,7 +4,6 @@ import { render, waitFor } from "@testing-library/react";
 import { createMemoryHistory } from "history";
 import { Route, Router } from "react-router-dom";
 import type { Paths } from "../../constants/paths";
-import { initLanguagesForTesting } from "../../i18nTestHelper";
 import { runWithAndWithoutOrganizationPrefix } from "../../testUtils";
 import type { MediationRequestRecieved } from "../../types/mediationRequest";
 import {
@@ -12,8 +11,6 @@ import {
   mockedAxios,
 } from "../../__mocks__/axiosMock";
 import UserMediation from "./UserMediation";
-
-initLanguagesForTesting();
 
 let userMediationsResponse: MediationRequestRecieved[];
 

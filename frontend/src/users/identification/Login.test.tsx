@@ -2,13 +2,10 @@ import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
 import { fireEvent, render, waitFor } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
-import { initLanguagesForTesting } from "../../i18nTestHelper";
 import { click, fillField } from "../../testUtils";
 import { mockedAxios, resetAxiosMocks } from "../../__mocks__/axiosMock";
 import Login from "./Login";
 import { fillLoginFields } from "./testUtils";
-
-initLanguagesForTesting();
 
 beforeEach(() => {
   resetAxiosMocks();

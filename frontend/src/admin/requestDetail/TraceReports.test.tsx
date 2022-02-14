@@ -11,7 +11,6 @@ import { Route, Router } from "react-router-dom";
 import { cache, SWRConfig } from "swr";
 import type { Paths } from "../../constants/paths";
 import { PATHS_WITHOUT_PREFIX } from "../../constants/paths";
-import { initLanguagesForTesting } from "../../i18nTestHelper";
 import {
   click,
   generatePathsWithoutPrefix,
@@ -19,8 +18,6 @@ import {
 } from "../../testUtils";
 import { mockedAxios, resetAxiosMocks } from "../../__mocks__/axiosMock";
 import TraceReports from "./TraceReports";
-
-initLanguagesForTesting();
 
 beforeEach(async () => {
   resetAxiosMocks();

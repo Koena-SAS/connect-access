@@ -3,7 +3,6 @@ import { I18nProvider } from "@lingui/react";
 import { fireEvent, render, waitFor } from "@testing-library/react";
 import { fr } from "make-plural/plurals";
 import AppWrapper from "./AppWrapper";
-import { initLanguagesForTesting } from "./i18nTestHelper";
 import { messages as frMessages } from "./locales/fr/messages";
 import { configData } from "./testUtils";
 
@@ -15,7 +14,6 @@ jest.mock(
     }
 );
 
-initLanguagesForTesting();
 i18n.load({
   fr: frMessages,
 });

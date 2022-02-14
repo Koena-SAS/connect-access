@@ -2,10 +2,7 @@ import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
 import { render, waitFor } from "@testing-library/react";
 import { useState } from "react";
-import { initLanguagesForTesting } from "../i18nTestHelper";
 import ConfirmationDialog from "./ConfirmationDialog";
-
-initLanguagesForTesting();
 
 describe("accessibility", () => {
   it(`moves focus to the first focusable element when opening the

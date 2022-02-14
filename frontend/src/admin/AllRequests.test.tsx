@@ -9,7 +9,6 @@ import {
 import { createMemoryHistory, History } from "history";
 import { Router } from "react-router-dom";
 import { cache, SWRConfig } from "swr";
-import { initLanguagesForTesting } from "../i18nTestHelper";
 import { MediationRequestRecieved } from "../types/mediationRequest";
 import {
   mediationRequestsResponse,
@@ -17,8 +16,6 @@ import {
   resetAxiosMocks,
 } from "../__mocks__/axiosMock";
 import AllRequests from "./AllRequests";
-
-initLanguagesForTesting();
 
 let mediationsResponse: MediationRequestRecieved[];
 
