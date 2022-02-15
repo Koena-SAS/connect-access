@@ -2,10 +2,20 @@ import { Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import ReactMarkdown from "react-markdown";
 import { useContactInformation } from "../hooks";
+import type { ContactInformationRecieved } from "../types/footerConfiguration";
 import { Langs } from "../types/types";
 
-function TermsOfService() {
-  const { contactInformation } = useContactInformation();
+type TermsOfServiceProps = {
+  /**
+   * Contact information data got from the backend for the first time.
+   */
+  initialContactInformation?: ContactInformationRecieved;
+};
+
+function TermsOfService({ initialContactInformation }: TermsOfServiceProps) {
+  const { contactInformation } = useContactInformation(
+    initialContactInformation
+  );
   const { i18n } = useLingui();
   return (
     <div className="terms-of-service page-base">

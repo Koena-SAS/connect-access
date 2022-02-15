@@ -8,6 +8,10 @@ import { PATHS, PATHS_WITHOUT_PREFIX } from "./constants/paths";
 import ConfigDataContext from "./contexts/configData";
 import { dynamicActivate } from "./i18nHelper";
 import type { Step } from "./mediationForm/StepsInitializer";
+import type {
+  AboutServiceRecieved,
+  ContactInformationRecieved,
+} from "./types/footerConfiguration";
 import type { OrganizationAppRecieved } from "./types/organizationApp";
 import type { Langs } from "./types/types";
 
@@ -16,6 +20,8 @@ declare global {
     SERVER_DATA: {
       initialLanguage: Langs;
       initialOrganizationApp?: OrganizationAppRecieved;
+      initialContactInformation?: ContactInformationRecieved;
+      initialAboutService?: AboutServiceRecieved[];
       configData: {
         platformName: string;
         logoFilename: string;
@@ -70,6 +76,10 @@ const AppWrapper = () => {
               setActiveMediationFormStep={setActiveMediationFormStep}
               paths={paths}
               initialOrganizationApp={window.SERVER_DATA.initialOrganizationApp}
+              initialContactInformation={
+                window.SERVER_DATA.initialContactInformation
+              }
+              initialAboutService={window.SERVER_DATA.initialAboutService}
             />
           </Route>
         </Router>

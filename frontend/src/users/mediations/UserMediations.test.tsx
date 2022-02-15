@@ -5,15 +5,17 @@ import { createMemoryHistory } from "history";
 import { Router } from "react-router-dom";
 import type { MediationRequestRecieved } from "../../types/mediationRequest";
 import {
-  mediationRequestsResponse,
+  axiosGetResponseMediationRequests,
   mockedAxios,
+  resetAxiosMocks,
 } from "../../__mocks__/axiosMock";
 import UserMediations from "./UserMediations";
 
 let userMediationsResponse: MediationRequestRecieved[];
 
 beforeEach(() => {
-  userMediationsResponse = mediationRequestsResponse.slice();
+  resetAxiosMocks();
+  userMediationsResponse = axiosGetResponseMediationRequests.data.slice();
 });
 
 afterEach(() => {

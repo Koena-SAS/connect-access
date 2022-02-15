@@ -17,7 +17,7 @@ import { configData, runWithAndWithoutOrganizationPrefix } from "../testUtils";
 import type { MediationRequestRecieved } from "../types/mediationRequest";
 import { fillResetPasswordConfirmFields } from "../users/password/testUtils";
 import {
-  mediationRequestsResponse,
+  axiosGetResponseMediationRequests,
   mockedAxios,
   resetAxiosMocks,
 } from "../__mocks__/axiosMock";
@@ -27,8 +27,8 @@ import Main from "./Main";
 let userMediationsResponse: MediationRequestRecieved[];
 
 beforeEach(async () => {
-  userMediationsResponse = mediationRequestsResponse.slice();
   resetAxiosMocks();
+  userMediationsResponse = axiosGetResponseMediationRequests.data.slice();
   localStorage.clear();
   await waitFor(() => cache.clear());
 });

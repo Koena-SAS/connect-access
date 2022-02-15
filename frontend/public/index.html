@@ -22,6 +22,8 @@
       window.SERVER_DATA = {
         initialLanguage: "{{ language }}",
         configData: {{ data|safe }},
+        initialContactInformation: {{ contact_information|safe }},
+        initialAboutService: {{ about_service|safe }},
       };
     </script>
     {% render_bundle 'vendors' 'css' 'CONNECT_ACCESS' %}

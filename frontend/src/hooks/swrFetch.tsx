@@ -105,15 +105,20 @@ type UseFooterAboutServiceReturn = {
   footerAboutServiceError: unknown;
 };
 
+const tenMinutes = 1000 * 60 * 10;
+
 /**
  * Return footer links in the "about" category.
  *
  * @returns data and error if any.
  */
-function useFooterAboutService(): UseFooterAboutServiceReturn {
+function useFooterAboutService(
+  initialAboutService?: AboutServiceRecieved[]
+): UseFooterAboutServiceReturn {
   const { data, error } = useSWR<AboutServiceRecieved[]>(
     "/api/configuration/about-service/",
-    fetcher
+    fetcher,
+    { dedupingInterval: tenMinutes, initialData: initialAboutService }
   );
   return {
     footerAboutService: keysToCamel(data) as AboutService[],
@@ -131,12 +136,13 @@ type UseContactInformationReturn = {
  *
  * @returns data and error if any.
  */
-function useContactInformation(): UseContactInformationReturn {
-  const tenMinutes = 1000 * 60 * 10;
+function useContactInformation(
+  initialContactInformation?: ContactInformationRecieved
+): UseContactInformationReturn {
   const { data, error } = useSWR<ContactInformationRecieved>(
     "/api/configuration/contact-information/",
     fetcher,
-    { dedupingInterval: tenMinutes }
+    { dedupingInterval: tenMinutes, initialData: initialContactInformation }
   );
   return {
     contactInformation: keysToCamel(data) as ContactInformation,

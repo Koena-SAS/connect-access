@@ -7,15 +7,17 @@ import type { Paths } from "../../constants/paths";
 import { runWithAndWithoutOrganizationPrefix } from "../../testUtils";
 import type { MediationRequestRecieved } from "../../types/mediationRequest";
 import {
-  mediationRequestsResponse,
+  axiosGetResponseMediationRequests,
   mockedAxios,
+  resetAxiosMocks,
 } from "../../__mocks__/axiosMock";
 import UserMediation from "./UserMediation";
 
 let userMediationsResponse: MediationRequestRecieved[];
 
 beforeEach(() => {
-  userMediationsResponse = mediationRequestsResponse.slice();
+  resetAxiosMocks();
+  userMediationsResponse = axiosGetResponseMediationRequests.data.slice();
 });
 
 afterEach(() => {

@@ -45,12 +45,6 @@ def test_contact_information_website_regex_validation():
     _check_url_format(ContactInformationFactory, "website_fr")
 
 
-@pytest.mark.usefixtures("_set_default_language")
-def test_about_service_link_url_regex_validation():
-    _check_url_format(AboutServiceInformationFactory, "link_url_en")
-    _check_url_format(AboutServiceInformationFactory, "link_url_fr")
-
-
 def _check_url_format(factory_class, field_name):
     object = factory_class(**{field_name: "http://koena.net"})
     object.delete()

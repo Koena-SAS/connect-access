@@ -80,6 +80,10 @@ type ContactInformationRecieved = {
     fr: string;
     en: string;
   };
+  terms_of_service?: {
+    fr: string;
+    en: string;
+  };
 };
 
 export type {

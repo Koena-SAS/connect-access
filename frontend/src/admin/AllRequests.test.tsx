@@ -11,7 +11,7 @@ import { Router } from "react-router-dom";
 import { cache, SWRConfig } from "swr";
 import { MediationRequestRecieved } from "../types/mediationRequest";
 import {
-  mediationRequestsResponse,
+  axiosGetResponseMediationRequests,
   mockedAxios,
   resetAxiosMocks,
 } from "../__mocks__/axiosMock";
@@ -20,8 +20,8 @@ import AllRequests from "./AllRequests";
 let mediationsResponse: MediationRequestRecieved[];
 
 beforeEach(() => {
-  mediationsResponse = mediationRequestsResponse.slice();
   resetAxiosMocks();
+  mediationsResponse = axiosGetResponseMediationRequests.data.slice();
 });
 
 afterEach(async () => {

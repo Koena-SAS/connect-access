@@ -1,6 +1,7 @@
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
 import { render, RenderResult, waitFor } from "@testing-library/react";
+import { BrowserRouter as Router } from "react-router-dom";
 import { cache, SWRConfig } from "swr";
 import { resetAxiosMocks } from "../__mocks__/axiosMock";
 import Footer from "./Footer";
@@ -20,7 +21,9 @@ async function renderFooter(): Promise<RenderResult> {
     render(
       <SWRConfig value={{ dedupingInterval: 0 }}>
         <I18nProvider i18n={i18n}>
-          <Footer />
+          <Router>
+            <Footer />
+          </Router>
         </I18nProvider>
       </SWRConfig>
     )

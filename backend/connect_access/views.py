@@ -5,6 +5,15 @@ import environ
 from django.utils.translation import get_language
 from django.views.generic.base import TemplateView
 
+from connect_access.configuration.models import (
+    AboutServiceInformation,
+    ContactInformation,
+)
+from connect_access.configuration.serializers import (
+    AboutServiceInformationSerializer,
+    ContactInformationSerializer,
+)
+
 env = environ.Env()
 
 
@@ -41,5 +50,23 @@ class IndexView(TemplateView):
             "logoFilename": env("DATA_LOGO_FILENAME"),
             "logoFilenameSmall": env("DATA_LOGO_FILENAME_SMALL"),
         }
+        self._set_contact_information(context)
+        self._set_about_service(context)
         context["platform_name"] = env("DATA_PLATFORM_NAME")
+        return context
+
+    def _set_contact_information(self, context):
+        context["contact_information"] = "null"
+        contact_information = ContactInformation.objects.first()
+        if contact_information:
+            serializer = ContactInformationSerializer(contact_information)
+            context["contact_information"] = json.dumps(serializer.data)
+        return context
+
+    def _set_about_service(self, context):
+        context["about_service"] = "null"
+        about_service = AboutServiceInformation.objects.all()
+        if len(about_service) > 0:
+            serializer = AboutServiceInformationSerializer(about_service, many=True)
+            context["about_service"] = json.dumps(serializer.data, cls=UUIDEncoder)
         return context

@@ -124,7 +124,6 @@ class AboutServiceInformation(TimeStampedModel):
     link_url = TranslatedField(
         models.CharField(
             verbose_name=_("The link URL to the page containing the information"),
-            validators=[url_regex],
             max_length=200,
         )
     )

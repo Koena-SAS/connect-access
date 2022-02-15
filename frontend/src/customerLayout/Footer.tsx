@@ -1,16 +1,37 @@
 import { Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import { useContactInformation, useFooterAboutService } from "../hooks";
 import LogoBPI from "../images/buildSvg/LogoBpiFrance";
 import LogoIDF from "../images/buildSvg/LogoRegionIleDeFrance";
+import type {
+  AboutServiceRecieved,
+  ContactInformationRecieved,
+} from "../types/footerConfiguration";
 import type { Langs } from "../types/types";
+
+type FooterProps = RouteComponentProps & {
+  /**
+   * Contact information data got from the backend for the first time.
+   */
+  initialContactInformation?: ContactInformationRecieved;
+  /**
+   * About service data got from the backend for the first time.
+   */
+  initialAboutService?: AboutServiceRecieved[];
+};
 
 /**
  * Footer content with different pages.
  */
-function Footer() {
-  const { footerAboutService } = useFooterAboutService();
-  const { contactInformation } = useContactInformation();
+function Footer({
+  initialContactInformation,
+  initialAboutService,
+}: FooterProps) {
+  const { footerAboutService } = useFooterAboutService(initialAboutService);
+  const { contactInformation } = useContactInformation(
+    initialContactInformation
+  );
   const { i18n } = useLingui();
   return (
     <footer
@@ -81,15 +102,26 @@ function Footer() {
           </h1>
           <ul className="footer__list">
             {footerAboutService?.map(function displayListItem(element) {
+              const url = element.linkUrl[i18n.locale as Langs];
               return (
                 <li key={element.id}>
-                  <a
-                    href={element.linkUrl[i18n.locale as Langs]}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {element.linkText[i18n.locale as Langs]}
-                  </a>
+                  {url.startsWith("http") ? (
+                    <a
+                      href={element.linkUrl[i18n.locale as Langs]}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {element.linkText[i18n.locale as Langs]}
+                    </a>
+                  ) : (
+                    <Link
+                      to={{
+                        pathname: url,
+                      }}
+                    >
+                      {element.linkText[i18n.locale as Langs]}
+                    </Link>
+                  )}
                 </li>
               );
             })}
@@ -124,4 +156,4 @@ function Footer() {
   );
 }
 
-export default Footer;
+export default withRouter(Footer);

@@ -26,9 +26,12 @@ import {
   generatePathsWithPrefix,
 } from "./testUtils";
 import type { MediationRequestRecieved } from "./types/mediationRequest";
+import { OrganizationAppRecieved } from "./types/organizationApp";
 import type { Langs } from "./types/types";
 import {
+  axiosGetResponseContactInformation,
   axiosGetResponseMe,
+  axiosGetResponseOrganizationApp,
   mockedAxios,
   resetAxiosMocks,
 } from "./__mocks__/axiosMock";
@@ -118,30 +121,8 @@ function ComponentWrapper({ paths }: { paths: Paths }) {
     }
   };
   const hasOrganizationPrefix = paths === PATHS;
-  const initialOrganizationApp = hasOrganizationPrefix
-    ? {
-        id: "1",
-        name: { en: "Connect Access", fr: "Connect Access" },
-        slug: "koena-connect",
-        logo: "/media/app_logo/koena/koena-connect/koena_square.png",
-        logo_alternative: {
-          en: "Connect Access Logo",
-          fr: "Logo de Connect Access",
-        },
-        description: {
-          en: `<h1>Connect Access</h1>
-      <p>Connect Access is a mediation platform</p>`,
-          fr: `<h1>Connect Access</h1>
-      <p>Connect Access est une plateforme de médiation</p>`,
-        },
-        text_color: "#DDFF3F",
-        button_background_color: "#98FFF4",
-        border_color: "#FF2CFD",
-        button_hover_color: "#90C9FF",
-        step_color: "#3F4BFF",
-        footer_color: "#000000",
-      }
-    : undefined;
+  const initialOrganizationApp: OrganizationAppRecieved | undefined =
+    hasOrganizationPrefix ? axiosGetResponseOrganizationApp.data : undefined;
   return (
     <App
       siteLanguage={siteLanguage}
@@ -150,6 +131,7 @@ function ComponentWrapper({ paths }: { paths: Paths }) {
       setActiveMediationFormStep={setActiveStep}
       paths={paths}
       initialOrganizationApp={initialOrganizationApp}
+      initialContactInformation={axiosGetResponseContactInformation.data}
     />
   );
 }
@@ -161,7 +143,7 @@ describe("Admin panel", () => {
       generatedPaths: Record<string, string>,
       paths: Record<string, string>
     ): Promise<void> {
-      axiosGetResponseMe.data.isStaff = true;
+      axiosGetResponseMe.data.is_staff = true;
 
       const history = createMemoryHistory({
         initialEntries: [generatedPaths.ROOT],
