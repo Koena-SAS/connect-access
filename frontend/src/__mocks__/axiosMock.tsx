@@ -223,8 +223,8 @@ export const resetAxiosMocks = () => {
           en: "About us",
         },
         link_url: {
-          fr: "/terms-of-service",
-          en: "/terms-of-service",
+          fr: "https://koena.net/mentions-legales/",
+          en: "https://koena.net/en/legal-information-and-credits/",
         },
       },
       {
@@ -235,8 +235,8 @@ export const resetAxiosMocks = () => {
           en: "Legal information",
         },
         link_url: {
-          fr: "https://koena.net/mentions-legales/",
-          en: "https://koena.net/en/legal-information-and-credits/",
+          fr: "/terms-of-service",
+          en: "/terms-of-service",
         },
       },
     ],

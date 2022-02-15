@@ -21,7 +21,7 @@ def test_createmediationsfortest_raises_exception_when_called_on_non_empty_datab
         call_command("createmediationsfortest")
 
 
-def test_deletemediations_deletes_all_elements_linked_to_recipes():
+def test_deletemediations_deletes_all_elements_linked_to_mediation_requests():
     call_command("createmediationsfortest")
     assert len(MediationRequest.objects.all()) != 0
     assert len(TraceReport.objects.all()) != 0

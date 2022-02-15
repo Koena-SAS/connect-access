@@ -2,6 +2,7 @@ const execSync = require("child_process").execSync;
 
 module.exports = {
   startBackend: function (backendPath, database, outputResult = true) {
+    stopBackend(outputResult);
     const djangoEnv = `cd ${backendPath} && DATABASE_URL=${database}`;
     execute(`${djangoEnv} python manage.py reset_db --noinput`, true);
     execute(`${djangoEnv} python manage.py migrate --run-syncdb`, true);
@@ -13,29 +14,35 @@ module.exports = {
     execute("node_modules/.bin/pm2 start pm2_backend.config.js", outputResult);
   },
   startFrontend: function (outputResult = true) {
+    stopFrontend(outputResult);
     execute("node_modules/.bin/pm2 start pm2_frontend.config.js", outputResult);
   },
   stopFrontend: function (outputResult = true) {
-    execute(
-      "node_modules/.bin/pm2 stop frontend_connect_access || true",
-      outputResult
-    );
-    execute(
-      "node_modules/.bin/pm2 delete frontend_connect_access || true",
-      false
-    );
+    stopFrontend(outputResult);
   },
   stopBackend: function (outputResult = true) {
-    execute(
-      "node_modules/.bin/pm2 stop backend_connect_access || true",
-      outputResult
-    );
-    execute(
-      "node_modules/.bin/pm2 delete backend_connect_access || true",
-      false
-    );
+    stopBackend(outputResult);
   },
 };
+
+function stopFrontend(outputResult) {
+  execute(
+    "node_modules/.bin/pm2 stop frontend_connect_access || true",
+    outputResult
+  );
+  execute(
+    "node_modules/.bin/pm2 delete frontend_connect_access || true",
+    false
+  );
+}
+
+function stopBackend(outputResult) {
+  execute(
+    "node_modules/.bin/pm2 stop backend_connect_access || true",
+    outputResult
+  );
+  execute("node_modules/.bin/pm2 delete backend_connect_access || true", false);
+}
 
 function execute(command, outputResult = true) {
   let options = {

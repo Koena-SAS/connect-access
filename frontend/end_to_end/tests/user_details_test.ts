@@ -1,4 +1,4 @@
-Feature("Mediation request");
+Feature("User details");
 
 Before(({ I }) => {
   I.preparePage();
