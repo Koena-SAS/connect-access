@@ -49,7 +49,7 @@ msgstr "<0>Complainant</0>"
 msgid "<0>DYS Disorder software</0>"
 msgstr "<0>DYS Disorder software</0>"
 
-#: src/customerLayout/Footer.tsx:45
+#: src/customerLayout/Footer.tsx:54
 #: src/mediationRequests/MediationRequestsDetail.tsx:101
 #: src/mediationRequests/MediationRequestsDetail.tsx:406
 msgid "<0>E-mail:</0>"
@@ -147,7 +147,7 @@ msgstr "<0>Waiting for mediator validation</0>"
 msgid "<0>Waiting for second contact</0>"
 msgstr "<0>Waiting for second contact</0>"
 
-#: src/customerLayout/Footer.tsx:62
+#: src/customerLayout/Footer.tsx:71
 msgid "<0>Website:</0>"
 msgstr "<0>Website:</0>"
 
@@ -163,7 +163,7 @@ msgstr "<0>Zoom software</0>"
 msgid "<0>iOS</0>"
 msgstr "<0>iOS</0>"
 
-#: src/customerLayout/Footer.tsx:80
+#: src/customerLayout/Footer.tsx:89
 msgid "About"
 msgstr "About"
 
@@ -279,7 +279,7 @@ msgstr "Assistive technology version(s)"
 msgid "Assistive technology version(s):"
 msgstr "Assistive technology version(s):"
 
-#: src/users/identification/Signup.tsx:166
+#: src/users/identification/Signup.tsx:172
 #: src/users/password/PasswordResetConfirm.tsx:119
 msgid "At least 8 characters, not fully numeric, and must not be a too common word"
 msgstr "At least 8 characters, not fully numeric, and must not be a too common word"
@@ -303,7 +303,7 @@ msgstr "Call"
 
 #: src/admin/requestDetail/TraceReportForm.tsx:433
 #: src/users/identification/Login.tsx:306
-#: src/users/identification/Signup.tsx:195
+#: src/users/identification/Signup.tsx:247
 #: src/users/password/PasswordResetRequest.tsx:92
 msgid "Cancel"
 msgstr "Cancel"
@@ -346,7 +346,7 @@ msgstr "Complainant"
 msgid "Completed"
 msgstr "Completed"
 
-#: src/users/identification/Signup.tsx:179
+#: src/users/identification/Signup.tsx:185
 #: src/users/password/PasswordResetConfirm.tsx:133
 msgid "Confirm password"
 msgstr "Confirm password"
@@ -371,7 +371,7 @@ msgstr "Contact date"
 msgid "Contact type"
 msgstr "Contact type"
 
-#: src/customerLayout/Footer.tsx:24
+#: src/customerLayout/Footer.tsx:33
 msgid "Contact us"
 msgstr "Contact us"
 
@@ -524,13 +524,17 @@ msgstr "Further information:"
 msgid "General Settings"
 msgstr "General Settings"
 
-#: src/customerLayout/Footer.tsx:104
+#: src/customerLayout/Footer.tsx:124
 msgid "Help"
 msgstr "Help"
 
 #: src/admin/requestDetail/History.tsx:18
 msgid "History"
 msgstr "History"
+
+#: src/users/identification/Signup.tsx:213
+msgid "I have read <0>the terms of service</0>, and I agree to create an account *"
+msgstr "I have read <0>the terms of service</0>, and I agree to create an account *"
 
 #: src/users/identification/IdentificationLayout.tsx:85
 msgid "Identification - Login"
@@ -783,12 +787,12 @@ msgid "Other"
 msgstr "Other"
 
 #: src/users/identification/Login.tsx:272
-#: src/users/identification/Signup.tsx:148
+#: src/users/identification/Signup.tsx:154
 #: src/users/password/PasswordResetConfirm.tsx:102
 msgid "Password"
 msgstr "Password"
 
-#: src/users/identification/Signup.tsx:176
+#: src/users/identification/Signup.tsx:182
 #: src/users/password/PasswordResetConfirm.tsx:130
 msgid "Password confirmation is required"
 msgstr "Password confirmation is required"
@@ -797,7 +801,7 @@ msgstr "Password confirmation is required"
 msgid "Password forgotten?"
 msgstr "Password forgotten?"
 
-#: src/users/identification/Signup.tsx:115
+#: src/users/identification/Signup.tsx:121
 #: src/users/password/PasswordResetConfirm.tsx:83
 msgid "Passwords do not match."
 msgstr "Passwords do not match."
@@ -812,7 +816,7 @@ msgstr "Personal information"
 msgid "Phone number"
 msgstr "Phone number"
 
-#: src/customerLayout/Footer.tsx:30
+#: src/customerLayout/Footer.tsx:39
 #: src/mediationRequests/MediationRequestsDetail.tsx:111
 #: src/mediationRequests/MediationRequestsDetail.tsx:418
 msgid "Phone number:"
@@ -826,7 +830,7 @@ msgstr "Pro Offer"
 msgid "Problem Description"
 msgstr "Problem Description"
 
-#: src/customerLayout/Footer.tsx:114
+#: src/customerLayout/Footer.tsx:134
 msgid "Project funded as part of the Innov'Up experimentation"
 msgstr "Project funded as part of the Innov'Up experimentation"
 
@@ -912,7 +916,7 @@ msgstr "Sender name(s)"
 msgid "Sender type"
 msgstr "Sender type"
 
-#: src/users/identification/Signup.tsx:192
+#: src/users/identification/Signup.tsx:244
 msgid "Sign up"
 msgstr "Sign up"
 
@@ -920,7 +924,7 @@ msgstr "Sign up"
 msgid "Signup"
 msgstr "Signup"
 
-#: src/customerLayout/Footer.tsx:107
+#: src/customerLayout/Footer.tsx:127
 msgid "Sitemap"
 msgstr "Sitemap"
 
@@ -1019,7 +1023,7 @@ msgid "The organization"
 msgstr "The organization"
 
 #: src/users/identification/Login.tsx:271
-#: src/users/identification/Signup.tsx:147
+#: src/users/identification/Signup.tsx:153
 #: src/users/password/PasswordResetConfirm.tsx:101
 msgid "The password is required"
 msgstr "The password is required"
@@ -1084,7 +1088,7 @@ msgstr "Trace reports"
 msgid "User management"
 msgstr "User management"
 
-#: src/customerLayout/Footer.tsx:100
+#: src/customerLayout/Footer.tsx:120
 msgid "Utilization"
 msgstr "Utilization"
 
@@ -1131,7 +1135,7 @@ msgstr "We were unable to change your password, please try again later."
 
 #: src/users/identification/Login.tsx:90
 #: src/users/identification/Login.tsx:120
-#: src/users/identification/Signup.tsx:77
+#: src/users/identification/Signup.tsx:83
 msgid "We were unable to log you in, please try again later."
 msgstr "We were unable to log you in, please try again later."
 
@@ -1139,7 +1143,7 @@ msgstr "We were unable to log you in, please try again later."
 msgid "We were unable to send the email."
 msgstr "We were unable to send the email."
 
-#: src/users/identification/Signup.tsx:93
+#: src/users/identification/Signup.tsx:99
 msgid "We were unable to sign you up, please try again later."
 msgstr "We were unable to sign you up, please try again later."
 
@@ -1213,6 +1217,14 @@ msgstr "Yes"
 #: src/mediationForm/fields/AboutIssueFields.tsx:132
 msgid "Yes, very urgent: need a quick answer"
 msgstr "Yes, very urgent: need a quick answer"
+
+#: src/users/identification/Signup.tsx:202
+msgid ""
+"You have to accept the terms of service before creating an\n"
+"account."
+msgstr ""
+"You have to accept the terms of service before creating an\n"
+"account."
 
 #: src/mediationForm/fields/AboutIssueFields.tsx:50
 msgid "You have to describe your problem"

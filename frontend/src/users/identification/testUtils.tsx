@@ -13,6 +13,10 @@ export async function fillSignupFields(
   fillField(app, /E-mail/, "bla@bla.fr", missingField !== "email");
   fillField(app, /Password/, "pass", missingField !== "password1");
   fillField(app, /Confirm password/, "pass", missingField !== "password2");
+  const termsOfService = app.getByLabelText(/I have read/) as HTMLInputElement;
+  if (missingField !== "termsOfService" && !termsOfService.checked) {
+    await click(termsOfService);
+  }
   const submit = app.getByText("Sign up");
   await click(submit);
   if (!missingField) {

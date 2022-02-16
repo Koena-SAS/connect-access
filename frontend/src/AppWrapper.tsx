@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import App from "./App";
 import { PATHS, PATHS_WITHOUT_PREFIX } from "./constants/paths";
 import ConfigDataContext from "./contexts/configData";
+import ContactInformationContext from "./contexts/contactInformation";
 import { dynamicActivate } from "./i18nHelper";
 import type { Step } from "./mediationForm/StepsInitializer";
 import type {
@@ -66,24 +67,27 @@ const AppWrapper = () => {
     : PATHS_WITHOUT_PREFIX;
   return (
     <ConfigDataContext.Provider value={window.SERVER_DATA.configData}>
-      <I18nProvider i18n={i18n}>
-        <Router>
-          <Route path={Object.values(paths)}>
-            <App
-              siteLanguage={siteLanguage}
-              toggleSiteLanguage={toggleSiteLanguage}
-              activeMediationFormStep={activeMediationFormStep}
-              setActiveMediationFormStep={setActiveMediationFormStep}
-              paths={paths}
-              initialOrganizationApp={window.SERVER_DATA.initialOrganizationApp}
-              initialContactInformation={
-                window.SERVER_DATA.initialContactInformation
-              }
-              initialAboutService={window.SERVER_DATA.initialAboutService}
-            />
-          </Route>
-        </Router>
-      </I18nProvider>
+      <ContactInformationContext.Provider
+        value={window.SERVER_DATA.initialContactInformation || {}}
+      >
+        <I18nProvider i18n={i18n}>
+          <Router>
+            <Route path={Object.values(paths)}>
+              <App
+                siteLanguage={siteLanguage}
+                toggleSiteLanguage={toggleSiteLanguage}
+                activeMediationFormStep={activeMediationFormStep}
+                setActiveMediationFormStep={setActiveMediationFormStep}
+                paths={paths}
+                initialOrganizationApp={
+                  window.SERVER_DATA.initialOrganizationApp
+                }
+                initialAboutService={window.SERVER_DATA.initialAboutService}
+              />
+            </Route>
+          </Router>
+        </I18nProvider>
+      </ContactInformationContext.Provider>
     </ConfigDataContext.Provider>
   );
 };

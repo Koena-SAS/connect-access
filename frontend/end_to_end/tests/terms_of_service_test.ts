@@ -24,4 +24,24 @@ Scenario(
   }
 ).retry(1);
 
+Scenario(
+  "Sign in and see user information, while terms of service page exist",
+  ({ I }) => {
+    I.click("Login");
+    within(".identification", () => {
+      I.click("Signup");
+      I.fillField("First name", "Jane");
+      I.fillField("Last name", "Doe");
+      I.fillField("E-mail", "jane.doe@example.com");
+      I.fillField("Phone number", "0000000000");
+      I.fillField("Password", "strongestpasswordever");
+      I.fillField("Confirm password", "strongestpasswordever");
+      I.checkOption("I have read");
+      I.click("Sign up");
+    });
+    I.see("Logout");
+    I.click("Logout");
+  }
+).retry(1);
+
 export {};

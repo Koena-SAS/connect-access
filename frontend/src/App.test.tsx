@@ -17,6 +17,7 @@ import App from "./App";
 import type { Paths } from "./constants/paths";
 import { PATHS, PATHS_WITHOUT_PREFIX } from "./constants/paths";
 import ConfigDataContext from "./contexts/configData";
+import ContactInformationContext from "./contexts/contactInformation";
 import type { Step } from "./mediationForm/StepsInitializer";
 import { ResetLittleStateMachine, unlockStep } from "./mediationForm/testUtils";
 import {
@@ -92,15 +93,19 @@ async function renderApp(
   let main = await waitFor(() =>
     render(
       <ConfigDataContext.Provider value={configData}>
-        <SWRConfig value={{ dedupingInterval: 0 }}>
-          <I18nProvider i18n={i18n}>
-            <Router history={history}>
-              <Route path={paths.ROOT}>
-                <ComponentWrapper paths={paths} />
-              </Route>
-            </Router>
-          </I18nProvider>
-        </SWRConfig>
+        <ContactInformationContext.Provider
+          value={axiosGetResponseContactInformation.data}
+        >
+          <SWRConfig value={{ dedupingInterval: 0 }}>
+            <I18nProvider i18n={i18n}>
+              <Router history={history}>
+                <Route path={paths.ROOT}>
+                  <ComponentWrapper paths={paths} />
+                </Route>
+              </Router>
+            </I18nProvider>
+          </SWRConfig>
+        </ContactInformationContext.Provider>
       </ConfigDataContext.Provider>
     )
   );
@@ -131,7 +136,6 @@ function ComponentWrapper({ paths }: { paths: Paths }) {
       setActiveMediationFormStep={setActiveStep}
       paths={paths}
       initialOrganizationApp={initialOrganizationApp}
-      initialContactInformation={axiosGetResponseContactInformation.data}
     />
   );
 }
@@ -588,6 +592,7 @@ describe("Register", () => {
     fireEvent.change(within(idDialog).getByLabelText(/Confirm password/), {
       target: { value: "pass" },
     });
+    fireEvent.click(within(idDialog).getByLabelText(/I have read/));
     fireEvent.click(within(idDialog).getByText("Sign up"));
     await waitFor(() =>
       expect(mockedAxios.post).toHaveBeenCalledTimes(postAxiosCalls)

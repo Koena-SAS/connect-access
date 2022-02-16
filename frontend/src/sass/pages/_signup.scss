@@ -4,7 +4,25 @@
     display: flex;
     flex-wrap: wrap;
   }
-
+  &__termsOfService {
+    display: flex;
+    align-items: flex-start;
+    margin-left: -9px;
+    margin-top: 2rem;
+  }
+  &__termsOfService-link {
+    padding-top: 0.1rem;
+    &:focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 2px;
+    }
+  }
+  &__termsOfService-label {
+    padding-top: 9px;
+  }
+  &__error {
+    color: #ee0701;
+  }
   &__submit.button,
   &__cancel.button {
     flex: auto;

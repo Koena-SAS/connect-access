@@ -32,7 +32,7 @@ body {
 }
 
 /* We define props on focus. */
-:focus:not(.MuiTab-root):not(.MuiInputBase-input):not(.header__logo-link),
+:focus:not(.MuiTab-root):not(.MuiInputBase-input):not(.header__logo-link):not(.signup__termsOfService-link):not(.terms-of-service__link),
 .MuiButton-contained.Mui-focusVisible:focus {
   box-shadow: 0 0 6px #80c0fd, 0 0 6px #80c0fd, 0 0 6px #80c0fd;
   outline-offset: -3px;

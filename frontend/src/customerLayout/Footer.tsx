@@ -4,17 +4,10 @@ import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import { useContactInformation, useFooterAboutService } from "../hooks";
 import LogoBPI from "../images/buildSvg/LogoBpiFrance";
 import LogoIDF from "../images/buildSvg/LogoRegionIleDeFrance";
-import type {
-  AboutServiceRecieved,
-  ContactInformationRecieved,
-} from "../types/footerConfiguration";
+import type { AboutServiceRecieved } from "../types/footerConfiguration";
 import type { Langs } from "../types/types";
 
 type FooterProps = RouteComponentProps & {
-  /**
-   * Contact information data got from the backend for the first time.
-   */
-  initialContactInformation?: ContactInformationRecieved;
   /**
    * About service data got from the backend for the first time.
    */
@@ -24,14 +17,9 @@ type FooterProps = RouteComponentProps & {
 /**
  * Footer content with different pages.
  */
-function Footer({
-  initialContactInformation,
-  initialAboutService,
-}: FooterProps) {
+function Footer({ initialAboutService }: FooterProps) {
   const { footerAboutService } = useFooterAboutService(initialAboutService);
-  const { contactInformation } = useContactInformation(
-    initialContactInformation
-  );
+  const { contactInformation } = useContactInformation();
   const { i18n } = useLingui();
   return (
     <footer

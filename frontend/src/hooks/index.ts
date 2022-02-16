@@ -20,6 +20,7 @@ import useGeneratePrefixedPath from "./useGeneratePrefixedPath";
 import useOuterClick from "./useOuterClick";
 import usePrevious from "./usePrevious";
 import useStateWithStorage from "./useStateWithStorage";
+import { useTermsOfServiceIsSet } from "./useTermsOfServiceIsSet";
 import useWindowDimensions from "./useWindowDimensions";
 
 export {
@@ -40,4 +41,5 @@ export {
   usePrevious,
   useFooterAboutService,
   useContactInformation,
+  useTermsOfServiceIsSet,
 };

@@ -8,10 +8,7 @@ import {
   useUserMediationRequests,
 } from "./hooks";
 import type { Step } from "./mediationForm/StepsInitializer";
-import type {
-  AboutServiceRecieved,
-  ContactInformationRecieved,
-} from "./types/footerConfiguration";
+import type { AboutServiceRecieved } from "./types/footerConfiguration";
 import type { OrganizationAppRecieved } from "./types/organizationApp";
 import type { Langs } from "./types/types";
 
@@ -29,10 +26,6 @@ type AppProps = {
    */
   initialOrganizationApp?: OrganizationAppRecieved;
   /**
-   * Contact information data got from the backend for the first time.
-   */
-  initialContactInformation?: ContactInformationRecieved;
-  /**
    * About service data got from the backend for the first time.
    */
   initialAboutService?: AboutServiceRecieved[];
@@ -48,7 +41,6 @@ function App({
   setActiveMediationFormStep,
   paths,
   initialOrganizationApp,
-  initialContactInformation,
   initialAboutService,
 }: AppProps) {
   const [token, setToken] = useStateWithStorage<string | undefined>("token");
@@ -76,7 +68,6 @@ function App({
             setActiveMediationFormStep={setActiveMediationFormStep}
             paths={paths}
             initialOrganizationApp={initialOrganizationApp}
-            initialContactInformation={initialContactInformation}
             initialAboutService={initialAboutService}
             token={token}
             setToken={setToken}

@@ -1,5 +1,7 @@
+import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import useSWR from "swr";
+import ContactInformationContext from "../contexts/contactInformation";
 import type {
   AboutService,
   AboutServiceRecieved,
@@ -136,9 +138,10 @@ type UseContactInformationReturn = {
  *
  * @returns data and error if any.
  */
-function useContactInformation(
-  initialContactInformation?: ContactInformationRecieved
-): UseContactInformationReturn {
+function useContactInformation(): UseContactInformationReturn {
+  const initialContactInformation = useContext<ContactInformationRecieved>(
+    ContactInformationContext
+  );
   const { data, error } = useSWR<ContactInformationRecieved>(
     "/api/configuration/contact-information/",
     fetcher,

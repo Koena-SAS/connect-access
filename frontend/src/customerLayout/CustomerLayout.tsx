@@ -3,10 +3,7 @@ import type { Paths } from "../constants/paths";
 import { useOrganizationApp } from "../hooks";
 import type { Step } from "../mediationForm/StepsInitializer";
 import QuickLinks from "../QuickLinks";
-import type {
-  AboutServiceRecieved,
-  ContactInformationRecieved,
-} from "../types/footerConfiguration";
+import type { AboutServiceRecieved } from "../types/footerConfiguration";
 import type { OrganizationAppRecieved } from "../types/organizationApp";
 import type { Langs } from "../types/types";
 import Footer from "./Footer";
@@ -25,10 +22,6 @@ type CustomerLayoutProps = {
    */
   initialOrganizationApp?: OrganizationAppRecieved;
   /**
-   * Contact information data got from the backend for the first time.
-   */
-  initialContactInformation?: ContactInformationRecieved;
-  /**
    * About service data got from the backend for the first time.
    */
   initialAboutService?: AboutServiceRecieved[];
@@ -43,7 +36,6 @@ function CustomerLayout({
   setActiveMediationFormStep,
   paths,
   initialOrganizationApp,
-  initialContactInformation,
   initialAboutService,
   token,
   setToken,
@@ -75,13 +67,9 @@ function CustomerLayout({
           setActiveMediationFormStep={setActiveMediationFormStep}
           paths={paths}
           initialOrganizationApp={initialOrganizationApp}
-          initialContactInformation={initialContactInformation}
         />
       )}
-      <Footer
-        initialContactInformation={initialContactInformation}
-        initialAboutService={initialAboutService}
-      />
+      <Footer initialAboutService={initialAboutService} />
     </div>
   );
 }

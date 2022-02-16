@@ -22,8 +22,8 @@ Scenario("Sign in and see user information", ({ I }) => {
   I.checkA11y(a11yIssuesToIgnore);
   I.click("Login");
   within(".identification", () => {
-    I.checkA11y(a11yIssuesToIgnore, [["#root"]]);
     I.click("Signup");
+    I.checkA11y(a11yIssuesToIgnore, [["#root"]]);
     I.fillField("First name", "John");
     I.fillField("Last name", "Doe");
     I.fillField("E-mail", "john.doe@example.com");

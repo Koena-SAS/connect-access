@@ -6,12 +6,17 @@ import { Route, Router } from "react-router-dom";
 import type { Paths } from "../../constants/paths";
 import { PATHS_WITHOUT_PREFIX } from "../../constants/paths";
 import ConfigDataContext from "../../contexts/configData";
+import ContactInformationContext from "../../contexts/contactInformation";
 import {
   click,
   configData,
   runWithAndWithoutOrganizationPrefix,
 } from "../../testUtils";
-import { mockedAxios, resetAxiosMocks } from "../../__mocks__/axiosMock";
+import {
+  axiosGetResponseContactInformation,
+  mockedAxios,
+  resetAxiosMocks,
+} from "../../__mocks__/axiosMock";
 import { fillResetPasswordFields } from "../password/testUtils";
 import IdentificationLayout from "./IdentificationLayout";
 import { fillLoginFields, fillSignupFields } from "./testUtils";
@@ -485,13 +490,17 @@ function renderIdentificationLayout(
   }
   return render(
     <ConfigDataContext.Provider value={configData}>
-      <I18nProvider i18n={i18n}>
-        <Router history={history}>
-          <Route path={paths.ROOT}>
-            <IdentificationLayout setToken={() => null} isLogged={false} />
-          </Route>
-        </Router>
-      </I18nProvider>
+      <ContactInformationContext.Provider
+        value={axiosGetResponseContactInformation.data}
+      >
+        <I18nProvider i18n={i18n}>
+          <Router history={history}>
+            <Route path={paths.ROOT}>
+              <IdentificationLayout setToken={() => null} isLogged={false} />
+            </Route>
+          </Router>
+        </I18nProvider>
+      </ContactInformationContext.Provider>
     </ConfigDataContext.Provider>
   );
 }

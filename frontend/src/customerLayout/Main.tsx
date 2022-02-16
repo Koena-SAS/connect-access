@@ -10,7 +10,6 @@ import { useUserDetails } from "../hooks";
 import { FormContainer } from "../mediationForm";
 import type { Step } from "../mediationForm/StepsInitializer";
 import Page from "../Page";
-import type { ContactInformationRecieved } from "../types/footerConfiguration";
 import type { OrganizationAppRecieved } from "../types/organizationApp";
 import { ConfigData } from "../types/types";
 import {
@@ -37,10 +36,6 @@ type MainProps = {
    * The organization applicaiton data got from the backend for the first time.
    */
   initialOrganizationApp?: OrganizationAppRecieved;
-  /**
-   * Contact information data got from the backend for the first time.
-   */
-  initialContactInformation?: ContactInformationRecieved;
 };
 
 /**
@@ -53,7 +48,6 @@ function Main({
   setActiveMediationFormStep,
   paths,
   initialOrganizationApp,
-  initialContactInformation,
 }: MainProps) {
   const isLogged = token !== undefined;
   const configData = useContext<ConfigData>(ConfigDataContext);
@@ -139,9 +133,7 @@ function Main({
         </Route>
         <Route path={paths.TERMS_OF_SERVICE} exact>
           <Page title={t`${configData.platformName} - Terms of service`}>
-            <TermsOfService
-              initialContactInformation={initialContactInformation}
-            />
+            <TermsOfService />
           </Page>
         </Route>
       </Switch>

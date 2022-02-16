@@ -1,9 +1,11 @@
 import { t, Trans } from "@lingui/macro";
+import { Checkbox } from "@material-ui/core";
 import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { RouteComponentProps, withRouter } from "react-router-dom";
+import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import { mutate } from "swr";
+import { PATHS } from "../../constants/paths";
 import {
   EmailField,
   FirstNameField,
@@ -13,6 +15,7 @@ import {
 } from "../../forms";
 import CancelButton from "../../forms/buttons/CancelButton";
 import DoneButton from "../../forms/buttons/DoneButton";
+import { useGeneratePrefixedPath, useTermsOfServiceIsSet } from "../../hooks";
 import { keysToCamel } from "../../utils";
 import {
   chooseErrorWrappingElement,
@@ -27,6 +30,7 @@ type FormInput = {
   phoneNumber: string;
   password1: string;
   password2: string;
+  termsOfService: string;
 };
 
 type SignupProps = RouteComponentProps & {
@@ -41,6 +45,8 @@ type SignupProps = RouteComponentProps & {
  * Signup form with error handling.
  */
 function Signup({ setToken, handleCloseIdentification }: SignupProps) {
+  const termsOfServiceIsSet = useTermsOfServiceIsSet();
+  const generatePrefixedPath = useGeneratePrefixedPath();
   const { register, handleSubmit, errors, watch, setError } =
     useForm<FormInput>();
   const [nonFieldErrors, setNonFieldErrors] = useState<JSX.Element[]>([]);
@@ -136,7 +142,7 @@ function Signup({ setToken, handleCloseIdentification }: SignupProps) {
         className="input-top-margin"
       />
       <PhoneField
-        componentName="user-info"
+        componentName="signup"
         errors={errors}
         register={register}
         className="input-top-margin"
@@ -186,6 +192,52 @@ function Signup({ setToken, handleCloseIdentification }: SignupProps) {
           className="input-top-margin"
         />
       </div>
+      {termsOfServiceIsSet ? (
+        <>
+          <div className="signup__termsOfService">
+            <Checkbox
+              id="termsOfService"
+              name="termsOfService"
+              inputRef={register({
+                required: t`You have to accept the terms of service before creating an
+              account.`,
+              })}
+              aria-describedby={
+                Boolean(errors.termsOfService) ? "termsOfService-desc" : ""
+              }
+            />
+            <label
+              htmlFor="termsOfService"
+              className={`label signup__termsOfService-label`}
+            >
+              <Trans>
+                I have read{" "}
+                <Link
+                  to={generatePrefixedPath(PATHS.TERMS_OF_SERVICE)}
+                  target="_blank"
+                  className="signup__termsOfService-link"
+                >
+                  the terms of service
+                </Link>
+                , and I agree to create an account *
+              </Trans>
+            </label>
+          </div>
+          {Boolean(errors.termsOfService) ? (
+            <p
+              id="termsOfService-desc"
+              className="form__helper-text signup__error"
+              role="alert"
+            >
+              {errors.termsOfService?.message}
+            </p>
+          ) : (
+            ""
+          )}
+        </>
+      ) : (
+        ""
+      )}
       {formatErrors(nonFieldErrors, false)}
       <div className="signup__buttons">
         <DoneButton className="signup__submit">
