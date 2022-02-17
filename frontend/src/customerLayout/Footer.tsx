@@ -1,7 +1,12 @@
 import { Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
-import { useContactInformation, useFooterAboutService } from "../hooks";
+import { PATHS, PATHS_WITHOUT_PREFIX } from "../constants/paths";
+import {
+  useContactInformation,
+  useFooterAboutService,
+  useGeneratePrefixedPath,
+} from "../hooks";
 import LogoBPI from "../images/buildSvg/LogoBpiFrance";
 import LogoIDF from "../images/buildSvg/LogoRegionIleDeFrance";
 import type { AboutServiceRecieved } from "../types/footerConfiguration";
@@ -21,6 +26,7 @@ function Footer({ initialAboutService }: FooterProps) {
   const { footerAboutService } = useFooterAboutService(initialAboutService);
   const { contactInformation } = useContactInformation();
   const { i18n } = useLingui();
+  const generatePrefixedPath = useGeneratePrefixedPath();
   return (
     <footer
       role="contentinfo"
@@ -91,9 +97,22 @@ function Footer({ initialAboutService }: FooterProps) {
           <ul className="footer__list">
             {footerAboutService?.map(function displayListItem(element) {
               const url = element.linkUrl[i18n.locale as Langs];
+              const urlIsTermsOfService =
+                !url.startsWith("http") &&
+                url.includes(
+                  PATHS_WITHOUT_PREFIX.TERMS_OF_SERVICE.substring(1)
+                );
               return (
                 <li key={element.id}>
-                  {url.startsWith("http") ? (
+                  {urlIsTermsOfService ? (
+                    <Link
+                      to={{
+                        pathname: generatePrefixedPath(PATHS.TERMS_OF_SERVICE),
+                      }}
+                    >
+                      {element.linkText[i18n.locale as Langs]}
+                    </Link>
+                  ) : (
                     <a
                       href={element.linkUrl[i18n.locale as Langs]}
                       target="_blank"
@@ -101,14 +120,6 @@ function Footer({ initialAboutService }: FooterProps) {
                     >
                       {element.linkText[i18n.locale as Langs]}
                     </a>
-                  ) : (
-                    <Link
-                      to={{
-                        pathname: url,
-                      }}
-                    >
-                      {element.linkText[i18n.locale as Langs]}
-                    </Link>
                   )}
                 </li>
               );

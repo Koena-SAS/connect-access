@@ -11,6 +11,10 @@
   &__withPassword {
     margin-top: 1.6rem;
     margin-left: -10px;
+    label {
+      position: relative;
+      top: 1px;
+    }
   }
   &__submit.button,
   &__cancel.button {
