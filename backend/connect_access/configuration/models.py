@@ -69,10 +69,7 @@ class ContactInformation(SingletonModel):
     )
     terms_of_service = TranslatedField(
         models.TextField(
-            verbose_name=_(
-                "Terms of service. Please use Markdown format, and start headings "
-                "from level 2 (eg. '## My heading')"
-            ),
+            verbose_name=_("Terms of service. Please use Markdown format."),
             blank=True,
         )
     )

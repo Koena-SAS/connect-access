@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-14 17:23+0100\n"
+"POT-Creation-Date: 2022-02-18 08:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -90,33 +90,30 @@ msgid "Website display text"
 msgstr "Text affiché pour le site web"
 
 #: connect_access/configuration/models.py:73
-msgid ""
-"Terms of service. Please use Markdown format, and start headings from level "
-"2 (eg. '## My heading')"
+msgid "Terms of service. Please use Markdown format."
 msgstr ""
-"Conditions générales d'utilisation. Veuillez utiliser le markdown, et "
-"veuillez commencer par les titres de niveau 2 (par exemple : '## Mon titre')."
+"Conditions générales d'utilisation. Veuillez utiliser le format markdown"
 
+#: connect_access/configuration/models.py:106
 #: connect_access/configuration/models.py:107
-#: connect_access/configuration/models.py:108
 msgid "About mediation service information"
 msgstr "Informations à propos du service de médiation"
 
-#: connect_access/configuration/models.py:111
+#: connect_access/configuration/models.py:110
 #: connect_access/mediations/models.py:182
 #: connect_access/mediations/models.py:386 connect_access/users/models.py:22
 msgid "Public identifier"
 msgstr "Identifiant public"
 
-#: connect_access/configuration/models.py:117
+#: connect_access/configuration/models.py:116
 msgid "The order in which the link is displayed"
 msgstr "L'ordre dans lequel le lien est affiché"
 
-#: connect_access/configuration/models.py:122
+#: connect_access/configuration/models.py:121
 msgid "The link text"
 msgstr "Le texte du lien"
 
-#: connect_access/configuration/models.py:126
+#: connect_access/configuration/models.py:125
 msgid "The link URL to the page containing the information"
 msgstr "L'URL du lien vers la page contenant l'information"
 
