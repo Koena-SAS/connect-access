@@ -57,6 +57,7 @@ function NavigationContextFields({
   );
   const isBrowserUsed = watch("browserUsed");
   const isMobileAppUsed = watch("mobileAppUsed");
+  console.log("mobileAppUsed ", isMobileAppUsed);
   return (
     <>
       <BorderedFieldset

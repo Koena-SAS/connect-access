@@ -71,7 +71,7 @@ function Menu({ shownDesktopMenu }: MenuProps) {
           subItems={[
             {
               text: t`Quick Access`,
-              link: generatePrefixedPath(PATHS.ADMIN),
+              link: "#",
             },
             { text: t`Statistics`, link: "#" },
           ]}

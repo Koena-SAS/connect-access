@@ -133,7 +133,7 @@ function Header({ setToken, token }: HeaderProps) {
                 <Button
                   size="medium"
                   component={NavLink}
-                  to={generatePrefixedPath(PATHS.ADMIN)}
+                  to={generatePrefixedPath(PATHS.ADMIN_ALL_REQUESTS)}
                   role={null} // the role should be the native link's one
                 >
                   <Trans>Admin</Trans>

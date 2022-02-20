@@ -54,7 +54,8 @@ async function renderRequestDetail(
 
 describe("display", () => {
   it(`displays mediation request details`, async () => {
-    const { getByDisplayValue, getByLabelText } = await renderRequestDetail();
+    const { getByDisplayValue, getByLabelText, queryByText } =
+      await renderRequestDetail();
     expect(getByDisplayValue("Bill")).toBeInTheDocument();
     expect(getByDisplayValue("Blue")).toBeInTheDocument();
     expect(getByDisplayValue("bluebill@koena.net")).toBeInTheDocument();
@@ -75,5 +76,25 @@ describe("display", () => {
         getByLabelText(/What was the level of inaccessibility/)
       ).getByLabelText("Impossible access")
     ).toBeChecked();
+    expect(
+      within(
+        getByLabelText(/Did the problem occur while using a web browser?/)
+      ).getByLabelText("No")
+    ).toBeChecked();
+    expect(
+      queryByText(
+        /What is the URL address where you have encountered the problem?/
+      )
+    ).not.toBeInTheDocument();
+    expect(
+      queryByText(/Which web browser did you use?/)
+    ).not.toBeInTheDocument();
+    expect(
+      queryByText(/Which web browser version did you use?/)
+    ).not.toBeInTheDocument();
+    expect(
+      within(getByLabelText(/Was it a mobile app?/)).getByLabelText("Yes")
+    ).toBeChecked();
+    expect(getByDisplayValue(/Windows phone/)).toBeInTheDocument();
   });
 });

@@ -44,7 +44,7 @@ focus-visible, everything defined at focus will be kept and the following
 elements will not be executed.
 cf. https://www.tpgi.com/focus-visible-and-backwards-compatibility/
   */
-:focus:not(:focus-visible):not(.MuiTab-root):not(.MuiInputBase-input):not(.header__logo-link),
+:focus:not(:focus-visible):not(.MuiTab-root):not(.MuiInputBase-input):not(.header__logo-link):not(.signup__termsOfService-link):not(.terms-of-service__link),
 .MuiButton-contained.Mui-focusVisible:focus {
   box-shadow: none;
   outline: none;

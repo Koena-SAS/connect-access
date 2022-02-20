@@ -1,9 +1,12 @@
 import { Trans } from "@lingui/macro";
 import produce from "immer";
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAdminMediationRequest, usePrevious } from "../../hooks";
-import { AboutIssueFields } from "../../mediationForm/fields";
+import {
+  AboutIssueFields,
+  NavigationContextFields,
+} from "../../mediationForm/fields";
 import AssitiveTechnologyFields from "../../mediationForm/fields/AssitiveTechnologyAdminFields";
 import { MediationRequest } from "../../types/mediationRequest";
 import PersonalInformationFields from "./PersonalInformationFields";
@@ -46,25 +49,42 @@ function RequestDetail({ token, setBreadcrumbs }: RequestDetailProps) {
   const previousMediationRequest = usePrevious<MediationRequest | undefined>(
     mediationRequest
   );
-  const { register, errors, setValue } = useForm<FormInputs>({
+  const [secondInitializationTodo, setSecondInitializationTodo] =
+    useState(false);
+  const { register, errors, setValue, watch } = useForm<FormInputs>({
     defaultValues: mediationRequest
       ? produce(mediationRequest, (draft) => {
           delete draft["id"];
         })
       : {},
   });
+  const setInitialValues = useCallback(() => {
+    if (mediationRequest) {
+      for (const key of Object.keys(mediationRequest)) {
+        if (key !== "id")
+          setValue(key, mediationRequest[key as keyof MediationRequest]);
+      }
+    }
+  }, [mediationRequest, setValue]);
   useEffect(
     function setInitialDefaultValues() {
-      if (!previousMediationRequest && mediationRequest) {
-        for (const key of Object.keys(mediationRequest)) {
-          if (key !== "id")
-            setValue(key, mediationRequest[key as keyof MediationRequest]);
-        }
+      if (!previousMediationRequest) {
+        setInitialValues();
+        setSecondInitializationTodo(true);
       }
     },
-    [previousMediationRequest, mediationRequest, setValue]
+    [previousMediationRequest, mediationRequest, setValue, setInitialValues]
   );
-
+  useEffect(
+    function resetSecondInitializationTodo() {
+      if (secondInitializationTodo) {
+        setInitialValues();
+        setSecondInitializationTodo(false);
+      }
+    },
+    [mediationRequest, secondInitializationTodo, setInitialValues, setValue]
+  );
+  console.log(mediationRequest);
   return (
     <div className="admin-request-detail">
       <h1 className="admin-page-base__title">
@@ -88,6 +108,13 @@ function RequestDetail({ token, setBreadcrumbs }: RequestDetailProps) {
           errors={errors}
           legendClassName="admin-request-detail__fieldset-legend"
           level={2}
+        />
+        <NavigationContextFields
+          register={register}
+          errors={errors}
+          watch={watch}
+          smallPaddingTop={true}
+          level={3}
         />
       </form>
     </div>
