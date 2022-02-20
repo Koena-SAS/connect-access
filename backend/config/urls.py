@@ -10,7 +10,9 @@ urlpatterns = [
     # Django Admin, use {% url 'admin:index' %}
     path(settings.ADMIN_URL, admin.site.urls),
     # Your stuff: custom urls includes go here
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(
+    settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
+)  # type: ignore
 
 # API URLS
 urlpatterns += [
@@ -22,29 +24,29 @@ urlpatterns += [
 ]
 
 urlpatterns += [
-    re_path(r"", IndexView.as_view(), name="home"),
+    re_path(r"", IndexView.as_view(), name="home"),  # type: ignore
 ]
 
 if settings.DEBUG:
     # This allows the error pages to be debugged during development, just visit
     # these url in browser to see how these error pages look like.
     urlpatterns += [
-        path(
+        path(  # type: ignore
             "400/",
             default_views.bad_request,
             kwargs={"exception": Exception("Bad Request!")},
         ),
-        path(
+        path(  # type: ignore
             "403/",
             default_views.permission_denied,
             kwargs={"exception": Exception("Permission Denied")},
         ),
-        path(
+        path(  # type: ignore
             "404/",
             default_views.page_not_found,
             kwargs={"exception": Exception("Page not Found")},
         ),
-        path("500/", default_views.server_error),
+        path("500/", default_views.server_error),  # type: ignore
     ]
     if "debug_toolbar" in settings.INSTALLED_APPS:
         import debug_toolbar
