@@ -84,7 +84,6 @@ function RequestDetail({ token, setBreadcrumbs }: RequestDetailProps) {
     },
     [mediationRequest, secondInitializationTodo, setInitialValues, setValue]
   );
-  console.log(mediationRequest);
   return (
     <div className="admin-request-detail">
       <h1 className="admin-page-base__title">
