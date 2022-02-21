@@ -1,4 +1,4 @@
-import MUIDialog from "@material-ui/core/Dialog";
+import MUIDialog from "@mui/material/Dialog";
 import { useEffect } from "react";
 
 type DialogProps = {

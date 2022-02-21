@@ -1,5 +1,5 @@
 import { t, Trans } from "@lingui/macro";
-import Checkbox from "@material-ui/core/Checkbox";
+import Checkbox from "@mui/material/Checkbox";
 import axios from "axios";
 import { useCallback, useEffect, useReducer, useRef, useState } from "react";
 import { useForm } from "react-hook-form";

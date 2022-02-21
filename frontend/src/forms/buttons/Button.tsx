@@ -1,4 +1,4 @@
-import MUIButton from "@material-ui/core/Button";
+import MUIButton from "@mui/material/Button";
 import React, { Ref } from "react";
 
 type ButtonProps = {

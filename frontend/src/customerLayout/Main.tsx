@@ -1,5 +1,5 @@
 import { t } from "@lingui/macro";
-import { SnackbarCloseReason } from "@material-ui/core/Snackbar";
+import { SnackbarCloseReason } from "@mui/material/Snackbar";
 import { useContext, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import TermsOfService from "../additionalPages/TermsOfService";
@@ -63,8 +63,8 @@ function Main({
     setRequestFailureMessageOpen(true);
   };
   const ClosePasswordConfirmSuccessMessage = (
-    event: React.SyntheticEvent<any, Event>,
-    reason: SnackbarCloseReason | null
+    event: Event | React.SyntheticEvent<any, Event>,
+    reason: SnackbarCloseReason
   ) => {
     if (reason === "clickaway") {
       return;
@@ -72,8 +72,8 @@ function Main({
     setRequestSuccessMessageOpen(false);
   };
   const ClosePasswordFailureMessage = (
-    event: React.SyntheticEvent<any, Event>,
-    reason: SnackbarCloseReason | null
+    event: Event | React.SyntheticEvent<any, Event>,
+    reason: SnackbarCloseReason
   ) => {
     if (reason === "clickaway") {
       return;

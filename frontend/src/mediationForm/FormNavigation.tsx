@@ -1,7 +1,7 @@
 import { t } from "@lingui/macro";
-import Step from "@material-ui/core/Step";
-import StepButton from "@material-ui/core/StepButton";
-import Stepper from "@material-ui/core/Stepper";
+import Step from "@mui/material/Step";
+import StepButton from "@mui/material/StepButton";
+import Stepper from "@mui/material/Stepper";
 import { useEffect, useMemo, useRef } from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { PATHS } from "../constants/paths";

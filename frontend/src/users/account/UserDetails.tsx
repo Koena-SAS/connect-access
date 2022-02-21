@@ -1,5 +1,5 @@
 import { t, Trans } from "@lingui/macro";
-import type { SnackbarCloseReason } from "@material-ui/core";
+import type { SnackbarCloseReason } from "@mui/material";
 import produce from "immer";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -32,8 +32,8 @@ function UserDetails({ token }: { token: string }) {
     setRequestFailureMessageOpen(true);
   };
   const handleCloseSuccessMessage = (
-    event: React.SyntheticEvent<any, Event>,
-    reason: SnackbarCloseReason | null
+    event: Event | React.SyntheticEvent<any, Event>,
+    reason: SnackbarCloseReason
   ) => {
     if (reason === "clickaway") {
       return;
@@ -41,8 +41,8 @@ function UserDetails({ token }: { token: string }) {
     setRequestSuccessMessageOpen(false);
   };
   const handleCloseFailureMessage = (
-    event: React.SyntheticEvent<any, Event>,
-    reason: SnackbarCloseReason | null
+    event: Event | React.SyntheticEvent<any, Event>,
+    reason: SnackbarCloseReason
   ) => {
     if (reason === "clickaway") {
       return;

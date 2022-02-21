@@ -1,5 +1,5 @@
 import { t, Trans } from "@lingui/macro";
-import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useStateMachine } from "little-state-machine";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";

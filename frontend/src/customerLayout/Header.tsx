@@ -1,6 +1,6 @@
 import { t, Trans } from "@lingui/macro";
-import CloseIcon from "@material-ui/icons/Close";
-import MenuIcon from "@material-ui/icons/Menu";
+import CloseIcon from "@mui/icons-material/Close";
+import MenuIcon from "@mui/icons-material/Menu";
 import { useContext, useEffect, useState } from "react";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
 import { LOGIN_HIDDEN } from "../constants/config";

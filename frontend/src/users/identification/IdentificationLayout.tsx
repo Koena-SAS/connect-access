@@ -1,5 +1,5 @@
 import { t } from "@lingui/macro";
-import type { SnackbarCloseReason } from "@material-ui/core";
+import type { SnackbarCloseReason } from "@mui/material";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { PATHS } from "../../constants/paths";
@@ -52,8 +52,8 @@ function IdentificationLayout({
     setRequestFailureMessageOpen(true);
   };
   const handleCloseSuccessMessage = (
-    event: React.SyntheticEvent<any, Event>,
-    reason: SnackbarCloseReason | null
+    event: Event | React.SyntheticEvent<any, Event>,
+    reason: SnackbarCloseReason
   ) => {
     if (reason === "clickaway") {
       return;
@@ -61,8 +61,8 @@ function IdentificationLayout({
     setRequestSuccessMessageOpen(false);
   };
   const handleCloseFailureMessage = (
-    event: React.SyntheticEvent<any, Event>,
-    reason: SnackbarCloseReason | null
+    event: Event | React.SyntheticEvent<any, Event>,
+    reason: SnackbarCloseReason
   ) => {
     if (reason === "clickaway") {
       return;

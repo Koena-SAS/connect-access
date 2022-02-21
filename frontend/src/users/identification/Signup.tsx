@@ -1,5 +1,5 @@
 import { t, Trans } from "@lingui/macro";
-import { Checkbox } from "@material-ui/core";
+import { Checkbox } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";

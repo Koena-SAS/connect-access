@@ -1,5 +1,5 @@
 import { t, Trans } from "@lingui/macro";
-import type { SnackbarCloseReason } from "@material-ui/core/Snackbar";
+import type { SnackbarCloseReason } from "@mui/material/Snackbar";
 import produce from "immer";
 import { createStore, StateMachineProvider } from "little-state-machine";
 import { useContext, useEffect, useState } from "react";
@@ -93,8 +93,8 @@ function FormContainer({
     setRequestFailureMessageOpen(true);
   };
   const handleCloseSuccessMessage = (
-    event: React.SyntheticEvent<any, Event>,
-    reason: SnackbarCloseReason | null
+    event: Event | React.SyntheticEvent<any, Event>,
+    reason: SnackbarCloseReason
   ) => {
     if (reason === "clickaway") {
       return;
@@ -102,8 +102,8 @@ function FormContainer({
     setRequestSuccessMessageOpen(false);
   };
   const handleCloseFailureMessage = (
-    event: React.SyntheticEvent<any, Event>,
-    reason: SnackbarCloseReason | null
+    event: Event | React.SyntheticEvent<any, Event>,
+    reason: SnackbarCloseReason
   ) => {
     if (reason === "clickaway") {
       return;

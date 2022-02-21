@@ -1,6 +1,6 @@
 import { t, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import ZoomInIcon from "@material-ui/icons/ZoomIn";
+import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import { generatePath, Link, useParams } from "react-router-dom";
 import { statusMap } from "../constants/choicesMap";
 import Button from "../forms/buttons/Button";

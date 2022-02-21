@@ -1,6 +1,6 @@
 import { t, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import Checkbox from "@material-ui/core/Checkbox";
+import Checkbox from "@mui/material/Checkbox";
 import produce from "immer";
 import { useMemo } from "react";
 import { assistiveTechnologyMap } from "../../constants/choicesMap";

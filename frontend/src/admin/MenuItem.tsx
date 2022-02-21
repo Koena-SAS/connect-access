@@ -1,5 +1,5 @@
-import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
-import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";

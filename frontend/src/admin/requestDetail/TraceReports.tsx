@@ -1,7 +1,7 @@
 import { t, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { SnackbarCloseReason } from "@material-ui/core/Snackbar";
-import AddIcon from "@material-ui/icons/Add";
+import AddIcon from "@mui/icons-material/Add";
+import { SnackbarCloseReason } from "@mui/material/Snackbar";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { mutate } from "swr";
@@ -36,8 +36,8 @@ function TraceReports({ token, setBreadcrumbs }: TraceReportsProps) {
   const [requestFailureMessageType, setRequestFailureMessageType] =
     useState<keyof typeof failureMessages>("none");
   const handleCloseFailureMessage = (
-    event: React.SyntheticEvent<any, Event>,
-    reason: SnackbarCloseReason | null
+    event: Event | React.SyntheticEvent<any, Event>,
+    reason: SnackbarCloseReason
   ) => {
     if (reason === "clickaway") {
       return;

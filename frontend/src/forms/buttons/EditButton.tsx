@@ -1,4 +1,4 @@
-import EditIcon from "@material-ui/icons/Edit";
+import EditIcon from "@mui/icons-material/Edit";
 import React, { Ref } from "react";
 import Button from "./Button";
 

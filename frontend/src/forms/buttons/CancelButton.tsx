@@ -1,4 +1,4 @@
-import ClearIcon from "@material-ui/icons/Clear";
+import ClearIcon from "@mui/icons-material/Clear";
 import React, { Ref } from "react";
 import Button from "./Button";
 

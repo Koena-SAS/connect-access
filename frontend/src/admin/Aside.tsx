@@ -1,6 +1,6 @@
 import { t, Trans } from "@lingui/macro";
-import CloseIcon from "@material-ui/icons/Close";
-import MenuIcon from "@material-ui/icons/Menu";
+import CloseIcon from "@mui/icons-material/Close";
+import MenuIcon from "@mui/icons-material/Menu";
 import { useEffect, useState } from "react";
 import { useOuterClick, useWindowDimensions } from "../hooks";
 import { ArrowLeft, ArrowRight } from "../images/buildSvg";

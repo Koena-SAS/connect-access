@@ -1,7 +1,7 @@
 import { Trans } from "@lingui/macro";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import ClearIcon from "@material-ui/icons/Clear";
-import DoneIcon from "@material-ui/icons/Done";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ClearIcon from "@mui/icons-material/Clear";
+import DoneIcon from "@mui/icons-material/Done";
 import axios from "axios";
 import { useStateMachine } from "little-state-machine";
 import { useEffect, useState } from "react";

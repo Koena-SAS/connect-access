@@ -1,4 +1,4 @@
-import MUITextField from "@material-ui/core/TextField";
+import MUITextField from "@mui/material/TextField";
 import { forwardRef, ReactNode, Ref } from "react";
 
 type TextFieldProps = {

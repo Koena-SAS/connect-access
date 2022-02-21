@@ -1,8 +1,8 @@
 import { t, Trans } from "@lingui/macro";
-import DashboardIcon from "@material-ui/icons/Dashboard";
-import DomainIcon from "@material-ui/icons/Domain";
-import ForumIcon from "@material-ui/icons/Forum";
-import SettingsIcon from "@material-ui/icons/Settings";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import DomainIcon from "@mui/icons-material/Domain";
+import ForumIcon from "@mui/icons-material/Forum";
+import SettingsIcon from "@mui/icons-material/Settings";
 import { useRef } from "react";
 import { PATHS } from "../constants/paths";
 import { useGeneratePrefixedPath } from "../hooks";

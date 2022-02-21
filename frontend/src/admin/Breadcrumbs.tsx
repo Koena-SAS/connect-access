@@ -1,5 +1,5 @@
 import { t } from "@lingui/macro";
-import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { useWindowDimensions } from "../hooks";
 
 type BreadcrumbsProps = {

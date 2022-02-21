@@ -1,7 +1,7 @@
-import AppBar from "@material-ui/core/AppBar";
-import Box from "@material-ui/core/Box";
-import Tab from "@material-ui/core/Tab";
-import MUITabs from "@material-ui/core/Tabs";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Tab from "@mui/material/Tab";
+import MUITabs from "@mui/material/Tabs";
 import { ReactNode, useEffect, useRef, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { useGeneratePrefixedPath } from "../hooks";

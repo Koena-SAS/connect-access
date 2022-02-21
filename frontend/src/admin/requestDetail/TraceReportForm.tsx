@@ -1,9 +1,9 @@
 import { t, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import Checkbox from "@material-ui/core/Checkbox";
-import AdapterDateFns from "@material-ui/lab/AdapterDateFns";
-import DateTimePicker from "@material-ui/lab/DateTimePicker";
-import LocalizationProvider from "@material-ui/lab/LocalizationProvider";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import DateTimePicker from "@mui/lab/DateTimePicker";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import Checkbox from "@mui/material/Checkbox";
 import enLocale from "date-fns/locale/en-US";
 import frLocale from "date-fns/locale/fr";
 import produce from "immer";

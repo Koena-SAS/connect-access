@@ -1,4 +1,4 @@
-import DeleteIcon from "@material-ui/icons/Delete";
+import DeleteIcon from "@mui/icons-material/Delete";
 import React, { Ref } from "react";
 import Button from "./Button";
 
