@@ -25,27 +25,32 @@ function Snackbar({
   ...props
 }: SnackbarProps) {
   return (
-    <MUISnackbar
-      open={open}
-      autoHideDuration={20000}
-      onClose={onClose}
-      anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-      {...props}
+    <div
+      aria-live={severity === "error" ? "assertive" : "polite"}
+      aria-atomic={true}
     >
-      <MuiAlert
-        elevation={6}
-        variant="filled"
-        onClose={(event) => onClose(event, "escapeKeyDown")}
-        severity={severity}
-        closeText={closeText}
-        role={severity === "error" ? "alert" : "status"}
-        className="snackbar-alert"
+      <MUISnackbar
+        open={open}
+        autoHideDuration={20000}
+        onClose={onClose}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        {...props}
       >
-        <div role={severity === "error" ? "alert" : "status"}>
-          {notificationText}
-        </div>
-      </MuiAlert>
-    </MUISnackbar>
+        <MuiAlert
+          elevation={6}
+          variant="filled"
+          onClose={(event) => onClose(event, "escapeKeyDown")}
+          severity={severity}
+          closeText={closeText}
+          role={severity === "error" ? "alert" : "status"}
+          className="snackbar-alert"
+        >
+          <div role={severity === "error" ? "alert" : "status"}>
+            {notificationText}
+          </div>
+        </MuiAlert>
+      </MUISnackbar>
+    </div>
   );
 }
 
