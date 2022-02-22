@@ -95,6 +95,29 @@ describe("display", () => {
     expect(
       within(getByLabelText(/Was it a mobile app?/)).getByLabelText("Yes")
     ).toBeChecked();
-    expect(getByDisplayValue(/Windows phone/)).toBeInTheDocument();
+    expect(getByDisplayValue("Windows phone")).toBeInTheDocument();
+    expect(getByDisplayValue("Super app")).toBeInTheDocument();
+    expect(
+      queryByText(/Which software, connected object or other did you use?/)
+    ).not.toBeInTheDocument();
+    expect(
+      within(
+        getByLabelText(
+          /Did you already tell the organization in charge about the problem?/
+        )
+      ).getByLabelText("Yes")
+    ).toBeChecked();
+    expect(
+      within(getByLabelText(/Did they reply?/)).getByLabelText("Yes")
+    ).toBeChecked();
+    expect(getByDisplayValue("No reply")).toBeInTheDocument();
+    expect(getByDisplayValue("Nothing to add")).toBeInTheDocument();
+    expect(getByDisplayValue("Koena")).toBeInTheDocument();
+    expect(
+      getByDisplayValue("2, esplanade de la Gare à Sannois 95110")
+    ).toBeInTheDocument();
+    expect(getByDisplayValue("aloha@koena.net")).toBeInTheDocument();
+    expect(getByDisplayValue("0972632128")).toBeInTheDocument();
+    expect(getByDisplayValue("Armony")).toBeInTheDocument();
   });
 });

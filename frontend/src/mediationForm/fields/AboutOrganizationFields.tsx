@@ -20,6 +20,10 @@ type AboutOrganizationFieldsProps = {
    */
   control: any;
   /**
+   * Wether the field names should be prefixed by 'organization'
+   */
+  prefixedNames?: boolean;
+  /**
    * The class name passed to the main container div.
    */
   className?: string;
@@ -33,6 +37,7 @@ function AboutOrganizationFields({
   register,
   errors,
   control,
+  prefixedNames = false,
   className,
   ...borderFieldsetProps
 }: AboutOrganizationFieldsProps) {
@@ -53,6 +58,21 @@ function AboutOrganizationFields({
       message: t`The phone number format is invalid`,
     },
   };
+  const names = prefixedNames
+    ? {
+        name: "organizationName",
+        mailingAddress: "organizationAddress",
+        email: "organizationEmail",
+        phoneNumber: "organizationPhoneNumber",
+        contact: "organizationContact",
+      }
+    : {
+        name: "name",
+        mailingAddress: "mailingAddress",
+        email: "email",
+        phoneNumber: "phoneNumber",
+        contact: "contact",
+      };
   return (
     <BorderedFieldset
       legend={t`About the organization`}
@@ -60,16 +80,16 @@ function AboutOrganizationFields({
       {...borderFieldsetProps}
     >
       <TextField
-        id="name"
-        name="name"
+        id={names.name}
+        name={names.name}
         inputRef={register}
         label={t`Name of the organization`}
         type="text"
         className="about-organization__name"
       />
       <TextField
-        id="mailingAddress"
-        name="mailingAddress"
+        id={names.mailingAddress}
+        name={names.mailingAddress}
         inputRef={register}
         label={t`Mailing address`}
         type="text"
@@ -79,12 +99,12 @@ function AboutOrganizationFields({
                 In RHF V7 this problem may be resolved, so repace by EmailField and PhoneField when migrating. */}
       <Controller
         control={control}
-        name="email"
+        name={names.email}
         rules={emailRules}
         error={!!errors.email}
         as={
           <TextField
-            id="email"
+            id={names.email}
             label={emailLabel}
             inputProps={{ "aria-describedby": "email-desc" }}
             type="email"
@@ -103,12 +123,12 @@ function AboutOrganizationFields({
       </p>
       <Controller
         control={control}
-        name="phoneNumber"
+        name={names.phoneNumber}
         rules={phoneRules}
         error={!!errors.phoneNumber}
         as={
           <TextField
-            id="phoneNumber"
+            id={names.phoneNumber}
             label={t`Phone number`}
             inputProps={{ "aria-describedby": "phoneNumber-desc" }}
             type="tel"
@@ -131,8 +151,8 @@ function AboutOrganizationFields({
         </Trans>
       </p>
       <TextField
-        id="contact"
-        name="contact"
+        id={names.contact}
+        name={names.contact}
         inputRef={register}
         label={t`Contact`}
         type="text"

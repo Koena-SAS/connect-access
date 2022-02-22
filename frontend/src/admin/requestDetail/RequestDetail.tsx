@@ -5,7 +5,10 @@ import { useForm } from "react-hook-form";
 import { useAdminMediationRequest, usePrevious } from "../../hooks";
 import {
   AboutIssueFields,
+  AboutOrganizationFields,
+  FurtherInfoFields,
   NavigationContextFields,
+  OrganizationAnswerFields,
 } from "../../mediationForm/fields";
 import AssitiveTechnologyFields from "../../mediationForm/fields/AssitiveTechnologyAdminFields";
 import { MediationRequest } from "../../types/mediationRequest";
@@ -23,6 +26,24 @@ type FormInputs = {
   issueDescription: string;
   stepDescription: string;
   inaccessibilityLevel: string;
+  browserUsed: string;
+  url: string;
+  browser: string;
+  browserVersion: string;
+  mobileAppUsed: string;
+  mobileAppPlatform: string;
+  mobileAppName: string;
+  otherUsedSoftware: string;
+  didTellOrganization: string;
+  didOrganizationReply: string;
+  organizationReply: string;
+  furtherInfo: string;
+  attachedFile: string;
+  organizationName: string;
+  organizationAddress: string;
+  organizationEmail: string;
+  organizationPhoneNumber: string;
+  organizationContact: string;
 };
 
 type RequestDetailProps = {
@@ -51,17 +72,19 @@ function RequestDetail({ token, setBreadcrumbs }: RequestDetailProps) {
   );
   const [secondInitializationTodo, setSecondInitializationTodo] =
     useState(false);
-  const { register, errors, setValue, watch } = useForm<FormInputs>({
+  const { register, errors, setValue, watch, control } = useForm<FormInputs>({
     defaultValues: mediationRequest
       ? produce(mediationRequest, (draft) => {
-          delete draft["id"];
+          delete draft.id;
+          delete draft.attachedFile;
+          delete draft.applicationData;
         })
-      : {},
+      : { organizationPhoneNumber: "", organizationEmail: "" },
   });
   const setInitialValues = useCallback(() => {
     if (mediationRequest) {
       for (const key of Object.keys(mediationRequest)) {
-        if (key !== "id")
+        if (key !== "id" && key !== "attachedFile" && key !== "applicationData")
           setValue(key, mediationRequest[key as keyof MediationRequest]);
       }
     }
@@ -106,15 +129,41 @@ function RequestDetail({ token, setBreadcrumbs }: RequestDetailProps) {
           register={register}
           errors={errors}
           legendClassName="admin-request-detail__fieldset-legend"
+          smallPaddingTop={true}
           level={2}
         />
         <NavigationContextFields
           register={register}
           errors={errors}
           watch={watch}
+          legendClassName="admin-request-detail__fieldset-legend"
           smallPaddingTop={true}
           level={3}
         />
+        <OrganizationAnswerFields
+          register={register}
+          watch={watch}
+          legendClassName="admin-request-detail__fieldset-legend"
+          smallPaddingTop={true}
+          level={3}
+        />
+        <FurtherInfoFields
+          register={register}
+          legendClassName="admin-request-detail__fieldset-legend"
+          smallPaddingTop={true}
+          level={3}
+        />
+        {mediationRequest?.applicationData && (
+          <AboutOrganizationFields
+            register={register}
+            errors={errors}
+            control={control}
+            prefixedNames={true}
+            legendClassName="admin-request-detail__fieldset-legend"
+            smallPaddingTop={true}
+            level={3}
+          />
+        )}
       </form>
     </div>
   );
