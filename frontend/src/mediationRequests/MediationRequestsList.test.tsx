@@ -28,7 +28,7 @@ it("displays the list of given mediation requests", async () => {
   expect(getByText("f8842f63")).toBeInTheDocument();
   expect(getByText("4ae77193")).toBeInTheDocument();
   expect(getAllByText(/2021/).length).toEqual(2);
-  expect(getAllByText(/Koena/).length).toEqual(2);
+  expect(getAllByText(/Koena/).length).toEqual(1);
   expect(
     getByText(/It loads but I don't get all the informaiton/)
   ).toBeInTheDocument();

@@ -37,6 +37,10 @@ export const mediationRequests: MediationRequest[] = [
     otherUsedSoftware: "",
     didTellOrganization: "NO",
     organizationName: "Koena",
+    organizationAddress: "2, esplanade de la Gare à Sannois 95110",
+    organizationEmail: "aloha@koena.net",
+    organizationPhoneNumber: "0972632128",
+    organizationContact: "Armony",
   },
   {
     id: "f8842f63-5073-4956-a7fa-2ec8eb82f37d",
@@ -75,11 +79,6 @@ export const mediationRequests: MediationRequest[] = [
     organizationReply: "No reply",
     furtherInfo: "Nothing to add",
     attachedFile: "Failure.png",
-    organizationName: "Koena",
-    organizationAddress: "2, esplanade de la Gare à Sannois 95110",
-    organizationEmail: "aloha@koena.net",
-    organizationPhoneNumber: "0972632128",
-    organizationContact: "Armony",
   },
 ];
 
@@ -87,7 +86,9 @@ export const mediationRequests: MediationRequest[] = [
  * Generates all URLs with arbitrary values and with an organization prefix.
  * @returns object similar to PATHS but with generated values.
  */
-export function generatePathsWithPrefix() {
+export function generatePathsWithPrefix({
+  requestId = "f8842f63-5073-4956-a7fa-2ec8eb82f37d",
+} = {}) {
   return produce(PATHS, (draftState) => {
     for (const [key, value] of getEntries(draftState)) {
       draftState[key] = generatePath(value, {
@@ -95,7 +96,7 @@ export function generatePathsWithPrefix() {
         applicationSlug: "koena-connect",
         uid: "IN",
         token: "z65e44jjlkmyu84e6fjfszqqds2az5szf",
-        requestId: "f8842f63-5073-4956-a7fa-2ec8eb82f37d",
+        requestId,
       });
     }
   });
@@ -105,7 +106,9 @@ export function generatePathsWithPrefix() {
  * Generates all URLs with arbitrary values and without organization prefix.
  * @returns object similar to PATHS but with generated values.
  */
-export function generatePathsWithoutPrefix() {
+export function generatePathsWithoutPrefix({
+  requestId = "f8842f63-5073-4956-a7fa-2ec8eb82f37d",
+} = {}) {
   return produce(PATHS, (draftState) => {
     for (const [key, value] of getEntries(draftState)) {
       draftState[key] = generatePath(value, {
@@ -113,7 +116,7 @@ export function generatePathsWithoutPrefix() {
         applicationSlug: undefined,
         uid: "IN",
         token: "z65e44jjlkmyu84e6fjfszqqds2az5szf",
-        requestId: "f8842f63-5073-4956-a7fa-2ec8eb82f37d",
+        requestId,
       });
     }
   });

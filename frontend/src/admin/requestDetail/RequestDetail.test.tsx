@@ -18,8 +18,6 @@ afterEach(async () => {
   await waitFor(() => cache.clear());
 });
 
-const generatedPathsWithoutPrefix = generatePathsWithoutPrefix();
-
 async function renderRequestDetail(
   history?: any,
   generatedPaths?: any,
@@ -30,7 +28,7 @@ async function renderRequestDetail(
   }
   if (!history) {
     if (!generatedPaths) {
-      generatedPaths = generatedPathsWithoutPrefix;
+      generatedPaths = generatePathsWithoutPrefix();
     }
     history = createMemoryHistory({
       initialEntries: [generatedPaths.ADMIN_REQUEST_DETAIL],
@@ -53,9 +51,13 @@ async function renderRequestDetail(
 }
 
 describe("display", () => {
-  it(`displays mediation request details`, async () => {
-    const { getByDisplayValue, getByLabelText, queryByText } =
-      await renderRequestDetail();
+  it(`displays mediation request details when the organization is a partner`, async () => {
+    const {
+      getByDisplayValue,
+      getByLabelText,
+      queryByText,
+      queryByDisplayValue,
+    } = await renderRequestDetail();
     expect(getByDisplayValue("Bill")).toBeInTheDocument();
     expect(getByDisplayValue("Blue")).toBeInTheDocument();
     expect(getByDisplayValue("bluebill@koena.net")).toBeInTheDocument();
@@ -112,6 +114,24 @@ describe("display", () => {
     ).toBeChecked();
     expect(getByDisplayValue("No reply")).toBeInTheDocument();
     expect(getByDisplayValue("Nothing to add")).toBeInTheDocument();
+    expect(queryByDisplayValue(/Koena/)).not.toBeInTheDocument();
+    expect(
+      queryByDisplayValue(/2, esplanade de la Gare à Sannois 95110/)
+    ).not.toBeInTheDocument();
+    expect(queryByDisplayValue(/aloha@koena.net/)).not.toBeInTheDocument();
+    expect(queryByDisplayValue(/0972632128/)).not.toBeInTheDocument();
+    expect(queryByDisplayValue(/Armony/)).not.toBeInTheDocument();
+  });
+
+  it(`displays mediation request details when the organization is not a partner`, async () => {
+    const history = createMemoryHistory({
+      initialEntries: [
+        generatePathsWithoutPrefix({
+          requestId: "4ae77193-1b66-4182-82af-bc9ce432b0e0",
+        }).ADMIN_REQUEST_DETAIL,
+      ],
+    });
+    const { getByDisplayValue } = await renderRequestDetail(history);
     expect(getByDisplayValue("Koena")).toBeInTheDocument();
     expect(
       getByDisplayValue("2, esplanade de la Gare à Sannois 95110")

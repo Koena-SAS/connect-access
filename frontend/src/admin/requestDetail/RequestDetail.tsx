@@ -153,7 +153,7 @@ function RequestDetail({ token, setBreadcrumbs }: RequestDetailProps) {
           smallPaddingTop={true}
           level={3}
         />
-        {mediationRequest?.applicationData && (
+        {!mediationRequest?.applicationData && (
           <AboutOrganizationFields
             register={register}
             errors={errors}

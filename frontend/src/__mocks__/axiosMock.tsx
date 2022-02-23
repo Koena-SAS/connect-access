@@ -85,6 +85,10 @@ export const resetAxiosMocks = () => {
         other_used_software: "",
         did_tell_organization: "NO",
         organization_name: "Koena",
+        organization_address: "2, esplanade de la Gare à Sannois 95110",
+        organization_email: "aloha@koena.net",
+        organization_phone_number: "0972632128",
+        organization_contact: "Armony",
       },
       {
         id: "f8842f63-5073-4956-a7fa-2ec8eb82f37d",
@@ -123,11 +127,6 @@ export const resetAxiosMocks = () => {
         organization_reply: "No reply",
         further_info: "Nothing to add",
         attached_file: "Failure.png",
-        organization_name: "Koena",
-        organization_address: "2, esplanade de la Gare à Sannois 95110",
-        organization_email: "aloha@koena.net",
-        organization_phone_number: "0972632128",
-        organization_contact: "Armony",
       },
     ],
   };
