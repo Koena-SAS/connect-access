@@ -10,6 +10,7 @@ type FurtherInfoFieldsProps = {
    * The class name passed to the main container div.
    */
   className?: string;
+  currentAttachedFile?: React.ReactNode;
   [borderFieldsetProps: string]: any;
 };
 
@@ -19,6 +20,7 @@ type FurtherInfoFieldsProps = {
 function FurtherInfoFields({
   register,
   className,
+  currentAttachedFile,
   ...borderFieldsetProps
 }: FurtherInfoFieldsProps) {
   return (
@@ -44,6 +46,7 @@ function FurtherInfoFields({
             understand your problem
           </Trans>
         </label>
+        {currentAttachedFile}
         <input
           type="file"
           name="attachedFile"

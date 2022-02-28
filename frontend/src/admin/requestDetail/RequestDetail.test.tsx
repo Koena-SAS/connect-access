@@ -57,6 +57,7 @@ describe("display", () => {
       getByLabelText,
       queryByText,
       queryByDisplayValue,
+      getByText,
     } = await renderRequestDetail();
     expect(getByDisplayValue("Bill")).toBeInTheDocument();
     expect(getByDisplayValue("Blue")).toBeInTheDocument();
@@ -114,6 +115,7 @@ describe("display", () => {
     ).toBeChecked();
     expect(getByDisplayValue("No reply")).toBeInTheDocument();
     expect(getByDisplayValue("Nothing to add")).toBeInTheDocument();
+    expect(getByText("Download the current attached file")).toBeInTheDocument();
     expect(queryByDisplayValue(/Koena/)).not.toBeInTheDocument();
     expect(
       queryByDisplayValue(/2, esplanade de la Gare à Sannois 95110/)
@@ -139,5 +141,24 @@ describe("display", () => {
     expect(getByDisplayValue("aloha@koena.net")).toBeInTheDocument();
     expect(getByDisplayValue("0972632128")).toBeInTheDocument();
     expect(getByDisplayValue("Armony")).toBeInTheDocument();
+  });
+
+  it(`displays the current attached file if there is one`, async () => {
+    const { getByText } = await renderRequestDetail();
+    expect(getByText("Download the current attached file")).toBeInTheDocument();
+  });
+
+  it(`does not display the current attached file if there is none`, async () => {
+    const history = createMemoryHistory({
+      initialEntries: [
+        generatePathsWithoutPrefix({
+          requestId: "4ae77193-1b66-4182-82af-bc9ce432b0e0",
+        }).ADMIN_REQUEST_DETAIL,
+      ],
+    });
+    const { queryByText } = await renderRequestDetail(history);
+    expect(
+      queryByText("Download the current attached file")
+    ).not.toBeInTheDocument();
   });
 });

@@ -152,6 +152,19 @@ function RequestDetail({ token, setBreadcrumbs }: RequestDetailProps) {
           legendClassName="admin-request-detail__fieldset-legend"
           smallPaddingTop={true}
           level={3}
+          currentAttachedFile={
+            mediationRequest?.attachedFile ? (
+              <a
+                className="admin-request-detail__link"
+                href={`${mediationRequest?.attachedFile}`}
+                download
+              >
+                <Trans>Download the current attached file</Trans>
+              </a>
+            ) : (
+              ""
+            )
+          }
         />
         {!mediationRequest?.applicationData && (
           <AboutOrganizationFields
