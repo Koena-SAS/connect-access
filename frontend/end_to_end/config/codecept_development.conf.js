@@ -16,6 +16,8 @@ exports.config = {
       url: "http://localhost:3501",
       show: true,
       browser: "chromium",
+      waitForAction: 30,
+      pressKeyDelay: 3,
     },
     AxeHelper: {
       require: "../helpers/axe_helper.ts",
