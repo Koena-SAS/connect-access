@@ -16,3 +16,170 @@
     }
   }
 }
+
+.main-mediation-request-admin-fields {
+  &__value {
+    font-size: 0.95rem;
+    margin-top: 0.7rem;
+  }
+  &__urgency {
+    margin-top: 2rem;
+  }
+  &__requestDate {
+    margin-top: 1.8rem;
+  }
+  .main-mediation-request-admin-fields__publicIdentifier.label {
+    margin-top: 0.5rem;
+  }
+  .main-mediation-request-admin-fields__modificationDate.label {
+    margin-top: 2rem;
+  }
+}
+
+.assistive-technology-admin-fields {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  &__title {
+    margin-top: 4rem;
+  }
+  &__warning {
+    width: 80%;
+    align-self: center;
+  }
+  &__isUsed {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2.8rem;
+  }
+  &__isUsedTitle {
+    font-size: 1.2rem;
+  }
+  &__isUsedItems {
+    display: flex;
+    justify-content: space-between;
+    max-width: 35rem;
+    margin-top: 0.3rem;
+    margin-left: -0.2rem;
+  }
+  &__isUsedItem {
+    width: auto;
+  }
+  &__type {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2.6rem;
+  }
+  &__typeTitle {
+    font-size: 1.2rem;
+  }
+  &__typeItems {
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+    margin-top: 0.3rem;
+    margin-left: -0.7rem;
+  }
+  &__typeItem {
+    width: auto;
+    margin-right: 0.4rem;
+    margin-top: 0.1rem;
+  }
+  &__nameAndVersion {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2.6rem;
+  }
+  &__nameAndVersionTitle {
+    font-size: 1.2rem;
+    margin-bottom: 0;
+  }
+  &__nameAndVersionItems {
+    display: flex;
+    flex-direction: column;
+  }
+  &__nameAndVersionItem {
+    margin-top: 1.9rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  &__nameAndVersionItemLegend {
+    font-size: 1.15rem;
+    flex-basis: 20%;
+    margin-top: 0.4rem;
+  }
+  &__nameAndVersionField {
+    flex-basis: 35%;
+  }
+  &__technologyName {
+    margin-top: 1.4rem;
+  }
+  &__technologyVersion {
+    margin-top: 1.6rem;
+  }
+
+  @media (max-width: 1150px) {
+    &__typeItems {
+      flex-direction: column;
+    }
+    &__nameAndVersionItemLegend {
+      flex-basis: 100%;
+    }
+    &__nameAndVersionField {
+      flex-basis: 47%;
+    }
+  }
+
+  @media (max-width: 900px) {
+    &__nameAndVersionItem {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    &__nameAndVersionItemLegend {
+      flex-basis: auto;
+    }
+    &__nameAndVersionField {
+      flex-basis: auto;
+    }
+    &__nameAndVersionFieldVersion {
+      margin-top: 0.7rem;
+    }
+  }
+
+  @media (max-width: 850px) {
+    &__isUsedItems {
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 750px) {
+    &__warning {
+      max-width: 90%;
+      width: auto;
+    }
+  }
+
+  @media (max-width: 450px) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    &__warning {
+      flex-direction: column;
+      .warning__text {
+        margin-left: 0;
+        margin-top: 1rem;
+      }
+    }
+  }
+}
+
+.assistive-technology-admin-fields,
+.main-mediation-request-admin-fields {
+  .label {
+    font-size: $label-size;
+    margin-bottom: 0.5rem;
+    margin-top: 1.5rem;
+  }
+}

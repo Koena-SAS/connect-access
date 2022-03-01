@@ -22,7 +22,7 @@ type AssitiveTechnologyFieldsProps = {
 } & { errors?: never };
 
 /**
- * Fields for assistive technology of the main mediation form.
+ * Fields for assistive technology in the admin panel.
  *
  * This component is here until the issue #77 is implemented on backend side, so that
  * we can use the AssistiveTechnologyFields component also in the admin panel.
@@ -36,21 +36,23 @@ function AssitiveTechnologyFields({
   return (
     <BorderedFieldset
       legend={t`Information about assistive technology used`}
-      fieldsetClassName={`assistive-technology ${className ? className : ""}`}
+      fieldsetClassName={`assistive-technology-admin-fields ${
+        className ? className : ""
+      }`}
       level={3}
-      legendClassName="assistive-technology__title"
+      legendClassName="assistive-technology-admin-fields__title"
       {...borderFieldsetProps}
     >
       {isUserFacing && (
         <Warning
-          containerClassName="assistive-technology__warning"
+          containerClassName="assistive-technology-admin-fields__warning"
           text={t`If you don't use any assistance technology, you can ignore the
             following questions and go to next step. However, if you use
             technologies to compensate for your disability in numeric
             usage, any details would help us to process your demand.`}
         />
       )}
-      <div className="assistive-technology__technologyUsed">
+      <div className="assistive-technology-admin-fields__technologyUsed">
         <FormControl fullWidth>
           <InputLabel shrink htmlFor="assistiveTechnologyUsed">
             <Trans>Assistive technologies used</Trans>
@@ -69,7 +71,9 @@ function AssitiveTechnologyFields({
                   }
                 : {}
             }
-            classes={{ select: "assistive-technology__technologyUsedSelect" }}
+            classes={{
+              select: "assistive-technology-admin-fields__technologyUsedSelect",
+            }}
           >
             <option label={t`Not specified`} value="" />
             <Trans>
@@ -117,7 +121,7 @@ function AssitiveTechnologyFields({
         {isBrowser && (
           <p
             id="assistiveTechnologyUsed-desc"
-            className="form__helper-text assistive-technology__technologyUsed-helper"
+            className="form__helper-text assistive-technology-admin-fields__technologyUsed-helper"
           >
             <Trans>
               To select several technologies, first hold down Ctrl key (or Cmd
@@ -127,7 +131,7 @@ function AssitiveTechnologyFields({
           </p>
         )}
       </div>
-      <div className="assistive-technology__technologyName">
+      <div className="assistive-technology-admin-fields__technologyName">
         <TextField
           id="technologyName"
           name="technologyName"
@@ -138,7 +142,7 @@ function AssitiveTechnologyFields({
           minRows={3}
         />
       </div>
-      <div className="assistive-technology__technologyVersion">
+      <div className="assistive-technology-admin-fields__technologyVersion">
         <TextField
           id="technologyVersion"
           name="technologyVersion"

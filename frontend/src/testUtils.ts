@@ -16,8 +16,9 @@ import { resetAxiosMocks } from "./__mocks__/axiosMock";
 export const mediationRequests: MediationRequest[] = [
   {
     id: "4ae77193-1b66-4182-82af-bc9ce432b0e0",
-    creationDate: "2021-02-03",
-    requestDate: "2021-02-03",
+    creationDate: "2021-02-03T11:41:04.346286+01:00",
+    modificationDate: "2021-02-04T11:41:04.346286+01:00",
+    requestDate: "2021-02-03T11:41:04.346286+01:00",
     status: "WAITING_MEDIATOR_VALIDATION",
     firstName: "John",
     lastName: "Doe",
@@ -44,8 +45,9 @@ export const mediationRequests: MediationRequest[] = [
   },
   {
     id: "f8842f63-5073-4956-a7fa-2ec8eb82f37d",
-    creationDate: "2021-01-08",
-    requestDate: "2021-01-08",
+    creationDate: "2021-01-08T11:41:04.346286+01:00",
+    modificationDate: "2021-01-09T11:41:04.346286+01:00",
+    requestDate: "2021-01-08T11:41:04.346286+01:00",
     status: "WAITING_CONTACT",
     applicationData: {
       id: "7c15b8d0-dcb4-4257-9e5b-2bb2e9364558",

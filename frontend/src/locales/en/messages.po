@@ -13,7 +13,7 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/mediationForm/fields/AssitiveTechnologyAdminFields.tsx:107
+#: src/admin/fields/AssitiveTechnologyFields.tsx:111
 msgid "<0>Adapted navigation dispositive</0>"
 msgstr "<0>Adapted navigation dispositive</0>"
 
@@ -21,7 +21,7 @@ msgstr "<0>Adapted navigation dispositive</0>"
 msgid "<0>Android</0>"
 msgstr "<0>Android</0>"
 
-#: src/mediationForm/fields/AssitiveTechnologyAdminFields.tsx:83
+#: src/admin/fields/AssitiveTechnologyFields.tsx:87
 msgid "<0>Braille display</0>"
 msgstr "<0>Braille display</0>"
 
@@ -45,22 +45,22 @@ msgstr "<0>Closed</0>"
 msgid "<0>Complainant</0>"
 msgstr "<0>Complainant</0>"
 
-#: src/mediationForm/fields/AssitiveTechnologyAdminFields.tsx:94
+#: src/admin/fields/AssitiveTechnologyFields.tsx:98
 msgid "<0>DYS Disorder software</0>"
 msgstr "<0>DYS Disorder software</0>"
 
-#: src/customerLayout/Footer.tsx:54
+#: src/customerLayout/Footer.tsx:60
 #: src/mediationRequests/MediationRequestsDetail.tsx:101
 #: src/mediationRequests/MediationRequestsDetail.tsx:406
 msgid "<0>E-mail:</0>"
 msgstr "E-mail:"
 
 #: src/forms/fields/EmailField.tsx:44
-#: src/mediationForm/fields/AboutOrganizationFields.tsx:40
+#: src/mediationForm/fields/AboutOrganizationFields.tsx:45
 msgid "<0>E-mail</0>"
 msgstr "E-mail"
 
-#: src/mediationForm/fields/AssitiveTechnologyAdminFields.tsx:102
+#: src/admin/fields/AssitiveTechnologyFields.tsx:106
 msgid "<0>Exclusive keyboard navigation</0>"
 msgstr "<0>Exclusive keyboard navigation</0>"
 
@@ -80,7 +80,7 @@ msgstr "<0>Incomplete</0>"
 msgid "<0>Internet Explorer</0>"
 msgstr "Internet Explorer"
 
-#: src/mediationForm/fields/AssitiveTechnologyAdminFields.tsx:75
+#: src/admin/fields/AssitiveTechnologyFields.tsx:79
 msgid "<0>Keyboard</0>"
 msgstr "<0>Keyboard</0>"
 
@@ -108,9 +108,9 @@ msgstr "Microsoft Edge"
 msgid "<0>Organization (partner)</0>"
 msgstr "<0>Organization (partner)</0>"
 
+#: src/admin/fields/AssitiveTechnologyFields.tsx:116
 #: src/admin/requestDetail/TraceReportForm.tsx:203
 #: src/admin/requestDetail/TraceReportForm.tsx:324
-#: src/mediationForm/fields/AssitiveTechnologyAdminFields.tsx:112
 #: src/mediationForm/fields/NavigationContextFields.tsx:260
 msgid "<0>Other</0>"
 msgstr "<0>Other</0>"
@@ -119,15 +119,15 @@ msgstr "<0>Other</0>"
 msgid "<0>Request filed</0>"
 msgstr "<0>Request filed</0>"
 
-#: src/mediationForm/fields/AssitiveTechnologyAdminFields.tsx:78
+#: src/admin/fields/AssitiveTechnologyFields.tsx:82
 msgid "<0>Screen reader with vocal synthesis</0>"
 msgstr "<0>Screen reader with vocal synthesis</0>"
 
-#: src/mediationForm/fields/AssitiveTechnologyAdminFields.tsx:99
+#: src/admin/fields/AssitiveTechnologyFields.tsx:103
 msgid "<0>Virtual keyboard</0>"
 msgstr "<0>Virtual keyboard</0>"
 
-#: src/mediationForm/fields/AssitiveTechnologyAdminFields.tsx:89
+#: src/admin/fields/AssitiveTechnologyFields.tsx:93
 msgid "<0>Vocal command software</0>"
 msgstr "<0>Vocal command software</0>"
 
@@ -147,7 +147,7 @@ msgstr "<0>Waiting for mediator validation</0>"
 msgid "<0>Waiting for second contact</0>"
 msgstr "<0>Waiting for second contact</0>"
 
-#: src/customerLayout/Footer.tsx:71
+#: src/customerLayout/Footer.tsx:77
 msgid "<0>Website:</0>"
 msgstr "<0>Website:</0>"
 
@@ -155,7 +155,7 @@ msgstr "<0>Website:</0>"
 msgid "<0>Windows phone</0>"
 msgstr "<0>Windows phone</0>"
 
-#: src/mediationForm/fields/AssitiveTechnologyAdminFields.tsx:86
+#: src/admin/fields/AssitiveTechnologyFields.tsx:90
 msgid "<0>Zoom software</0>"
 msgstr "<0>Zoom software</0>"
 
@@ -163,15 +163,15 @@ msgstr "<0>Zoom software</0>"
 msgid "<0>iOS</0>"
 msgstr "<0>iOS</0>"
 
-#: src/customerLayout/Footer.tsx:89
+#: src/customerLayout/Footer.tsx:95
 msgid "About"
 msgstr "About"
 
-#: src/mediationForm/fields/AboutIssueFields.tsx:42
+#: src/mediationForm/fields/AboutIssueFields.tsx:44
 msgid "About the issue"
 msgstr "About the issue"
 
-#: src/mediationForm/fields/AboutOrganizationFields.tsx:58
+#: src/mediationForm/fields/AboutOrganizationFields.tsx:78
 msgid "About the organization"
 msgstr "About the organization"
 
@@ -190,7 +190,7 @@ msgid "About you"
 msgstr "About you"
 
 #: src/constants/choicesMap.tsx:70
-#: src/mediationForm/fields/AboutIssueFields.tsx:100
+#: src/mediationForm/fields/AboutIssueFields.tsx:102
 msgid "Access possible by bypass but difficult"
 msgstr "Access possible by bypass but difficult"
 
@@ -227,7 +227,7 @@ msgstr "All"
 #: src/admin/AllRequests.tsx:39
 #: src/admin/Menu.tsx:87
 #: src/admin/requestDetail/History.tsx:16
-#: src/admin/requestDetail/RequestDetail.tsx:39
+#: src/admin/requestDetail/RequestDetail.tsx:66
 #: src/admin/requestDetail/TraceReports.tsx:80
 #: src/users/mediations/UserMediations.tsx:21
 msgid "All requests"
@@ -245,12 +245,12 @@ msgstr "An unexpected error occurred."
 msgid "Android"
 msgstr "Android"
 
-#: src/mediationForm/fields/FurtherInfoFields.tsx:34
+#: src/mediationForm/fields/FurtherInfoFields.tsx:36
 msgid "Anything else about your problem?"
 msgstr "Anything else about your problem?"
 
-#: src/mediationForm/fields/AssitiveTechnologyAdminFields.tsx:56
-#: src/mediationForm/fields/AssitiveTechnologyAdminFields.tsx:63
+#: src/admin/fields/AssitiveTechnologyFields.tsx:58
+#: src/admin/fields/AssitiveTechnologyFields.tsx:65
 #: src/mediationForm/fields/AssitiveTechnologyFields.tsx:221
 msgid "Assistive technologies used"
 msgstr "Assistive technologies used"
@@ -259,7 +259,7 @@ msgstr "Assistive technologies used"
 msgid "Assistive technologies used:"
 msgstr "Assistive technologies used:"
 
-#: src/mediationForm/fields/AssitiveTechnologyAdminFields.tsx:135
+#: src/admin/fields/AssitiveTechnologyFields.tsx:139
 msgid "Assistive technology name(s)"
 msgstr "Assistive technology name(s)"
 
@@ -271,7 +271,7 @@ msgstr "Assistive technology name(s) and version(s)"
 msgid "Assistive technology name(s):"
 msgstr "Assistive technology name(s):"
 
-#: src/mediationForm/fields/AssitiveTechnologyAdminFields.tsx:146
+#: src/admin/fields/AssitiveTechnologyFields.tsx:150
 msgid "Assistive technology version(s)"
 msgstr "Assistive technology version(s)"
 
@@ -355,7 +355,7 @@ msgstr "Confirm password"
 msgid "Confirmation"
 msgstr "Confirmation"
 
-#: src/mediationForm/fields/AboutOrganizationFields.tsx:137
+#: src/mediationForm/fields/AboutOrganizationFields.tsx:157
 msgid "Contact"
 msgstr "Contact"
 
@@ -371,7 +371,7 @@ msgstr "Contact date"
 msgid "Contact type"
 msgstr "Contact type"
 
-#: src/customerLayout/Footer.tsx:33
+#: src/customerLayout/Footer.tsx:39
 msgid "Contact us"
 msgstr "Contact us"
 
@@ -397,7 +397,7 @@ msgstr "Dashboard"
 msgid "Date"
 msgstr "Date"
 
-#: src/mediationForm/fields/AboutIssueFields.tsx:73
+#: src/mediationForm/fields/AboutIssueFields.tsx:75
 msgid "Describe every step you did in order to access the wanted content or features"
 msgstr "Describe every step you did in order to access the wanted content or features"
 
@@ -406,7 +406,7 @@ msgid "Describe every step you did in order to access the wanted content or feat
 msgstr "Describe every step you did in order to access the wanted content or features:"
 
 #: src/admin/requestDetail/History.tsx:17
-#: src/admin/requestDetail/RequestDetail.tsx:40
+#: src/admin/requestDetail/RequestDetail.tsx:67
 #: src/admin/requestDetail/TraceReports.tsx:81
 #: src/mediationRequests/MediationRequestsList.tsx:35
 msgid "Details"
@@ -431,7 +431,7 @@ msgstr "Did they reply?"
 msgid "Did you already tell the organization in charge about the problem?"
 msgstr "Did you already tell the organization in charge about the problem?"
 
-#: src/mediationForm/fields/FurtherInfoFields.tsx:42
+#: src/mediationForm/fields/FurtherInfoFields.tsx:44
 msgid "Do not hesitate to upload any file that may be useful to better understand your problem"
 msgstr "Do not hesitate to upload any file that may be useful to better understand your problem"
 
@@ -450,6 +450,10 @@ msgstr "Don't Know"
 #: src/mediationForm/fields/NavigationContextFields.tsx:179
 msgid "Don't know"
 msgstr "Don't know"
+
+#: src/admin/requestDetail/RequestDetail.tsx:181
+msgid "Download the current attached file"
+msgstr "Download the current attached file"
 
 #: src/admin/requestDetail/TraceReports.tsx:178
 msgid "Download the file"
@@ -475,12 +479,13 @@ msgstr "Edit a trace report"
 msgid "Edit the report"
 msgstr "Edit the report"
 
+#: src/admin/fields/MainFields.tsx:157
 #: src/admin/requestDetail/TraceReportForm.tsx:300
 msgid "Example of correct format: 09/01/2021 06:52 PM"
 msgstr "Example of correct format: 09/01/2021 06:52 PM"
 
 #: src/forms/fields/EmailField.tsx:82
-#: src/mediationForm/fields/AboutOrganizationFields.tsx:102
+#: src/mediationForm/fields/AboutOrganizationFields.tsx:122
 msgid "Example of correct format: name@domain.com"
 msgstr "Example of correct format: name@domain.com"
 
@@ -512,7 +517,7 @@ msgstr "Footer"
 msgid "Form management"
 msgstr "Form management"
 
-#: src/mediationForm/fields/FurtherInfoFields.tsx:26
+#: src/mediationForm/fields/FurtherInfoFields.tsx:28
 msgid "Further information"
 msgstr "Further information"
 
@@ -524,7 +529,7 @@ msgstr "Further information:"
 msgid "General Settings"
 msgstr "General Settings"
 
-#: src/customerLayout/Footer.tsx:124
+#: src/customerLayout/Footer.tsx:135
 msgid "Help"
 msgstr "Help"
 
@@ -556,7 +561,7 @@ msgstr "Identifier"
 msgid "If an account exists with this e-mail, you will receive a password reset link soon."
 msgstr "If an account exists with this e-mail, you will receive a password reset link soon."
 
-#: src/mediationForm/fields/AssitiveTechnologyAdminFields.tsx:47
+#: src/admin/fields/AssitiveTechnologyFields.tsx:49
 #: src/mediationForm/fields/AssitiveTechnologyFields.tsx:164
 msgid ""
 "If you don't use any assistance technology, you can ignore the\n"
@@ -570,7 +575,7 @@ msgstr ""
 "usage, any details would help us to process your demand."
 
 #: src/constants/choicesMap.tsx:69
-#: src/mediationForm/fields/AboutIssueFields.tsx:92
+#: src/mediationForm/fields/AboutIssueFields.tsx:94
 msgid "Impossible access"
 msgstr "Impossible access"
 
@@ -578,7 +583,7 @@ msgstr "Impossible access"
 msgid "Incomplete"
 msgstr "Incomplete"
 
-#: src/mediationForm/fields/AssitiveTechnologyAdminFields.tsx:38
+#: src/admin/fields/AssitiveTechnologyFields.tsx:38
 #: src/mediationForm/fields/AssitiveTechnologyFields.tsx:155
 msgid "Information about assistive technology used"
 msgstr "Information about assistive technology used"
@@ -587,10 +592,18 @@ msgstr "Information about assistive technology used"
 msgid "Internet Explorer"
 msgstr "Internet Explorer"
 
-#: src/mediationForm/fields/AboutIssueFields.tsx:125
+#: src/admin/fields/MainFields.tsx:181
+msgid "Is the problem urgent?"
+msgstr "Is the problem urgent?"
+
+#: src/mediationForm/fields/AboutIssueFields.tsx:130
 #: src/mediationRequests/MediationRequestsDetail.tsx:214
 msgid "Is your problem urgent?"
 msgstr "Is your problem urgent?"
+
+#: src/admin/fields/MainFields.tsx:164
+msgid "Last modification date"
+msgstr "Last modification date"
 
 #: src/forms/fields/LastNameField.tsx:55
 msgid "Last name"
@@ -626,13 +639,17 @@ msgstr "Login"
 msgid "Logout"
 msgstr "Logout"
 
-#: src/mediationForm/fields/AboutOrganizationFields.tsx:74
+#: src/mediationForm/fields/AboutOrganizationFields.tsx:94
 msgid "Mailing address"
 msgstr "Mailing address"
 
 #: src/mediationRequests/MediationRequestsDetail.tsx:398
 msgid "Mailing adress:"
 msgstr "Mailing adress:"
+
+#: src/admin/fields/MainFields.tsx:76
+msgid "Main information"
+msgstr "Main information"
 
 #: src/admin/Menu.tsx:63
 msgid "Main menu"
@@ -645,7 +662,7 @@ msgstr "Mediating"
 #: src/admin/AllRequests.tsx:39
 #: src/admin/Menu.tsx:81
 #: src/admin/requestDetail/History.tsx:15
-#: src/admin/requestDetail/RequestDetail.tsx:38
+#: src/admin/requestDetail/RequestDetail.tsx:65
 #: src/admin/requestDetail/TraceReports.tsx:79
 msgid "Mediation"
 msgstr "Mediation"
@@ -670,8 +687,9 @@ msgstr "Menu"
 msgid "Microsoft Edge"
 msgstr "Microsoft Edge"
 
+#: src/admin/fields/MainFields.tsx:195
 #: src/constants/choicesMap.tsx:48
-#: src/mediationForm/fields/AboutIssueFields.tsx:139
+#: src/mediationForm/fields/AboutIssueFields.tsx:144
 msgid "Moderately, I can wait, but not too long"
 msgstr "Moderately, I can wait, but not too long"
 
@@ -704,7 +722,7 @@ msgstr "My requests"
 msgid "Name"
 msgstr "Name"
 
-#: src/mediationForm/fields/AboutOrganizationFields.tsx:66
+#: src/mediationForm/fields/AboutOrganizationFields.tsx:86
 msgid "Name of the organization"
 msgstr "Name of the organization"
 
@@ -730,11 +748,12 @@ msgstr "No"
 msgid "No field is required. If you have information about the owner of the digital service, you can indicate it, or go to the next step if not."
 msgstr "No field is required. If you have information about the owner of the digital service, you can indicate it, or go to the next step if not."
 
+#: src/admin/fields/AssitiveTechnologyFields.tsx:78
+#: src/admin/fields/MainFields.tsx:209
 #: src/admin/requestDetail/TraceReportForm.tsx:190
 #: src/admin/requestDetail/TraceReportForm.tsx:314
-#: src/mediationForm/fields/AboutIssueFields.tsx:116
-#: src/mediationForm/fields/AboutIssueFields.tsx:153
-#: src/mediationForm/fields/AssitiveTechnologyAdminFields.tsx:74
+#: src/mediationForm/fields/AboutIssueFields.tsx:118
+#: src/mediationForm/fields/AboutIssueFields.tsx:158
 #: src/mediationForm/fields/NavigationContextFields.tsx:94
 #: src/mediationForm/fields/NavigationContextFields.tsx:186
 #: src/mediationForm/fields/NavigationContextFields.tsx:234
@@ -744,8 +763,9 @@ msgstr "No field is required. If you have information about the owner of the dig
 msgid "Not specified"
 msgstr "Not specified"
 
+#: src/admin/fields/MainFields.tsx:202
 #: src/constants/choicesMap.tsx:49
-#: src/mediationForm/fields/AboutIssueFields.tsx:146
+#: src/mediationForm/fields/AboutIssueFields.tsx:151
 msgid "Not urgent at all, but would like a solution as soon as possible"
 msgstr "Not urgent at all, but would like a solution as soon as possible"
 
@@ -812,11 +832,11 @@ msgid "Personal information"
 msgstr "Personal information"
 
 #: src/forms/fields/PhoneField.tsx:61
-#: src/mediationForm/fields/AboutOrganizationFields.tsx:112
+#: src/mediationForm/fields/AboutOrganizationFields.tsx:132
 msgid "Phone number"
 msgstr "Phone number"
 
-#: src/customerLayout/Footer.tsx:39
+#: src/customerLayout/Footer.tsx:45
 #: src/mediationRequests/MediationRequestsDetail.tsx:111
 #: src/mediationRequests/MediationRequestsDetail.tsx:418
 msgid "Phone number:"
@@ -830,9 +850,13 @@ msgstr "Pro Offer"
 msgid "Problem Description"
 msgstr "Problem Description"
 
-#: src/customerLayout/Footer.tsx:134
+#: src/customerLayout/Footer.tsx:145
 msgid "Project funded as part of the Innov'Up experimentation"
 msgstr "Project funded as part of the Innov'Up experimentation"
+
+#: src/admin/fields/MainFields.tsx:87
+msgid "Public identifier"
+msgstr "Public identifier"
 
 #: src/admin/Menu.tsx:73
 #: src/admin/QuickAccess.tsx:14
@@ -840,7 +864,7 @@ msgid "Quick Access"
 msgstr "Quick Access"
 
 #: src/constants/choicesMap.tsx:71
-#: src/mediationForm/fields/AboutIssueFields.tsx:108
+#: src/mediationForm/fields/AboutIssueFields.tsx:110
 msgid "Random access, sometimes it works and sometimes it does not"
 msgstr "Random access, sometimes it works and sometimes it does not"
 
@@ -868,7 +892,11 @@ msgstr "Remove the attached file"
 msgid "Request a password reset"
 msgstr "Request a password reset"
 
-#: src/admin/requestDetail/RequestDetail.tsx:71
+#: src/admin/fields/MainFields.tsx:115
+msgid "Request date"
+msgstr "Request date"
+
+#: src/admin/requestDetail/RequestDetail.tsx:121
 msgid "Request detail"
 msgstr "Request detail"
 
@@ -924,7 +952,7 @@ msgstr "Sign up"
 msgid "Signup"
 msgstr "Signup"
 
-#: src/customerLayout/Footer.tsx:127
+#: src/customerLayout/Footer.tsx:138
 msgid "Sitemap"
 msgstr "Sitemap"
 
@@ -981,7 +1009,7 @@ msgstr "Submit my mediation request"
 msgid "Summary"
 msgstr "Summary"
 
-#: src/additionalPages/TermsOfService.tsx:13
+#: src/additionalPages/TermsOfService.tsx:15
 msgid "Terms of service"
 msgstr "Terms of service"
 
@@ -997,7 +1025,11 @@ msgstr "The URL must be a valid http address, with at least domain.extension"
 msgid "The contact date must be formated following the pattern mm/dd/yyyy hh:mm (a|p)m"
 msgstr "The contact date must be formated following the pattern mm/dd/yyyy hh:mm (a|p)m"
 
-#: src/mediationForm/fields/AboutOrganizationFields.tsx:47
+#: src/admin/fields/MainFields.tsx:55
+msgid "The creation date must be formated following the pattern mm/dd/yyyy hh:mm (a|p)m"
+msgstr "The creation date must be formated following the pattern mm/dd/yyyy hh:mm (a|p)m"
+
+#: src/mediationForm/fields/AboutOrganizationFields.tsx:52
 msgid "The e-mail format is invalid"
 msgstr "The e-mail format is invalid"
 
@@ -1029,7 +1061,7 @@ msgid "The password is required"
 msgstr "The password is required"
 
 #: src/forms/fields/PhoneField.tsx:53
-#: src/mediationForm/fields/AboutOrganizationFields.tsx:53
+#: src/mediationForm/fields/AboutOrganizationFields.tsx:58
 msgid "The phone number format is invalid"
 msgstr "The phone number format is invalid"
 
@@ -1038,7 +1070,7 @@ msgid "The phone number is required"
 msgstr "The phone number is required"
 
 #: src/forms/fields/PhoneField.tsx:79
-#: src/mediationForm/fields/AboutOrganizationFields.tsx:128
+#: src/mediationForm/fields/AboutOrganizationFields.tsx:148
 msgid "The phone number must be 9 to 15 digits long and can be preceded by the + sign"
 msgstr "The phone number must be 9 to 15 digits long and can be preceded by the + sign"
 
@@ -1070,7 +1102,7 @@ msgstr "There was a technical error and the submission failed, please try again 
 msgid "This information is used to identify you, you can modify it at any time."
 msgstr "This information is used to identify you, you can modify it at any time."
 
-#: src/mediationForm/fields/AssitiveTechnologyAdminFields.tsx:122
+#: src/admin/fields/AssitiveTechnologyFields.tsx:126
 msgid "To select several technologies, first hold down Ctrl key (or Cmd under macOS), then use the mouse click, or on the keyboard the directional arrows to move and Space to select them."
 msgstr "To select several technologies, first hold down Ctrl key (or Cmd under macOS), then use the mouse click, or on the keyboard the directional arrows to move and Space to select them."
 
@@ -1088,7 +1120,7 @@ msgstr "Trace reports"
 msgid "User management"
 msgstr "User management"
 
-#: src/customerLayout/Footer.tsx:120
+#: src/customerLayout/Footer.tsx:131
 msgid "Utilization"
 msgstr "Utilization"
 
@@ -1160,12 +1192,12 @@ msgstr "What is the url address where you have encountered the problem?"
 msgid "What kind of app was it?"
 msgstr "What kind of app was it?"
 
-#: src/mediationForm/fields/AboutIssueFields.tsx:52
+#: src/mediationForm/fields/AboutIssueFields.tsx:54
 #: src/mediationRequests/MediationRequestsDetail.tsx:177
 msgid "What was the issue?"
 msgstr "What was the issue?"
 
-#: src/mediationForm/fields/AboutIssueFields.tsx:85
+#: src/mediationForm/fields/AboutIssueFields.tsx:87
 #: src/mediationRequests/MediationRequestsDetail.tsx:196
 msgid "What was the level of inaccessibility encountered?"
 msgstr "What was the level of inaccessibility encountered?"
@@ -1213,8 +1245,9 @@ msgstr "Would rather not to mention"
 msgid "Yes"
 msgstr "Yes"
 
+#: src/admin/fields/MainFields.tsx:188
 #: src/constants/choicesMap.tsx:47
-#: src/mediationForm/fields/AboutIssueFields.tsx:132
+#: src/mediationForm/fields/AboutIssueFields.tsx:137
 msgid "Yes, very urgent: need a quick answer"
 msgstr "Yes, very urgent: need a quick answer"
 
@@ -1226,7 +1259,7 @@ msgstr ""
 "You have to accept the terms of service before creating an\n"
 "account."
 
-#: src/mediationForm/fields/AboutIssueFields.tsx:50
+#: src/mediationForm/fields/AboutIssueFields.tsx:52
 msgid "You have to describe your problem"
 msgstr "You have to describe your problem"
 

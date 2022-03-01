@@ -18,6 +18,7 @@ type AboutIssueFieldsProps = {
    * Function that performs the validation of required fields.
    */
   validateRequired?: any;
+  hideUrgencyField?: boolean;
   /**
    * The class name passed to the main container div.
    */
@@ -34,6 +35,7 @@ function AboutIssueFields({
   validateRequired = (errorText: string) => {
     return (value: string) => (value ? true : errorText);
   },
+  hideUrgencyField = false,
   className,
   ...borderFieldsetProps
 }: AboutIssueFieldsProps) {
@@ -116,43 +118,47 @@ function AboutIssueFields({
           label={t`Not specified`}
         />
       </div>
-      <div
-        role="radiogroup"
-        aria-labelledby="urgency"
-        className="radio-container"
-      >
-        <p className="label" id="urgency">
-          <Trans>Is your problem urgent?</Trans>
-        </p>
-        <Radio
-          name="urgency"
-          id="urgencyVeryUrgent"
-          value="VERY_URGENT"
-          register={register}
-          label={t`Yes, very urgent: need a quick answer`}
-        />
-        <Radio
-          name="urgency"
-          id="urgencyModeratelyUrgent"
-          value="MODERATELY_URGENT"
-          register={register}
-          label={t`Moderately, I can wait, but not too long`}
-        />
-        <Radio
-          name="urgency"
-          id="UrgencyNotUrgent"
-          value="NOT_URGENT"
-          register={register}
-          label={t`Not urgent at all, but would like a solution as soon as possible`}
-        />
-        <Radio
-          name="urgency"
-          id="UrgencyNotSpecified"
-          value=""
-          register={register}
-          label={t`Not specified`}
-        />
-      </div>
+      {hideUrgencyField ? (
+        ""
+      ) : (
+        <div
+          role="radiogroup"
+          aria-labelledby="urgency"
+          className="radio-container"
+        >
+          <p className="label" id="urgency">
+            <Trans>Is your problem urgent?</Trans>
+          </p>
+          <Radio
+            name="urgency"
+            id="urgencyVeryUrgent"
+            value="VERY_URGENT"
+            register={register}
+            label={t`Yes, very urgent: need a quick answer`}
+          />
+          <Radio
+            name="urgency"
+            id="urgencyModeratelyUrgent"
+            value="MODERATELY_URGENT"
+            register={register}
+            label={t`Moderately, I can wait, but not too long`}
+          />
+          <Radio
+            name="urgency"
+            id="UrgencyNotUrgent"
+            value="NOT_URGENT"
+            register={register}
+            label={t`Not urgent at all, but would like a solution as soon as possible`}
+          />
+          <Radio
+            name="urgency"
+            id="UrgencyNotSpecified"
+            value=""
+            register={register}
+            label={t`Not specified`}
+          />
+        </div>
+      )}
     </BorderedFieldset>
   );
 }

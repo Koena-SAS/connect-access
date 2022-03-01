@@ -47,6 +47,7 @@ type AssistiveTechnology =
 type MediationRequest = {
   id?: string;
   creationDate?: string;
+  modificationDate?: string;
   requestDate?: string;
   status: Status;
   applicationData?: ApplicationData;
@@ -84,6 +85,7 @@ type MediationRequest = {
 type MediationRequestRecieved = {
   id?: string;
   creation_date?: string;
+  modification_date?: string;
   request_date?: string;
   status: Status;
   application_data?: ApplicationDataRecieved;

@@ -10,11 +10,14 @@ import {
   NavigationContextFields,
   OrganizationAnswerFields,
 } from "../../mediationForm/fields";
-import AssitiveTechnologyFields from "../../mediationForm/fields/AssitiveTechnologyAdminFields";
 import { MediationRequest } from "../../types/mediationRequest";
+import AssitiveTechnologyFields from "../fields/AssitiveTechnologyFields";
+import MainFields from "../fields/MainFields";
 import PersonalInformationFields from "./PersonalInformationFields";
 
 type FormInputs = {
+  requestDate: Date | string;
+  modificationDate: Date | string;
   firstName: string;
   lastName: string;
   email: string;
@@ -72,15 +75,20 @@ function RequestDetail({ token, setBreadcrumbs }: RequestDetailProps) {
   );
   const [secondInitializationTodo, setSecondInitializationTodo] =
     useState(false);
-  const { register, errors, setValue, watch, control } = useForm<FormInputs>({
-    defaultValues: mediationRequest
-      ? produce(mediationRequest, (draft) => {
-          delete draft.id;
-          delete draft.attachedFile;
-          delete draft.applicationData;
-        })
-      : { organizationPhoneNumber: "", organizationEmail: "" },
-  });
+  const { register, errors, setError, clearErrors, setValue, watch, control } =
+    useForm<FormInputs>({
+      defaultValues: mediationRequest
+        ? produce(mediationRequest, (draft) => {
+            delete draft.id;
+            delete draft.attachedFile;
+            delete draft.applicationData;
+          })
+        : {
+            organizationPhoneNumber: "",
+            organizationEmail: "",
+            requestDate: Date(),
+          },
+    });
   const setInitialValues = useCallback(() => {
     if (mediationRequest) {
       for (const key of Object.keys(mediationRequest)) {
@@ -113,10 +121,20 @@ function RequestDetail({ token, setBreadcrumbs }: RequestDetailProps) {
         <Trans>Request detail</Trans>
       </h1>
       <form className="form">
+        <MainFields
+          register={register}
+          control={control}
+          mediationRequest={mediationRequest}
+          setError={setError}
+          clearErrors={clearErrors}
+          errors={errors}
+          legendClassName="admin-request-detail__fieldset-legend-first"
+          level={2}
+        />
         <PersonalInformationFields
           register={register}
           errors={errors}
-          legendClassName="admin-request-detail__fieldset-legend-first"
+          legendClassName="admin-request-detail__fieldset-legend"
           level={2}
         />
         <AssitiveTechnologyFields
@@ -131,6 +149,7 @@ function RequestDetail({ token, setBreadcrumbs }: RequestDetailProps) {
           legendClassName="admin-request-detail__fieldset-legend"
           smallPaddingTop={true}
           level={2}
+          hideUrgencyField={true}
         />
         <NavigationContextFields
           register={register}
@@ -138,20 +157,20 @@ function RequestDetail({ token, setBreadcrumbs }: RequestDetailProps) {
           watch={watch}
           legendClassName="admin-request-detail__fieldset-legend"
           smallPaddingTop={true}
-          level={3}
+          level={2}
         />
         <OrganizationAnswerFields
           register={register}
           watch={watch}
           legendClassName="admin-request-detail__fieldset-legend"
           smallPaddingTop={true}
-          level={3}
+          level={2}
         />
         <FurtherInfoFields
           register={register}
           legendClassName="admin-request-detail__fieldset-legend"
           smallPaddingTop={true}
-          level={3}
+          level={2}
           currentAttachedFile={
             mediationRequest?.attachedFile ? (
               <a
@@ -174,7 +193,7 @@ function RequestDetail({ token, setBreadcrumbs }: RequestDetailProps) {
             prefixedNames={true}
             legendClassName="admin-request-detail__fieldset-legend"
             smallPaddingTop={true}
-            level={3}
+            level={2}
           />
         )}
       </form>

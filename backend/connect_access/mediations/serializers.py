@@ -148,6 +148,7 @@ class MediationRequestSerializer(ToReprMixin, serializers.ModelSerializer):
 
     id = serializers.ReadOnlyField(source="uuid")
     creation_date = serializers.DateTimeField(source="created", required=False)
+    modification_date = serializers.DateTimeField(source="created", required=False)
     request_date = serializers.DateTimeField(required=False)
     complainant = serializers.SlugRelatedField(
         slug_field="uuid", queryset=User.objects.all(), required=False
@@ -171,6 +172,7 @@ class MediationRequestSerializer(ToReprMixin, serializers.ModelSerializer):
         fields = [
             "id",
             "creation_date",
+            "modification_date",
             "request_date",
             "complainant",
             "status",

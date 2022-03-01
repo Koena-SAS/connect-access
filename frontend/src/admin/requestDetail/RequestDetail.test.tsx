@@ -59,6 +59,12 @@ describe("display", () => {
       queryByDisplayValue,
       getByText,
     } = await renderRequestDetail();
+    expect(getByText(/f8842f63/)).toBeInTheDocument();
+    expect(getByText(/2ec8eb82f37d/)).toBeInTheDocument();
+    expect(
+      getByDisplayValue("1/08/2021", { exact: false })
+    ).toBeInTheDocument();
+    expect(getByText("1/9/2021", { exact: false })).toBeInTheDocument();
     expect(getByDisplayValue("Bill")).toBeInTheDocument();
     expect(getByDisplayValue("Blue")).toBeInTheDocument();
     expect(getByDisplayValue("bluebill@koena.net")).toBeInTheDocument();
@@ -68,7 +74,7 @@ describe("display", () => {
     expect(getByDisplayValue("Fictive technology")).toBeInTheDocument();
     expect(getByDisplayValue("3.5.2")).toBeInTheDocument();
     expect(
-      within(getByLabelText(/Is your problem urgent?/)).getByLabelText(
+      within(getByLabelText(/Is the problem urgent?/)).getByLabelText(
         /Not urgent at all/
       )
     ).toBeChecked();

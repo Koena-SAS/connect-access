@@ -46,6 +46,7 @@ def test_mediation_request_serializes_correctly_all_fields():
     data = response.data[0]
     assertContains(response, str(mediation_request.uuid))
     parse(data["creation_date"])  # we test that parsing it to datime does not raise
+    parse(data["modification_date"])  # we test that parsing it to datime does not raise
     parse(data["request_date"])  # we test that parsing it to datime does not raise
     assertContains(response, str(mediation_request.complainant.uuid))
     assertContains(response, MediationRequestStatus(mediation_request.status).name)
