@@ -967,7 +967,7 @@ msgstr "Statut :"
 #: src/mediationForm/ProblemDescription.tsx:210
 #: src/mediationForm/UserInfo.tsx:135
 msgid "Step 1: About yourself"
-msgstr "Étape 1 : A propos de vous"
+msgstr "Étape 1 : À propos de vous"
 
 #: src/mediationForm/OrganizationInfo.tsx:137
 #: src/mediationForm/ProblemDescription.tsx:168
