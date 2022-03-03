@@ -37,7 +37,7 @@ msgstr "<0>Chrome</0>"
 msgid "<0>Close sidebar</0>"
 msgstr "<0>Cacher le menu</0>"
 
-#: src/admin/FilterMediationRequests.tsx:70
+#: src/forms/fields/MediationRequestStatus.tsx:75
 msgid "<0>Closed</0>"
 msgstr "<0>Fermé</0>"
 
@@ -72,7 +72,7 @@ msgstr "<0>Organisation externe</0>"
 msgid "<0>Firefox</0>"
 msgstr "<0>Firefox</0>"
 
-#: src/admin/FilterMediationRequests.tsx:43
+#: src/forms/fields/MediationRequestStatus.tsx:50
 msgid "<0>Incomplete</0>"
 msgstr "<0>Incomplet</0>"
 
@@ -88,11 +88,11 @@ msgstr "<0>Clavier</0>"
 msgid "<0>Letter</0>"
 msgstr "<0>Lettre</0>"
 
-#: src/admin/FilterMediationRequests.tsx:67
+#: src/forms/fields/MediationRequestStatus.tsx:72
 msgid "<0>Mediating</0>"
 msgstr "<0>En cours de médiation</0>"
 
-#: src/admin/FilterMediationRequests.tsx:73
+#: src/forms/fields/MediationRequestStatus.tsx:78
 msgid "<0>Mediation failed</0>"
 msgstr "<0>La médiation a échoué</0>"
 
@@ -115,7 +115,7 @@ msgstr "<0>Organisation partenaire</0>"
 msgid "<0>Other</0>"
 msgstr "<0>Autre</0>"
 
-#: src/admin/FilterMediationRequests.tsx:51
+#: src/forms/fields/MediationRequestStatus.tsx:58
 msgid "<0>Request filed</0>"
 msgstr "<0>Demande déposée</0>"
 
@@ -131,19 +131,19 @@ msgstr "<0>Clavier virtuel</0>"
 msgid "<0>Vocal command software</0>"
 msgstr "<0>Logiciel de commande vocale</0>"
 
-#: src/admin/FilterMediationRequests.tsx:54
+#: src/forms/fields/MediationRequestStatus.tsx:61
 msgid "<0>Waiting for administrative validation</0>"
 msgstr "<0>En attente de validation administrative</0>"
 
-#: src/admin/FilterMediationRequests.tsx:59
+#: src/forms/fields/MediationRequestStatus.tsx:66
 msgid "<0>Waiting for contact</0>"
 msgstr "<0>En attente de réponse de l'organisation</0>"
 
-#: src/admin/FilterMediationRequests.tsx:46
+#: src/forms/fields/MediationRequestStatus.tsx:53
 msgid "<0>Waiting for mediator validation</0>"
 msgstr "<0>En attente de validation par le médiateur</0>"
 
-#: src/admin/FilterMediationRequests.tsx:62
+#: src/forms/fields/MediationRequestStatus.tsx:69
 msgid "<0>Waiting for second contact</0>"
 msgstr "<0>En attente de réponse après relance</0>"
 
@@ -219,7 +219,7 @@ msgstr "Admin"
 msgid "Admin content"
 msgstr "Contenu de l'interface d'administration"
 
-#: src/admin/FilterMediationRequests.tsx:42
+#: src/admin/FilterMediationRequests.tsx:35
 msgid "All"
 msgstr "Toutes"
 
@@ -227,7 +227,7 @@ msgstr "Toutes"
 #: src/admin/AllRequests.tsx:39
 #: src/admin/Menu.tsx:87
 #: src/admin/requestDetail/History.tsx:16
-#: src/admin/requestDetail/RequestDetail.tsx:66
+#: src/admin/requestDetail/RequestDetail.tsx:76
 #: src/admin/requestDetail/TraceReports.tsx:80
 #: src/users/mediations/UserMediations.tsx:21
 msgid "All requests"
@@ -406,7 +406,7 @@ msgid "Describe every step you did in order to access the wanted content or feat
 msgstr "Décrivez les actions que vous avez faites pour accéder au contenu ou aux fonctionnalités désirées :"
 
 #: src/admin/requestDetail/History.tsx:17
-#: src/admin/requestDetail/RequestDetail.tsx:67
+#: src/admin/requestDetail/RequestDetail.tsx:77
 #: src/admin/requestDetail/TraceReports.tsx:81
 #: src/mediationRequests/MediationRequestsList.tsx:35
 msgid "Details"
@@ -451,7 +451,7 @@ msgstr "Ne sais pas"
 msgid "Don't know"
 msgstr "Ne sais pas"
 
-#: src/admin/requestDetail/RequestDetail.tsx:181
+#: src/admin/requestDetail/RequestDetail.tsx:191
 msgid "Download the current attached file"
 msgstr "Télécharger le fichier joint actuel"
 
@@ -479,7 +479,7 @@ msgstr "Modifier un rapport de suivi"
 msgid "Edit the report"
 msgstr "Modifier le rapport"
 
-#: src/admin/fields/MainFields.tsx:157
+#: src/admin/fields/MainFields.tsx:158
 #: src/admin/requestDetail/TraceReportForm.tsx:300
 msgid "Example of correct format: 09/01/2021 06:52 PM"
 msgstr "Exemple de format correct : 25/09/2021 15:52"
@@ -588,7 +588,7 @@ msgstr "Informations sur la technologie d’assistance utilisée"
 msgid "Internet Explorer"
 msgstr "Internet Explorer"
 
-#: src/admin/fields/MainFields.tsx:181
+#: src/admin/fields/MainFields.tsx:191
 msgid "Is the problem urgent?"
 msgstr "Le problème est-il urgent ?"
 
@@ -597,7 +597,7 @@ msgstr "Le problème est-il urgent ?"
 msgid "Is your problem urgent?"
 msgstr "Votre problème est-il urgent ?"
 
-#: src/admin/fields/MainFields.tsx:164
+#: src/admin/fields/MainFields.tsx:165
 msgid "Last modification date"
 msgstr "Date de la dernière modification"
 
@@ -643,7 +643,7 @@ msgstr "Adresse postale"
 msgid "Mailing adress:"
 msgstr "Adresse postale :"
 
-#: src/admin/fields/MainFields.tsx:76
+#: src/admin/fields/MainFields.tsx:77
 msgid "Main information"
 msgstr "Informations principales"
 
@@ -658,7 +658,7 @@ msgstr "En cours de médiation"
 #: src/admin/AllRequests.tsx:39
 #: src/admin/Menu.tsx:81
 #: src/admin/requestDetail/History.tsx:15
-#: src/admin/requestDetail/RequestDetail.tsx:65
+#: src/admin/requestDetail/RequestDetail.tsx:75
 #: src/admin/requestDetail/TraceReports.tsx:79
 msgid "Mediation"
 msgstr "Médiation"
@@ -683,7 +683,7 @@ msgstr "Menu"
 msgid "Microsoft Edge"
 msgstr "Microsoft Edge"
 
-#: src/admin/fields/MainFields.tsx:195
+#: src/admin/fields/MainFields.tsx:205
 #: src/constants/choicesMap.tsx:48
 #: src/mediationForm/fields/AboutIssueFields.tsx:144
 msgid "Moderately, I can wait, but not too long"
@@ -745,7 +745,8 @@ msgid "No field is required. If you have information about the owner of the digi
 msgstr "Aucun champ n'est obligatoire. Si vous avez des informations concernant le propriétaire du service numérique, vous pouvez les indiquer, ou passer à l'étape suivante dans le cas contraire."
 
 #: src/admin/fields/AssitiveTechnologyFields.tsx:78
-#: src/admin/fields/MainFields.tsx:209
+#: src/admin/fields/MainFields.tsx:181
+#: src/admin/fields/MainFields.tsx:219
 #: src/admin/requestDetail/TraceReportForm.tsx:190
 #: src/admin/requestDetail/TraceReportForm.tsx:314
 #: src/mediationForm/fields/AboutIssueFields.tsx:118
@@ -759,7 +760,7 @@ msgstr "Aucun champ n'est obligatoire. Si vous avez des informations concernant 
 msgid "Not specified"
 msgstr "Non renseigné"
 
-#: src/admin/fields/MainFields.tsx:202
+#: src/admin/fields/MainFields.tsx:212
 #: src/constants/choicesMap.tsx:49
 #: src/mediationForm/fields/AboutIssueFields.tsx:151
 msgid "Not urgent at all, but would like a solution as soon as possible"
@@ -850,7 +851,7 @@ msgstr "Description du problème"
 msgid "Project funded as part of the Innov'Up experimentation"
 msgstr "Projet financé dans le cadre du dispositif Innov'Up expérimentation"
 
-#: src/admin/fields/MainFields.tsx:87
+#: src/admin/fields/MainFields.tsx:88
 msgid "Public identifier"
 msgstr "Identifiant public"
 
@@ -888,11 +889,11 @@ msgstr "Supprimer le fichier joint"
 msgid "Request a password reset"
 msgstr "Réinitialiser votre mot de passe"
 
-#: src/admin/fields/MainFields.tsx:115
+#: src/admin/fields/MainFields.tsx:116
 msgid "Request date"
 msgstr "Date de la demande"
 
-#: src/admin/requestDetail/RequestDetail.tsx:121
+#: src/admin/requestDetail/RequestDetail.tsx:131
 msgid "Request detail"
 msgstr "Détail de la demande"
 
@@ -911,6 +912,10 @@ msgstr "Détails de la demande"
 #: src/constants/choicesMap.tsx:82
 msgid "Request filed"
 msgstr "Demande déposée"
+
+#: src/admin/fields/MainFields.tsx:180
+msgid "Request status"
+msgstr "Statut de la demande"
 
 #: src/admin/Menu.tsx:90
 msgid "Requests management"
@@ -960,7 +965,7 @@ msgstr "Statistiques"
 msgid "Status"
 msgstr "Statut"
 
-#: src/admin/FilterMediationRequests.tsx:37
+#: src/admin/FilterMediationRequests.tsx:34
 msgid "Status:"
 msgstr "Statut :"
 
@@ -1021,7 +1026,7 @@ msgstr "L'URL doit être une adresse http valide, avec au moins la forme domaine
 msgid "The contact date must be formated following the pattern mm/dd/yyyy hh:mm (a|p)m"
 msgstr "La date de contact doit être dans un format respectant jj/mm/aaaa hh:mm"
 
-#: src/admin/fields/MainFields.tsx:55
+#: src/admin/fields/MainFields.tsx:56
 msgid "The creation date must be formated following the pattern mm/dd/yyyy hh:mm (a|p)m"
 msgstr "La date de création doit être dans un format respectant jj/mm/aaaa hh:mm"
 
@@ -1241,7 +1246,7 @@ msgstr "Non renseigné"
 msgid "Yes"
 msgstr "Oui"
 
-#: src/admin/fields/MainFields.tsx:188
+#: src/admin/fields/MainFields.tsx:198
 #: src/constants/choicesMap.tsx:47
 #: src/mediationForm/fields/AboutIssueFields.tsx:137
 msgid "Yes, very urgent: need a quick answer"
