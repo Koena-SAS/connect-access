@@ -10,7 +10,16 @@ import {
   NavigationContextFields,
   OrganizationAnswerFields,
 } from "../../mediationForm/fields";
-import { MediationRequest } from "../../types/mediationRequest";
+import {
+  AssistiveTechnology,
+  Browser,
+  InaccessibilityLevel,
+  MediationRequest,
+  MobileAppPlatform,
+  Status,
+  Urgency,
+} from "../../types/mediationRequest";
+import { YesNo } from "../../types/types";
 import AssitiveTechnologyFields from "../fields/AssitiveTechnologyFields";
 import MainFields from "../fields/MainFields";
 import PersonalInformationFields from "./PersonalInformationFields";
@@ -22,23 +31,24 @@ type FormInputs = {
   lastName: string;
   email: string;
   phoneNumber: string;
-  assistiveTechnologyUsed: string[];
+  assistiveTechnologyUsed: AssistiveTechnology[] | [];
   technologyName: string;
   technologyVersion: string;
-  urgency: string;
+  status: Status;
+  urgency: Urgency | "";
   issueDescription: string;
   stepDescription: string;
-  inaccessibilityLevel: string;
-  browserUsed: string;
+  inaccessibilityLevel: InaccessibilityLevel | "";
+  browserUsed: YesNo | "";
   url: string;
-  browser: string;
+  browser: Browser | "";
   browserVersion: string;
-  mobileAppUsed: string;
-  mobileAppPlatform: string;
+  mobileAppUsed: YesNo | "";
+  mobileAppPlatform: MobileAppPlatform | "";
   mobileAppName: string;
   otherUsedSoftware: string;
-  didTellOrganization: string;
-  didOrganizationReply: string;
+  didTellOrganization: YesNo | "";
+  didOrganizationReply: YesNo | "";
   organizationReply: string;
   furtherInfo: string;
   attachedFile: string;

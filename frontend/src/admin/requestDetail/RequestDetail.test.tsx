@@ -5,7 +5,10 @@ import { createMemoryHistory } from "history";
 import { Route, Router } from "react-router-dom";
 import { cache, SWRConfig } from "swr";
 import { PATHS_WITHOUT_PREFIX } from "../../constants/paths";
-import { generatePathsWithoutPrefix } from "../../testUtils";
+import {
+  checkOptionIsSelected,
+  generatePathsWithoutPrefix,
+} from "../../testUtils";
 import { resetAxiosMocks } from "../../__mocks__/axiosMock";
 import RequestDetail from "./RequestDetail";
 
@@ -65,6 +68,12 @@ describe("display", () => {
       getByDisplayValue("1/08/2021", { exact: false })
     ).toBeInTheDocument();
     expect(getByText("1/9/2021", { exact: false })).toBeInTheDocument();
+    checkOptionIsSelected("Waiting for contact", "Request status");
+    expect(
+      within(getByLabelText(/Is the problem urgent?/)).getByLabelText(
+        /Not urgent at all/
+      )
+    ).toBeChecked();
     expect(getByDisplayValue("Bill")).toBeInTheDocument();
     expect(getByDisplayValue("Blue")).toBeInTheDocument();
     expect(getByDisplayValue("bluebill@koena.net")).toBeInTheDocument();
@@ -73,11 +82,6 @@ describe("display", () => {
     expect(getByDisplayValue(/Braille/)).toBeInTheDocument();
     expect(getByDisplayValue("Fictive technology")).toBeInTheDocument();
     expect(getByDisplayValue("3.5.2")).toBeInTheDocument();
-    expect(
-      within(getByLabelText(/Is the problem urgent?/)).getByLabelText(
-        /Not urgent at all/
-      )
-    ).toBeChecked();
     expect(getByDisplayValue("It fails to load")).toBeInTheDocument();
     expect(getByDisplayValue("I try to load the page")).toBeInTheDocument();
     expect(

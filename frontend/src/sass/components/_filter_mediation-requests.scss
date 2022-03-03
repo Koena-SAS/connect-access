@@ -10,12 +10,18 @@
   &__option:not(.last).MuiFormControl-root {
     margin-right: 2.5rem;
   }
+  &__statusContainer {
+    max-width: 25rem;
+  }
 
   @media (max-width: 600px) {
     flex-direction: column;
 
     &__option.MuiFormControl-root {
       width: 100%;
+    }
+    &__option:not(.last).MuiFormControl-root {
+      margin-right: 0;
     }
   }
 }

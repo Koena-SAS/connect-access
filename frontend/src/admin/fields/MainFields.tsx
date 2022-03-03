@@ -7,6 +7,7 @@ import enLocale from "date-fns/locale/en-US";
 import frLocale from "date-fns/locale/fr";
 import { Controller } from "react-hook-form";
 import { BorderedFieldset, Radio, TextField } from "../../forms";
+import MediationRequestStatus from "../../forms/fields/MediationRequestStatus";
 import { MediationRequest } from "../../types/mediationRequest";
 import { Langs } from "../../types/types";
 
@@ -172,6 +173,15 @@ function MainFields({
       ) : (
         ""
       )}
+      <div className="main-mediation-request-admin-fields__status">
+        <MediationRequestStatus
+          register={register}
+          name="status"
+          label={t`Request status`}
+          defaultOptionLabel={t`Not specified`}
+          fullWidth={true}
+        />
+      </div>
       <div
         role="radiogroup"
         aria-labelledby="urgency"

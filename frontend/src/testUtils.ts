@@ -2,7 +2,9 @@ import {
   cleanup,
   fireEvent,
   RenderResult,
+  screen,
   waitFor,
+  within,
 } from "@testing-library/react";
 import produce from "immer";
 import { generatePath } from "react-router-dom";
@@ -189,3 +191,28 @@ export const configData: ConfigData = {
   logoFilename: "logo.png",
   logoFilenameSmall: "logo_small.png",
 } as const;
+
+/**
+ * Check that for a given select, the wanted option is selected, and the
+ * other ones are not selected.
+ * @param optionName the option name that should be selected
+ * @param selectLabel the select label name
+ */
+export function checkOptionIsSelected(
+  optionName: string,
+  selectLabel: string | RegExp
+) {
+  const applicationSelect = screen.getAllByLabelText(selectLabel)[0];
+  const selectedOption = within(applicationSelect).getByRole("option", {
+    name: optionName,
+  }) as HTMLOptionElement;
+  const regex = new RegExp(`^(?!${optionName}).*$`);
+  const otherOptions = within(applicationSelect).getAllByRole("option", {
+    name: regex,
+  }) as HTMLOptionElement[];
+
+  expect(selectedOption.selected).toBeTruthy();
+  otherOptions.forEach((otherOption) =>
+    expect(otherOption.selected).toBeFalsy()
+  );
+}

@@ -1,5 +1,5 @@
 import { t, Trans } from "@lingui/macro";
-import { TextField } from "../forms";
+import MediationRequestStatus from "../forms/fields/MediationRequestStatus";
 
 type FilterMediationRequestsProps = {
   setChosenStatus: (value: string) => void;
@@ -27,53 +27,16 @@ function FilterMediationRequests({
       >
         <Trans>Filter by:</Trans>
       </span>
-      <TextField
-        id="mediationStatus"
-        name="mediationStatus"
-        select
-        SelectProps={{
-          native: true,
-        }}
-        label={t`Status:`}
-        onChange={handleChangeStatus}
-        className="filter-mediation-requests__option"
-        fullwidth={false}
-      >
-        <option label={t`All`} value="" />
-        <Trans>
-          <option value="PENDING">Incomplete</option>
-        </Trans>
-        <Trans>
-          <option value="WAITING_MEDIATOR_VALIDATION">
-            Waiting for mediator validation
-          </option>
-        </Trans>
-        <Trans>
-          <option value="FILED">Request filed</option>
-        </Trans>
-        <Trans>
-          <option value="WAITING_ADMIN">
-            Waiting for administrative validation
-          </option>
-        </Trans>
-        <Trans>
-          <option value="WAITING_CONTACT">Waiting for contact</option>
-        </Trans>
-        <Trans>
-          <option value="WAITING_CONTACT_BIS">
-            Waiting for second contact
-          </option>
-        </Trans>
-        <Trans>
-          <option value="MEDIATING">Mediating</option>
-        </Trans>
-        <Trans>
-          <option value="CLOTURED">Closed</option>
-        </Trans>
-        <Trans>
-          <option value="MEDIATION_FAILED">Mediation failed</option>
-        </Trans>
-      </TextField>
+      <div className="filter-mediation-requests__statusContainer">
+        <MediationRequestStatus
+          onChange={handleChangeStatus}
+          name="mediationStatus"
+          label={t`Status:`}
+          defaultOptionLabel={t`All`}
+          className="filter-mediation-requests__option"
+          fullWidth={true}
+        />
+      </div>
     </div>
   );
 }
