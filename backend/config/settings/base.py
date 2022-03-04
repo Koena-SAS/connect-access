@@ -331,6 +331,7 @@ MEDIATION_REQUEST_EMAIL = env("MEDIATION_REQUEST_EMAIL", default="")
 
 # django-csp - https://django-csp.readthedocs.io/en/latest/configuration.html
 CSP_DEFAULT_SRC = ["'self'", "'unsafe-inline'", "data:"]
+CSP_FRAME_SRC = ["https://www.youtube-nocookie.com/", "https://www.youtube.com/"]
 
 # django-rest-framework-passwordless - https://github.com/aaronn/django-rest-framework-passwordless
 PASSWORDLESS_AUTH = {
