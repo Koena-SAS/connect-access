@@ -1,8 +1,15 @@
-import { Trans } from "@lingui/macro";
+import { t, Trans } from "@lingui/macro";
+import { SnackbarCloseReason } from "@mui/material";
 import produce from "immer";
 import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useAdminMediationRequest, usePrevious } from "../../hooks";
+import { useParams } from "react-router-dom";
+import { Button, Snackbar } from "../../forms";
+import {
+  useAdminMediationRequest,
+  useEditMediationRequest,
+  usePrevious,
+} from "../../hooks";
 import {
   AboutIssueFields,
   AboutOrganizationFields,
@@ -24,7 +31,7 @@ import AssitiveTechnologyFields from "../fields/AssitiveTechnologyFields";
 import MainFields from "../fields/MainFields";
 import PersonalInformationFields from "./PersonalInformationFields";
 
-type FormInputs = {
+type FormInput = {
   requestDate: Date | string;
   modificationDate: Date | string;
   firstName: string;
@@ -69,6 +76,37 @@ type RequestDetailProps = {
  * possibility to update them.
  */
 function RequestDetail({ token, setBreadcrumbs }: RequestDetailProps) {
+  const [requestSuccessMessageOpen, setRequestSuccessMessageOpen] =
+    useState(false);
+  const [requestFailureMessageOpen, setRequestFailureMessageOpen] =
+    useState(false);
+  const displayRequestSuccess = () => {
+    setRequestSuccessMessageOpen(true);
+  };
+  const displayRequestFailure = () => {
+    setRequestFailureMessageOpen(true);
+  };
+  const handleCloseSuccessMessage = (
+    _: Event | React.SyntheticEvent<any, Event>,
+    reason: SnackbarCloseReason
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setRequestSuccessMessageOpen(false);
+  };
+  const handleCloseFailureMessage = (
+    _: Event | React.SyntheticEvent<any, Event>,
+    reason: SnackbarCloseReason
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setRequestFailureMessageOpen(false);
+  };
+  const { requestId: mediationRequestId } = useParams<{
+    requestId: string;
+  }>();
   useEffect(
     function initBreadcrumbs() {
       setBreadcrumbs([
@@ -85,20 +123,33 @@ function RequestDetail({ token, setBreadcrumbs }: RequestDetailProps) {
   );
   const [secondInitializationTodo, setSecondInitializationTodo] =
     useState(false);
-  const { register, errors, setError, clearErrors, setValue, watch, control } =
-    useForm<FormInputs>({
-      defaultValues: mediationRequest
-        ? produce(mediationRequest, (draft) => {
-            delete draft.id;
-            delete draft.attachedFile;
-            delete draft.applicationData;
-          })
-        : {
-            organizationPhoneNumber: "",
-            organizationEmail: "",
-            requestDate: Date(),
-          },
-    });
+  const {
+    register,
+    errors,
+    setError,
+    clearErrors,
+    setValue,
+    watch,
+    control,
+    handleSubmit,
+  } = useForm<FormInput>({
+    defaultValues: mediationRequest
+      ? produce(mediationRequest, (draft) => {
+          delete draft.id;
+          delete draft.attachedFile;
+          delete draft.applicationData;
+        })
+      : {
+          organizationPhoneNumber: "",
+          organizationEmail: "",
+          requestDate: Date(),
+        },
+  });
+  const [editMediationRequest] = useEditMediationRequest({
+    token,
+    onSuccess: displayRequestSuccess,
+    onFailure: displayRequestFailure,
+  });
   const setInitialValues = useCallback(() => {
     if (mediationRequest) {
       for (const key of Object.keys(mediationRequest)) {
@@ -125,12 +176,20 @@ function RequestDetail({ token, setBreadcrumbs }: RequestDetailProps) {
     },
     [mediationRequest, secondInitializationTodo, setInitialValues, setValue]
   );
+
+  const onSubmit = (data: FormInput) => {
+    editMediationRequest({
+      mediationRequestId: mediationRequestId,
+      mediationRequest: data as MediationRequest,
+      token,
+    });
+  };
   return (
     <div className="admin-request-detail">
       <h1 className="admin-page-base__title">
         <Trans>Request detail</Trans>
       </h1>
-      <form className="form">
+      <form className="form" noValidate onSubmit={handleSubmit(onSubmit)}>
         <MainFields
           register={register}
           control={control}
@@ -206,6 +265,23 @@ function RequestDetail({ token, setBreadcrumbs }: RequestDetailProps) {
             level={2}
           />
         )}
+        <Snackbar
+          notificationText={t`The mediaiton request was successfully updated.`}
+          open={requestSuccessMessageOpen}
+          onClose={handleCloseSuccessMessage}
+          severity="success"
+        />
+        <Snackbar
+          notificationText={t`We could'nt update the mediation request. Please retry later.`}
+          open={requestFailureMessageOpen}
+          onClose={handleCloseFailureMessage}
+          severity="error"
+        />
+        <div className="admin-request-detail__submit">
+          <Button size="medium" type="submit">
+            <Trans>Update the mediation request</Trans>
+          </Button>
+        </div>
       </form>
     </div>
   );

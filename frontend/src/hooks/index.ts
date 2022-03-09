@@ -1,9 +1,10 @@
+import { useEditMediationRequest } from "./mutateAdminMediationRequests";
 import {
   useAddTraceReport,
   useDeleteTraceReport,
   useEditTraceReport,
-} from "./optimisticAdminMutate";
-import { useModifyUserDetails } from "./optimisticMutate";
+} from "./mutateAdminTraceReports";
+import { useModifyUserDetails } from "./mutateUserDetails";
 import {
   useAdminMediationRequest,
   useAdminMediationRequests,
@@ -41,5 +42,6 @@ export {
   usePrevious,
   useFooterAboutService,
   useContactInformation,
+  useEditMediationRequest,
   useTermsOfServiceIsSet,
 };

@@ -32,7 +32,7 @@ function UserDetails({ token }: { token: string }) {
     setRequestFailureMessageOpen(true);
   };
   const handleCloseSuccessMessage = (
-    event: Event | React.SyntheticEvent<any, Event>,
+    _: Event | React.SyntheticEvent<any, Event>,
     reason: SnackbarCloseReason
   ) => {
     if (reason === "clickaway") {
@@ -41,7 +41,7 @@ function UserDetails({ token }: { token: string }) {
     setRequestSuccessMessageOpen(false);
   };
   const handleCloseFailureMessage = (
-    event: Event | React.SyntheticEvent<any, Event>,
+    _: Event | React.SyntheticEvent<any, Event>,
     reason: SnackbarCloseReason
   ) => {
     if (reason === "clickaway") {
