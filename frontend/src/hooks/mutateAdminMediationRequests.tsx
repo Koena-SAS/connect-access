@@ -1,6 +1,5 @@
 import type { AxiosResponse } from "axios";
 import axios from "axios";
-import { useParams } from "react-router-dom";
 import { cache, mutate } from "swr";
 import useMutation from "use-mutation";
 import type {
@@ -21,10 +20,88 @@ async function editMediationRequest({
   token,
 }: EditMediationRequestProps): Promise<AxiosResponse<MediationRequestToSend>> {
   const dataToSend = new FormData();
-  if (mediationRequest.requestDate) {
+  mediationRequest.requestDate &&
     dataToSend.append("request_date", mediationRequest.requestDate);
-  }
+  dataToSend.append("status", mediationRequest.status);
+  mediationRequest.urgency &&
+    dataToSend.append("urgency", mediationRequest.urgency);
   dataToSend.append("first_name", mediationRequest.firstName);
+  mediationRequest.lastName &&
+    dataToSend.append("last_name", mediationRequest.lastName);
+  dataToSend.append("email", mediationRequest.email);
+  mediationRequest.phoneNumber &&
+    dataToSend.append("phone_number", mediationRequest.phoneNumber);
+  mediationRequest.assistiveTechnologyUsed &&
+    mediationRequest.assistiveTechnologyUsed.forEach((technologyType) => {
+      dataToSend.append("assistive_technology_used", technologyType);
+    });
+  mediationRequest.technologyName &&
+    dataToSend.append("technology_name", mediationRequest.technologyName);
+  mediationRequest.technologyVersion &&
+    dataToSend.append("technology_version", mediationRequest.technologyVersion);
+  dataToSend.append("issue_description", mediationRequest.issueDescription);
+  mediationRequest.stepDescription &&
+    dataToSend.append("step_description", mediationRequest.stepDescription);
+  mediationRequest.inaccessibilityLevel &&
+    dataToSend.append(
+      "inaccessibility_level",
+      mediationRequest.inaccessibilityLevel
+    );
+  mediationRequest.browserUsed &&
+    dataToSend.append("browser_used", mediationRequest.browserUsed);
+  mediationRequest.url && dataToSend.append("url", mediationRequest.url);
+  mediationRequest.browser &&
+    dataToSend.append("browser", mediationRequest.browser);
+  mediationRequest.browserVersion &&
+    dataToSend.append("browser_version", mediationRequest.browserVersion);
+  mediationRequest.mobileAppUsed &&
+    dataToSend.append("mobile_app_used", mediationRequest.mobileAppUsed);
+  mediationRequest.mobileAppPlatform &&
+    dataToSend.append(
+      "mobile_app_platform",
+      mediationRequest.mobileAppPlatform
+    );
+  mediationRequest.mobileAppName &&
+    dataToSend.append("mobile_app_name", mediationRequest.mobileAppName);
+  mediationRequest.otherUsedSoftware &&
+    dataToSend.append(
+      "other_used_software",
+      mediationRequest.otherUsedSoftware
+    );
+  mediationRequest.didTellOrganization &&
+    dataToSend.append(
+      "did_tell_organization",
+      mediationRequest.didTellOrganization
+    );
+  mediationRequest.didOrganizationReply &&
+    dataToSend.append(
+      "did_organization_reply",
+      mediationRequest.didOrganizationReply
+    );
+  mediationRequest.organizationReply &&
+    dataToSend.append("organization_reply", mediationRequest.organizationReply);
+  mediationRequest.furtherInfo &&
+    dataToSend.append("further_info", mediationRequest.furtherInfo);
+  // TODO attached_file
+  mediationRequest.organizationName &&
+    dataToSend.append("organization_name", mediationRequest.organizationName);
+  mediationRequest.organizationAddress &&
+    dataToSend.append(
+      "organization_address",
+      mediationRequest.organizationAddress
+    );
+  mediationRequest.organizationEmail &&
+    dataToSend.append("organization_email", mediationRequest.organizationEmail);
+  mediationRequest.organizationPhoneNumber &&
+    dataToSend.append(
+      "organization_phone_number",
+      mediationRequest.organizationPhoneNumber
+    );
+  mediationRequest.organizationContact &&
+    dataToSend.append(
+      "organization_contact",
+      mediationRequest.organizationContact
+    );
   try {
     const response = await axios.patch<MediationRequestToSend>(
       `/api/mediation-requests/${mediationRequestId}/`,
@@ -63,17 +140,14 @@ export function useEditMediationRequest({
   onSuccess,
   onFailure,
 }: UseEditMediationRequestProps) {
-  const { requestId: mediationRequestId } = useParams<{
-    requestId: string;
-  }>();
-  const key = [`/api/mediation-request/${mediationRequestId}/`, token];
+  const key = [`/api/mediation-requests/`, token];
   return useMutation(editMediationRequest, {
     onMutate({ input }) {
       const oldData = cache.get(key);
       mutate(
         key,
-        (current: MediationRequest[]) =>
-          current.map((mediationRequest) => {
+        (current: MediationRequest[]) => {
+          return current.map((mediationRequest) => {
             const isTheNewRequest =
               mediationRequest.id === input.mediationRequest.id;
             if (isTheNewRequest) {
@@ -81,7 +155,8 @@ export function useEditMediationRequest({
             } else {
               return mediationRequest;
             }
-          }),
+          });
+        },
         false
       );
       return () => mutate(key, oldData, false);

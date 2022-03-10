@@ -29,9 +29,7 @@ describe("Error handling", () => {
     const submit = app.getByText("Reset password");
     await click(submit);
     const error = app.getByRole("alert");
-    expect(error.textContent).toMatch(
-      /The e-mail must be formated like this: name@domain.extension/
-    );
+    expect(error.textContent).toMatch(/The e-mail format is invalid/);
   });
 });
 

@@ -61,7 +61,7 @@ function OrganizationInfo({
 }: OrganizationInfoProps) {
   const { state, actions } = useStateMachine({ updateOrganizationInfo });
   const generatePrefixedPath = useGeneratePrefixedPath();
-  const { register, control, errors, trigger, getValues } = useForm<FormInput>({
+  const { register, errors, trigger, getValues } = useForm<FormInput>({
     defaultValues: state.organizationInfo,
   });
   const onSubmit = (data: FormInput) => {
@@ -122,7 +122,6 @@ function OrganizationInfo({
           <AboutOrganizationFields
             register={register}
             errors={errors}
-            control={control}
             smallMarginTop={true}
             smallPaddingTop={true}
             level={3}

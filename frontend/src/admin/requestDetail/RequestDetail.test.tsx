@@ -1,6 +1,7 @@
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
 import {
+  fireEvent,
   render,
   RenderResult,
   screen,
@@ -13,10 +14,11 @@ import { cache, SWRConfig } from "swr";
 import { PATHS_WITHOUT_PREFIX } from "../../constants/paths";
 import {
   checkOptionIsSelected,
+  click,
   fillField,
   generatePathsWithoutPrefix,
 } from "../../testUtils";
-import { resetAxiosMocks } from "../../__mocks__/axiosMock";
+import { mockedAxios, resetAxiosMocks } from "../../__mocks__/axiosMock";
 import RequestDetail from "./RequestDetail";
 
 beforeEach(() => {
@@ -191,9 +193,113 @@ describe("Display the mediation request details", () => {
 describe("Form validation success", () => {
   it(`displays a success message when the mediaiton request is successfully
   updated`, async () => {
-    const app = await renderRequestDetail();
-    fillField(app, /First name/, "Joseph");
-    screen.getByRole("button", { name: "Update the mediation request" });
-    expect(app.getByLabelText(/First name/)).toHaveDisplayValue("Joseph");
+    await renderRequestDetail();
+    await submitEditForm();
+    expect(
+      screen.getByText("The mediaiton request was successfully updated.")
+    ).toBeInTheDocument();
   });
 });
+
+describe("Form errors on mandatory fields", () => {
+  it(`displays an error message for every mandatory field not filled when
+  validating the form`, async () => {
+    const app = await renderRequestDetail();
+    fillField(app, /First name/, "");
+    fillField(app, "E-mail *", "");
+    fillField(app, /What was the issue/, "");
+    await submitEditForm();
+    expect(screen.getAllByRole("alert")).toHaveLength(3);
+    expect(
+      app.getByText("The first name / username is required")
+    ).toBeInTheDocument();
+    expect(app.getByText("The e-mail is required")).toBeInTheDocument();
+    expect(
+      app.getByText("You have to describe your problem")
+    ).toBeInTheDocument();
+  });
+});
+
+describe("Form errors on wrong data format", () => {
+  it(`displays an error message when validating the form with a wrong
+  format for the email`, async () => {
+    const app = await renderRequestDetail();
+    fillField(app, "E-mail *", "bla@");
+    await submitEditForm();
+    expect(screen.getAllByRole("alert")).toHaveLength(1);
+  });
+
+  it(`displays an error message when validating the form with a wrong
+  format for the phone number`, async () => {
+    const app = await renderRequestDetail();
+    fillField(app, /Phone number/, "123");
+    await submitEditForm();
+    expect(screen.getAllByRole("alert")).toHaveLength(1);
+  });
+
+  it(`displays an error message when validating the form with a wrong
+  format for the problem URL`, async () => {
+    const history = createMemoryHistory({
+      initialEntries: [
+        generatePathsWithoutPrefix({
+          requestId: "4ae77193-1b66-4182-82af-bc9ce432b0e0",
+        }).ADMIN_REQUEST_DETAIL,
+      ],
+    });
+    const app = await renderRequestDetail(history);
+    fillField(app, /What is the URL/, "123");
+    await submitEditForm();
+    expect(screen.getAllByRole("alert")).toHaveLength(1);
+  });
+
+  it(`displays an error message when validating the form with a wrong
+  format for organization email`, async () => {
+    const history = createMemoryHistory({
+      initialEntries: [
+        generatePathsWithoutPrefix({
+          requestId: "4ae77193-1b66-4182-82af-bc9ce432b0e0",
+        }).ADMIN_REQUEST_DETAIL,
+      ],
+    });
+    const app = await renderRequestDetail(history);
+    const field = app.getAllByLabelText(/E-mail/);
+    fireEvent.change(field[1], { target: { value: "bla@" } });
+    await submitEditForm();
+    expect(screen.getAllByRole("alert")).toHaveLength(1);
+  });
+
+  it(`displays an error message when validating the form with a wrong
+  format for organization phone number`, async () => {
+    const history = createMemoryHistory({
+      initialEntries: [
+        generatePathsWithoutPrefix({
+          requestId: "4ae77193-1b66-4182-82af-bc9ce432b0e0",
+        }).ADMIN_REQUEST_DETAIL,
+      ],
+    });
+    const app = await renderRequestDetail(history);
+    const field = app.getAllByLabelText(/Phone number/);
+    fireEvent.change(field[1], { target: { value: "123" } });
+    await submitEditForm();
+    expect(screen.getAllByRole("alert")).toHaveLength(1);
+  });
+});
+
+describe("Errors from the backend", () => {
+  it(`displays an error message when the backend replies with an error
+  during update`, async () => {
+    mockedAxios.patch.mockRejectedValue({ data: "backend error" });
+    await renderRequestDetail();
+    await submitEditForm();
+    expect(
+      screen.getByText(/We could'nt update the mediation request./)
+    ).toBeInTheDocument();
+  });
+});
+
+async function submitEditForm() {
+  const submitButton = screen.getAllByRole("button", {
+    name: "Update the mediation request",
+  });
+  await click(submitButton[0]);
+}

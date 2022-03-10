@@ -1,10 +1,10 @@
-import { t, Trans } from "@lingui/macro";
-import { Controller } from "react-hook-form";
-import { BorderedFieldset, TextField } from "../../forms";
+import { t } from "@lingui/macro";
 import {
-  chooseErrorWrappingElement,
-  formatErrors,
-} from "../../utils/formUtils";
+  BorderedFieldset,
+  EmailField,
+  PhoneField,
+  TextField,
+} from "../../forms";
 
 type AboutOrganizationFieldsProps = {
   /**
@@ -15,10 +15,6 @@ type AboutOrganizationFieldsProps = {
    * React hook form errors object
    */
   errors: any;
-  /**
-   * React hook form control object
-   */
-  control: any;
   /**
    * Wether the field names should be prefixed by 'organization'
    */
@@ -36,28 +32,10 @@ type AboutOrganizationFieldsProps = {
 function AboutOrganizationFields({
   register,
   errors,
-  control,
   prefixedNames = false,
   className,
   ...borderFieldsetProps
 }: AboutOrganizationFieldsProps) {
-  const emailLabel = (
-    <Trans>
-      <span lang="en">E-mail</span>
-    </Trans>
-  );
-  const emailRules = {
-    pattern: {
-      value: /^\S+@\S+\.\S+$/i,
-      message: t`The e-mail format is invalid`,
-    },
-  };
-  const phoneRules = {
-    pattern: {
-      value: /^\+?\d{9,15}$/,
-      message: t`The phone number format is invalid`,
-    },
-  };
   const names = prefixedNames
     ? {
         name: "organizationName",
@@ -94,62 +72,20 @@ function AboutOrganizationFields({
         label={t`Mailing address`}
         type="text"
       />
-      {/* TODO: currently the email/phone are in controllers instead of using generic compoennts.
-                This is because with classic register() the rules cn't have a pattern without the field being mandatory.
-                In RHF V7 this problem may be resolved, so repace by EmailField and PhoneField when migrating. */}
-      <Controller
-        control={control}
+      <EmailField
+        componentName="about-organization"
+        errors={errors}
+        register={register}
+        required={false}
         name={names.email}
-        rules={emailRules}
-        error={!!errors.email}
-        as={
-          <TextField
-            id={names.email}
-            label={emailLabel}
-            inputProps={{ "aria-describedby": "email-desc" }}
-            type="email"
-            helperText={
-              errors.email ? formatErrors(errors.email.message, true) : ""
-            }
-            FormHelperTextProps={{
-              role: "alert",
-              component: chooseErrorWrappingElement(errors.email),
-            }}
-          />
-        }
       />
-      <p id="email-desc" className="form__helper-text">
-        <Trans>Example of correct format: name@domain.com</Trans>
-      </p>
-      <Controller
-        control={control}
+      <PhoneField
+        componentName="about-organization"
+        errors={errors}
+        register={register}
+        required={false}
         name={names.phoneNumber}
-        rules={phoneRules}
-        error={!!errors.phoneNumber}
-        as={
-          <TextField
-            id={names.phoneNumber}
-            label={t`Phone number`}
-            inputProps={{ "aria-describedby": "phoneNumber-desc" }}
-            type="tel"
-            helperText={
-              errors.phoneNumber
-                ? formatErrors(errors.phoneNumber.message, true)
-                : ""
-            }
-            FormHelperTextProps={{
-              role: "alert",
-              component: chooseErrorWrappingElement(errors.phoneNumber),
-            }}
-          />
-        }
       />
-      <p id="phoneNumber-desc" className="form__helper-text">
-        <Trans>
-          The phone number must be 9 to 15 digits long and can be preceded by
-          the + sign
-        </Trans>
-      </p>
       <TextField
         id={names.contact}
         name={names.contact}

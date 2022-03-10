@@ -123,9 +123,7 @@ describe("Errors on fields' format", () => {
     const submit = app.getByText("Sign up");
     await click(submit);
     const error = app.getByRole("alert");
-    expect(error.textContent).toMatch(
-      /The e-mail must be formated like this: name@domain.extension/
-    );
+    expect(error.textContent).toMatch(/The e-mail format is invalid/);
   });
 
   it("displays an error message when the two passwords are not the same", async () => {

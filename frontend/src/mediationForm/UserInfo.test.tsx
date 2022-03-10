@@ -194,7 +194,7 @@ describe("Errors on bad formatted input", () => {
     });
     const submit = app.getByText("Step 2: Your problem");
     await click(submit);
-    const error = app.getByText(/The e-mail must be formated like this/);
+    const error = app.getByText(/The e-mail format is invalid/);
     expect(error).toBeInTheDocument();
     expect(history.location).toEqual(initialLocation);
   });

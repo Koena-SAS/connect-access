@@ -24,6 +24,7 @@ type EmailFieldProps = {
   elementRef?: any;
   required?: boolean;
   autoComplete?: string;
+  name?: string;
   [props: string]: any;
 };
 
@@ -37,6 +38,7 @@ function EmailField({
   elementRef,
   required = false,
   autoComplete = "email",
+  name = "email",
   ...props
 }: EmailFieldProps) {
   const errorId = `email-desc-${componentName}`;
@@ -45,17 +47,18 @@ function EmailField({
       <span lang="en">E-mail</span>
     </Trans>
   );
+  const emailErrors = errors && name in errors && errors[name];
   return (
     <>
       <TextField
         id={`${componentName}-email`}
-        name="email"
+        name={name}
         inputRef={(input: HTMLInputElement) => {
           const rhfRef = register({
             required: required ? t`The e-mail is required` : undefined,
             pattern: {
-              value: /^\S+@\S+\.\S+$/i,
-              message: t`The e-mail must be formated like this: name@domain.extension`,
+              value: /^(?:\S+@\S+\.\S+)?$/i,
+              message: t`The e-mail format is invalid`,
             },
           });
           rhfRef(input);
@@ -67,13 +70,11 @@ function EmailField({
         inputProps={{ "aria-describedby": errorId }}
         type="email"
         autoComplete={autoComplete}
-        error={!!errors.email}
-        helperText={
-          errors.email ? formatErrors(errors.email.message, true) : ""
-        }
+        error={!!emailErrors}
+        helperText={emailErrors ? formatErrors(emailErrors.message, true) : ""}
         FormHelperTextProps={{
           role: "alert",
-          component: chooseErrorWrappingElement(errors.email),
+          component: chooseErrorWrappingElement(emailErrors),
         }}
         {...props}
         required={required}

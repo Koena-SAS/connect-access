@@ -33,7 +33,6 @@ import PersonalInformationFields from "./PersonalInformationFields";
 
 type FormInput = {
   requestDate: Date | string;
-  modificationDate: Date | string;
   firstName: string;
   lastName: string;
   email: string;
@@ -121,8 +120,12 @@ function RequestDetail({ token, setBreadcrumbs }: RequestDetailProps) {
   const previousMediationRequest = usePrevious<MediationRequest | undefined>(
     mediationRequest
   );
+  const previousPreviousMediationRequest = usePrevious<
+    MediationRequest | undefined
+  >(previousMediationRequest || undefined);
   const [secondInitializationTodo, setSecondInitializationTodo] =
     useState(false);
+  const [thirdInitializationTodo, setThirdInitializationTodo] = useState(false);
   const {
     register,
     errors,
@@ -153,34 +156,75 @@ function RequestDetail({ token, setBreadcrumbs }: RequestDetailProps) {
   const setInitialValues = useCallback(() => {
     if (mediationRequest) {
       for (const key of Object.keys(mediationRequest)) {
-        if (key !== "id" && key !== "attachedFile" && key !== "applicationData")
-          setValue(key, mediationRequest[key as keyof MediationRequest]);
+        if (
+          key !== "id" &&
+          key !== "attachedFile" &&
+          key !== "applicationData"
+        ) {
+          if (key === "requestDate") {
+            setValue(
+              key,
+              new Date(mediationRequest[key as keyof MediationRequest])
+            );
+          } else {
+            setValue(key, mediationRequest[key as keyof MediationRequest]);
+          }
+        }
       }
     }
   }, [mediationRequest, setValue]);
   useEffect(
     function setInitialDefaultValues() {
-      if (!previousMediationRequest) {
+      if (!previousMediationRequest && !previousPreviousMediationRequest) {
         setInitialValues();
         setSecondInitializationTodo(true);
       }
     },
-    [previousMediationRequest, mediationRequest, setValue, setInitialValues]
+    [
+      previousMediationRequest,
+      previousPreviousMediationRequest,
+      mediationRequest,
+      setValue,
+      setInitialValues,
+    ]
   );
   useEffect(
-    function resetSecondInitializationTodo() {
-      if (secondInitializationTodo) {
+    function setInitialDefaultValues2ndTime() {
+      if (secondInitializationTodo && !previousPreviousMediationRequest) {
         setInitialValues();
         setSecondInitializationTodo(false);
+        setThirdInitializationTodo(true);
       }
     },
-    [mediationRequest, secondInitializationTodo, setInitialValues, setValue]
+    [
+      previousPreviousMediationRequest,
+      mediationRequest,
+      secondInitializationTodo,
+      setInitialValues,
+      setValue,
+    ]
+  );
+  useEffect(
+    function setInitialDefaultValues3rdTime() {
+      if (thirdInitializationTodo) {
+        setInitialValues();
+        setThirdInitializationTodo(false);
+      }
+    },
+    [mediationRequest, thirdInitializationTodo, setInitialValues, setValue]
   );
 
   const onSubmit = (data: FormInput) => {
+    const dataToSend: MediationRequest = {
+      ...data,
+      requestDate:
+        typeof data.requestDate !== "string"
+          ? data.requestDate.toJSON()
+          : data.requestDate,
+    };
     editMediationRequest({
       mediationRequestId: mediationRequestId,
-      mediationRequest: data as MediationRequest,
+      mediationRequest: dataToSend,
       token,
     });
   };
@@ -190,6 +234,11 @@ function RequestDetail({ token, setBreadcrumbs }: RequestDetailProps) {
         <Trans>Request detail</Trans>
       </h1>
       <form className="form" noValidate onSubmit={handleSubmit(onSubmit)}>
+        <div className="admin-request-detail__submit-top">
+          <Button size="medium" type="submit">
+            <Trans>Update the mediation request</Trans>
+          </Button>
+        </div>
         <MainFields
           register={register}
           control={control}
@@ -258,7 +307,6 @@ function RequestDetail({ token, setBreadcrumbs }: RequestDetailProps) {
           <AboutOrganizationFields
             register={register}
             errors={errors}
-            control={control}
             prefixedNames={true}
             legendClassName="admin-request-detail__fieldset-legend"
             smallPaddingTop={true}
@@ -277,7 +325,7 @@ function RequestDetail({ token, setBreadcrumbs }: RequestDetailProps) {
           onClose={handleCloseFailureMessage}
           severity="error"
         />
-        <div className="admin-request-detail__submit">
+        <div className="admin-request-detail__submit-bottom">
           <Button size="medium" type="submit">
             <Trans>Update the mediation request</Trans>
           </Button>

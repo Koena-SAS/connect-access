@@ -170,19 +170,19 @@ function Recap({
         state.problemDescription.browserVersion
       );
       dataToSend.append(
-        "mobileAppUsed",
+        "mobile_app_used",
         state.problemDescription.mobileAppUsed
       );
       dataToSend.append(
-        "mobileAppPlatform",
+        "mobile_app_platform",
         state.problemDescription.mobileAppPlatform
       );
       dataToSend.append(
-        "mobileAppName",
+        "mobile_app_name",
         state.problemDescription.mobileAppName
       );
       dataToSend.append(
-        "otherUsedSoftware",
+        "other_used_software",
         state.problemDescription.otherUsedSoftware
       );
 

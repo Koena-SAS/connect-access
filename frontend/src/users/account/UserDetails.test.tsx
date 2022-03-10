@@ -68,7 +68,7 @@ describe("Errors on bad formatted fields", () => {
     const submit = app.getByText(/Validate your new personal/);
     await click(submit);
     const error = app.getByRole("alert");
-    expect(error.textContent).toMatch(/The e-mail must be/);
+    expect(error.textContent).toMatch(/The e-mail format is invalid/);
   });
 
   it(`displays an error message when the phone number does not meet the

@@ -79,9 +79,7 @@ describe("Errors on fields' format", () => {
     const submit = app.getByText("Log in");
     await click(submit);
     const errors = app.getAllByRole("alert");
-    expect(errors[0].textContent).toMatch(
-      /The e-mail must be formated like this: name@domain.extension/
-    );
+    expect(errors[0].textContent).toMatch(/The e-mail format is invalid/);
   });
 });
 

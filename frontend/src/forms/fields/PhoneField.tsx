@@ -24,6 +24,7 @@ type PhoneFieldProps = {
   elementRef?: any;
   required?: boolean;
   autoComplete?: string;
+  name?: string;
   [props: string]: any;
 };
 
@@ -37,19 +38,21 @@ function PhoneField({
   elementRef,
   required = false,
   autoComplete = "tel",
+  name = "phoneNumber",
   ...props
 }: PhoneFieldProps) {
   const errorId = `phoneNumber-desc-${componentName}`;
+  const phoneNumberErrors = errors && name in errors && errors[name];
   return (
     <>
       <TextField
         id={`${componentName}-phoneNumber`}
-        name="phoneNumber"
+        name={name}
         inputRef={(input: HTMLInputElement) => {
           const rhfRef = register({
             required: required ? t`The phone number is required` : undefined,
             pattern: {
-              value: /^\+?\d{9,15}$/,
+              value: /^(?:\+?\d{9,15})?$/,
               message: t`The phone number format is invalid`,
             },
           });
@@ -62,15 +65,13 @@ function PhoneField({
         inputProps={{ "aria-describedby": errorId }}
         type="tel"
         autoComplete={autoComplete}
-        error={!!errors.phoneNumber}
+        error={!!phoneNumberErrors}
         helperText={
-          errors.phoneNumber
-            ? formatErrors(errors.phoneNumber.message, true)
-            : ""
+          phoneNumberErrors ? formatErrors(phoneNumberErrors.message, true) : ""
         }
         FormHelperTextProps={{
           role: "alert",
-          component: chooseErrorWrappingElement(errors.phoneNumber),
+          component: chooseErrorWrappingElement(phoneNumberErrors),
         }}
         {...props}
         required={required}

@@ -24,6 +24,9 @@ export let axiosPostResponseMediationRequests: {
 export let axiosGetResponseMediationRequests: {
   data: MediationRequestRecieved[];
 };
+export let axiosPatchResponseMediationRequest: {
+  data: MediationRequestRecieved;
+};
 export let axiosGetResponseOrganizationApp: { data: OrganizationAppRecieved };
 export let axiosGetResponseTraceReports: { data: TraceReportRecieved[] };
 export let axiosPostResponseTraceReports: { data: TraceReportRecieved };
@@ -133,6 +136,9 @@ export const resetAxiosMocks = () => {
     ],
   };
   axiosPostResponseMediationRequests = {
+    data: axiosGetResponseMediationRequests.data[0],
+  };
+  axiosPatchResponseMediationRequest = {
     data: axiosGetResponseMediationRequests.data[0],
   };
   axiosGetResponseOrganizationApp = {
@@ -328,6 +334,8 @@ export const resetAxiosMocks = () => {
   mockedAxios.patch.mockImplementation((url) => {
     if (url.match(/\/api\/trace-reports\/[^/]*/)) {
       return Promise.resolve(axiosPatchResponseTraceReports);
+    } else if (url.match(/\/api\/mediation-requests\/[^/]*/)) {
+      return Promise.resolve(axiosPatchResponseMediationRequest);
     } else {
       return Promise.reject(new Error(`The URL '${url}' is not implemented.`));
     }
