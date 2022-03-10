@@ -4,7 +4,7 @@ import produce from "immer";
 import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
-import { Button, Snackbar } from "../../forms";
+import { DoneButton, Snackbar } from "../../forms";
 import {
   useAdminMediationRequest,
   useEditMediationRequest,
@@ -236,9 +236,9 @@ function RequestDetail({ token, setBreadcrumbs }: RequestDetailProps) {
       </h1>
       <form className="form" noValidate onSubmit={handleSubmit(onSubmit)}>
         <div className="admin-request-detail__submit-top">
-          <Button size="medium" type="submit">
+          <DoneButton size="medium" type="submit">
             <Trans>Update the mediation request</Trans>
-          </Button>
+          </DoneButton>
         </div>
         <MainFields
           register={register}
@@ -339,9 +339,9 @@ function RequestDetail({ token, setBreadcrumbs }: RequestDetailProps) {
           severity="error"
         />
         <div className="admin-request-detail__submit-bottom">
-          <Button size="medium" type="submit">
+          <DoneButton size="medium" type="submit">
             <Trans>Update the mediation request</Trans>
-          </Button>
+          </DoneButton>
         </div>
       </form>
     </div>
