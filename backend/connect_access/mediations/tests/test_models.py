@@ -54,6 +54,23 @@ def test_attached_file_without_complainant_is_stored_in_correct_path():
     )
 
 
+def test_attached_file_is_removed_when_removing_from_db():
+    attached_file = SimpleUploadedFile(
+        "test_file.png",
+        b"file content",
+        content_type="multipart/form-data",
+    )
+    mediation_request = MediationRequestFactory(
+        complainant=None, attached_file=attached_file
+    )
+    assert os.path.isfile(f"{settings.MEDIA_ROOT}/further_info/anonymous/test_file.png")
+    mediation_request.attached_file = None  # type: ignore
+    mediation_request.save()
+    assert not os.path.isfile(
+        f"{settings.MEDIA_ROOT}/further_info/anonymous/test_file.png"
+    )
+
+
 @pytest.mark.usefixtures("_set_default_language")
 def test_mediation_request_phone_number_regex_validation():
     MediationRequestFactory(phone_number="1687416238")

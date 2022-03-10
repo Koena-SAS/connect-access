@@ -1,5 +1,5 @@
 import { t, Trans } from "@lingui/macro";
-import { SnackbarCloseReason } from "@mui/material";
+import { Checkbox, SnackbarCloseReason } from "@mui/material";
 import produce from "immer";
 import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -63,6 +63,7 @@ type FormInput = {
   organizationEmail: string;
   organizationPhoneNumber: string;
   organizationContact: string;
+  removeAttachedFile: boolean;
 };
 
 type RequestDetailProps = {
@@ -291,13 +292,25 @@ function RequestDetail({ token, setBreadcrumbs }: RequestDetailProps) {
           level={2}
           currentAttachedFile={
             mediationRequest?.attachedFile ? (
-              <a
-                className="admin-request-detail__link"
-                href={`${mediationRequest?.attachedFile}`}
-                download
-              >
-                <Trans>Download the current attached file</Trans>
-              </a>
+              <div className="admin-request-detail__file-data">
+                <a
+                  className="admin-request-detail__link"
+                  href={`${mediationRequest?.attachedFile}`}
+                  download
+                >
+                  <Trans>Download the current attached file</Trans>
+                </a>
+                <div className="admin-request-detail__remove-file">
+                  <Checkbox
+                    id="removeAttachedFile"
+                    name="removeAttachedFile"
+                    inputRef={register}
+                  />
+                  <label htmlFor="removeAttachedFile" className="label">
+                    <Trans>Remove the attached file</Trans>
+                  </label>
+                </div>
+              </div>
             ) : (
               ""
             )

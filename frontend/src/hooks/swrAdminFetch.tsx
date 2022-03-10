@@ -48,15 +48,13 @@ function useAdminMediationRequest(
   const { requestId } = useParams<{
     requestId: string;
   }>();
-  const foundRequest =
-    mediationRequests &&
-    mediationRequests.filter(function findMediationRequestById(request) {
+  const foundRequest = mediationRequests?.find(
+    function findMediationRequestById(request) {
       return request.id === requestId;
-    });
-  const mediationRequest =
-    foundRequest && foundRequest.length === 1 && foundRequest[0];
+    }
+  );
   return {
-    mediationRequest: mediationRequest ? mediationRequest : undefined,
+    mediationRequest: foundRequest,
     mediationRequestsError,
     mutateMediationRequests,
   };

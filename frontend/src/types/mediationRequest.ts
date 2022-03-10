@@ -81,6 +81,7 @@ type MediationRequest = {
   organizationEmail?: string;
   organizationPhoneNumber?: string;
   organizationContact?: string;
+  removeAttachedFile?: boolean;
 };
 
 type MediationRequestRecieved = {

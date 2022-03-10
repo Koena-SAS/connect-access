@@ -226,6 +226,8 @@ export function useEditTraceReport({
                   // avoid a visual bug when updating optimistically
                   // while there is no attached file
                   draft.attachedFile = "";
+                } else {
+                  draft.attachedFile = "#";
                 }
               });
             } else {

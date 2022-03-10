@@ -136,9 +136,6 @@ describe("Display the mediation request details", () => {
     ).toBeChecked();
     expect(screen.getByDisplayValue("No reply")).toBeInTheDocument();
     expect(screen.getByDisplayValue("Nothing to add")).toBeInTheDocument();
-    expect(
-      screen.getByText("Download the current attached file")
-    ).toBeInTheDocument();
     expect(screen.queryByDisplayValue(/Koena/)).not.toBeInTheDocument();
     expect(
       screen.queryByDisplayValue(/2, esplanade de la Gare à Sannois 95110/)
@@ -168,10 +165,14 @@ describe("Display the mediation request details", () => {
     expect(screen.getByDisplayValue("Armony")).toBeInTheDocument();
   });
 
-  it(`displays the current attached file if there is one`, async () => {
+  it(`displays the current attached file if there is one, with the checkbox to
+  remove it`, async () => {
     await renderRequestDetail();
     expect(
       screen.getByText("Download the current attached file")
+    ).toBeInTheDocument();
+    expect(
+      screen.getByLabelText("Remove the attached file")
     ).toBeInTheDocument();
   });
 
@@ -186,6 +187,9 @@ describe("Display the mediation request details", () => {
     await renderRequestDetail(history);
     expect(
       screen.queryByText("Download the current attached file")
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByLabelText("Remove the attached file")
     ).not.toBeInTheDocument();
   });
 });

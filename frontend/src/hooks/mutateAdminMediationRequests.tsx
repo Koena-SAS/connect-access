@@ -1,5 +1,6 @@
 import type { AxiosResponse } from "axios";
 import axios from "axios";
+import produce from "immer";
 import { cache, mutate } from "swr";
 import useMutation from "use-mutation";
 import type {
@@ -82,7 +83,14 @@ async function editMediationRequest({
     dataToSend.append("organization_reply", mediationRequest.organizationReply);
   mediationRequest.furtherInfo &&
     dataToSend.append("further_info", mediationRequest.furtherInfo);
-  // TODO attached_file
+  if (mediationRequest.removeAttachedFile) {
+    dataToSend.append("attached_file", new File([], ""));
+  } else if (
+    mediationRequest.attachedFile &&
+    mediationRequest.attachedFile.length
+  ) {
+    dataToSend.append("attached_file", mediationRequest.attachedFile[0]);
+  }
   mediationRequest.organizationName &&
     dataToSend.append("organization_name", mediationRequest.organizationName);
   mediationRequest.organizationAddress &&
@@ -149,9 +157,26 @@ export function useEditMediationRequest({
         (current: MediationRequest[]) => {
           return current.map((mediationRequest) => {
             const isTheNewRequest =
-              mediationRequest.id === input.mediationRequest.id;
+              mediationRequest.id === input.mediationRequestId;
             if (isTheNewRequest) {
-              return input.mediationRequest;
+              return produce(input.mediationRequest, (draft) => {
+                draft.id = mediationRequest.id;
+                const askForFileRemoval = draft.removeAttachedFile;
+                const noFileProvidedByUser =
+                  draft.attachedFile && !draft.attachedFile.length;
+                const fileAlreadyExists = mediationRequest.attachedFile;
+                if (askForFileRemoval) {
+                  draft.attachedFile = "";
+                } else if (noFileProvidedByUser && fileAlreadyExists) {
+                  draft.attachedFile = mediationRequest.attachedFile;
+                } else if (noFileProvidedByUser && !fileAlreadyExists) {
+                  // avoid a visual bug when updating optimistically
+                  // while there is no attached file
+                  draft.attachedFile = "";
+                } else {
+                  draft.attachedFile = "#";
+                }
+              });
             } else {
               return mediationRequest;
             }

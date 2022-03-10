@@ -5,12 +5,29 @@
   &__fieldset-legend {
     margin-top: 3rem;
   }
+  &__file-data {
+    margin-top: 0.5rem;
+  }
   &__link {
     font-size: 0.95rem;
     color: #150bab;
     margin-bottom: 0.5rem;
     margin-top: 0.5rem;
   }
+  &__remove-file {
+    margin-top: 0.5rem;
+    margin-left: -0.78rem;
+    display: flex;
+    align-items: center;
+    .label {
+      font-size: $label-size;
+      padding: 0.5rem 1rem 0.5rem 0;
+      display: inline-block;
+      margin-bottom: -0.2rem;
+      margin-top: 0;
+    }
+  }
+
   &__submit-top {
     margin-left: -5px;
     margin-top: 2rem;

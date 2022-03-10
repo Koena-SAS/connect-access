@@ -166,6 +166,9 @@ class MediationRequestSerializer(ToReprMixin, serializers.ModelSerializer):
     browser = EnumSerializerField(Browser, required=False)
     did_tell_organization = BooleanSerializerNullField(required=False)
     did_organization_reply = BooleanSerializerNullField(required=False)
+    attached_file = serializers.FileField(
+        allow_empty_file=True, allow_null=True, required=False
+    )
 
     class Meta:
         model = MediationRequest
@@ -222,7 +225,7 @@ class TraceReportSerializer(serializers.ModelSerializer):
     trace_type = EnumSerializerField(TraceType, required=False)
     sender_type = EnumSerializerField(ContactEntityType, required=False)
     recipient_type = EnumSerializerField(ContactEntityType, required=False)
-    attached_file = serializers.ImageField(
+    attached_file = serializers.FileField(
         allow_empty_file=True, allow_null=True, required=False
     )
 
