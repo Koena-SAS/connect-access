@@ -23,25 +23,26 @@ async function editMediationRequest({
   const dataToSend = new FormData();
   mediationRequest.requestDate &&
     dataToSend.append("request_date", mediationRequest.requestDate);
-  dataToSend.append("status", mediationRequest.status);
+  mediationRequest.requestDate &&
+    dataToSend.append("status", mediationRequest.status);
   mediationRequest.urgency &&
     dataToSend.append("urgency", mediationRequest.urgency);
   dataToSend.append("first_name", mediationRequest.firstName);
-  mediationRequest.lastName &&
+  mediationRequest.lastName !== undefined &&
     dataToSend.append("last_name", mediationRequest.lastName);
   dataToSend.append("email", mediationRequest.email);
-  mediationRequest.phoneNumber &&
+  mediationRequest.phoneNumber !== undefined &&
     dataToSend.append("phone_number", mediationRequest.phoneNumber);
-  mediationRequest.assistiveTechnologyUsed &&
+  mediationRequest.assistiveTechnologyUsed !== undefined &&
     mediationRequest.assistiveTechnologyUsed.forEach((technologyType) => {
       dataToSend.append("assistive_technology_used", technologyType);
     });
-  mediationRequest.technologyName &&
+  mediationRequest.technologyName !== undefined &&
     dataToSend.append("technology_name", mediationRequest.technologyName);
-  mediationRequest.technologyVersion &&
+  mediationRequest.technologyVersion !== undefined &&
     dataToSend.append("technology_version", mediationRequest.technologyVersion);
   dataToSend.append("issue_description", mediationRequest.issueDescription);
-  mediationRequest.stepDescription &&
+  mediationRequest.stepDescription !== undefined &&
     dataToSend.append("step_description", mediationRequest.stepDescription);
   mediationRequest.inaccessibilityLevel &&
     dataToSend.append(
@@ -50,10 +51,11 @@ async function editMediationRequest({
     );
   mediationRequest.browserUsed &&
     dataToSend.append("browser_used", mediationRequest.browserUsed);
-  mediationRequest.url && dataToSend.append("url", mediationRequest.url);
+  mediationRequest.url !== undefined &&
+    dataToSend.append("url", mediationRequest.url);
   mediationRequest.browser &&
     dataToSend.append("browser", mediationRequest.browser);
-  mediationRequest.browserVersion &&
+  mediationRequest.browserVersion !== undefined &&
     dataToSend.append("browser_version", mediationRequest.browserVersion);
   mediationRequest.mobileAppUsed &&
     dataToSend.append("mobile_app_used", mediationRequest.mobileAppUsed);
@@ -62,9 +64,9 @@ async function editMediationRequest({
       "mobile_app_platform",
       mediationRequest.mobileAppPlatform
     );
-  mediationRequest.mobileAppName &&
+  mediationRequest.mobileAppName !== undefined &&
     dataToSend.append("mobile_app_name", mediationRequest.mobileAppName);
-  mediationRequest.otherUsedSoftware &&
+  mediationRequest.otherUsedSoftware !== undefined &&
     dataToSend.append(
       "other_used_software",
       mediationRequest.otherUsedSoftware
@@ -79,33 +81,33 @@ async function editMediationRequest({
       "did_organization_reply",
       mediationRequest.didOrganizationReply
     );
-  mediationRequest.organizationReply &&
+  mediationRequest.organizationReply !== undefined &&
     dataToSend.append("organization_reply", mediationRequest.organizationReply);
-  mediationRequest.furtherInfo &&
+  mediationRequest.furtherInfo !== undefined &&
     dataToSend.append("further_info", mediationRequest.furtherInfo);
   if (mediationRequest.removeAttachedFile) {
     dataToSend.append("attached_file", new File([], ""));
   } else if (
-    mediationRequest.attachedFile &&
+    mediationRequest.attachedFile !== undefined &&
     mediationRequest.attachedFile.length
   ) {
     dataToSend.append("attached_file", mediationRequest.attachedFile[0]);
   }
-  mediationRequest.organizationName &&
+  mediationRequest.organizationName !== undefined &&
     dataToSend.append("organization_name", mediationRequest.organizationName);
-  mediationRequest.organizationAddress &&
+  mediationRequest.organizationAddress !== undefined &&
     dataToSend.append(
       "organization_address",
       mediationRequest.organizationAddress
     );
-  mediationRequest.organizationEmail &&
+  mediationRequest.organizationEmail !== undefined &&
     dataToSend.append("organization_email", mediationRequest.organizationEmail);
-  mediationRequest.organizationPhoneNumber &&
+  mediationRequest.organizationPhoneNumber !== undefined &&
     dataToSend.append(
       "organization_phone_number",
       mediationRequest.organizationPhoneNumber
     );
-  mediationRequest.organizationContact &&
+  mediationRequest.organizationContact !== undefined &&
     dataToSend.append(
       "organization_contact",
       mediationRequest.organizationContact

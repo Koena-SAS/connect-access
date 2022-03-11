@@ -230,7 +230,7 @@ function RequestDetail({ token, setBreadcrumbs }: RequestDetailProps) {
     const dataToSend: MediationRequest = {
       ...data,
       requestDate:
-        typeof data.requestDate !== "string"
+        typeof data.requestDate !== "string" && data.requestDate
           ? data.requestDate.toJSON()
           : data.requestDate,
     };
