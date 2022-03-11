@@ -81,8 +81,11 @@ def _execute_mediation_request_retrieve(permission):
     }
 
 
-def _execute_mediation_request_update(permission, request_data):
-    user = UserFactory()
+def _execute_mediation_request_update(permission, request_data, has_user=True):
+    if has_user:
+        user = UserFactory()
+    else:
+        user = None
     mediation_request = MediationRequestFactory(complainant=user)
     request = APIRequestFactory().put(
         _get_mediation_request_absolute_url("detail", mediation_request.uuid),

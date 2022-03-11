@@ -126,6 +126,17 @@ def test_update_mediation_request_is_authorized_for_admin_user(
     assert response.status_code == 200
 
 
+def test_update_mediation_request_works_when_not_having_complainant_attached_to_the_request(
+    request_data_for_mediation_request,
+):
+    response = itemgetter("response")(
+        _execute_mediation_request_update(
+            "admin", request_data_for_mediation_request, False
+        )
+    )
+    assert response.status_code == 200
+
+
 def test_delete_mediation_request_is_forbidden_for_anonymous_user():
     response = itemgetter("response")(
         _execute_mediation_request_delete(permission=None)

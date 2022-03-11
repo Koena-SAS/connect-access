@@ -17,9 +17,10 @@ class AnonCreateAndUpdateOwnerOnly(permissions.BasePermission):
 
     def has_object_permission(self, request, view, obj):
         retrieve_or_update = view.action in ["retrieve", "update", "partial_update"]
-        object_owner_or_admin = (
-            obj.complainant.pk == request.user.pk or request.user.is_staff
+        is_object_owner = (
+            obj.complainant and request.user and (obj.complainant.pk == request.user.pk)
         )
+        object_owner_or_admin = is_object_owner or request.user.is_staff
         delete_by_admin = view.action == "destroy" and request.user.is_staff
         return (retrieve_or_update and object_owner_or_admin) or delete_by_admin
 
