@@ -119,7 +119,7 @@ function AllRequests({ token }: { token: string }) {
         opened={confirmationDialogOptions.open}
       />
       <Snackbar
-        notificationText={t`The mediaiton request was successfully updated.`}
+        notificationText={t`The mediation request was successfully deleted.`}
         open={requestSuccessMessageOpen}
         onClose={handleCloseSuccessMessage}
         severity="success"

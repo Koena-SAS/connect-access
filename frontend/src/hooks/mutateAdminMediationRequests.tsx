@@ -161,6 +161,7 @@ export function useEditMediationRequest({
             if (isTheNewRequest) {
               return produce(input.mediationRequest, (draft) => {
                 draft.id = mediationRequest.id;
+                draft.modificationDate = mediationRequest.modificationDate;
                 const askForFileRemoval = draft.removeAttachedFile;
                 const noFileProvidedByUser =
                   draft.attachedFile && !draft.attachedFile.length;

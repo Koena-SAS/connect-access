@@ -55,8 +55,7 @@ msgstr "<0>Logiciel pour troubles DYS</0>"
 msgid "<0>E-mail:</0>"
 msgstr "<0>E-mail</0> :"
 
-#: src/forms/fields/EmailField.tsx:44
-#: src/mediationForm/fields/AboutOrganizationFields.tsx:45
+#: src/forms/fields/EmailField.tsx:46
 msgid "<0>E-mail</0>"
 msgstr "Courriel <0>(e-mail)</0>"
 
@@ -171,7 +170,7 @@ msgstr "À propos"
 msgid "About the issue"
 msgstr "Informations sur le problème rencontré"
 
-#: src/mediationForm/fields/AboutOrganizationFields.tsx:78
+#: src/mediationForm/fields/AboutOrganizationFields.tsx:56
 msgid "About the organization"
 msgstr "Informations sur l'organisation"
 
@@ -223,11 +222,11 @@ msgstr "Contenu de l'interface d'administration"
 msgid "All"
 msgstr "Toutes"
 
-#: src/admin/AllRequests.tsx:36
-#: src/admin/AllRequests.tsx:39
+#: src/admin/AllRequests.tsx:91
+#: src/admin/AllRequests.tsx:94
 #: src/admin/Menu.tsx:87
 #: src/admin/requestDetail/History.tsx:16
-#: src/admin/requestDetail/RequestDetail.tsx:76
+#: src/admin/requestDetail/RequestDetail.tsx:119
 #: src/admin/requestDetail/TraceReports.tsx:80
 #: src/users/mediations/UserMediations.tsx:21
 msgid "All requests"
@@ -355,7 +354,7 @@ msgstr "Confirmer le mot de passe"
 msgid "Confirmation"
 msgstr "Confirmation"
 
-#: src/mediationForm/fields/AboutOrganizationFields.tsx:157
+#: src/mediationForm/fields/AboutOrganizationFields.tsx:93
 msgid "Contact"
 msgstr "Contact"
 
@@ -393,7 +392,7 @@ msgid "Dashboard"
 msgstr "Tableau de bord"
 
 #: src/admin/requestDetail/TraceReports.tsx:99
-#: src/mediationRequests/MediationRequestsList.tsx:30
+#: src/mediationRequests/MediationRequestsList.tsx:40
 msgid "Date"
 msgstr "Date"
 
@@ -406,13 +405,13 @@ msgid "Describe every step you did in order to access the wanted content or feat
 msgstr "Décrivez les actions que vous avez faites pour accéder au contenu ou aux fonctionnalités désirées :"
 
 #: src/admin/requestDetail/History.tsx:17
-#: src/admin/requestDetail/RequestDetail.tsx:77
+#: src/admin/requestDetail/RequestDetail.tsx:120
 #: src/admin/requestDetail/TraceReports.tsx:81
-#: src/mediationRequests/MediationRequestsList.tsx:35
+#: src/mediationRequests/MediationRequestsList.tsx:45
 msgid "Details"
 msgstr "Détails"
 
-#: src/mediationRequests/MediationRequestsList.tsx:66
+#: src/mediationRequests/MediationRequestsList.tsx:76
 msgid "Details<0>: {requestId}</0>"
 msgstr "Détails<0> : {requestId}</0>"
 
@@ -435,6 +434,10 @@ msgstr "Avez-vous déjà essayé de remonter le problème à l'organisation conc
 msgid "Do not hesitate to upload any file that may be useful to better understand your problem"
 msgstr "N'hésitez pas à joindre tout élément pouvant être utile pour mieux comprendre votre problème"
 
+#: src/admin/AllRequests.tsx:105
+msgid "Do you really want to delete the mediation request?"
+msgstr "Voulez-vous vraiment supprimer cette demande de médiation ?"
+
 #: src/admin/requestDetail/TraceReports.tsx:239
 msgid "Do you really want to delete the trace report?"
 msgstr "Voulez-vous vraiment supprimer ce rapport de suivi ?"
@@ -451,7 +454,7 @@ msgstr "Ne sais pas"
 msgid "Don't know"
 msgstr "Ne sais pas"
 
-#: src/admin/requestDetail/RequestDetail.tsx:191
+#: src/admin/requestDetail/RequestDetail.tsx:312
 msgid "Download the current attached file"
 msgstr "Télécharger le fichier joint actuel"
 
@@ -484,8 +487,7 @@ msgstr "Modifier le rapport"
 msgid "Example of correct format: 09/01/2021 06:52 PM"
 msgstr "Exemple de format correct : 25/09/2021 15:52"
 
-#: src/forms/fields/EmailField.tsx:82
-#: src/mediationForm/fields/AboutOrganizationFields.tsx:122
+#: src/forms/fields/EmailField.tsx:83
 msgid "Example of correct format: name@domain.com"
 msgstr "Exemple de format correct : nom@domaine.fr"
 
@@ -553,7 +555,7 @@ msgstr "Identification - Réinitialiser votre mot de passe"
 msgid "Identification - Signup"
 msgstr "Identification - Inscription"
 
-#: src/mediationRequests/MediationRequestsList.tsx:34
+#: src/mediationRequests/MediationRequestsList.tsx:44
 msgid "Identifier"
 msgstr "Identifiant"
 
@@ -635,7 +637,7 @@ msgstr "Connexion"
 msgid "Logout"
 msgstr "Déconnexion"
 
-#: src/mediationForm/fields/AboutOrganizationFields.tsx:94
+#: src/mediationForm/fields/AboutOrganizationFields.tsx:72
 msgid "Mailing address"
 msgstr "Adresse postale"
 
@@ -655,10 +657,10 @@ msgstr "Menu principal"
 msgid "Mediating"
 msgstr "En cours de médiation"
 
-#: src/admin/AllRequests.tsx:39
+#: src/admin/AllRequests.tsx:94
 #: src/admin/Menu.tsx:81
 #: src/admin/requestDetail/History.tsx:15
-#: src/admin/requestDetail/RequestDetail.tsx:75
+#: src/admin/requestDetail/RequestDetail.tsx:118
 #: src/admin/requestDetail/TraceReports.tsx:79
 msgid "Mediation"
 msgstr "Médiation"
@@ -718,7 +720,7 @@ msgstr "Mes demandes"
 msgid "Name"
 msgstr "Nom"
 
-#: src/mediationForm/fields/AboutOrganizationFields.tsx:86
+#: src/mediationForm/fields/AboutOrganizationFields.tsx:64
 msgid "Name of the organization"
 msgstr "Nom de l'organisation"
 
@@ -787,7 +789,7 @@ msgstr "Ouvrir le menu"
 msgid "Organazations list"
 msgstr "Liste des organisations"
 
-#: src/mediationRequests/MediationRequestsList.tsx:31
+#: src/mediationRequests/MediationRequestsList.tsx:41
 msgid "Organization"
 msgstr "Organisation"
 
@@ -828,8 +830,7 @@ msgstr "Les mots de passe ne correspondent pas"
 msgid "Personal information"
 msgstr "Informations personnelles"
 
-#: src/forms/fields/PhoneField.tsx:61
-#: src/mediationForm/fields/AboutOrganizationFields.tsx:132
+#: src/forms/fields/PhoneField.tsx:64
 msgid "Phone number"
 msgstr "Téléphone"
 
@@ -843,7 +844,7 @@ msgstr "Téléphone :"
 msgid "Pro Offer"
 msgstr "Offre pro"
 
-#: src/mediationRequests/MediationRequestsList.tsx:32
+#: src/mediationRequests/MediationRequestsList.tsx:42
 msgid "Problem Description"
 msgstr "Description du problème"
 
@@ -881,9 +882,14 @@ msgstr "Type de destinataire"
 msgid "Remove"
 msgstr "Supprimer"
 
+#: src/admin/requestDetail/RequestDetail.tsx:321
 #: src/admin/requestDetail/TraceReportForm.tsx:417
 msgid "Remove the attached file"
 msgstr "Supprimer le fichier joint"
+
+#: src/mediationRequests/MediationRequestsList.tsx:92
+msgid "Remove<0>: {requestId}</0>"
+msgstr "Supprimer<0> : {requestId}</0>"
 
 #: src/users/password/PasswordResetRequest.tsx:70
 msgid "Request a password reset"
@@ -893,7 +899,7 @@ msgstr "Réinitialiser votre mot de passe"
 msgid "Request date"
 msgstr "Date de la demande"
 
-#: src/admin/requestDetail/RequestDetail.tsx:131
+#: src/admin/requestDetail/RequestDetail.tsx:246
 msgid "Request detail"
 msgstr "Détail de la demande"
 
@@ -961,7 +967,7 @@ msgstr "Plan du site"
 msgid "Statistics"
 msgstr "Statistiques"
 
-#: src/mediationRequests/MediationRequestsList.tsx:33
+#: src/mediationRequests/MediationRequestsList.tsx:43
 msgid "Status"
 msgstr "Statut"
 
@@ -974,7 +980,7 @@ msgstr "Statut :"
 msgid "Step 1: About yourself"
 msgstr "Étape 1 : À propos de vous"
 
-#: src/mediationForm/OrganizationInfo.tsx:137
+#: src/mediationForm/OrganizationInfo.tsx:136
 #: src/mediationForm/ProblemDescription.tsx:168
 #: src/mediationForm/Recap.tsx:317
 #: src/mediationForm/UserInfo.tsx:159
@@ -992,7 +998,7 @@ msgstr "Étape 3 : Récapitulatif"
 msgid "Step 3: The organization"
 msgstr "Étape 3 : L'organisation"
 
-#: src/mediationForm/OrganizationInfo.tsx:145
+#: src/mediationForm/OrganizationInfo.tsx:144
 #: src/mediationForm/Recap.tsx:298
 msgid "Step 4: Summary"
 msgstr "Étape 4 : Récapitulatif"
@@ -1030,17 +1036,13 @@ msgstr "La date de contact doit être dans un format respectant jj/mm/aaaa hh:mm
 msgid "The creation date must be formated following the pattern mm/dd/yyyy hh:mm (a|p)m"
 msgstr "La date de création doit être dans un format respectant jj/mm/aaaa hh:mm"
 
-#: src/mediationForm/fields/AboutOrganizationFields.tsx:52
+#: src/forms/fields/EmailField.tsx:61
 msgid "The e-mail format is invalid"
 msgstr "Le format du courriel est incorrect"
 
-#: src/forms/fields/EmailField.tsx:55
+#: src/forms/fields/EmailField.tsx:58
 msgid "The e-mail is required"
 msgstr "Le courriel est obligatoire"
-
-#: src/forms/fields/EmailField.tsx:58
-msgid "The e-mail must be formated like this: name@domain.extension"
-msgstr "Le courriel doit être de la forme nom@domaine.extension"
 
 #: src/forms/fields/FirstNameField.tsx:49
 msgid "The first name / username is required"
@@ -1049,6 +1051,22 @@ msgstr "Le prénom / pseudo est obligatoire"
 #: src/forms/fields/LastNameField.tsx:48
 msgid "The last name is required"
 msgstr "Le nom de famille est obligatoire."
+
+#: src/admin/requestDetail/RequestDetail.tsx:341
+msgid "The mediaiton request was successfully updated."
+msgstr "La demande de médiation a été mise à jour avec succès."
+
+#: src/admin/AllRequests.tsx:40
+msgid "The mediation request deletion was not successful. Please retry later."
+msgstr "La suppression de la demande de médiation a échoué. Veuillez réessayer plus tard."
+
+#: src/admin/requestDetail/RequestDetail.tsx:85
+msgid "The mediation request update was not successful. Please retry later."
+msgstr "La mise à jour de la demande de médiation a échoué. Veuillez réessayer plus tard."
+
+#: src/admin/AllRequests.tsx:122
+msgid "The mediation request was successfully deleted."
+msgstr "La demande de médiation a été supprimée avec succès."
 
 #: src/mediationForm/FormNavigation.tsx:78
 #: src/mediationRequests/MediationRequestsDetail.tsx:384
@@ -1061,17 +1079,15 @@ msgstr "L'organisation"
 msgid "The password is required"
 msgstr "Le mot de passe est obligatoire"
 
-#: src/forms/fields/PhoneField.tsx:53
-#: src/mediationForm/fields/AboutOrganizationFields.tsx:58
+#: src/forms/fields/PhoneField.tsx:56
 msgid "The phone number format is invalid"
 msgstr "Le format du numéro de téléphone est incorrect"
 
-#: src/forms/fields/PhoneField.tsx:50
+#: src/forms/fields/PhoneField.tsx:53
 msgid "The phone number is required"
 msgstr "Le numéro de téléphone est obligatoire"
 
-#: src/forms/fields/PhoneField.tsx:79
-#: src/mediationForm/fields/AboutOrganizationFields.tsx:148
+#: src/forms/fields/PhoneField.tsx:80
 msgid "The phone number must be 9 to 15 digits long and can be preceded by the + sign"
 msgstr "Le numéro de téléphone doit comporter 9 à 15 chiffres et peut être précédé du signe +"
 
@@ -1116,6 +1132,11 @@ msgstr "Code à usage unique reçu par courriel"
 #: src/admin/requestDetail/TraceReports.tsx:232
 msgid "Trace reports"
 msgstr "Rapports de suivi"
+
+#: src/admin/requestDetail/RequestDetail.tsx:251
+#: src/admin/requestDetail/RequestDetail.tsx:354
+msgid "Update the request"
+msgstr "Mettre à jour la demande"
 
 #: src/admin/Menu.tsx:100
 msgid "User management"
@@ -1270,7 +1291,7 @@ msgstr "Vous allez recevoir un courriel, avec un code à 6 chiffres dedans qu'il
 msgid "Your mediation request has been successfully sent !"
 msgstr "Votre demande de médiation a bien été envoyée !"
 
-#: src/mediationRequests/MediationRequestsList.tsx:79
+#: src/mediationRequests/MediationRequestsList.tsx:108
 msgid "Your mediation requests' list sorted by date (the most recent first)"
 msgstr "Vos demandes de médiation triées par date (les plus récentes en premier)"
 

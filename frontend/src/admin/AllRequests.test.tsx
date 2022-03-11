@@ -106,7 +106,7 @@ describe("Remove buttons", () => {
         expect(screen.queryByText("Yes")).not.toBeInTheDocument()
       );
       expect(
-        screen.queryByText(/The mediaiton request was successfully updated/)
+        screen.queryByText(/The mediation request was successfully updated/)
       ).not.toBeInTheDocument();
     });
 
@@ -118,7 +118,7 @@ describe("Remove buttons", () => {
         expect(screen.queryByText("Yes")).not.toBeInTheDocument()
       );
       expect(
-        screen.getByText(/The mediaiton request was successfully updated/)
+        screen.getByText(/The mediation request was successfully deleted/)
       ).toBeInTheDocument();
     });
   });
