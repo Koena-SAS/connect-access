@@ -4,11 +4,13 @@ import produce from "immer";
 import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
+import { mutate } from "swr";
 import { DoneButton, Snackbar } from "../../forms";
 import {
   useAdminMediationRequest,
   useEditMediationRequest,
   usePrevious,
+  useRedirectIfNonExistingRequest,
 } from "../../hooks";
 import {
   AboutIssueFields,
@@ -76,15 +78,18 @@ type RequestDetailProps = {
  * possibility to update them.
  */
 function RequestDetail({ token, setBreadcrumbs }: RequestDetailProps) {
+  useRedirectIfNonExistingRequest(token);
+  const { mediationRequest } = useAdminMediationRequest(token);
+  const failureMessages = Object.freeze({
+    none: "",
+    edit: t`The mediation request update was not successful. Please retry later.`,
+  });
+  const [requestFailureMessageType, setRequestFailureMessageType] =
+    useState<keyof typeof failureMessages>("none");
   const [requestSuccessMessageOpen, setRequestSuccessMessageOpen] =
-    useState(false);
-  const [requestFailureMessageOpen, setRequestFailureMessageOpen] =
     useState(false);
   const displayRequestSuccess = () => {
     setRequestSuccessMessageOpen(true);
-  };
-  const displayRequestFailure = () => {
-    setRequestFailureMessageOpen(true);
   };
   const handleCloseSuccessMessage = (
     _: Event | React.SyntheticEvent<any, Event>,
@@ -102,7 +107,7 @@ function RequestDetail({ token, setBreadcrumbs }: RequestDetailProps) {
     if (reason === "clickaway") {
       return;
     }
-    setRequestFailureMessageOpen(false);
+    setRequestFailureMessageType("none");
   };
   const { requestId: mediationRequestId } = useParams<{
     requestId: string;
@@ -117,7 +122,7 @@ function RequestDetail({ token, setBreadcrumbs }: RequestDetailProps) {
     },
     [setBreadcrumbs]
   );
-  const { mediationRequest } = useAdminMediationRequest(token);
+
   const previousMediationRequest = usePrevious<MediationRequest | undefined>(
     mediationRequest
   );
@@ -151,9 +156,15 @@ function RequestDetail({ token, setBreadcrumbs }: RequestDetailProps) {
   });
   const [editMediationRequest] = useEditMediationRequest({
     token,
-    onSuccess: displayRequestSuccess,
-    onFailure: displayRequestFailure,
+    onSuccess: function handleSuccess() {
+      mutate([`/api/mediation-requests/`, token]);
+      displayRequestSuccess();
+    },
+    onFailure: function handleDeleteFailure() {
+      setRequestFailureMessageType("edit");
+    },
   });
+
   const setInitialValues = useCallback(() => {
     if (mediationRequest) {
       for (const key of Object.keys(mediationRequest)) {
@@ -237,7 +248,7 @@ function RequestDetail({ token, setBreadcrumbs }: RequestDetailProps) {
       <form className="form" noValidate onSubmit={handleSubmit(onSubmit)}>
         <div className="admin-request-detail__submit-top">
           <DoneButton size="medium" type="submit">
-            <Trans>Update the mediation request</Trans>
+            <Trans>Update the request</Trans>
           </DoneButton>
         </div>
         <MainFields
@@ -333,14 +344,14 @@ function RequestDetail({ token, setBreadcrumbs }: RequestDetailProps) {
           severity="success"
         />
         <Snackbar
-          notificationText={t`We could'nt update the mediation request. Please retry later.`}
-          open={requestFailureMessageOpen}
+          notificationText={failureMessages[requestFailureMessageType]}
+          open={requestFailureMessageType !== "none"}
           onClose={handleCloseFailureMessage}
           severity="error"
         />
         <div className="admin-request-detail__submit-bottom">
           <DoneButton size="medium" type="submit">
-            <Trans>Update the mediation request</Trans>
+            <Trans>Update the request</Trans>
           </DoneButton>
         </div>
       </form>

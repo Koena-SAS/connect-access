@@ -201,3 +201,79 @@ export function useEditMediationRequest({
     },
   });
 }
+
+type DeleteRequestProps = {
+  mediationRequest: MediationRequest;
+  token: string;
+};
+
+async function deleteMediationRequest({
+  mediationRequest,
+  token,
+}: DeleteRequestProps): Promise<AxiosResponse<MediationRequestToSend>> {
+  try {
+    const response = await axios.delete<MediationRequestToSend>(
+      `/api/mediation-requests/${mediationRequest.id}/`,
+      {
+        headers: {
+          Authorization: `token ${token}`,
+        },
+      }
+    );
+    return response;
+  } catch (error: any) {
+    throw error.response ? error.response.data : [];
+  }
+}
+
+type UseDeleteMediationRequestProps = {
+  token: string;
+  onSuccess: () => void;
+  onFailure: () => void;
+};
+
+/**
+ * Delete a mediation request.
+ * Hook using use-mutation lib, to make delete request and update
+ * optimistically the UI, with the possibility to rollback in
+ * case of error.
+ * @param {object} obj authentication token and two functions
+ *   to be called when the backend reply arrives.
+ *   One in case of success and one in case of failure.
+ * @returns array containing a function to delete a mediation request,
+ *   and an object with additional information like errors.
+ */
+export function useDeleteMediationRequest({
+  token,
+  onSuccess,
+  onFailure,
+}: UseDeleteMediationRequestProps) {
+  const key = [`/api/mediation-requests/`, token];
+  return useMutation(deleteMediationRequest, {
+    onMutate({ input }) {
+      const oldData = cache.get(key);
+      mutate(
+        key,
+        (current: MediationRequest[]) => {
+          const mediationRequestsUpdated = produce(current, (draftState) => {
+            const index = draftState.findIndex((mediationRequest) => {
+              return mediationRequest.id === input.mediationRequest.id;
+            });
+            draftState.splice(index, 1);
+          });
+          return mediationRequestsUpdated;
+        },
+        false
+      );
+      return () => mutate(key, oldData, false);
+    },
+    onSuccess() {
+      mutate(key);
+      onSuccess && onSuccess();
+    },
+    onFailure({ rollback }) {
+      if (rollback) rollback();
+      onFailure && onFailure();
+    },
+  });
+}

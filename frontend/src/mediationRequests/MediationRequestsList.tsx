@@ -3,6 +3,7 @@ import { useLingui } from "@lingui/react";
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import { generatePath, Link, useParams } from "react-router-dom";
 import { statusMap } from "../constants/choicesMap";
+import { DeleteButton } from "../forms";
 import Button from "../forms/buttons/Button";
 import Table from "../forms/Table";
 import type { MediationRequest } from "../types/mediationRequest";
@@ -13,6 +14,14 @@ type MediationRequestsListProps = {
    * The path to get the mediation request detail pages.
    */
   detailsPath: string;
+  /**
+   * If provided, shows a delete button, with this function triggered
+   * on click.
+   */
+  setDeleteDialogOptions?: (props: {
+    request: MediationRequest;
+    open: boolean;
+  }) => void;
 };
 
 /**
@@ -21,6 +30,7 @@ type MediationRequestsListProps = {
 function MediationRequestsList({
   mediationRequests,
   detailsPath,
+  setDeleteDialogOptions,
 }: MediationRequestsListProps) {
   const { organizationSlug, applicationSlug } =
     useParams<{ organizationSlug: string; applicationSlug: string }>();
@@ -51,7 +61,7 @@ function MediationRequestsList({
         },
         {
           text: (
-            <>
+            <div className="mediation-requests-list__buttons">
               {" "}
               <Button
                 size="small"
@@ -67,7 +77,26 @@ function MediationRequestsList({
                   Details<span className="sr-only">: {requestId}</span>
                 </Trans>
               </Button>
-            </>
+              {setDeleteDialogOptions ? (
+                <DeleteButton
+                  size="medium"
+                  type="button"
+                  variant="outlined"
+                  onClick={() =>
+                    setDeleteDialogOptions({
+                      request: request,
+                      open: true,
+                    })
+                  }
+                >
+                  <Trans>
+                    Remove<span className="sr-only">: {requestId}</span>
+                  </Trans>
+                </DeleteButton>
+              ) : (
+                ""
+              )}
+            </div>
           ),
         },
       ],

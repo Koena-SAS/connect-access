@@ -296,14 +296,14 @@ describe("Errors from the backend", () => {
     await renderRequestDetail();
     await submitEditForm();
     expect(
-      screen.getByText(/We could'nt update the mediation request./)
+      screen.getByText(/The mediation request update was not successful/)
     ).toBeInTheDocument();
   });
 });
 
 async function submitEditForm() {
   const submitButton = screen.getAllByRole("button", {
-    name: "Update the mediation request",
+    name: "Update the request",
   });
   await click(submitButton[0]);
 }

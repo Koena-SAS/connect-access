@@ -1,2 +1,17 @@
 .mediation-requests-list {
+  &__buttons {
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media (max-width: 1400px) {
+    &__buttons {
+      flex-direction: row;
+    }
+  }
+  @media (max-width: 600px) {
+    &__buttons {
+      flex-direction: column;
+    }
+  }
 }
