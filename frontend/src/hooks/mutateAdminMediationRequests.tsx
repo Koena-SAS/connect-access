@@ -23,7 +23,7 @@ async function editMediationRequest({
   const dataToSend = new FormData();
   mediationRequest.requestDate &&
     dataToSend.append("request_date", mediationRequest.requestDate);
-  mediationRequest.requestDate &&
+  mediationRequest.status &&
     dataToSend.append("status", mediationRequest.status);
   mediationRequest.urgency &&
     dataToSend.append("urgency", mediationRequest.urgency);
