@@ -86,7 +86,7 @@ end_to_end:
 
 test_pages:
   stage: lint_and_unit_test
-  image: node:16.13-bullseye
+  image: node:18-buster
   script:
   - cd docs
   - yarn install
@@ -100,7 +100,7 @@ test_pages:
 
 pages:
   stage: deploy
-  image: node:16.13-bullseye
+  image: node:18-buster
   script:
   - cd docs
   - yarn install
