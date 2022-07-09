@@ -1,7 +1,7 @@
-from typing import Union
+from typing import List, Union
 
 from django.conf import settings
-from django.urls import path
+from django.urls import URLPattern, URLResolver, path
 from rest_framework.routers import DefaultRouter, SimpleRouter
 
 from connect_access.configuration.api import (
@@ -21,7 +21,7 @@ router.register("users", UserViewSet)
 router.register("mediation-requests", MediationRequestViewSet, "mediation_requests")
 router.register("trace-reports", TraceReportViewSet, "trace_reports")
 
-urlpatterns = [
+urlpatterns: List[Union[URLPattern, URLResolver]] = [
     path(
         "configuration/contact-information/",
         ContactInformationView.as_view(),

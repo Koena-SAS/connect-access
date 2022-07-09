@@ -11,7 +11,7 @@ from django.utils.translation import gettext_lazy as _
 from .managers import UserManager
 
 
-class User(AbstractBaseUser, PermissionsMixin):
+class User(AbstractBaseUser, PermissionsMixin):  # type: ignore
     """Default user for Connect Access."""
 
     class Meta:
