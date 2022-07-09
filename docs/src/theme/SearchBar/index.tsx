@@ -47,7 +47,17 @@ const Search = (props) => {
     };
   };
 
-  const pluginData = usePluginData<SearchData>("docusaurus-lunr-search");
+  function isSearchData(searchData: any): searchData is SearchData {
+    return (
+      searchData?.fileNames?.searchDoc !== undefined &&
+      searchData?.fileNames?.lunrIndex !== undefined
+    );
+  }
+
+  const pluginData = usePluginData("docusaurus-lunr-search");
+  if (!isSearchData(pluginData)) {
+    throw new Error(`Lunyr plugin search data is inconsistent: ${pluginData}`);
+  }
   const getSearchDoc = () =>
     process.env.NODE_ENV === "production"
       ? fetch(`${baseUrl}${pluginData.fileNames.searchDoc}`).then((content) =>
