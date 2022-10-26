@@ -10,4 +10,4 @@ yarn lang:compile
 pm2 start node_modules/react-app-rewired/scripts/start.js --name react-app
 cd ../backend
 python manage.py compilemessages
-python manage.py runserver_plus 0.0.0.0:8000
+python manage.py runserver_plus 0.0.0.0:8000 --keep-meta-shutdown
