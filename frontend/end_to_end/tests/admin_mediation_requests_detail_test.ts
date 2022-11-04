@@ -2,10 +2,12 @@ Feature("Admin Mediation requests detail");
 
 BeforeSuite(({ I }) => {
   I.runDjangoCommand("createmediationsfortest");
+  I.runDjangoCommand("createtracereportsfortest");
 });
 
 AfterSuite(({ I }) => {
   I.runDjangoCommand("deletemediations");
+  I.runDjangoCommand("deletetracereports");
 });
 
 Before(({ I }) => {
