@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class ConfigurationConfig(AppConfig):
-    name = "connect_access.configuration"
+    name = "connect_access.apps.configuration"

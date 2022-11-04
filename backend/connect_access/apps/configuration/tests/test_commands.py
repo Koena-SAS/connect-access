@@ -2,7 +2,10 @@ import pytest
 from django.core.management import call_command
 from django.core.management.base import CommandError
 
-from ..models import AboutServiceInformation, ContactInformation
+from connect_access.core.loading import get_model
+
+AboutServiceInformation = get_model("configuration", "AboutServiceInformation")
+ContactInformation = get_model("configuration", "ContactInformation")
 
 pytestmark = pytest.mark.django_db
 

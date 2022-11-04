@@ -1,14 +1,10 @@
 from factory import Faker
 from factory.django import DjangoModelFactory
 
-from connect_access.configuration.models import (
-    AboutServiceInformation,
-    ContactInformation,
-)
+from connect_access.core.loading import get_model
 
 
 class ContactInformationFactory(DjangoModelFactory):
-
     email_fr = Faker("email")
     email_en = Faker("email")
     email_text_fr = Faker("paragraph")
@@ -25,15 +21,14 @@ class ContactInformationFactory(DjangoModelFactory):
     terms_of_service_en = Faker("paragraph")
 
     class Meta:
-        model = ContactInformation
+        model = get_model("configuration", "ContactInformation")
 
 
 class AboutServiceInformationFactory(DjangoModelFactory):
-
     link_text_fr = Faker("paragraph")
     link_text_en = Faker("paragraph")
     link_url_fr = Faker("url")
     link_url_en = Faker("url")
 
     class Meta:
-        model = AboutServiceInformation
+        model = get_model("configuration", "AboutServiceInformation")

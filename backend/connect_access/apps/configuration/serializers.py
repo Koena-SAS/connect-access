@@ -1,6 +1,9 @@
 from rest_framework import serializers
 
-from .models import AboutServiceInformation, ContactInformation
+from ...core.loading import get_model
+
+ContactInformation = get_model("configuration", "ContactInformation")
+AboutServiceInformation = get_model("configuration", "AboutServiceInformation")
 
 
 class TranslatableSerializer:

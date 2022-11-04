@@ -9,7 +9,6 @@ from .serializers import AboutServiceInformationSerializer, ContactInformationSe
 
 
 class ContactInformationView(APIView):
-
     permission_classes = [AllowAny]
     lookup_field = "uuid"
 

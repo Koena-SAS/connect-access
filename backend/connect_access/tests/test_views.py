@@ -4,11 +4,11 @@ import pytest
 from django.urls import reverse
 from mock import patch
 
-from connect_access.configuration.serializers import (
+from connect_access.apps.configuration.serializers import (
     AboutServiceInformationSerializer,
     ContactInformationSerializer,
 )
-from connect_access.configuration.tests.factories import (
+from connect_access.apps.configuration.tests.factories import (
     AboutServiceInformationFactory,
     ContactInformationFactory,
 )

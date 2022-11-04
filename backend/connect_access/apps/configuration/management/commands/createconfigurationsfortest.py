@@ -1,9 +1,9 @@
 from django.core.management.base import BaseCommand, CommandError
 
-from connect_access.configuration.models import (
-    AboutServiceInformation,
-    ContactInformation,
-)
+from connect_access.core.loading import get_model
+
+AboutServiceInformation = get_model("configuration", "AboutServiceInformation")
+ContactInformation = get_model("configuration", "ContactInformation")
 
 
 class Command(BaseCommand):
