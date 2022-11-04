@@ -6,6 +6,6 @@ class TraceReportConfig(AppConfig):
     name = "connect_access.apps.mediations.trace_report"
 
     def ready(self):
-        import connect_access.core.receivers  # noqa
+        import connect_access.models.receivers  # noqa
 
         super(TraceReportConfig, self).ready()

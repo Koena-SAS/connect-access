@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from connect_access.core.loading import get_model
-from connect_access.core.serializers import EnumSerializerField
+from connect_access.models.serializers import EnumSerializerField
 
 from . import choices
 

@@ -6,6 +6,6 @@ class MediationsConfig(AppConfig):
     name = "connect_access.apps.mediations"
 
     def ready(self):
-        import connect_access.core.receivers  # noqa
+        import connect_access.models.receivers  # noqa
 
         super().ready()

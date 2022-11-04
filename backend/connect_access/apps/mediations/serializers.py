@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
 from connect_access.core.loading import get_model
-from connect_access.core.serializers import (
+from connect_access.models.serializers import (
     BooleanSerializerNullField,
     EnumArraySerializerField,
     EnumSerializerField,

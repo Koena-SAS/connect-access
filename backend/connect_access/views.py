@@ -5,14 +5,14 @@ import environ
 from django.utils.translation import get_language
 from django.views.generic.base import TemplateView
 
-from connect_access.configuration.models import (
-    AboutServiceInformation,
-    ContactInformation,
-)
-from connect_access.configuration.serializers import (
+from connect_access.apps.configuration.serializers import (
     AboutServiceInformationSerializer,
     ContactInformationSerializer,
 )
+from connect_access.core.loading import get_model
+
+AboutServiceInformation = get_model("configuration", "AboutServiceInformation")
+ContactInformation = get_model("configuration", "ContactInformation")
 
 env = environ.Env()
 

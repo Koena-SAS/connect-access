@@ -10,7 +10,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from connect_access.core.loading import get_model
-from connect_access.core.permissions import (
+from connect_access.models.permissions import (
     AnonCreateAndUpdateOwnerOnly,
     ListDeleteAdminOnly,
 )
