@@ -6,7 +6,6 @@ from factory.django import DjangoModelFactory
 
 
 class UserFactory(DjangoModelFactory):
-
     first_name = Faker("first_name")
     last_name = Faker("last_name")
     email = Faker("email")
@@ -34,5 +33,4 @@ class UserFactory(DjangoModelFactory):
 
 
 class AdminUserFactory(UserFactory):
-
     is_staff = True

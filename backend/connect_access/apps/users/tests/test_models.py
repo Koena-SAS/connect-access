@@ -1,7 +1,7 @@
 import pytest
 
-from connect_access.mediations.tests.factories import MediationRequestFactory
-from connect_access.users.models import User
+from connect_access.apps.mediations.tests.factories import MediationRequestFactory
+from connect_access.apps.users.models import User
 
 from .factories import UserFactory
 

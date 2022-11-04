@@ -4,7 +4,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import Group
 from django.utils.translation import gettext_lazy as _
 
-from connect_access.users.forms import UserChangeForm, UserCreationForm
+from connect_access.apps.users.forms import UserChangeForm, UserCreationForm
 
 User = get_user_model()
 

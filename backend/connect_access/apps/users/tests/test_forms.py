@@ -1,7 +1,7 @@
 import pytest
 
-from connect_access.users.forms import UserCreationForm
-from connect_access.users.tests.factories import UserFactory
+from connect_access.apps.users.forms import UserCreationForm
+from connect_access.apps.users.tests.factories import UserFactory
 
 pytestmark = pytest.mark.django_db
 

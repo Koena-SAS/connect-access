@@ -1,7 +1,7 @@
 import pytest
 from django.urls import resolve, reverse
 
-from connect_access.users.models import User
+from connect_access.apps.users.models import User
 
 pytestmark = pytest.mark.django_db
 
