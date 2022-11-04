@@ -1,5 +1,6 @@
 """Base settings to build other settings files upon."""
 from pathlib import Path
+from typing import List
 
 import environ
 from django.utils.translation import gettext_lazy as _
@@ -7,6 +8,7 @@ from django.utils.translation import gettext_lazy as _
 ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 # connect_access/
 APPS_DIR = ROOT_DIR / "connect_access"
+APP_DIRS = True
 BACKEND_DIR = ROOT_DIR
 FRONTEND_DIR = BACKEND_DIR.parents[0] / "frontend"
 env = environ.Env()
@@ -85,17 +87,24 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    "connect_access.users.apps.UsersConfig",
-    "connect_access.mediations.apps.MediationsConfig",
-    "connect_access.configuration.apps.ConfigurationConfig",
+    "connect_access",
+    "connect_access.apps.users",
+    "connect_access.apps.mediations",
+    "connect_access.apps.mediations.trace_report",
+    "connect_access.apps.configuration",
 ]
+
+PLUGIN_APPS: List[str] = []
+
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS + PLUGIN_APPS
 
 # MIGRATIONS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#migration-modules
-MIGRATION_MODULES = {"sites": "connect_access.contrib.sites.migrations"}
+MIGRATION_MODULES = {
+    "sites": "connect_access.contrib.sites.migrations",
+}
 
 # AUTHENTICATION
 # ------------------------------------------------------------------------------
@@ -317,13 +326,13 @@ DJOSER = {
     "PASSWORD_RESET_SHOW_EMAIL_NOT_FOUND": False,
     "HIDE_USERS": True,
     "SERIALIZERS": {
-        "user_create_password_retype": "connect_access.users.serializers.UserCreatePasswordRetypeSerializer",
+        "user_create_password_retype": "connect_access.apps.users.serializers.UserCreatePasswordRetypeSerializer",
         "user_delete": "djoser.serializers.UserDeleteSerializer",
-        "user": "connect_access.users.serializers.UserAuthSerializer",
-        "current_user": "connect_access.users.serializers.UserAuthSerializer",
+        "user": "connect_access.apps.users.serializers.UserAuthSerializer",
+        "current_user": "connect_access.apps.users.serializers.UserAuthSerializer",
     },
     "EMAIL": {
-        "password_changed_confirmation": "connect_access.users.emails.PasswordChangedConfirmationEmail"
+        "password_changed_confirmation": "connect_access.apps.users.emails.PasswordChangedConfirmationEmail"
     },
 }
 
