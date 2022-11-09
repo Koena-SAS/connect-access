@@ -88,6 +88,7 @@ THIRD_PARTY_APPS = [
 
 LOCAL_APPS = [
     "connect_access",
+    "connect_access.core",
     "connect_access.apps.users",
     "connect_access.apps.mediations",
     "connect_access.apps.mediations.trace_report",
