@@ -1,8 +1,7 @@
 import { t, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import DateTimePicker from "@mui/lab/DateTimePicker";
-import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import Checkbox from "@mui/material/Checkbox";
 import enLocale from "date-fns/locale/en-US";
 import frLocale from "date-fns/locale/fr";
@@ -239,7 +238,7 @@ function TraceReportForm({
       >
         <LocalizationProvider
           dateAdapter={AdapterDateFns}
-          locale={localeMap[i18n.locale as Langs]}
+          adapterLocale={localeMap[i18n.locale as Langs]}
         >
           <Controller
             name="contactDate"

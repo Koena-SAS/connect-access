@@ -1,8 +1,7 @@
 import { i18n } from "@lingui/core";
 import { t, Trans } from "@lingui/macro";
-import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import DateTimePicker from "@mui/lab/DateTimePicker";
-import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import enLocale from "date-fns/locale/en-US";
 import frLocale from "date-fns/locale/fr";
 import { Controller } from "react-hook-form";
@@ -97,7 +96,7 @@ function MainFields({
       <div className="main-mediation-request-admin-fields__requestDate">
         <LocalizationProvider
           dateAdapter={AdapterDateFns}
-          locale={localeMap[i18n.locale as Langs]}
+          adapterLocale={localeMap[i18n.locale as Langs]}
         >
           <Controller
             name="requestDate"
