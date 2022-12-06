@@ -11,6 +11,13 @@ repository = "https://gitlab.com/koena/connect-access"
 documentation = "https://connectaccess.org/docs/introduction/"
 packages = [{include = "connect_access"}]
 
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings.test"
+addopts = "--reuse-db"
+python_files = "tests.py test_*.py"
+
+[tool.poetry.plugins]
+pytest11 = { "connect_access" = "connect_access.tests" }
 [tool.poetry.dependencies]
 python = "^3.9"
 pytz = "2022.1"
