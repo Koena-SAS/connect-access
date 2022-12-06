@@ -24,11 +24,9 @@ def test_trace_reports_list_contains_all_trace_reports(authenticate):
     assertContains(response, trace_report2.comment)
 
 
-def test_trace_report_create(
-    request_data_for_trace_report,
-):
+def test_trace_report_create(request_data_for_trace_report, authenticate):
     assert TraceReport.objects.count() == 0
-    _add_trace_report(request_data_for_trace_report)
+    _add_trace_report(request_data_for_trace_report, authenticate)
     assert TraceReport.objects.count() == 1
 
 

@@ -21,9 +21,9 @@ TraceReport = get_model("trace_report", "TraceReport")
 pytestmark = pytest.mark.django_db
 
 
-def test_trace_report_serializes_correctly_all_fields():
+def test_trace_report_serializes_correctly_all_fields(authenticate):
     trace_report, response = itemgetter("trace_report", "response")(
-        _execute_trace_report_list(permission="admin")
+        _execute_trace_report_list(permission="admin", auth=authenticate)
     )
     data = response.data[0]
     assertContains(response, str(trace_report.uuid))
@@ -76,10 +76,12 @@ def test_trace_report_deserializes_correctly_all_fields(image_file, authenticate
     )
 
 
-def test_trace_report_by_mediation_request_serializes_correctly_all_fields():
+def test_trace_report_by_mediation_request_serializes_correctly_all_fields(
+    authenticate,
+):
     trace_report1, trace_report2, mediation_request_uuid, response = itemgetter(
         "trace_report1", "trace_report2", "mediation_request_uuid", "response"
-    )(_execute_trace_report_by_mediation_request(permission="admin"))
+    )(_execute_trace_report_by_mediation_request(permission="admin", auth=authenticate))
     data = response.data
     assertContains(response, str(trace_report1.uuid))
     parse(data[0]["contact_date"])  # we test that parsing it to datime does not raise

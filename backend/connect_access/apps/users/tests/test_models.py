@@ -23,8 +23,9 @@ def test_user_str():
     assert str(user) == "john@doe.com"
 
 
+@pytest.mark.usefixtures("_set_default_language")
 def test_user_manager_create_user_raises_exception_if_no_email():
-    with pytest.raises(ValueError, match="mail"):
+    with pytest.raises(ValueError, match="The Email must be set"):
         User.objects.create_user(email="", first_name="John", last_name="Doe")
 
 

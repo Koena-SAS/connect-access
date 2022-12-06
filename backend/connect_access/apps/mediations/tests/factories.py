@@ -12,10 +12,8 @@ from connect_access.apps.mediations.choices import (
     MobileAppPlatform,
     UrgencyLevel,
 )
+from connect_access.apps.mediations.models import MediationRequest
 from connect_access.apps.users.tests.factories import UserFactory
-from connect_access.core.loading import get_model
-
-MediationRequest = get_model("mediations", "MediationRequest")
 
 
 class MediationRequestFactory(DjangoModelFactory):

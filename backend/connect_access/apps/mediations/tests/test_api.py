@@ -48,7 +48,7 @@ def test_mediation_requests_list_sorts_requests_by_request_date_from_the_most_re
 
 
 def test_mediation_request_create_with_authorirequest_dateed_status_succeeds(
-    request_data_for_mediation_request,
+    request_data_for_mediation_request, authenticate
 ):
     number_of_tests = 0
     for name in MediationRequestStatus.names:
@@ -57,7 +57,9 @@ def test_mediation_request_create_with_authorirequest_dateed_status_succeeds(
             or name == MediationRequestStatus.WAITING_MEDIATOR_VALIDATION.name
         ):
             assert MediationRequest.objects.count() == 0
-            _add_mediation_request(request_data_for_mediation_request, name)
+            _add_mediation_request(
+                request_data_for_mediation_request, name, authenticate
+            )
             assert MediationRequest.objects.count() == 1
             MediationRequest.objects.all().delete()
             number_of_tests += 1
@@ -66,7 +68,7 @@ def test_mediation_request_create_with_authorirequest_dateed_status_succeeds(
 
 @pytest.mark.usefixtures("_set_default_language")
 def test_mediation_request_create_with_unauthorized_status_fails(
-    request_data_for_mediation_request,
+    request_data_for_mediation_request, authenticate
 ):
     number_of_tests = 0
     for name in MediationRequestStatus.names:
@@ -75,7 +77,9 @@ def test_mediation_request_create_with_unauthorized_status_fails(
             and name != MediationRequestStatus.WAITING_MEDIATOR_VALIDATION.name
         ):
             assert MediationRequest.objects.count() == 0
-            response = _add_mediation_request(request_data_for_mediation_request, name)
+            response = _add_mediation_request(
+                request_data_for_mediation_request, name, authenticate
+            )
             assert response.status_code == 400
             assert response.data == {
                 "message": str(
@@ -144,13 +148,14 @@ def test_mediation_requests_user_contains_all_user_related_mediation_requests():
 @pytest.mark.usefixtures("_set_default_language")
 @override_settings(MEDIATION_REQUEST_EMAIL="mediator@mediation.org")
 def test_send_emails_when_a_mediation_request_is_created(
-    request_data_for_mediation_request_creation,
+    request_data_for_mediation_request_creation, authenticate
 ):
     # An email is sent to complainant, and another one to MEDIATION_REQUEST_EMAIL.
     assert len(mail.outbox) == 0
     _add_mediation_request(
         request_data_for_mediation_request_creation,
         MediationRequestStatus.WAITING_MEDIATOR_VALIDATION.name,
+        authenticate,
     )
     assert len(mail.outbox) == 2
     assert mail.outbox[0].recipients() == ["john@doe.com"]

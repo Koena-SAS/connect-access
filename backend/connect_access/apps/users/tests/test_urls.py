@@ -6,6 +6,7 @@ from connect_access.apps.users.models import User
 pytestmark = pytest.mark.django_db
 
 
+@pytest.mark.usefixtures("user")
 def test_user_detail(user: User):
     assert (
         reverse("api:user-detail", kwargs={"email": user.email})

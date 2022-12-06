@@ -34,7 +34,7 @@ phone_regex = RegexValidator(
 
 domain_name_regex = RegexValidator(
     regex=r"^(https?:\/\/)?(www\.)?[-a-zA-Z-1-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)$",
-    message=_("Domain name must be at least in the form domain.extension"),
+    message=_("URL must be at least in the form domain.extension"),
 )
 
 

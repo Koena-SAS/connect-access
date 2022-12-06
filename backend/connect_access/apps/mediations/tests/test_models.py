@@ -2,7 +2,6 @@ import os.path
 
 import pytest
 from django.conf import settings
-from django.core.exceptions import ValidationError
 from django.core.files.uploadedfile import SimpleUploadedFile
 
 from connect_access.apps.users.tests.factories import UserFactory
@@ -69,31 +68,13 @@ def test_attached_file_is_removed_when_removing_from_db():
 
 
 @pytest.mark.usefixtures("_set_default_language")
-def test_mediation_request_phone_number_regex_validation():
-    MediationRequestFactory(phone_number="1687416238")
-    MediationRequestFactory(phone_number="+1687416238")
-    mediation_request = MediationRequestFactory(phone_number="a1687416238")
-    with pytest.raises(ValidationError, match="Phone number must have"):
-        mediation_request.full_clean()
-    mediation_request = MediationRequestFactory(phone_number="6238")
-    with pytest.raises(ValidationError, match="Phone number must have"):
-        mediation_request.full_clean()
+def test_mediation_request_phone_number_regex_validation(field_checker):
+    field_checker.check_phone_format(MediationRequestFactory, "phone_number")
 
 
 @pytest.mark.usefixtures("_set_default_language")
-def test_mediation_request_domain_name_regex_validation():
-    MediationRequestFactory(url="koena.net")
-    MediationRequestFactory(url="http://koena.net")
-    MediationRequestFactory(url="https://koena.net")
-    mediation_request = MediationRequestFactory(url="koena")
-    with pytest.raises(ValidationError, match="Domain name must be"):
-        mediation_request.full_clean()
-    mediation_request = MediationRequestFactory(url="http:/koena.net")
-    with pytest.raises(ValidationError, match="Domain name must be"):
-        mediation_request.full_clean()
-    mediation_request = MediationRequestFactory(url="https://koena")
-    with pytest.raises(ValidationError, match="Domain name must be"):
-        mediation_request.full_clean()
+def test_mediation_request_domain_name_regex_validation(field_checker):
+    field_checker.check_url_format(MediationRequestFactory, "url")
 
 
 @pytest.mark.parametrize(

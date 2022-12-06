@@ -25,9 +25,9 @@ pytestmark = pytest.mark.django_db
 MediationRequest = get_model("mediations", "MediationRequest")
 
 
-def test_mediation_request_serializes_correctly_all_fields():
+def test_mediation_request_serializes_correctly_all_fields(authenticate):
     mediation_request, response = itemgetter("mediation_request", "response")(
-        _execute_mediation_request_list(permission="admin")
+        _execute_mediation_request_list(permission="admin", auth=authenticate)
     )
     data = response.data[0]
     assertContains(response, str(mediation_request.uuid))
