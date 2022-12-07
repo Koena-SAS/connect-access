@@ -30,7 +30,6 @@ def is_model_registered(app_label, model_name):
 def model_factory(abstract_class):
     app_label = abstract_class.Meta.app_label
     model_name = abstract_class.__name__.replace("Abstract", "")
-
     if not is_model_registered(app_label, model_name):
         return type(
             str(model_name),

@@ -1,8 +1,9 @@
-from django.contrib import admin
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from pagedown.widgets import AdminPagedownWidget
 from translated_fields import TranslatedFieldAdmin
+
+import connect_access.core.admin as admin
 
 from .models import AboutServiceInformation, ContactInformation
 
@@ -18,25 +19,22 @@ class ContactInformationAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
         return obj.email_text if obj.email_text else "-----"
 
     get_email_text.short_description = _("Email address display text")  # type: ignore
-    fieldsets = (
-        (
-            _("Main information"),
-            {
-                "fields": (
-                    (*ContactInformation.email.fields,),
-                    (*ContactInformation.email_text.fields,),
-                    (*ContactInformation.phone_number.fields,),
-                    (*ContactInformation.phone_number_text.fields,),
-                    (*ContactInformation.website.fields,),
-                    (*ContactInformation.website_text.fields,),
-                )
-            },
-        ),
-        (
-            _("Terms of service"),
-            {"fields": ((*ContactInformation.terms_of_service.fields,),)},
-        ),
-    )
+    _fieldsets = {
+        "Main information": {
+            "fields": [
+                (*ContactInformation.email.fields,),
+                (*ContactInformation.email_text.fields,),
+                (*ContactInformation.phone_number.fields,),
+                (*ContactInformation.phone_number_text.fields,),
+                (*ContactInformation.website.fields,),
+                (*ContactInformation.website_text.fields,),
+            ]
+        },
+        "Terms of service": {
+            "fields": ((*ContactInformation.terms_of_service.fields,),)
+        },
+    }
+
     formfield_overrides = {
         models.TextField: {"widget": AdminPagedownWidget},
     }
@@ -48,19 +46,16 @@ class AboutServiceInformationAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
         "link_text",
         "link_url",
     )
-    fieldsets = (
-        (
-            _("Main information"),
-            {
-                "fields": (
-                    "display_order",
-                    (*AboutServiceInformation.link_text.fields,),
-                    (*AboutServiceInformation.link_url.fields,),
-                )
-            },
-        ),
-    )
+    _fieldsets = {
+        "Main information": {
+            "fields": [
+                "display_order",
+                (*AboutServiceInformation.link_text.fields,),
+                (*AboutServiceInformation.link_url.fields,),
+            ]
+        },
+    }
 
 
-admin.site.register(ContactInformation, ContactInformationAdmin)
-admin.site.register(AboutServiceInformation, AboutServiceInformationAdmin)
+ContactInformationAdmin.register(ContactInformation)
+AboutServiceInformationAdmin.register(AboutServiceInformation)

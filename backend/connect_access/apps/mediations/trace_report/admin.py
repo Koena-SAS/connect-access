@@ -1,5 +1,4 @@
-from django.contrib import admin
-
+import connect_access.core.admin as admin
 from connect_access.core.loading import get_model
 
 TraceReport = get_model("trace_report", "TraceReport")
@@ -19,4 +18,4 @@ class TraceReportAdmin(admin.ModelAdmin):
     list_filter = ("trace_type",)
 
 
-admin.site.register(TraceReport, TraceReportAdmin)
+TraceReportAdmin.register(TraceReport)
