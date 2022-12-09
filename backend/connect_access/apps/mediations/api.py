@@ -2,14 +2,14 @@ import logging
 from smtplib import SMTPException
 
 from django.conf import settings
-from django.core.mail import BadHeaderError, EmailMultiAlternatives
-from django.template.loader import get_template
+from django.core.mail import BadHeaderError
 from django.utils.translation import gettext_lazy as _
 from rest_framework import authentication, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from connect_access.core.loading import get_model
+from connect_access.core.tasks import send_multialternative_mail
 from connect_access.models.permissions import (
     AnonCreateAndUpdateOwnerOnly,
     ListDeleteAdminOnly,
@@ -22,14 +22,6 @@ MediationRequest = get_model("mediations", "MediationRequest")
 TraceReport = get_model("trace_report", "TraceReport")
 
 logger = logging.getLogger(__name__)
-
-
-def send_multialternative_mail(context, subject, to, content_filename):
-    text_content = get_template(f"{content_filename}.txt").render(context)
-    html_content = get_template(f"{content_filename}.html").render(context)
-    msg = EmailMultiAlternatives(subject, text_content, None, to)
-    msg.attach_alternative(html_content, "text/html")
-    msg.send()
 
 
 class MediationRequestViewSet(viewsets.ModelViewSet):

@@ -1,5 +1,6 @@
 from connect_access.apps.mediations.abstract_models import AbstractMediationRequest
-from connect_access.core.loading import is_model_registered, model_factory
+from connect_access.core.loading import is_model_registered
+from connect_access.models import model_factory
 
 __all__ = []
 
