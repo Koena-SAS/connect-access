@@ -5,24 +5,37 @@ from dateutil.parser import parse
 from pytest_django.asserts import assertContains
 from rest_framework.test import APIRequestFactory
 
-from connect_access.apps.users.tests.factories import UserFactory
-from connect_access.core.loading import get_model
+from connect_access.core.loading import get_class, get_classes, get_model
 
-from ..api import MediationRequestViewSet
-from ..choices import (
+from .utils import _execute_mediation_request_list, _get_mediation_request_absolute_url
+
+pytestmark = pytest.mark.django_db
+
+UserFactory = get_class("users.tests.factories", "UserFactory")
+MediationRequestFactory = get_class(
+    "mediations.tests.factories", "MediationRequestFactory"
+)
+MediationRequestViewSet = get_class("mediations.api", "MediationRequestViewSet")
+MediationRequest = get_model("mediations", "MediationRequest")
+
+(
     AssistiveTechnology,
     Browser,
     InaccessibilityLevel,
     MediationRequestStatus,
     MobileAppPlatform,
     UrgencyLevel,
+) = get_classes(
+    "mediations.choices",
+    [
+        "AssistiveTechnology",
+        "Browser",
+        "InaccessibilityLevel",
+        "MediationRequestStatus",
+        "MobileAppPlatform",
+        "UrgencyLevel",
+    ],
 )
-from .factories import MediationRequestFactory
-from .utils import _execute_mediation_request_list, _get_mediation_request_absolute_url
-
-pytestmark = pytest.mark.django_db
-
-MediationRequest = get_model("mediations", "MediationRequest")
 
 
 def test_mediation_request_serializes_correctly_all_fields(authenticate):

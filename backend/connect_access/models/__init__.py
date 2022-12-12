@@ -1,5 +1,20 @@
 from django.core.exceptions import ValidationError
 
+from connect_access.core.loading import is_model_registered
+
+
+def model_factory(abstract_class):
+    app_label = abstract_class.Meta.app_label
+    model_name = abstract_class.__name__.replace("Abstract", "")
+    if not is_model_registered(app_label, model_name):
+        return type(
+            str(model_name),
+            (abstract_class,),
+            {
+                "__module__": __name__,
+            },
+        )
+
 
 class MixinModel(object):
     def _ensure_no_field_a_without_translated_field_b(self, a, b, error_message):

@@ -4,16 +4,27 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from factory import Faker
 from factory.django import DjangoModelFactory
 
-from connect_access.apps.mediations.choices import (
+from connect_access.core.loading import get_class, get_classes, get_model
+
+(
     AssistiveTechnology,
     Browser,
     InaccessibilityLevel,
     MediationRequestStatus,
     MobileAppPlatform,
     UrgencyLevel,
+) = get_classes(
+    "mediations.choices",
+    [
+        "AssistiveTechnology",
+        "Browser",
+        "InaccessibilityLevel",
+        "MediationRequestStatus",
+        "MobileAppPlatform",
+        "UrgencyLevel",
+    ],
 )
-from connect_access.apps.mediations.models import MediationRequest
-from connect_access.apps.users.tests.factories import UserFactory
+UserFactory = get_class("users.tests.factories", "UserFactory")
 
 
 class MediationRequestFactory(DjangoModelFactory):
@@ -65,4 +76,4 @@ class MediationRequestFactory(DjangoModelFactory):
     organization_contact = Faker("name")
 
     class Meta:
-        model = MediationRequest
+        model = get_model("mediations", "MediationRequest")

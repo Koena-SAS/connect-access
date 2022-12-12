@@ -1,9 +1,12 @@
 from rest_framework.test import APIRequestFactory, force_authenticate
 
-from connect_access.apps.users.tests.factories import UserFactory
+from connect_access.core.loading import get_class
 
-from ..api import MediationRequestViewSet
-from .factories import MediationRequestFactory
+MediationRequestViewSet = get_class("mediations.api", "MediationRequestViewSet")
+MediationRequestFactory = get_class(
+    "mediations.tests.factories", "MediationRequestFactory"
+)
+UserFactory = get_class("users.tests.factories", "UserFactory")
 
 
 def _get_mediation_request_absolute_url(action, parameter=None):

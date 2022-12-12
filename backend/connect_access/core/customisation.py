@@ -46,17 +46,6 @@ def inherit_app_config(local_app_folder_path, local_app_name, app_config):
 
 
 def fork_app(label, local_folder_path, local_app_subpackage=None, logger=None):
-    """
-    Create a custom version of one of Oscar's apps.
-
-    The first argument is the app label of the Oscar app to fork.
-    The second argument is a folder path, for where to copy the forked app.
-    The third optional argument is the subpackage (inside the local folder path
-    package) for the new app.
-
-    Raises:
-        ValueError: if app label doesn't exist.
-    """
     if logger is None:
         logger = logging.getLogger(__name__)
 
@@ -103,7 +92,6 @@ def fork_app(label, local_folder_path, local_app_subpackage=None, logger=None):
     )
     inherit_app_config(local_app_folder_path, local_app_name, app_config)
 
-    # Only create models.py and migrations if they exist in the Oscar app
     models_file_path = join(app_folder_path, "models.py")
     if exists(models_file_path):
         logger.info("Creating models.py")

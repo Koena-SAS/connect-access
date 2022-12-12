@@ -1,7 +1,14 @@
 from rest_framework.test import APIRequestFactory
 
-from ..api import TraceReportViewSet
-from .factories import MediationRequestFactory, TraceReportFactory
+from connect_access.core.loading import get_class
+
+TraceReportViewSet = get_class("trace_report.api", "TraceReportViewSet")
+TraceReportFactory = get_class(
+    "mediations.trace_report.tests.factories", "TraceReportFactory"
+)
+MediationRequestFactory = get_class(
+    "mediations.tests.factories", "MediationRequestFactory"
+)
 
 
 def _get_trace_report_absolute_url(action, parameter=None):

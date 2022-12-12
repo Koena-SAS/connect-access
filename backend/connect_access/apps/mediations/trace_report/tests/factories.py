@@ -9,8 +9,6 @@ from connect_access.core.loading import get_model
 
 from ..choices import ContactEntityType, TraceType
 
-TraceReport = get_model("trace_report", "TraceReport")
-
 
 class TraceReportFactory(DjangoModelFactory):
     """Creates a trace report object.
@@ -34,4 +32,4 @@ class TraceReportFactory(DjangoModelFactory):
     )
 
     class Meta:
-        model = TraceReport
+        model = get_model("trace_report", "TraceReport")

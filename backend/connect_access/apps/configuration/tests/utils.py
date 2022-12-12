@@ -1,8 +1,16 @@
 from django.urls import reverse
 from rest_framework.test import APIRequestFactory
 
-from ..api import AboutServiceInformationView, ContactInformationView
-from .factories import AboutServiceInformationFactory, ContactInformationFactory
+from connect_access.core.loading import get_classes
+
+AboutServiceInformationView, ContactInformationView = get_classes(
+    "configuration.api", ["AboutServiceInformationView", "ContactInformationView"]
+)
+
+AboutServiceInformationFactory, ContactInformationFactory = get_classes(
+    "configuration.tests.factories",
+    ["AboutServiceInformationFactory", "ContactInformationFactory"],
+)
 
 
 def _execute_contact_information():

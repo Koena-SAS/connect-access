@@ -8,24 +8,30 @@ pytestmark = pytest.mark.django_db
 
 MediationRequest = get_model("mediations", "MediationRequest")
 
-CREATE_COMMAND = "createmediationsfortest"
-DELETE_COMMAND = "deletemediations"
 
+class TestCommands:
+    def _create(self):
+        command = "createmediationsfortest"
+        call_command(command)
 
-def test_createmediationsfortest_create_correct_elements():
-    assert len(MediationRequest.objects.all()) == 0
-    call_command(CREATE_COMMAND)
-    assert len(MediationRequest.objects.all()) == 2
+    def _delete(self):
+        command = "deletemediations"
+        call_command(command)
 
+    def test_createmediationsfortest_create_correct_elements(self):
+        assert len(MediationRequest.objects.all()) == 0
+        self._create()
+        assert len(MediationRequest.objects.all()) == 2
 
-def test_createmediationsfortest_raises_exception_when_called_on_non_empty_database():
-    call_command(CREATE_COMMAND)
-    with pytest.raises(CommandError):
-        call_command(CREATE_COMMAND)
+    def test_createmediationsfortest_raises_exception_when_called_on_non_empty_database(
+        self,
+    ):
+        self._create()
+        with pytest.raises(CommandError):
+            self._create()
 
-
-def test_deletemediations_deletes_all_elements_linked_to_mediation_requests():
-    call_command(CREATE_COMMAND)
-    assert len(MediationRequest.objects.all()) != 0
-    call_command(DELETE_COMMAND)
-    assert len(MediationRequest.objects.all()) == 0
+    def test_deletemediations_deletes_all_elements_linked_to_mediation_requests(self):
+        self._create()
+        assert len(MediationRequest.objects.all()) != 0
+        self._delete()
+        assert len(MediationRequest.objects.all()) == 0
