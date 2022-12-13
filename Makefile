@@ -1,4 +1,6 @@
 COMPOSE_FILE=local.yml
+DOCKER_COMPOSE_CMD="docker compose -f $(COMPOSE_FILE)"
+DOCKER_RUN_CMD="$(DOCKER_COMPOSE_CMD) run -w /app/backend/ django"
 
 clean-backend:
 	cd backend \
@@ -21,30 +23,36 @@ poetry:
 		curl -sSL https://install.python-poetry.org | python3 -;\
 	fi
 
-requirements-dev: poetry
+poetry-lock:
 	cd backend \
-	&& poetry lock \
-	&& poetry export --with dev,plugins -o requirements.dev.txt --without-hashes
+	&& poetry lock
+
+export-requirements: poetry poetry-lock
+	cd backend \
+	&& poetry export -o requirements/base.txt --without-hashes \
+	&& poetry export --only code_quality -o requirements/code_quality.txt --without-hashes \
+	&& poetry export --with dev,code_quality,plugins -o requirements/local.txt --without-hashes \
+	&& poetry export --with prod,plugins -o requirements/production.txt --without-hashes \
 
 wheels:
 	cd backend \
 	&& pip wheel --wheel-dir ./wheels -r requirements.dev.txt
 
-_docker-build:
-	docker compose -f $(COMPOSE_FILE) build
 
-docker-build: requirements-dev wheels _docker-build clean
+docker-build:
+	# docker compose -f $(COMPOSE_FILE) build
+	eval $(DOCKER_COMPOSE_CMD) build
 
 docker-up:
-	docker compose -f $(COMPOSE_FILE) up
+	eval $(DOCKER_COMPOSE_CMD) up
 
 docker-migrate:
-	docker compose -f $(COMPOSE_FILE) run -w /app/backend/ django python manage.py migrate $(APPS)
+	eval $(DOCKER_RUN_CMD) python manage.py migrate $(APPS)
 
 docker-makemigrations:
-	docker compose -f $(COMPOSE_FILE) run -w /app/backend/ django python manage.py makemigrations $(APPS)
+	eval $(DOCKER_RUN_CMD) python manage.py makemigrations $(APPS)
 
-docker-run-tests:
-	docker compose -f $(COMPOSE_FILE) run \
+docker-test:
+	eval $(DOCKER_COMPOSE_CMD) run \
 		-w /app/backend/connect_access/ django \
 		pytest
