@@ -52,7 +52,7 @@ class TestModels:
         assert os.path.isfile(
             f"{settings.MEDIA_ROOT}/trace_report/mediation_request_{mediation_request.uuid}/test_file.png"
         )
-        trace_report.attached_file = None  # type: ignore
+        trace_report.attached_file = None
         trace_report.save()
         assert not os.path.isfile(
             f"{settings.MEDIA_ROOT}/trace_report/mediation_request_{mediation_request.uuid}/test_file.png"

@@ -65,7 +65,7 @@ class TestMediationModels:
         assert os.path.isfile(
             f"{settings.MEDIA_ROOT}/further_info/anonymous/test_file.png"
         )
-        mediation_request.attached_file = None  # type: ignore
+        mediation_request.attached_file = None
         mediation_request.save()
         assert not os.path.isfile(
             f"{settings.MEDIA_ROOT}/further_info/anonymous/test_file.png"

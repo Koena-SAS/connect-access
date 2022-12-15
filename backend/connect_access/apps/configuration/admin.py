@@ -31,7 +31,9 @@ class ContactInformationAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
             ]
         },
         "Terms of service": {
-            "fields": ((*ContactInformation.terms_of_service.fields,),)
+            "fields": [
+                (*ContactInformation.terms_of_service.fields,),
+            ]
         },
     }
 

@@ -1,9 +1,11 @@
+from typing import Any, Dict, List
+
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 
 
 class ModelAdmin(admin.ModelAdmin):
-    _fieldsets = {}
+    _fieldsets: Dict[str, Dict[str, List[Any]]] = {}
 
     @classmethod
     def _add_field(cls, name, field, position=-1):
