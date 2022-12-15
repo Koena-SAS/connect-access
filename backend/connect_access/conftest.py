@@ -1,7 +1,7 @@
 pytest_plugins = [
-    "tests.fixtures",
+    "connect_access.tests.fixtures",
     *[
-        f"apps.{app}.tests.fixtures"
+        f"connect_access.apps.{app}.tests.fixtures"
         for app in (
             "mediations",
             "mediations.trace_report",
