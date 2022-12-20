@@ -4,13 +4,15 @@ from django.conf import settings
 from django.urls import URLPattern, URLResolver, path
 from rest_framework.routers import DefaultRouter, SimpleRouter
 
-from connect_access.apps.configuration.api import (
-    AboutServiceInformationView,
-    ContactInformationView,
+from connect_access.core.loading import get_class, get_classes
+
+(AboutServiceInformationView, ContactInformationView,) = get_classes(
+    "configuration.api", ["AboutServiceInformationView", "ContactInformationView"]
 )
-from connect_access.apps.mediations.api import MediationRequestViewSet
-from connect_access.apps.mediations.trace_report.api import TraceReportViewSet
-from connect_access.apps.users.api import UserViewSet
+
+MediationRequestViewSet = get_class("mediations.api", "MediationRequestViewSet")
+TraceReportViewSet = get_class("trace_report.api", "TraceReportViewSet")
+UserViewSet = get_class("users.api", "UserViewSet")
 
 router: Union[SimpleRouter, DefaultRouter]
 if settings.DEBUG:
