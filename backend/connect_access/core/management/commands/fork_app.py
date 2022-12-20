@@ -1,10 +1,14 @@
-from django.core.management import BaseCommand, CommandError
+from django.core.management import CommandError
 
 from connect_access.core import customisation
+from connect_access.core.management.commands import BaseCommand
 
 
 class Command(BaseCommand):
     help = "Create a customizable local version of one of Connect Access app."
+
+    def _check_requirements(self):
+        pass
 
     def add_arguments(self, parser):
         parser.add_argument("app_label", help="The application to fork")

@@ -1,6 +1,7 @@
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import CommandError
 
 from connect_access.core.loading import get_model
+from connect_access.core.management.commands import BaseCommand
 
 AboutServiceInformation = get_model("configuration", "AboutServiceInformation")
 ContactInformation = get_model("configuration", "ContactInformation")
@@ -9,17 +10,22 @@ ContactInformation = get_model("configuration", "ContactInformation")
 class Command(BaseCommand):
     help = "Creates a set of test configuration objects."
 
+    @staticmethod
+    def _check_requirements():
+        if (
+            len(ContactInformation.objects.all()) != 0
+            or len(AboutServiceInformation.objects.all()) != 0
+        ):
+            raise Exception(
+                "The database should be empty to apply createconfigurationsfortest command.\n"
+                f"Here we have {len(ContactInformation.objects.all())} contact information objects "
+                f"and {len(AboutServiceInformation.objects.all())} about service objects."
+            )
+
     def handle(self, *args, **options):
         try:
-            if (
-                len(ContactInformation.objects.all()) != 0
-                or len(AboutServiceInformation.objects.all()) != 0
-            ):
-                raise Exception(
-                    "The database should be empty to apply createconfigurationsfortest command.\n"
-                    f"Here we have {len(ContactInformation.objects.all())} contact information objects "
-                    f"and {len(AboutServiceInformation.objects.all())} about service objects."
-                )
+            self._check_requirements()
+
             ContactInformation.objects.create(
                 email_en="mediation@example.com",
                 email_text_en="mediation@example.com",

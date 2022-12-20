@@ -1,6 +1,7 @@
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import CommandError
 
 from connect_access.core.loading import get_model
+from connect_access.core.management.commands import BaseCommand
 
 TraceReport = get_model("trace_report", "TraceReport")
 MediationRequest = get_model("mediations", "MediationRequest")
@@ -9,14 +10,18 @@ MediationRequest = get_model("mediations", "MediationRequest")
 class Command(BaseCommand):
     help = "Creates a set of test mediation requests and trace reports."
 
+    @staticmethod
+    def _check_requirements():
+        if len(MediationRequest.objects.all()) == 0:
+            raise Exception(
+                "The database should be populate to apply createtracereportsfortest command.\n"
+                f"Here we have {len(MediationRequest.objects.all())} mediation requests.\n"
+                "Try to use createmediationsfortest command to populate database."
+            )
+
     def handle(self, *args, **options):
         try:
-            if len(MediationRequest.objects.all()) == 0:
-                raise Exception(
-                    "The database should be populate to apply createtracereportsfortest command.\n"
-                    f"Here we have {len(MediationRequest.objects.all())} mediation requests.\n"
-                    "Try to use createmediationsfortest command to populate database."
-                )
+            self._check_requirements()
             mediation_request_1 = MediationRequest.objects.all()[0]
 
             TraceReport.objects.create(

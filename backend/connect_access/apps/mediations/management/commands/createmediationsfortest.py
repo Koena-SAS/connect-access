@@ -1,6 +1,7 @@
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import CommandError
 
 from connect_access.core.loading import get_model
+from connect_access.core.management.commands import BaseCommand
 
 MediationRequest = get_model("mediations", "MediationRequest")
 
@@ -8,13 +9,17 @@ MediationRequest = get_model("mediations", "MediationRequest")
 class Command(BaseCommand):
     help = "Creates a set of test mediation requests and trace reports."
 
+    @staticmethod
+    def _check_requirements():
+        if len(MediationRequest.objects.all()) != 0:
+            raise Exception(
+                "The database should be empty to apply createmediationsfortest command.\n"
+                f"Here we have {len(MediationRequest.objects.all())} mediation requests"
+            )
+
     def handle(self, *args, **options):
         try:
-            if len(MediationRequest.objects.all()) != 0:
-                raise Exception(
-                    "The database should be empty to apply createmediationsfortest command.\n"
-                    f"Here we have {len(MediationRequest.objects.all())} mediation requests"
-                )
+            self._check_requirements()
             MediationRequest.objects.create(
                 status="wc",
                 first_name="Roman",
