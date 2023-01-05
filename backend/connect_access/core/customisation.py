@@ -64,7 +64,7 @@ def fork_app(label, local_folder_path, local_app_subpackage=None, logger=None):
 
     local_apps_package = local_folder_path.lstrip("/").replace("/", ".")
     if local_app_subpackage is None:
-        local_app_subpackage = app_config.name.replace("connect_access.apps.", "")
+        local_app_subpackage = app_config.name.split(".")[-1]
         # In case this is a fork of a fork
         local_app_subpackage = local_app_subpackage.replace(local_apps_package, "")
 
