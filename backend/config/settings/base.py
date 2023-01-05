@@ -1,6 +1,6 @@
 """Base settings to build other settings files upon."""
 from pathlib import Path
-from typing import List
+from typing import Dict
 
 import environ
 from django.utils.translation import gettext_lazy as _
@@ -86,19 +86,30 @@ THIRD_PARTY_APPS = [
     "pagedown.apps.PagedownConfig",
 ]
 
-LOCAL_APPS = [
-    "connect_access",
-    "connect_access.core",
-    "connect_access.apps.users",
-    "connect_access.apps.mediations",
-    "connect_access.apps.mediations.trace_report",
-    "connect_access.apps.configuration",
-]
+CONNECT_ACCESS_APPS = {
+    "connect_access": True,
+    "connect_access.core": True,
+    "connect_access.apps.users": True,
+    "connect_access.apps.mediations": False,
+    "connect_access.apps.mediations.trace_report": True,
+    "connect_access.apps.configuration": True,
+}
 
-PLUGIN_APPS: List[str] = []
+CONNECT_ACCESS_PLUGIN_APPS: Dict[str, bool] = {}
+
+
+def get_connect_access_apps():
+    return [
+        app
+        for apps in [CONNECT_ACCESS_APPS, CONNECT_ACCESS_PLUGIN_APPS]
+        for app, enabled in apps.items()
+        if enabled
+    ]
+
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS + PLUGIN_APPS
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + get_connect_access_apps()
+
 
 # MIGRATIONS
 # ------------------------------------------------------------------------------
