@@ -1,15 +1,22 @@
 """With these settings, tests run faster."""
 
 from .base import *  # noqa
+from .base import (
+    get_connect_access_apps,
+    CONNECT_ACCESS_APPS,
+    CONNECT_ACCESS_PLUGIN_APPS,
+    DJANGO_APPS,
+    THIRD_PARTY_APPS,
+)
 from .base import env
 
-for app in CONNECT_ACCESS_APPS:  # noqa F405
-    CONNECT_ACCESS_APPS[app] = True  # noqa F405
+for app in CONNECT_ACCESS_APPS:
+    CONNECT_ACCESS_APPS[app] = True
 
-for app in CONNECT_ACCESS_PLUGIN_APPS:  # noqa F405
-    CONNECT_ACCESS_PLUGIN_APPS[app] = False  # noqa F405
+for app in CONNECT_ACCESS_PLUGIN_APPS:
+    CONNECT_ACCESS_PLUGIN_APPS[app] = False
 
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + get_connect_access_apps()  # noqa F405
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + get_connect_access_apps()
 
 # GENERAL
 # ------------------------------------------------------------------------------
