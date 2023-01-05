@@ -39,6 +39,14 @@ wheels: poetry-lock
 
 ### django management commands
 
+django-command:
+ifeq ($(USE_DOCKER), no)
+	poetry run manage.py $(COMMAND)
+else
+	eval $(DOCKER_RUN_CMD) python manage.py $(COMMAND)
+endif
+
+
 migrate:
 ifeq ($(USE_DOCKER), no)
 	poetry run manage.py migrate $(APPS)
@@ -58,6 +66,13 @@ ifeq ($(USE_DOCKER), no)
 	poetry run manage.py shell
 else
 	eval $(DOCKER_RUN_CMD) python manage.py shell
+endif
+
+createsuperuser:
+ifeq ($(USE_DOCKER), no)
+	poetry run manage.py createsuperuser
+else
+	eval $(DOCKER_RUN_CMD) python manage.py createsuperuser
 endif
 
 ### code quality
