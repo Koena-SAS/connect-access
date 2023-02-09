@@ -214,6 +214,7 @@ TEMPLATES = [
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
                 "connect_access.utils.context_processors.settings_context",
+                "connect_access.apps.configuration.context_processors.settings_context",
             ],
         },
     }

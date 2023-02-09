@@ -1,10 +1,20 @@
+import json
 from collections import OrderedDict
+from uuid import UUID
 
 from bidict import bidict
 from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
 from rest_framework.fields import SkipField
 from rest_framework.relations import PKOnlyObject
+
+
+class UUIDEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, UUID):
+            # if the obj is uuid, we simply return the value of uuid
+            return str(obj)
+        return json.JSONEncoder.default(self, obj)
 
 
 class EnumSerializerField(serializers.CharField):

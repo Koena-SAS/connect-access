@@ -20,7 +20,7 @@
 
     <script>
       window.SERVER_DATA = {
-        initialLanguage: "{{ language }}",
+        initialLanguage: "{{ LANGUAGE_CODE }}",
         configData: {{ data|safe }},
         initialContactInformation: {{ contact_information|safe }},
         initialAboutService: {{ about_service|safe }},
@@ -30,7 +30,7 @@
     {% render_bundle 'main' 'css' 'CONNECT_ACCESS' %}
     {% render_bundle 'runtime-main' 'css' 'CONNECT_ACCESS' %}
 
-    <title>{{ platform_name }}</title>
+    <title>{{ data.platformName }}</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

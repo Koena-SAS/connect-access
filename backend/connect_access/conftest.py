@@ -1,5 +1,5 @@
 pytest_plugins = [
-    "connect_access.tests.fixtures",
+    "connect_access.fixtures",
     *[
         f"connect_access.apps.{app}.tests.fixtures"
         for app in (
@@ -9,3 +9,11 @@ pytest_plugins = [
         )
     ],
 ]
+
+
+def pytest_generate_tests():
+    import os
+
+    os.environ["DATA_PLATFORM_NAME"] = "Connect Access"
+    os.environ["DATA_LOGO_FILENAME"] = "logo_custom.png"
+    os.environ["DATA_LOGO_FILENAME_SMALL"] = "logo_custom_small.png"
