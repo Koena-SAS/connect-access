@@ -15,7 +15,7 @@ Connect Access can be installed and run locally fully with Docker, or without Do
   <TabItem value="docker" label="With Docker:" default>
 
 - Docker Engine v20+
-- Docker Compose v1.29+
+- Docker Compose v2.12+
 
 </TabItem>
 <TabItem value="nodocker" label="Without Docker:">
@@ -34,7 +34,7 @@ Connect Access can be installed and run locally fully with Docker, or without Do
 To begin, you have to clone the repository locally:
 
 ```bash
-git clone https://gitlab.com/koena/connect-access.git
+git clone https://gitlab.com/koena/connect-access/connect-access.git
 ```
 
 ### Configure the Git pre commit hook
@@ -193,22 +193,22 @@ By default, the frontend will be available on [localhost:3000](http://localhost:
 
 ## Install and run with Docker
 
-Everything is built and started at once with `docker-compose`, and the local code is mounted to Docker, so no need to rebuild at each change.
+Everything is built and started at once with `docker compose`, and the local code is mounted to Docker, so no need to rebuild at each change.
 
 ### Build and run the development servers
 
 You need to build the Docker images first, and then run the containers:
 
 ```bash
-docker-compose -f local.yml build
-docker-compose -f local.yml up
+docker compose -f local.yml build
+docker compose -f local.yml up
 ```
 
 You could also run it in daemon mode, in that case you dont keep the logs in your terminal, and you will have to stop the containers with another command:
 
 ```bash
-docker-compose -f local.yml up -d
-docker-compose -f local.yml down
+docker compose -f local.yml up -d
+docker compose -f local.yml down
 ```
 
 As with the non-Docker mode, the frontend server is available on [localhost:8000](http://localhost:3000) and the backend server is available on [localhost:8000](http://localhost:8000).
@@ -218,8 +218,8 @@ As with the non-Docker mode, the frontend server is available on [localhost:8000
 There is no need to run `python manage.py runserver` and `yarn start` as they are already running, but you can execute any other command on the backend or the frontend, eg.:
 
 ```bash
-docker-compose -f local.yml run -w /app/backend django python manage.py compilemessages
-docker-compose -f local.yml run -w /app/frontend django yarn lang:compile
+docker compose -f local.yml run -w /app/backend django python manage.py compilemessages
+docker compose -f local.yml run -w /app/frontend django yarn lang:compile
 ```
 
 ## Run Docker staging/production image locally

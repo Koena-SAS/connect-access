@@ -12,7 +12,7 @@ The deployement is done with Docker and Docker Compose that package everything n
 The following are thus needed on the production server:
 
 - Docker Engine v20+
-- Docker Compose v1.29+
+- Docker Compose v2.12+
 
 The two Docker Compose files `staging.yml` and `production.yml` with correctly configured environment variables give the possibility to have completely separate Docker containers and volumes, so that a staging and a production environment can be run on the same machine independently.
 
@@ -25,7 +25,7 @@ The SSL/TLS encryption is not done in one of the Docker layers of this applicati
 To start the deployement you need to clone the repository on your server:
 
 ```bash
-git clone https://gitlab.com/koena/connect-access.git
+git clone https://gitlab.com/koena/connect-access/connect-access.git
 ```
 
 ## Environment variables
@@ -162,7 +162,7 @@ Connect Access is configured to send error logs to Sentry, which is both an open
 
 ### Create merged files
 
-You can pass only one file containing environment variables to set to `docker-compose` so you have to merge these files everytime you change something. This can be done with the following command:
+You can pass only one file containing environment variables to set to `docker compose` so you have to merge these files everytime you change something. This can be done with the following command:
 
 ```bash
 python merge_production_dotenvs_in_dotenv.py
@@ -172,20 +172,20 @@ This will create the two files `.env_production` and `.env_staging` that are sim
 
 ## Build and deploy the application
 
-Everytime you would like to execute a command, you have to specify the correct `docker-compose` YAML configuration file and the correct environment variables merged file.
+Everytime you would like to execute a command, you have to specify the correct `docker compose` YAML configuration file and the correct environment variables merged file.
 
 <Tabs>
   <TabItem value="production" label="Production" default>
 
 ```bash
-docker-compose -f production.yml --env-file .env_production my_command
+docker compose -f production.yml --env-file .env_production my_command
 ```
 
 </TabItem>
 <TabItem value="staging" label="Staging">
 
 ```bash
-docker-compose -f staging.yml --env-file .env_staging my_command
+docker compose -f staging.yml --env-file .env_staging my_command
 ```
 
 </TabItem>
@@ -197,18 +197,18 @@ To build and start the application, run the following commands:
   <TabItem value="production" label="Production" default>
 
 ```bash
-docker-compose -f production.yml --env-file .env_production build
-docker-compose -f production.yml --env-file .env_production run django python backend/manage.py migrate
-docker-compose -f production.yml --env-file .env_production up -d
+docker compose -f production.yml --env-file .env_production build
+docker compose -f production.yml --env-file .env_production run django python backend/manage.py migrate
+docker compose -f production.yml --env-file .env_production up -d
 ```
 
 </TabItem>
 <TabItem value="staging" label="Staging">
 
 ```bash
-docker-compose -f staging.yml --env-file .env_staging build
-docker-compose -f staging.yml --env-file .env_staging run django python backend/manage.py migrate
-docker-compose -f staging.yml --env-file .env_staging up -d
+docker compose -f staging.yml --env-file .env_staging build
+docker compose -f staging.yml --env-file .env_staging run django python backend/manage.py migrate
+docker compose -f staging.yml --env-file .env_staging up -d
 ```
 
 </TabItem>
@@ -228,14 +228,14 @@ But first you need to create an admin account with the following command (you wi
   <TabItem value="production" label="Production" default>
 
 ```bash
-docker-compose -f production.yml --env-file .env_production run django python backend/manage.py createsuperuser
+docker compose -f production.yml --env-file .env_production run django python backend/manage.py createsuperuser
 ```
 
 </TabItem>
 <TabItem value="staging" label="Staging">
 
 ```bash
-docker-compose -f staging.yml --env-file .env_staging run django python backend/manage.py createsuperuser
+docker compose -f staging.yml --env-file .env_staging run django python backend/manage.py createsuperuser
 ```
 
 </TabItem>

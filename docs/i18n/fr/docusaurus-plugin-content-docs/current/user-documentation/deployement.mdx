@@ -12,7 +12,7 @@ Le déploiement est fait avec Docker et Docker Compose qui empaquettent tout ce 
 Il faut donc ces 2 logiciels sur le serveur de production :
 
 - Docker Engine v20+
-- Docker Compose v1.29+
+- Docker Compose v2.12+
 
 Les deux fichiers Docker Compose <span lang="en">`staging.yml`</span> et `production.yml` couplé à des variables d'environnement correctement configurées donnent la possibilité d'avoir des conteneurs et des volumes Docker complétement séparés, de manière à ce qu'un environnement de production et un autre de pré-production puissent tourner sur la même machine indépendamment.
 
@@ -25,7 +25,7 @@ Le chiffrement SSL/TLS n'est pas fait dans une des couches Docker de cette appli
 Pour commencer le déploiement, vous devez cloner le dépôt sur votre serveur :
 
 ```bash
-git clone https://gitlab.com/koena/connect-access.git
+git clone https://gitlab.com/koena/connect-access/connect-access.git
 ```
 
 ## Variables d'environnement
@@ -166,7 +166,7 @@ Le plus simple est de vous créer un compte sur [sentry.io](https://sentry.io) e
 
 ### Créer des fichiers fusionnés
 
-Vous ne pouvez passer qu'un seule fichier contenant des variables d'environnement à créer à `docker-compose`, donc vous devez fusionner ces fichiers à chaque fois que vous y changez quelque chose. Vous pouvez le faire avec la commande suivante :
+Vous ne pouvez passer qu'un seule fichier contenant des variables d'environnement à créer à `docker compose`, donc vous devez fusionner ces fichiers à chaque fois que vous y changez quelque chose. Vous pouvez le faire avec la commande suivante :
 
 ```bash
 python merge_production_dotenvs_in_dotenv.py
@@ -176,20 +176,20 @@ Ceci va créer 2 fichiers `.env_production` et `.env_staging` qui sont simplemen
 
 ## Construire et déployer l'application
 
-À chaque fois que vous souhaitez exécuter une commande, vous devez spécifier le bon fichier YAML de configuration à `docker-compose`, et le bon fichier fusionné de variables d'environnements.
+À chaque fois que vous souhaitez exécuter une commande, vous devez spécifier le bon fichier YAML de configuration à `docker compose`, et le bon fichier fusionné de variables d'environnements.
 
 <Tabs>
   <TabItem value="production" label="Production" default>
 
 ```bash
-docker-compose -f production.yml --env-file .env_production my_command
+docker compose -f production.yml --env-file .env_production my_command
 ```
 
 </TabItem>
 <TabItem value="staging" label="Pré-production">
 
 ```bash
-docker-compose -f staging.yml --env-file .env_staging my_command
+docker compose -f staging.yml --env-file .env_staging my_command
 ```
 
 </TabItem>
@@ -201,18 +201,18 @@ Pour construire et démarrer l'application, utilisez ces commandes :
   <TabItem value="production" label="Production" default>
 
 ```bash
-docker-compose -f production.yml --env-file .env_production build
-docker-compose -f production.yml --env-file .env_production run django python backend/manage.py migrate
-docker-compose -f production.yml --env-file .env_production up -d
+docker compose -f production.yml --env-file .env_production build
+docker compose -f production.yml --env-file .env_production run django python backend/manage.py migrate
+docker compose -f production.yml --env-file .env_production up -d
 ```
 
 </TabItem>
 <TabItem value="staging" label="Pré-production">
 
 ```bash
-docker-compose -f staging.yml --env-file .env_staging build
-docker-compose -f staging.yml --env-file .env_staging run django python backend/manage.py migrate
-docker-compose -f staging.yml --env-file .env_staging up -d
+docker compose -f staging.yml --env-file .env_staging build
+docker compose -f staging.yml --env-file .env_staging run django python backend/manage.py migrate
+docker compose -f staging.yml --env-file .env_staging up -d
 ```
 
 </TabItem>
@@ -232,14 +232,14 @@ Mais d'abord vous devez créer un compte admin avec la commande suivants (vous d
   <TabItem value="production" label="Production" default>
 
 ```bash
-docker-compose -f production.yml --env-file .env_production run django python backend/manage.py createsuperuser
+docker compose -f production.yml --env-file .env_production run django python backend/manage.py createsuperuser
 ```
 
 </TabItem>
 <TabItem value="staging" label="Pré-production">
 
 ```bash
-docker-compose -f staging.yml --env-file .env_staging run django python backend/manage.py createsuperuser
+docker compose -f staging.yml --env-file .env_staging run django python backend/manage.py createsuperuser
 ```
 
 </TabItem>

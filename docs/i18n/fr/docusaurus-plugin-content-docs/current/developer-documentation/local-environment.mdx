@@ -17,7 +17,7 @@ avec Docker, ou sans Docker en installant tous les interpréteurs et outils requ
   <TabItem value="docker" label="Avec Docker :" default>
 
 - Docker Engine v20+
-- Docker Compose v1.29+
+- Docker Compose v2.12+
 
 </TabItem>
 <TabItem value="nodocker" label="Sans Docker :">
@@ -36,7 +36,7 @@ avec Docker, ou sans Docker en installant tous les interpréteurs et outils requ
 Pour commencer, vous devez cloner le dépôt localement :
 
 ```bash
-git clone https://gitlab.com/koena/connect-access.git
+git clone https://gitlab.com/koena/connect-access/connect-access.git
 ```
 
 ### Configurer le hook pré-<span lang="en">commit</span> de Git
@@ -195,22 +195,22 @@ Par défaut, le <span lang="en">frontend</span> sera disponible sur [localhost:3
 
 ## Installer et démarrer avec Docker
 
-Tout est construit et démarré ensemble avec `docker-compose`, et le répertoire local contenant le code est monté dans Docker, donc pas besoin de reconstruire les images à chaque changement.
+Tout est construit et démarré ensemble avec `docker compose`, et le répertoire local contenant le code est monté dans Docker, donc pas besoin de reconstruire les images à chaque changement.
 
 ### Construire et démarrer les serveurs de développement
 
 Vous devez construire les images Docker d'abord, et ensuite démarrer les conteneurs :
 
 ```bash
-docker-compose -f local.yml build
-docker-compose -f local.yml up
+docker compose -f local.yml build
+docker compose -f local.yml up
 ```
 
 Vous pourriez aussi les lancer en mode démon, auquel cas vous n'aurez pas accès aux <span lang="en">logs</span> depuis le terminal d'où vous avez lancé la commande, et vous devrez arrêter les conteneurs avec une commande supplémentaire :
 
 ```bash
-docker-compose -f local.yml up -d
-docker-compose -f local.yml down
+docker compose -f local.yml up -d
+docker compose -f local.yml down
 ```
 
 Comme avec le mode non-Docker, le serveur du <span lang="en">frontend</span> est disponible sur [localhost:8000](http://localhost:3000), et celui du <span lang="en">backend</span> est disponible sur [localhost:8000](http://localhost:8000).
@@ -220,8 +220,8 @@ Comme avec le mode non-Docker, le serveur du <span lang="en">frontend</span> est
 Il n'y a pas besoin d'exécuter `python manage.py runserver` et `yarn start` étant donné qu'ils sont déjà en train de tourner, mais vous pouvez exécuter toute autre commande sur le <span lang="en">backend</span> ou le <span lang="en">frontend</span>, par exemple :
 
 ```bash
-docker-compose -f local.yml run -w /app/backend django python manage.py compilemessages
-docker-compose -f local.yml run -w /app/frontend django yarn lang:compile
+docker compose -f local.yml run -w /app/backend django python manage.py compilemessages
+docker compose -f local.yml run -w /app/frontend django yarn lang:compile
 ```
 
 ## Démarrer les images de production/pré-production localement

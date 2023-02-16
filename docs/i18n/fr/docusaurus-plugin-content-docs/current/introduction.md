@@ -18,20 +18,20 @@ Voici les commandes pour construire et démarrer l'app:
 
 ```bash
 # télécharger le dépôt
-git clone https://gitlab.com/koena/connect-access.git
+git clone https://gitlab.com/koena/connect-access/connect-access.git
 cd connect-access
 # créer les fichiers de variable d'environnement
 cp -r .envs/local_template .envs/.local
 # activer les variables d'environnement locales
 source .envs/.local/local_no_docker_activate
 # construire les images Docker
-docker-compose -f local.yml build
+docker compose -f local.yml build
 # créer les tables de la base de données
-docker-compose -f local.yml run -w /app/backend django python manage.py migrate
+docker compose -f local.yml run -w /app/backend django python manage.py migrate
 # installer les dépendances du frontend
-docker-compose -f local.yml run -w /app/frontend django yarn install
+docker compose -f local.yml run -w /app/frontend django yarn install
 # démarrer les containers Docker
-docker-compose -f local.yml up
+docker compose -f local.yml up
 ```
 
 L'application sera disponible sur [localhost:8000](http://localhost:8000).

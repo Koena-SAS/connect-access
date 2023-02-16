@@ -24,7 +24,8 @@ const config = {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
-          editUrl: "https://gitlab.com/koena/connect-access/-/edit/master/docs",
+          editUrl:
+            "https://gitlab.com/koena/connect-access/connect-access/-/edit/master/docs",
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
@@ -56,7 +57,7 @@ const config = {
             position: "right",
           },
           {
-            href: "https://gitlab.com/koena/connect-access",
+            href: "https://gitlab.com/koena/connect-access/connect-access",
             label: "Source code",
             position: "right",
           },
@@ -102,7 +103,7 @@ const config = {
       },
     }),
   i18n: {
-    defaultLocale: "en",
+    defaultLocale: "fr",
     locales: ["en", "fr"],
     localeConfigs: {
       en: {

@@ -26,14 +26,14 @@ Pour sauvegarder la base de données, vous devez utiliser la commande suivante :
   <TabItem value="production" label="Production" default>
 
 ```bash
-docker-compose -f production.yml --env-file .env_production run postgres backup
+docker compose -f production.yml --env-file .env_production run postgres backup
 ```
 
 </TabItem>
 <TabItem value="staging" label="Pré-production">
 
 ```bash
-docker-compose -f staging.yml --env-file .env_staging run postgres backup
+docker compose -f staging.yml --env-file .env_staging run postgres backup
 ```
 
 </TabItem>
@@ -73,14 +73,14 @@ Certains changements dans <span lang="en">Connect Access</span> changent la stru
   <TabItem value="production" label="Production" default>
 
 ```bash
-docker-compose -f production.yml --env-file .env_production run django python backend/manage.py migrate
+docker compose -f production.yml --env-file .env_production run django python backend/manage.py migrate
 ```
 
 </TabItem>
 <TabItem value="staging" label="Pré-production">
 
 ```bash
-docker-compose -f staging.yml --env-file .env_staging run django python backend/manage.py migrate
+docker compose -f staging.yml --env-file .env_staging run django python backend/manage.py migrate
 ```
 
 </TabItem>
@@ -92,14 +92,14 @@ Après avoir appliqué les migrations de base de données, vous aurez besoin de 
 
 ```bash
 # pour la pré-production
-docker-compose -f staging.yml --env-file .env_staging build
-docker-compose -f staging.yml --env-file .env_staging down
-docker-compose -f staging.yml --env-file .env_staging up -d
+docker compose -f staging.yml --env-file .env_staging build
+docker compose -f staging.yml --env-file .env_staging down
+docker compose -f staging.yml --env-file .env_staging up -d
 
 # pour la production
-docker-compose -f production.yml --env-file .env_production build
-docker-compose -f production.yml --env-file .env_production down
-docker-compose -f production.yml --env-file .env_production up -d
+docker compose -f production.yml --env-file .env_production build
+docker compose -f production.yml --env-file .env_production down
+docker compose -f production.yml --env-file .env_production up -d
 ```
 
 ## Revenir à la version précédente
@@ -114,14 +114,14 @@ Pour restaurer la base de données à partir d'une sauvegarde existante, vous po
   <TabItem value="production" label="Production" default>
 
 ```bash
-docker-compose -f production.yml --env-file .env_production run postgres backups
+docker compose -f production.yml --env-file .env_production run postgres backups
 ```
 
 </TabItem>
 <TabItem value="staging" label="Pré-production">
 
 ```bash
-docker-compose -f staging.yml --env-file .env_staging run postgres backups
+docker compose -f staging.yml --env-file .env_staging run postgres backups
 ```
 
 </TabItem>
@@ -133,14 +133,14 @@ Ensuite, vous pouvez restaurer une sauvegarde particulière avec la commande :
   <TabItem value="production" label="Production" default>
 
 ```bash
-docker-compose -f production.yml --env-file .env_production run postgres restore NOM_DU_FICHIER_DE_SAUVEGARDE
+docker compose -f production.yml --env-file .env_production run postgres restore NOM_DU_FICHIER_DE_SAUVEGARDE
 ```
 
 </TabItem>
 <TabItem value="staging" label="Pré-production">
 
 ```bash
-docker-compose -f staging.yml --env-file .env_staging run postgres restore NOM_DU_FICHIER_DE_SAUVEGARDE
+docker compose -f staging.yml --env-file .env_staging run postgres restore NOM_DU_FICHIER_DE_SAUVEGARDE
 ```
 
 </TabItem>
@@ -167,14 +167,14 @@ Vous devrez alors reconstruire et redémarrer l'application :
 
 ```bash
 # pour la pré-production
-docker-compose -f staging.yml --env-file .env_staging build
-docker-compose -f staging.yml --env-file .env_staging down
-docker-compose -f staging.yml --env-file .env_staging up -d
+docker compose -f staging.yml --env-file .env_staging build
+docker compose -f staging.yml --env-file .env_staging down
+docker compose -f staging.yml --env-file .env_staging up -d
 
 # pour la production
-docker-compose -f production.yml --env-file .env_production build
-docker-compose -f production.yml --env-file .env_production down
-docker-compose -f production.yml --env-file .env_production up -d
+docker compose -f production.yml --env-file .env_production build
+docker compose -f production.yml --env-file .env_production down
+docker compose -f production.yml --env-file .env_production up -d
 ```
 
 ## Gérer les sauvegardes de base de données
@@ -201,13 +201,13 @@ docker cp POSTGRES_CONTAINER_NAME:/backups/backup_2021_04_27T15_22_59.sql.gz bac
 
 ```bash
 # créer une nouvelle sauvegarde de la base de données de production
-docker-compose -f production.yml --env-file .env_production run postgres backup
+docker compose -f production.yml --env-file .env_production run postgres backup
 # la copier dans le répertoire local appelé backups
 docker cp NOM_DU_CONTENEUR_POSTGRES_DE_PRODUCTION:/backups/backup_XXXX_XX_XXXXX_XX_XX.sql.gz backups
 # copier le fichier de sauvegarde de base de données de production dans le volume de sauvegarde de base de données de pré-production
 docker cp backups/backup_XXXX_XX_XXXXX_XX_XX.sql.gz NOM_DU_CONTENEUR_POSTGRES_DE_PRE-PRODUCTION:/backups/
 # restaurer le fichier de sauvegarde dans la base de données de pré-production
-docker-compose -f staging.yml --env-file .env_staging run --rm postgres restore backup_XXXX_XX_XXXXX_XX_XX.sql.gz
+docker compose -f staging.yml --env-file .env_staging run --rm postgres restore backup_XXXX_XX_XXXXX_XX_XX.sql.gz
 ```
 
 ## Sauvegarder les fichiers utilisateur

@@ -25,14 +25,14 @@ To make a backup of your database, you need to run the following command:
   <TabItem value="production" label="Production" default>
 
 ```bash
-docker-compose -f production.yml --env-file .env_production run postgres backup
+docker compose -f production.yml --env-file .env_production run postgres backup
 ```
 
 </TabItem>
 <TabItem value="staging" label="Staging">
 
 ```bash
-docker-compose -f staging.yml --env-file .env_staging run postgres backup
+docker compose -f staging.yml --env-file .env_staging run postgres backup
 ```
 
 </TabItem>
@@ -72,14 +72,14 @@ Some changes in Connect Access change the database structure. You need to apply 
   <TabItem value="production" label="Production" default>
 
 ```bash
-docker-compose -f production.yml --env-file .env_production run django python backend/manage.py migrate
+docker compose -f production.yml --env-file .env_production run django python backend/manage.py migrate
 ```
 
 </TabItem>
 <TabItem value="staging" label="Staging">
 
 ```bash
-docker-compose -f staging.yml --env-file .env_staging run django python backend/manage.py migrate
+docker compose -f staging.yml --env-file .env_staging run django python backend/manage.py migrate
 ```
 
 </TabItem>
@@ -91,14 +91,14 @@ After applying the database migrations, you need to restart the application so t
 
 ```bash
 # for staging
-docker-compose -f staging.yml --env-file .env_staging build
-docker-compose -f staging.yml --env-file .env_staging down
-docker-compose -f staging.yml --env-file .env_staging up -d
+docker compose -f staging.yml --env-file .env_staging build
+docker compose -f staging.yml --env-file .env_staging down
+docker compose -f staging.yml --env-file .env_staging up -d
 
 # for production
-docker-compose -f production.yml --env-file .env_production build
-docker-compose -f production.yml --env-file .env_production down
-docker-compose -f production.yml --env-file .env_production up -d
+docker compose -f production.yml --env-file .env_production build
+docker compose -f production.yml --env-file .env_production down
+docker compose -f production.yml --env-file .env_production up -d
 ```
 
 ## Rollback to the previous version
@@ -113,14 +113,14 @@ To rollback your database to an existing database backup, you can list the avail
   <TabItem value="production" label="Production" default>
 
 ```bash
-docker-compose -f production.yml --env-file .env_production run postgres backups
+docker compose -f production.yml --env-file .env_production run postgres backups
 ```
 
 </TabItem>
 <TabItem value="staging" label="Staging">
 
 ```bash
-docker-compose -f staging.yml --env-file .env_staging run postgres backups
+docker compose -f staging.yml --env-file .env_staging run postgres backups
 ```
 
 </TabItem>
@@ -132,14 +132,14 @@ And then you can rollback to a specific database with the following command:
   <TabItem value="production" label="Production" default>
 
 ```bash
-docker-compose -f production.yml --env-file .env_production run postgres restore THE_NAME_OF_THE_BACKUP_FILE
+docker compose -f production.yml --env-file .env_production run postgres restore THE_NAME_OF_THE_BACKUP_FILE
 ```
 
 </TabItem>
 <TabItem value="staging" label="Staging">
 
 ```bash
-docker-compose -f staging.yml --env-file .env_staging run postgres restore THE_NAME_OF_THE_BACKUP_FILE
+docker compose -f staging.yml --env-file .env_staging run postgres restore THE_NAME_OF_THE_BACKUP_FILE
 ```
 
 </TabItem>
@@ -166,14 +166,14 @@ Then you need to rebuild and restart your application:
 
 ```bash
 # for staging
-docker-compose -f staging.yml --env-file .env_staging build
-docker-compose -f staging.yml --env-file .env_staging down
-docker-compose -f staging.yml --env-file .env_staging up -d
+docker compose -f staging.yml --env-file .env_staging build
+docker compose -f staging.yml --env-file .env_staging down
+docker compose -f staging.yml --env-file .env_staging up -d
 
 # for production
-docker-compose -f production.yml --env-file .env_production build
-docker-compose -f production.yml --env-file .env_production down
-docker-compose -f production.yml --env-file .env_production up -d
+docker compose -f production.yml --env-file .env_production build
+docker compose -f production.yml --env-file .env_production down
+docker compose -f production.yml --env-file .env_production up -d
 ```
 
 ## Manage database backups
@@ -200,13 +200,13 @@ docker cp POSTGRES_CONTAINER_NAME:/backups/backup_2021_04_27T15_22_59.sql.gz bac
 
 ```bash
 # create a fresh backup of the production database
-docker-compose -f production.yml --env-file .env_production run postgres backup
+docker compose -f production.yml --env-file .env_production run postgres backup
 # copy it to a local repository called backups
 docker cp PRODUCTION_POSTGRES_CONTAINER_NAME:/backups/backup_XXXX_XX_XXXXX_XX_XX.sql.gz backups
 # copy the production database file to staging backups volume
 docker cp backups/backup_XXXX_XX_XXXXX_XX_XX.sql.gz STAGING_POSTGRES_CONTAINER_NAME:/backups/
 # restore the production database in the staging postgres database
-docker-compose -f staging.yml --env-file .env_staging run --rm postgres restore backup_XXXX_XX_XXXXX_XX_XX.sql.gz
+docker compose -f staging.yml --env-file .env_staging run --rm postgres restore backup_XXXX_XX_XXXXX_XX_XX.sql.gz
 ```
 
 ## Backup the user files
