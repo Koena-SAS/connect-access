@@ -8,7 +8,7 @@ Merci d'envisager de contribuer à ce projet. Il y a de nombreux moyens pour con
 
 Si vous voulez contribuer, nous vous demandons de rester bienveillant et respectueux.
 
-## Demandes de fonctionnaltés et rapports de <span lang="en">bugs</span>
+## Demandes de fonctionnalités et rapports de <span lang="en">bugs</span>
 
 Avante de créer un ticket, vuillez chercher dans [la liste des tickets existants](https://gitlab.com/koena/connect-access/-/issues) pour voir si quelque chose de similaire n'existe pas déjà.
 
@@ -20,7 +20,7 @@ La documentation que vous êtes en train de lire a été construite avec [Docusa
 
 Le documentation est générée et déployée sur <span lang="en">Gitlab Pages</span> quand la branche est fusionnée sur <span lang="en">`master`</span>.
 
-## Contrinution au code
+## Contribution au code
 
 ### <span lang="en">Merge requests</span> et intégration continue
 

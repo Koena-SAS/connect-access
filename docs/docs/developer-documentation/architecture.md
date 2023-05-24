@@ -32,6 +32,8 @@ There are currently 2 exceptions where the backend serves HTML pages instead of 
 
 The backend is written in Python with the Django framework. Its codebase has been bootstrapped with [cookiecutter-django](https://github.com/cookiecutter/cookiecutter-django). The cookiecutter-django documentation can help a lot to understand the way the backend is structured.
 
+Moreover, it is structured in such a way that all the basic features (django applications) can be customized to meet the needs of your project.
+
 It uses a PostgreSQL database on all environments, and a RabbitMQ message broker through Celery on production.
 
 ### Internationalization
@@ -108,6 +110,141 @@ For all the resources that are regularly queried from the frontend to stay up to
 React is injected in a Django template that is located in `frontend/public/index.html`. We are thus able to create a JavaScript variable called `window.SERVER_DATA` in that template, and put inside anything useful from the Django view that handles the template (located at `backend/connect_access/views.py`).
 
 These data are available on React side immediately after the browser starts executing the JavaScript code, without the need to make a REST API call.
+
+## Connect Access personalization
+
+### Backend
+
+#### Core application fork
+
+##### Creation of python module with same label name
+
+You need to create a Python module with the same application label as the Connect Access application you want to extend.
+
+For example, to create a local version of `connect_access.apps.mediations`, do the following:
+
+```shell
+mkdir yourproject/mediations
+mkdir yourproject/mediations/__init__.py
+```
+
+##### Core model import and modification
+
+If the original Connect Access application has a `models.py` file, you will need to create a `models.py` file in your local application. It should import all the models from the Connect Access application that are being replaced, you can also modify the and be sure to import the other original models at the end of your file :
+
+```python
+# yourproject/mediations/models.py
+
+from django.db import models
+
+from connect_access.apps.mediations.abstract_models import AbstractMediationRequest
+
+# your custom models go here
+class MediationRequest(AbstractMediationRequest):
+    new_field = models.CharField()
+
+from connect_access.apps.mediations.models import * #noqa
+```
+
+:::note
+
+The use of `from ... import *` is strange, isn't it? Yes, but it must be done at the bottom of the module because of the way Django registers models. If two models with the same name are declared in an application, Django will only use the first one. This means that if you want to customize Connect Access models, you must declare your custom models before importing the Connect Access models for that application.
+
+:::
+
+##### Core model API route import and modification
+
+If the original Connect Access application has `api.py` and `serializers.py` files, you will need to recreate these files in your local application.
+
+- `api.py` have to import all [`ViewSet`](https://www.django-rest-framework.org/api-guide/viewsets/#viewsets) from core app :
+
+```python
+# yourproject/mediations/api.py
+
+from connect_access.apps.mediations.api import (
+    MediationRequestViewSet as BaseMediationRequestViewSet,
+)
+
+from .serializers import MediationRequestSerializer
+
+class MediationRequestViewSet(BaseMediationRequestViewSet):
+    pass
+```
+
+- `serializers.py` have to import all [`Serializers`](https://www.django-rest-framework.org/api-guide/serializers/) from core app :
+
+```python
+# yourproject/mediations/serializers.py
+
+from connect_access.apps.mediations.serializers import (
+    MediationRequestSerializer as BaseMeditionRequestSerializer,
+)
+
+class MediationRequestSerializer(BaseMeditionRequestSerializer):
+	pass
+```
+
+##### Schema update
+
+The last thing you need to do now is to get Django to update the database schema and create a new column in the mediation requests table. We recommend using migrations for this, so all you need to do is create a new schema migration.
+
+It is possible to simply create a new catalog migration (using `./manage.py makemigrations mediations`) but this is not recommended as all dependencies between migrations will have to be applied manually (by adding a `dependencies` attribute to the migration class).
+
+The recommended way to handle migrations is to copy the migration directory from `connect_access/apps/mediations` into your new `mediations` application. You can then create a new (additional) migration using the `makemigrations` management command:
+
+```shell
+python manage.py makemigrations mediations
+```
+
+To apply the migration you just created, you just have to run `python manage.py migrate mediations` and the new column is added to the mediation requests table in the database.
+
+##### Adding the model to the Django administration interface
+
+When you replace one of the Connect Access applications with a local application, the Django administration integration is lost. If you want to use it, you need to create an `admin.py` file and import the `admin.py` from the main application (which will run the registration code):
+
+```python
+# yourproject/mediations/admin.py
+from connect_access.apps.mediations.admin import (
+	MediationRequestAdmin as BaseMediationRequestAdmin
+)
+
+from yourproject.mediations.models import MediationRequest
+
+class MediationRequestAdmin(BaseMediationRequestAdmin):
+    pass
+
+MediationRequestAdmin.unregister(MediationRequest)
+MediationRequestAdmin.register(MediationRequest)
+```
+
+##### Define the application configuration
+
+In order for Django to load this new application, its configuration must be defined by defining a subclass of `AppConfig`
+
+```python
+# yourproject/mediations/apps.py
+from connect_access.apps.mediations.apps import MediationsConfig as BaseMediationsConfig
+
+class MediationsConfig(BaseMediationsConfig):
+    name = "yourproject.mediations"
+    default = True
+```
+
+##### Replace the Connect Access application with your own in `INSTALLED_APPS`.
+
+You need to tell Django that you have replaced one of the main Connect Access applications. You can do this by replacing its entry in the `INSTALLED_APPS` parameter with that of your own application.
+
+```python
+INSTALLED_APPS = [
+    # all non Connect Access apps
+    ...
+	# Connect Access apps
+    ...
+    # 'connect_access.apps.mediations', # remplaced by
+    'yourproject.mediations',
+    ...
+]
+```
 
 ## Testing strategy
 

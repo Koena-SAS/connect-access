@@ -32,6 +32,8 @@ Il y a actuellement 2 exceptions où le <span lang="en">backend</span> sert des 
 
 Le <span lang="en">backend</span>est écrit en Python avec le <span lang="en">framework</span> Django. Le code initial a été crée avec <span lang="en">[cookiecutter-django](https://github.com/cookiecutter/cookiecutter-django)</span>. La documentation de <span lang="en">cookiecutter-django</span> peut grandement aider à comprendre la manière dont est structuré le code du <span lang="en">backend</span>.
 
+De plus, il est structuré de manière à ce que toutes les fonctionnalités (applications django) de base puissent être personnalisées pour répondre aux besoins de votre projet.
+
 Il utilise une base de données PostgreSQL dans tous les environnements, et un <span lang="en">message broker</span> RabbitMQ à travers Celery en production.
 
 ### Internationalisation
@@ -108,6 +110,143 @@ Pour toutes les ressources qui sont régulièrement mises à jour à partir du <
 React est injecté dans un gabarit de Django qui est situé dans `frontend/public/index.html`. Nous sommes ainsi capables de créer une variable JavaScript appelée `window.SERVER_DATA` dans ce gabarit, et de mettre dedans tout ce qui peut être utile depuis la vue Django qui gère ce gabarit (située dans `backend/connect_access/views.py`).
 
 Ces données sont disponibles côté React immédiatement après que le navigateur ait commencé à exécuter le code JavaScript, sans avoir besoin de faire d'appels REST via une <span lang="en">API</span>.
+
+## Personnaliser <span lang="en">Connect Access</span>
+
+### <span lang="en">Backend</span>
+
+#### <span lang="en">Fork</span> d'une application de base
+
+##### Création d'un module python avec le même label
+
+Vous devez créer un module Python avec le même label d'application que l'application <span lang="en">Connect Access</span> que vous souhaitez étendre.
+
+Par exemple, pour créer une version locale de `connect_access.apps.mediations`, procédez comme suit :
+
+```shell
+mkdir votreprojet/mediations
+mkdir votreprojet/mediations/__init__.py
+```
+
+##### Import et/ou modification d'un modèle de base
+
+Si l'application <span lang="en">Connect Access</span> originale possède un fichier `models.py`, vous devrez créer un fichier `models.py` dans votre application locale. Il doit importer tous les modèles de l'application <span lang="en">Connect Access</span> qui sont remplacés, vous pouvez aussi y modifier le modèle :
+
+```python
+# votreprojet/mediations/models.py
+
+from django.db import models
+
+from connect_access.apps.mediations.abstract_models import AbstractMediationRequest
+
+# your custom models go here
+class MediationRequest(AbstractMediationRequest):
+    new_field = models.CharField()
+
+from connect_access.apps.mediations.models import * #noqa
+```
+
+Veillez à importer les autres modèles d'origine à la fin de votre fichier.
+
+:::note
+
+L'utilisation de `from ... import *` est étrange, n'est-ce pas ? Oui, mais cela doit être fait au bas du module en raison de la manière dont Django enregistre les modèles. Si deux modèles portant le même nom sont déclarés dans une application, Django n'utilisera que le premier. Cela signifie que si vous souhaitez personnaliser les modèles de <span lang="en">Connect Access</span>, vous devez déclarer vos modèles personnalisés avant d'importer les modèles de <span lang="en">Connect Access</span> pour cette application.
+
+:::
+
+##### Import et/ou modification à l'API d'un modèle de base
+
+Si l'application <span lang="en">Connect Access</span> originale possède des fichiers `api.py` et `serializers.py`, vous devrez recréer ses fichiers dans votre application locale.
+
+- `api.py`doit importer tous les [`ViewSet`](https://www.django-rest-framework.org/api-guide/viewsets/#viewsets) de l'application de base ;
+
+```python
+# votreprojet/mediations/api.py
+
+from connect_access.apps.mediations.api import (
+    MediationRequestViewSet as BaseMediationRequestViewSet,
+)
+
+from .serializers import MediationRequestSerializer
+
+class MediationRequestViewSet(BaseMediationRequestViewSet):
+    pass
+```
+
+- `serializers.py` doit importer tous les [`Serializers`](https://www.django-rest-framework.org/api-guide/serializers/) de l'application de base.
+
+```python
+# votreprojet/mediations/serializers.py
+
+from connect_access.apps.mediations.serializers import (
+    MediationRequestSerializer as BaseMeditionRequestSerializer,
+)
+
+class MediationRequestSerializer(BaseMeditionRequestSerializer):
+	pass
+```
+
+##### Mise à jours du schéma
+
+La dernière chose que vous devez faire maintenant est de faire en sorte que Django mette à jour le schéma de la base de données et crée une nouvelle colonne dans la table des <span lang="en">mediation requests</span>. Nous recommandons d'utiliser des migrations pour cela, il vous suffit donc de créer une nouvelle migration de schéma.
+
+Il est possible de créer simplement une nouvelle migration de catalogue (en utilisant `./manage.py makemigrations mediations`) mais ce n'est pas recommandé car toutes les dépendances entre les migrations devront être appliquées manuellement (en ajoutant un attribut <span lang="en">`dependencies`</span> à la classe de migration).
+
+La méthode recommandée pour gérer les migrations est de copier le répertoire des migrations depuis `connect_access/apps/mediations` dans votre nouvelle application <span lang="en">`mediations`</span>. Vous pouvez ensuite créer une nouvelle migration (supplémentaire) en utilisant la commande de gestion <span lang="en">`makemigrations`</span> :
+
+```shell
+python manage.py makemigrations mediations
+```
+
+Pour appliquer la migration que vous venez de créer, il vous suffit d'exécuter `python manage.py migrate mediations` et la nouvelle colonne est ajoutée à la table des <span lang="en">mediation requests</span> dans la base de données.
+
+##### Ajout du modèle à l'interface d'administration Django
+
+Lorsque vous remplacez une des applications de <span lang="en">Connect Access</span> par une application locale, l'intégration de l'administration de Django est perdue. Si vous souhaitez l'utiliser, vous devez créer un fichier `admin.py` et importer le `admin.py` de l'application principale (qui exécutera le code d'enregistrement) :
+
+```python
+# votreprojet/mediations/admin.py
+from connect_access.apps.mediations.admin import (
+	MediationRequestAdmin as BaseMediationRequestAdmin
+)
+
+from votreprojet.mediations.models import MediationRequest
+
+class MediationRequestAdmin(BaseMediationRequestAdmin):
+    pass
+
+MediationRequestAdmin.unregister(MediationRequest)
+MediationRequestAdmin.register(MediationRequest)
+```
+
+##### Définir la configuration de l'application
+
+Pour que Django charge cette nouvelle application il faut définir sa configuration en définissant une sous-classe de [`AppConfig`](https://docs.djangoproject.com/fr/4.2/ref/applications/#django.apps.AppConfig) avec l'attribut `default = True`.
+
+```python
+# votreprojet/mediations/apps.py
+from connect_access.apps.mediations.apps import MediationsConfig as BaseMediationsConfig
+
+class MediationsConfig(BaseMediationsConfig):
+    name = "votreprojet.mediations"
+    default = True
+```
+
+##### Remplacer l'application de <span lang="en">Connect Access</span> par la vôtre dans <span lang="en">`INSTALLED_APPS`</span>
+
+Vous devez indiquer à Django que vous avez remplacé l'une des applications principales de <span lang="en">Connect Access</span>. Vous pouvez le faire en remplaçant son entrée dans le paramètre <span lang="en">`INSTALLED_APPS`</span> par celle de votre propre application.
+
+```python
+INSTALLED_APPS = [
+    # toutes vos applications non Connect Access
+    ...
+	# applications Connect Access
+    ...
+    # 'connect_access.apps.mediations', # remplaced by
+    'votreprojet.mediations',
+    ...
+]
+```
 
 ## Stratégie de test
 
