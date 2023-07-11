@@ -40,7 +40,8 @@ domain_name_regex = RegexValidator(
 
 class PhoneNumberField(models.CharField):
     def __init__(self, *args: Any, **kwargs: Any) -> None:
-        kwargs["validators"] = [phone_regex]
+        kwargs.setdefault("validators", [phone_regex])
+        kwargs.setdefault("max_length", 16)
         super().__init__(*args, **kwargs)
 
 
