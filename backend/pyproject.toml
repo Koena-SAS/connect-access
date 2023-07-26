@@ -26,7 +26,6 @@ known_first_party = ["connect_access"]
 python = "^3.9"
 pytz = "2022.1"
 python-slugify = "6.1.2"
-psycopg2 = "^2.9.5"
 pillow = "9.1.1"
 argon2-cffi = "21.3.0"
 whitenoise = "6.1.0"
@@ -55,6 +54,7 @@ django-extensions = "3.1.5"
 django-csp = "3.7"
 drfpasswordless = "1.5.8"
 django-pagedown = "2.2.1"
+psycopg2-binary = "^2.9.6"
 
 [tool.poetry.group.plugins]
 optional = true
