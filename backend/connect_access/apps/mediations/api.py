@@ -118,7 +118,7 @@ class MediationRequestViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=["GET"])
     def user(self, request):
         mediation_requests = MediationRequest.objects.filter(
-            complainant__id=self.request.user.id
+            complainant__uuid=request.user.uuid
         )
         serializer = self.get_serializer(mediation_requests, many=True)
         return Response(serializer.data)

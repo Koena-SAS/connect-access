@@ -36,7 +36,7 @@ class MediationRequestSerializer(ToReprMixin, serializers.ModelSerializer):
     request_date = serializers.DateTimeField(required=False)
     complainant = serializers.SlugRelatedField(
         slug_field="uuid", queryset=User.objects.all(), required=False
-    )
+    )  # type: ignore
     status = EnumSerializerField(MediationRequestStatus)
     email = serializers.EmailField(allow_blank=False)
     assistive_technology_used = EnumArraySerializerField(
