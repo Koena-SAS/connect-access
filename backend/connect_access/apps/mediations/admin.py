@@ -1,10 +1,12 @@
-import connect_access.core.admin as admin
+from django.contrib import admin
+
+import connect_access.core.admin as core_admin
 from connect_access.core.loading import get_model
 
 MediationRequest = get_model("mediations", "MediationRequest")
 
 
-class MediationRequestAdmin(admin.ModelAdmin):
+class MediationRequestAdmin(admin.ModelAdmin, core_admin.ModelAdminMixin):
     search_fields = (
         "uuid",
         "first_name",
@@ -78,4 +80,4 @@ class MediationRequestAdmin(admin.ModelAdmin):
     }
 
 
-MediationRequestAdmin.register(MediationRequest)
+admin.site.register(MediationRequest, MediationRequestAdmin)

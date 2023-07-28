@@ -1,14 +1,17 @@
+from django.contrib import admin
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from pagedown.widgets import AdminPagedownWidget
 from translated_fields import TranslatedFieldAdmin
 
-import connect_access.core.admin as admin
+import connect_access.core.admin as core_admin
 
 from .models import AboutServiceInformation, ContactInformation
 
 
-class ContactInformationAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
+class ContactInformationAdmin(
+    admin.ModelAdmin, TranslatedFieldAdmin, core_admin.ModelAdminMixin
+):
     list_display = (
         "get_email_text",
         "phone_number_text",
@@ -42,7 +45,9 @@ class ContactInformationAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
     }
 
 
-class AboutServiceInformationAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
+class AboutServiceInformationAdmin(
+    admin.ModelAdmin, TranslatedFieldAdmin, core_admin.ModelAdminMixin
+):
     list_display = (
         "display_order",
         "link_text",
@@ -59,5 +64,5 @@ class AboutServiceInformationAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
     }
 
 
-ContactInformationAdmin.register(ContactInformation)
-AboutServiceInformationAdmin.register(AboutServiceInformation)
+admin.site.register(ContactInformation, ContactInformationAdmin)
+admin.site.register(AboutServiceInformation, AboutServiceInformationAdmin)
