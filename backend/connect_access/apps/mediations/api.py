@@ -10,12 +10,9 @@ from rest_framework.response import Response
 
 from connect_access.core.loading import get_model
 from connect_access.core.tasks import send_multialternative_mail
-from connect_access.models.permissions import (
-    AnonCreateAndUpdateOwnerOnly,
-    ListDeleteAdminOnly,
-)
 
 from .choices import MediationRequestStatus, UrgencyLevel
+from .permissions import IsAdmin, IsAnon, IsOwner
 from .serializers import MediationRequestSerializer
 
 MediationRequest = get_model("mediations", "MediationRequest")
@@ -33,7 +30,7 @@ class MediationRequestViewSet(viewsets.ModelViewSet):
     """
 
     queryset = MediationRequest.objects.order_by("-request_date")
-    permission_classes = [AnonCreateAndUpdateOwnerOnly & ListDeleteAdminOnly]
+    permission_classes = [IsAdmin | IsAnon | IsOwner]
     authentication_classes = [authentication.TokenAuthentication]
     serializer_class = MediationRequestSerializer
     lookup_field = "uuid"
