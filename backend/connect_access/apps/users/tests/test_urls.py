@@ -1,16 +1,11 @@
 import pytest
 from django.urls import resolve, reverse
 
-from connect_access.core.loading import get_model
-
-User = get_model("users", "User")
-
 pytestmark = pytest.mark.django_db
 
 
 class TestUrls:
-    @pytest.mark.usefixtures("user")
-    def test_user_detail(self, user: User):
+    def test_user_detail(self, user):
         assert (
             reverse("api:user-detail", kwargs={"email": user.email})
             == f"/api/users/{user.email}/"

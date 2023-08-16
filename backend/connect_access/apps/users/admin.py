@@ -9,7 +9,7 @@ from connect_access.core.admin import ModelAdminMixin
 User = get_user_model()
 
 
-class UserAdmin(ModelAdminMixin, BaseUserAdmin):
+class UserAdmin(BaseUserAdmin, ModelAdminMixin):
     form = UserChangeForm
     add_form = UserCreationForm
 
