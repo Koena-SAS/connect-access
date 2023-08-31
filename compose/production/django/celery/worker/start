@@ -5,4 +5,4 @@ set -o pipefail
 set -o nounset
 
 
-cd backend && celery -A config.celery_app worker -l INFO
+cd backend && watchgod celery.__main__.main --args -A config.celery_app worker -l INFO
