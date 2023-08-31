@@ -9,8 +9,8 @@ import connect_access.core.admin as core_admin
 from .models import AboutServiceInformation, ContactInformation
 
 
-class ContactInformationAdmin(
-    admin.ModelAdmin, TranslatedFieldAdmin, core_admin.ModelAdminMixin
+class ContactInformationAdmin(  # type: ignore
+    core_admin.ModelAdminMixin, admin.ModelAdmin, TranslatedFieldAdmin
 ):
     list_display = (
         "get_email_text",
@@ -45,8 +45,8 @@ class ContactInformationAdmin(
     }
 
 
-class AboutServiceInformationAdmin(
-    admin.ModelAdmin, TranslatedFieldAdmin, core_admin.ModelAdminMixin
+class AboutServiceInformationAdmin(  # type: ignore
+    core_admin.ModelAdminMixin, admin.ModelAdmin, TranslatedFieldAdmin
 ):
     list_display = (
         "display_order",

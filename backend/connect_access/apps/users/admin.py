@@ -9,10 +9,9 @@ from connect_access.core.admin import ModelAdminMixin
 User = get_user_model()
 
 
-class UserAdmin(BaseUserAdmin, ModelAdminMixin):
+class UserAdmin(ModelAdminMixin, BaseUserAdmin):  # type: ignore
     form = UserChangeForm
     add_form = UserCreationForm
-
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.

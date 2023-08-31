@@ -6,7 +6,7 @@ from connect_access.core.loading import get_model
 MediationRequest = get_model("mediations", "MediationRequest")
 
 
-class MediationRequestAdmin(admin.ModelAdmin, core_admin.ModelAdminMixin):
+class MediationRequestAdmin(core_admin.ModelAdminMixin, admin.ModelAdmin):  # type: ignore
     search_fields = (
         "uuid",
         "first_name",

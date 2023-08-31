@@ -10,7 +10,7 @@ from connect_access.models.fields import PhoneNumberField
 UserManager = get_class("users.managers", "UserManager")
 
 
-class AbstractUser(AbstractBaseUser, PermissionsMixin):
+class AbstractUser(PermissionsMixin, AbstractBaseUser):
     """Default asbtract user for Connect Access."""
 
     class Meta:
