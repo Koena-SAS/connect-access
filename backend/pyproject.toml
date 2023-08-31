@@ -55,11 +55,7 @@ django-csp = "3.7"
 drfpasswordless = "1.5.8"
 django-pagedown = "2.2.1"
 psycopg2-binary = "^2.9.6"
-
-[tool.poetry.group.plugins]
-optional = true
-
-[tool.poetry.group.plugins.dependencies]
+mypy = "0.981"
 
 [tool.poetry.group.code_quality]
 optional = true
@@ -105,7 +101,6 @@ optional = true
 werkzeug = "2.1.2"
 ipdb = "0.13.9"
 watchgod = "0.8.2"
-mypy = "0.961"
 django-stubs = "1.12.0"
 djangorestframework-stubs = "1.7.0"
 pytest = "7.1.2"
