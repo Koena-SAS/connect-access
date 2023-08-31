@@ -2,13 +2,13 @@
 
 from .base import *  # noqa
 from .base import (
-    get_connect_access_apps,
     CONNECT_ACCESS_APPS,
     CONNECT_ACCESS_PLUGIN_APPS,
     DJANGO_APPS,
     THIRD_PARTY_APPS,
+    env,
+    get_connect_access_apps,
 )
-from .base import env
 
 for app in CONNECT_ACCESS_APPS:
     CONNECT_ACCESS_APPS[app] = True

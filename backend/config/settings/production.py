@@ -17,6 +17,9 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 ALLOWED_HOSTS = env.list(
     "DJANGO_ALLOWED_HOSTS", default=[env("DATA_PLATFORM_DOMAIN_NAME")]
 )
+CSRF_TRUSTED_ORIGINS = env.list(
+    "DJANGO_CSRF_TRUSTED_ORIGINS", default=["https://*.127.0.0.1"]
+)
 
 # DATABASES
 # ------------------------------------------------------------------------------
