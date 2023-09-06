@@ -32,4 +32,4 @@ class TraceReportFactory(DjangoModelFactory):
     )
 
     class Meta:
-        model = get_model("trace_report", "TraceReport")
+        model = get_model("mediations", "TraceReport")

@@ -9,7 +9,7 @@ from .utils import _add_trace_report, _get_trace_report_absolute_url
 pytestmark = pytest.mark.django_db
 
 TraceReportViewSet = get_class("trace_report.api", "TraceReportViewSet")
-TraceReport = get_model("trace_report", "TraceReport")
+TraceReport = get_model("mediations", "TraceReport")
 TraceReportFactory = get_class(
     "mediations.trace_report.tests.factories", "TraceReportFactory"
 )

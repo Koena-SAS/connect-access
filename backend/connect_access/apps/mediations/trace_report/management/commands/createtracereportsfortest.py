@@ -3,7 +3,7 @@ from django.core.management.base import CommandError
 from connect_access.core.loading import get_model
 from connect_access.core.management.commands import BaseCommand
 
-TraceReport = get_model("trace_report", "TraceReport")
+TraceReport = get_model("mediations", "TraceReport")
 MediationRequest = get_model("mediations", "MediationRequest")
 
 

@@ -20,7 +20,7 @@ from .choices import (
 
 User = get_user_model()
 MediationRequest = get_model("mediations", "MediationRequest")
-TraceReport = get_model("trace_report", "TraceReport")
+TraceReport = get_model("mediations", "TraceReport")
 
 
 class MediationRequestSerializer(ToReprMixin, serializers.ModelSerializer):

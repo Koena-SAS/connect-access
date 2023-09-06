@@ -6,7 +6,7 @@ from connect_access.core.loading import get_model
 
 pytestmark = pytest.mark.django_db
 
-TraceReport = get_model("trace_report", "TraceReport")
+TraceReport = get_model("mediations", "TraceReport")
 
 
 class TestCommands:

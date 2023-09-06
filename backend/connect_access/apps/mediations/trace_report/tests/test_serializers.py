@@ -20,7 +20,7 @@ MediationRequestFactory = get_class(
     "mediations.tests.factories", "MediationRequestFactory"
 )
 TraceReportViewSet = get_class("trace_report.api", "TraceReportViewSet")
-TraceReport = get_model("trace_report", "TraceReport")
+TraceReport = get_model("mediations", "TraceReport")
 
 pytestmark = pytest.mark.django_db
 

@@ -25,7 +25,7 @@ class AbstractTraceReport(TimeStampedModel):
 
     class Meta:
         abstract = True
-        app_label = "trace_report"
+        app_label = "mediations"
         verbose_name = _("Trace report")
         verbose_name_plural = _("Trace reports")
 

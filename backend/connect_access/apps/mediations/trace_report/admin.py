@@ -3,7 +3,7 @@ from django.contrib import admin
 import connect_access.core.admin as core_admin
 from connect_access.core.loading import get_model
 
-TraceReport = get_model("trace_report", "TraceReport")
+TraceReport = get_model("mediations", "TraceReport")
 
 
 class TraceReportAdmin(core_admin.ModelAdminMixin, admin.ModelAdmin):  # type: ignore

@@ -10,7 +10,7 @@ from connect_access.core.loading import get_model
 from .serializers import TraceReportSerializer
 
 MediationRequest = get_model("mediations", "MediationRequest")
-TraceReport = get_model("trace_report", "TraceReport")
+TraceReport = get_model("mediations", "TraceReport")
 
 logger = logging.getLogger(__name__)
 

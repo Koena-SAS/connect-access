@@ -4,7 +4,7 @@ from django.db.models import ProtectedError
 from connect_access.core.loading import get_model
 from connect_access.core.management.commands import BaseCommand
 
-TraceReport = get_model("trace_report", "TraceReport")
+TraceReport = get_model("mediations", "TraceReport")
 
 
 class Command(BaseCommand):

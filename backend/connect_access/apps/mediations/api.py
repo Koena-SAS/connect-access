@@ -16,7 +16,7 @@ from .permissions import IsAdmin, IsAnon, IsOwner
 from .serializers import MediationRequestSerializer
 
 MediationRequest = get_model("mediations", "MediationRequest")
-TraceReport = get_model("trace_report", "TraceReport")
+TraceReport = get_model("mediations", "TraceReport")
 
 logger = logging.getLogger(__name__)
 
@@ -45,7 +45,7 @@ class MediationRequestViewSet(viewsets.ModelViewSet):
         accepted for the creation through this endpoint.
 
         """
-        serializer = MediationRequestSerializer(data=request.data)
+        serializer = self.get_serializer(data=request.data)
         log_message = ""
         if logger.isEnabledFor(logging.INFO):
             filled_fields = {k: v for k, v in request.data.items() if v}

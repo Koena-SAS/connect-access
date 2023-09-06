@@ -5,7 +5,7 @@ from connect_access.models.serializers import EnumSerializerField
 
 from . import choices
 
-TraceReport = get_model("trace_report", "TraceReport")
+TraceReport = get_model("mediations", "TraceReport")
 MediationRequest = get_model("mediations", "MediationRequest")
 
 
