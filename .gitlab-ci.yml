@@ -62,7 +62,7 @@ end_to_end:
   stage: end_to_end
   needs: [lint_and_unit_test]
   extends: .base-docker
-  image: docker/compose:debian-1.29.2
+  image: docker/compose:latest
   before_script:
     - echo 'deb http://deb.debian.org/debian buster main' >> /etc/apt/sources.list
     - apt-get update
